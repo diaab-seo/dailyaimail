@@ -1,0 +1,260 @@
+---
+import Layout from './Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import type { Article } from '../data/articles';
+import { articles, getArticlesByCategory, tagColor } from '../data/articles';
+
+export interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+
+const color = tagColor(article.tag);
+const related = getArticlesByCategory(article.tag)
+  .filter(a => a.slug !== article.slug)
+  .slice(0, 3);
+---
+
+<Layout title={article.headline} description={article.excerpt}>
+  <Navbar />
+
+  <!-- Article hero bar -->
+  <div class="article-top-bar" style={`background: ${color}10; border-bottom: 1px solid ${color}25;`}>
+    <div class="article-top-inner">
+      <a href={`/category/${article.tag.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}
+         class="back-link"
+         style={`color: ${color};`}>
+        ← {article.tag}
+      </a>
+    </div>
+  </div>
+
+  <!-- Article header -->
+  <header class="article-header">
+    <div class="article-header-inner">
+      <span class="article-tag" style={`background: ${color}18; color: ${color};`}>{article.tag}</span>
+      <h1 class="article-headline">{article.headline}</h1>
+      <p class="article-excerpt">{article.excerpt}</p>
+      <div class="article-meta">
+        <span class="article-author">By {article.author}</span>
+        <span class="article-sep">·</span>
+        <time datetime={article.isoDate}>{article.date}</time>
+        <span class="article-sep">·</span>
+        <span>{article.readingTime}</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Image placeholder -->
+  <div class="article-hero-img" style={`background: linear-gradient(135deg, ${color}15 0%, ${color}05 100%);`}>
+    <div class="article-hero-icon" style={`color: ${color};`}>
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Article body + sidebar -->
+  <div class="article-layout">
+    <article class="article-body">
+      <slot />
+    </article>
+
+    <aside class="article-sidebar">
+      <!-- Author box -->
+      <div class="sidebar-author-box">
+        <div class="author-avatar">{article.author.split(' ').map(n => n[0]).join('')}</div>
+        <div>
+          <div class="author-name">{article.author}</div>
+          <div class="author-role">Editor, Daily AI Mail</div>
+        </div>
+      </div>
+
+      <!-- Related articles -->
+      {related.length > 0 && (
+        <div class="related-box">
+          <h3 class="related-title">More in {article.tag}</h3>
+          <ul class="related-list">
+            {related.map(r => (
+              <li class="related-item">
+                <a href={`/articles/${r.slug}`}>
+                  <span class="related-date">{r.date}</span>
+                  <span class="related-headline">{r.headline}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </aside>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  .article-top-bar { padding: 12px 0; }
+  .article-top-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .back-link {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .back-link:hover { opacity: 0.7; }
+
+  .article-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 48px 0 40px;
+  }
+  .article-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .article-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    align-self: flex-start;
+  }
+  .article-headline {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4.5vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .article-excerpt {
+    font-size: 18px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+  .article-author { font-weight: 500; color: var(--color-text); }
+  .article-sep { opacity: 0.4; }
+
+  .article-hero-img {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .article-hero-icon { opacity: 0.25; }
+
+  .article-layout {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 48px var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* Article body typography */
+  .article-body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+  .article-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 40px 0 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+  }
+  .article-body :global(p) {
+    margin-bottom: 20px;
+    color: #2D2D2B;
+  }
+  .article-body :global(strong) { font-weight: 600; }
+  .article-body :global(a) { text-decoration: underline; }
+  .article-body :global(ul), .article-body :global(ol) {
+    margin: 0 0 20px 20px;
+  }
+  .article-body :global(li) { margin-bottom: 8px; }
+  .article-body :global(blockquote) {
+    border-left: 3px solid var(--color-border);
+    padding-left: 20px;
+    margin: 24px 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* Sidebar */
+  .article-sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 24px; }
+  .sidebar-author-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--color-text);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .author-name { font-weight: 600; font-size: 15px; }
+  .author-role { font-size: 13px; color: var(--color-text-muted); margin-top: 2px; }
+  .related-box {
+    padding: 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+  .related-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .related-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .related-item a { display: flex; flex-direction: column; gap: 4px; text-decoration: none; }
+  .related-date { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .related-headline { font-size: 14px; line-height: 1.4; font-weight: 500; }
+  .related-item a:hover .related-headline { text-decoration: underline; }
+
+  @media (max-width: 1024px) {
+    .article-layout { grid-template-columns: 1fr; }
+    .article-sidebar { position: static; }
+  }
+  @media (max-width: 768px) {
+    .article-hero-img { height: 240px; }
+  }
+</style>

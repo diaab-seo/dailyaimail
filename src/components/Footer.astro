@@ -1,0 +1,154 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <!-- Column 1 -->
+      <div class="footer-col brand-col">
+        <a href="/" class="footer-logo">Daily <em>AI</em> Mail</a>
+        <p class="tagline">Your daily source for AI news, research & tools.</p>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="footer-col links-col">
+        <div class="links-group">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about-us">About Us</a></li>
+            <li><a href="/contact-us">Contact</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-and-conditions">Terms of Use</a></li>
+          </ul>
+        </div>
+        <div class="links-group">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="/category/anthropic">Anthropic</a></li>
+            <li><a href="/category/google-ai">Google AI</a></li>
+            <li><a href="/category/openai">OpenAI</a></li>
+            <li><a href="/category/meta-ai">Meta AI</a></li>
+            <li><a href="/category/tools-and-apps">Tools & Apps</a></li>
+            <li><a href="/category/policy-and-ethics">Policy & Ethics</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="footer-col connect-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="copyright">© 2026 Daily AI Mail · Built by Mohamed Diab</p>
+      <div class="legal-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <span class="sep">·</span>
+        <a href="/terms-and-conditions">Terms of Use</a>
+        <span class="sep">·</span>
+        <a href="/cookies-policy">Cookies Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    padding: 60px var(--gutter) 32px;
+  }
+  .footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 26px;
+    text-decoration: none;
+    color: var(--nav-text);
+    display: block;
+    margin-bottom: 16px;
+  }
+  .footer-logo em {
+    font-style: italic;
+  }
+  .tagline {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .links-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .footer-col h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col ul a {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    transition: opacity 0.2s;
+  }
+  .footer-col ul a:hover {
+    opacity: 1;
+    color: white;
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+  }
+  .legal-links a {
+    color: rgba(255,255,255,0.6);
+    transition: opacity 0.2s;
+  }
+  .legal-links a:hover {
+    color: white;
+  }
+  .sep {
+    margin: 0 8px;
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+  }
+</style>

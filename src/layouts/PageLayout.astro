@@ -1,0 +1,63 @@
+---
+import Layout from './Layout.astro';
+const { title, description, metaTitle, publishDate, lastModified, author } = Astro.props;
+---
+<Layout title={title} description={description} metaTitle={metaTitle}>
+  <main class="page-main">
+    <div class="page-container">
+      <header class="page-header">
+        <h1 class="page-title">{title}</h1>
+        <div class="page-meta">
+          {author && <span>By {author}</span>}
+          {publishDate && <span>Published {publishDate}</span>}
+          {lastModified && <span>Last updated {lastModified}</span>}
+        </div>
+      </header>
+      <div class="page-content">
+        <slot />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .page-main {
+    min-height: 100vh;
+    padding: 80px var(--gutter) var(--gutter);
+  }
+  .page-container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .page-header {
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 40px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .page-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+  .page-content {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+  .page-content h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--color-text);
+    margin: 40px 0 16px;
+  }
+  .page-content p { margin-bottom: 16px; }
+  .page-content a { text-decoration: underline; }
+</style>

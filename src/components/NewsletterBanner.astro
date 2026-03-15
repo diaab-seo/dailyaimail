@@ -1,0 +1,95 @@
+---
+---
+
+<section class="newsletter-banner">
+  <div class="banner-inner">
+    <div class="icon">📩</div>
+    <h2>Stay Ahead of AI</h2>
+    <p>Join thousands of professionals getting the latest AI news right in their inbox.</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Your email address..." required />
+      <button type="submit">Subscribe Free →</button>
+    </form>
+    <p class="disclaimer">No spam. Unsubscribe any time.</p>
+  </div>
+</section>
+
+<style>
+  .newsletter-banner {
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    padding: 64px 24px;
+    text-align: center;
+  }
+  .banner-inner {
+    max-width: 540px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+  p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 32px;
+  }
+  .newsletter-form {
+    display: flex;
+    width: 100%;
+    background: white;
+    border-radius: 999px;
+    padding: 6px;
+    margin-bottom: 16px;
+  }
+  .newsletter-form input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 24px;
+    font-size: 16px;
+    outline: none;
+    color: var(--color-text);
+  }
+  .newsletter-form button {
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .newsletter-form button:hover {
+    opacity: 0.9;
+  }
+  .disclaimer {
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 600px) {
+    .newsletter-form {
+      flex-direction: column;
+      border-radius: 16px;
+      padding: 12px;
+      gap: 12px;
+    }
+    .newsletter-form input {
+      border-radius: 8px;
+    }
+    .newsletter-form button {
+      width: 100%;
+    }
+  }
+</style>

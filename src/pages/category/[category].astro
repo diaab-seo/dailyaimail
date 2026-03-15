@@ -1,0 +1,17 @@
+---
+import { getAllCategories, getArticlesByCategory, categoryToSlug } from '../../data/articles';
+import CategoryLayout from '../../layouts/CategoryLayout.astro';
+
+export async function getStaticPaths() {
+  const categories = getAllCategories();
+  return categories.map((tag) => ({
+    params: { category: categoryToSlug(tag) },
+    props: { tag },
+  }));
+}
+
+const { tag } = Astro.props;
+const articles = getArticlesByCategory(tag);
+---
+
+<CategoryLayout tag={tag} articles={articles} />
