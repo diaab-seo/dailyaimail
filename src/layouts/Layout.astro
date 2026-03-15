@@ -1,23 +1,71 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  metaTitle?: string;
+}
+
+const { title, description, metaTitle } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description ?? 'Your daily source for AI news, research and tools.'} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;400;500;600&display=swap" rel="stylesheet">
+    <title>{metaTitle ?? title ?? 'Daily AI Mail'}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    --color-bg: #F8F7F4;
+    --color-surface: #FFFFFF;
+    --color-border: #E8E4DC;
+    --color-text: #1A1A18;
+    --color-text-muted: #6B6860;
+    --color-accent: #1A1A18;
+
+    /* Company tag colours */
+    --tag-anthropic: #7C3AED;
+    --tag-google: #1967D2;
+    --tag-openai: #10A37F;
+    --tag-meta: #0082FB;
+    --tag-tools: #D97706;
+    --tag-policy: #DC2626;
+    --tag-default: #4B5563;
+
+    --nav-bg: #0F0F0D;
+    --nav-text: #F0EDE6;
+
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'DM Sans', sans-serif;
+
+    --radius-card: 4px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.10), 0 12px 32px rgba(0,0,0,0.08);
+
+    --max-width: 1280px;
+    --gutter: clamp(16px, 4vw, 48px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration: none; }
 </style>

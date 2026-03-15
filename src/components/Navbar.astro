@@ -1,0 +1,219 @@
+---
+---
+
+<nav class="navbar" id="main-nav">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo">Daily <em>AI</em> Mail</a>
+    
+    <ul class="desktop-nav">
+      <li><a href="/">Home</a></li>
+      <li class="has-dropdown">
+        <a href="/category/anthropic">Anthropic</a>
+        <ul class="dropdown">
+          <li><a href="/category/anthropic">Claude Updates</a></li>
+          <li><a href="/category/policy-and-ethics">Safety Research</a></li>
+          <li><a href="/category/anthropic">Product Releases</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="/category/google-ai">Google AI</a>
+        <ul class="dropdown">
+          <li><a href="/category/google-ai">Gemini</a></li>
+          <li><a href="/category/google-ai">DeepMind</a></li>
+          <li><a href="/category/google-ai">Google Labs</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="/category/openai">OpenAI</a>
+        <ul class="dropdown">
+          <li><a href="/category/openai">GPT Series</a></li>
+          <li><a href="/articles/sora-2-4k-scenes">Sora</a></li>
+          <li><a href="/category/openai">Research</a></li>
+          <li><a href="/category/openai">Policy</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="/category/meta-ai">Meta AI</a>
+        <ul class="dropdown">
+          <li><a href="/category/meta-ai">Llama</a></li>
+          <li><a href="/category/meta-ai">Research</a></li>
+          <li><a href="/category/meta-ai">Open Source</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="/category/tools-and-apps">Tools & Apps</a>
+        <ul class="dropdown">
+          <li><a href="/category/tools-and-apps">New Launches</a></li>
+          <li><a href="/category/tools-and-apps">Reviews</a></li>
+          <li><a href="/articles/perplexity-vs-searchgpt">Comparisons</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="/category/policy-and-ethics">Policy & Ethics</a>
+        <ul class="dropdown">
+          <li><a href="/category/policy-and-ethics">Regulation</a></li>
+          <li><a href="/category/policy-and-ethics">Safety</a></li>
+          <li><a href="/category/policy-and-ethics">Industry News</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="/about-us">About</a>
+        <ul class="dropdown">
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/contact-us">Contact</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">🔍</button>
+      <button class="icon-btn" aria-label="Newsletter">📩</button>
+      <button class="hamburger" id="hamburger-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+  
+  <div class="mobile-nav" id="mobile-nav">
+    <!-- Mobile links (stacked) -->
+    <a href="/">Home</a>
+    <a href="/category/anthropic">Anthropic</a>
+    <a href="/category/google-ai">Google AI</a>
+    <a href="/category/openai">OpenAI</a>
+    <a href="/category/meta-ai">Meta AI</a>
+    <a href="/category/tools-and-apps">Tools & Apps</a>
+    <a href="/category/policy-and-ethics">Policy & Ethics</a>
+    <a href="/about-us">About</a>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('hamburger-btn');
+  const nav = document.getElementById('main-nav');
+  if(btn && nav) {
+    btn.addEventListener('click', () => {
+      nav.toggleAttribute('data-open');
+    });
+  }
+</script>
+
+<style>
+  .navbar {
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .navbar-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    text-decoration: none;
+    color: var(--nav-text);
+  }
+  .navbar-logo em {
+    font-style: italic;
+  }
+  .desktop-nav {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+  }
+  .desktop-nav > li {
+    position: relative;
+  }
+  .desktop-nav > li > a {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 0;
+    color: rgba(255,255,255,0.8);
+    transition: color 0.2s;
+  }
+  .desktop-nav > li > a:hover {
+    color: white;
+  }
+  .has-dropdown .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #1A1A18;
+    padding: 8px 0;
+    border-radius: 4px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+    list-style: none;
+    min-width: 180px;
+  }
+  .has-dropdown:hover .dropdown {
+    display: block;
+  }
+  .dropdown li a {
+    display: block;
+    font-size: 14px;
+    padding: 10px 20px;
+    color: rgba(255,255,255,0.8);
+    transition: background 0.2s;
+  }
+  .dropdown li a:hover {
+    background: rgba(255,255,255,0.06);
+    color: white;
+  }
+  .nav-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .icon-btn {
+    background: none;
+    border: none;
+    color: var(--nav-text);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--nav-text);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    padding: 16px var(--gutter);
+    background: var(--nav-bg);
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .mobile-nav a {
+    padding: 12px 0;
+    font-size: 16px;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  nav[data-open] .mobile-nav {
+    display: flex;
+  }
+
+  @media (max-width: 768px) {
+    .desktop-nav {
+      display: none;
+    }
+    .hamburger {
+      display: block;
+    }
+  }
+</style>

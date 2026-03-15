@@ -1,0 +1,17 @@
+---
+import { articles } from '../../data/articles';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+---
+
+<ArticleLayout article={article}>
+  <div set:html={article.body.replace(/\n\n/g, '</p><p>').replace(/^## (.+)$/gm, '</p><h2>$1</h2><p>').replace(/^<\/p>/, '')} />
+</ArticleLayout>
