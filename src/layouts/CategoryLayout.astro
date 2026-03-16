@@ -1,10 +1,10 @@
 ---
-import Layout from './Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import NewsCard from '../components/NewsCard.astro';
-import Footer from '../components/Footer.astro';
-import type { Article } from '../data/articles';
-import { tagColor } from '../data/articles';
+import Layout from "./Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import NewsCard from "../components/NewsCard.astro";
+import Footer from "../components/Footer.astro";
+import type { Article } from "../data/articles";
+import { tagColor } from "../data/articles";
 
 export interface Props {
   tag: string;
@@ -16,42 +16,56 @@ const color = tagColor(tag);
 const count = articles.length;
 ---
 
-<Layout title={`${tag} News — Daily AI Mail`} description={`The latest ${tag} news, research and updates.`}>
+<Layout
+  title={`${tag} News — Daily AI Mail`}
+  description={`The latest ${tag} news, research and updates.`}
+>
   <Navbar />
 
   <!-- Category hero -->
-  <div class="cat-hero" style={`background: linear-gradient(135deg, ${color}12 0%, transparent 60%); border-bottom: 2px solid ${color}25;`}>
+  <header
+    class="cat-hero"
+    style={`background: linear-gradient(135deg, ${color}12 0%, transparent 60%); border-bottom: 2px solid ${color}25;`}
+  >
     <div class="cat-hero-inner">
-      <span class="cat-tag" style={`background: ${color}18; color: ${color};`}>{tag}</span>
+      <span class="cat-tag" style={`background: ${color}18; color: ${color};`}
+        >{tag}</span
+      >
       <h1 class="cat-title">{tag} News</h1>
-      <p class="cat-subtitle">{count} article{count !== 1 ? 's' : ''} · Updated daily</p>
+      <p class="cat-subtitle">
+        {count} article{count !== 1 ? "s" : ""} · Updated daily
+      </p>
     </div>
-  </div>
+  </header>
 
   <!-- Articles grid -->
-  <div class="cat-content">
+  <main class="cat-content">
     <div class="cat-inner">
-      <div class="cat-grid">
-        {articles.map(a => (
-          <NewsCard
-            tag={a.tag}
-            headline={a.headline}
-            excerpt={a.excerpt}
-            date={a.date}
-            author={a.author}
-            readingTime={a.readingTime}
-            href={`/articles/${a.slug}`}
-          />
-        ))}
-      </div>
+      <section class="cat-grid">
+        {
+          articles.map((a) => (
+            <NewsCard
+              tag={a.tag}
+              headline={a.headline}
+              excerpt={a.excerpt}
+              date={a.date}
+              author={a.author}
+              readingTime={a.readingTime}
+              href={`/articles/${a.slug}`}
+            />
+          ))
+        }
+      </section>
     </div>
-  </div>
+  </main>
 
   <Footer />
 </Layout>
 
 <style>
-  .cat-hero { padding: 56px 0 48px; }
+  .cat-hero {
+    padding: 56px 0 48px;
+  }
   .cat-hero-inner {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -75,19 +89,32 @@ const count = articles.length;
     font-size: clamp(36px, 5vw, 64px);
     line-height: 1.05;
   }
-  .cat-subtitle { font-size: 16px; color: var(--color-text-muted); }
+  .cat-subtitle {
+    font-size: 16px;
+    color: var(--color-text-muted);
+  }
 
   .cat-content {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 48px var(--gutter) 80px;
   }
-  .cat-inner { width: 100%; }
+  .cat-inner {
+    width: 100%;
+  }
   .cat-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
-  @media (max-width: 1024px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 640px) { .cat-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1024px) {
+    .cat-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .cat-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

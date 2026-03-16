@@ -8,15 +8,19 @@ interface Props {
 const { title, viewAllHref, viewAllLabel } = Astro.props;
 ---
 
-<div class="section-header">
+<header class="section-header">
   <div class="header-row">
     <h2 class="title">{title}</h2>
-    {viewAllHref && viewAllLabel && (
-      <a href={viewAllHref} class="view-all">{viewAllLabel}</a>
-    )}
+    {
+      viewAllHref && viewAllLabel && (
+        <a href={viewAllHref} class="view-all">
+          {viewAllLabel}
+        </a>
+      )
+    }
   </div>
   <hr class="divider" />
-</div>
+</header>
 
 <style>
   .section-header {
