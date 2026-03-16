@@ -143,6 +143,7 @@ const { title, description, metaTitle } = Astro.props;
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden; /* prevent any element causing page-wide horizontal scroll */
   }
 
   /* Smooth transitions only AFTER initial theme is applied (prevents FOUC) */
