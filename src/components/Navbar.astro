@@ -1,5 +1,5 @@
 ---
-import SearchModal from "./SearchModal.astro";
+
 ---
 
 <nav class="navbar" id="main-nav">
@@ -75,9 +75,10 @@ import SearchModal from "./SearchModal.astro";
     <div class="nav-actions">
       <!-- Search -->
       <button
-        class="icon-btn search-trigger"
+        class="icon-btn"
         id="search-open-btn"
-        aria-label="Search articles (Ctrl+K)"
+        aria-label="Search"
+        aria-keyshortcuts="Control+K Meta+K"
       >
         <svg
           width="18"
@@ -94,7 +95,6 @@ import SearchModal from "./SearchModal.astro";
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <span class="search-kbd-hint" aria-hidden="true">⌘K</span>
       </button>
 
       <!-- Subscribe -->
@@ -317,70 +317,166 @@ import SearchModal from "./SearchModal.astro";
   </ul>
 </nav>
 
-<SearchModal />
+<!-- ── Search Modal ─────────────────────────────────────────── -->
+<div
+  id="search-modal"
+  class="search-modal"
+  hidden
+  aria-modal="true"
+  role="dialog"
+  aria-label="Search Daily AI Mail"
+>
+  <div class="search-backdrop" id="search-backdrop"></div>
+  <div class="search-container">
+    <div id="search"></div>
+  </div>
+</div>
 
-<script is:inline>
-  // ── Search button → open modal ──────────────────────────────
-  document
-    .getElementById("search-open-btn")
-    .addEventListener("click", function () {
-      window.__openSearch && window.__openSearch();
-    });
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // ── Hamburger ──────────────────────────────────
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const mainNav = document.getElementById("main-nav");
 
-  // ── Hamburger ──────────────────────────────────
-  var hamburgerBtn = document.getElementById("hamburger-btn");
-  var mainNav = document.getElementById("main-nav");
-
-  if (hamburgerBtn && mainNav) {
-    hamburgerBtn.addEventListener("click", function () {
-      var isOpen = mainNav.hasAttribute("data-open");
-      mainNav.toggleAttribute("data-open");
-      hamburgerBtn.setAttribute("aria-expanded", String(!isOpen));
-      hamburgerBtn.setAttribute(
-        "aria-label",
-        isOpen ? "Open menu" : "Close menu",
-      );
-    });
-  }
-
-  // ── Theme toggle ───────────────────────────────
-  function applyTheme(pref) {
-    var root = document.documentElement;
-    var resolved = pref;
-    if (pref === "system") {
-      resolved = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+    if (hamburgerBtn && mainNav) {
+      hamburgerBtn.addEventListener("click", () => {
+        const isOpen = mainNav.hasAttribute("data-open");
+        mainNav.toggleAttribute("data-open");
+        hamburgerBtn.setAttribute("aria-expanded", String(!isOpen));
+        hamburgerBtn.setAttribute(
+          "aria-label",
+          isOpen ? "Open menu" : "Close menu",
+        );
+      });
     }
-    root.setAttribute("data-theme", resolved);
-    root.setAttribute("data-theme-pref", pref);
-    localStorage.setItem("dai-theme", pref);
 
-    document.querySelectorAll("[data-theme-val]").forEach(function (btn) {
-      btn.setAttribute("aria-pressed", String(btn.dataset.themeVal === pref));
+    // ── Theme toggle ───────────────────────────────
+    function applyTheme(pref: string) {
+      const root = document.documentElement;
+      let resolved = pref;
+      if (pref === "system") {
+        resolved = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+      root.setAttribute("data-theme", resolved);
+      root.setAttribute("data-theme-pref", pref);
+      localStorage.setItem("dai-theme", pref);
+      document
+        .querySelectorAll<HTMLButtonElement>("[data-theme-val]")
+        .forEach((btn) => {
+          btn.setAttribute(
+            "aria-pressed",
+            String(btn.dataset.themeVal === pref),
+          );
+        });
+    }
+
+    const saved = localStorage.getItem("dai-theme") || "system";
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-theme-val]")
+      .forEach((btn) => {
+        btn.setAttribute(
+          "aria-pressed",
+          String(btn.dataset.themeVal === saved),
+        );
+        btn.addEventListener("click", () => applyTheme(btn.dataset.themeVal!));
+      });
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", () => {
+        const pref = localStorage.getItem("dai-theme") || "system";
+        if (pref === "system") applyTheme("system");
+      });
+
+    // ── Search modal ───────────────────────────────
+    const searchOpenBtn = document.getElementById("search-open-btn");
+    const searchModal = document.getElementById("search-modal");
+    const searchBackdrop = document.getElementById("search-backdrop");
+    const searchEl = document.getElementById("search");
+
+    if (!searchOpenBtn || !searchModal || !searchEl) {
+      console.warn("[Search] Missing DOM elements", {
+        searchOpenBtn,
+        searchModal,
+        searchEl,
+      });
+      return;
+    }
+
+    let pagefindInitialised = false;
+
+    function openSearch() {
+      searchModal!.hidden = false;
+      document.body.style.overflow = "hidden";
+
+      if (pagefindInitialised) {
+        searchModal!
+          .querySelector<HTMLInputElement>("input[type=text]")
+          ?.focus();
+        return;
+      }
+
+      const isDev =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+
+      if (isDev) {
+        searchEl!.innerHTML = `
+          <div style="padding:32px 24px; color:#8a95a8; font-size:14px;
+                      font-family:var(--font-mono); text-align:center; line-height:1.9;">
+            <div style="font-size:32px; margin-bottom:12px;">🔍</div>
+            Search requires a production build.<br/>
+            Run <code style="color:#e8b84b; background:rgba(232,184,75,0.1);
+                             padding:2px 8px; border-radius:4px;">
+              npm run build &amp;&amp; npm run preview
+            </code><br/>to test search locally.
+          </div>`;
+        pagefindInitialised = true;
+        return;
+      }
+
+      // Production — lazy-load pagefind
+      const pagefindPath = ["", "pagefind", "pagefind-ui.js"].join("/");
+      // @ts-ignore
+      import(/* @vite-ignore */ pagefindPath)
+        .then(({ PagefindUI }) => {
+          new PagefindUI({
+            element: "#search",
+            showSubResults: true,
+            showImages: false,
+            resetStyles: false,
+          });
+          pagefindInitialised = true;
+          setTimeout(() => {
+            searchModal!
+              .querySelector<HTMLInputElement>("input[type=text]")
+              ?.focus();
+          }, 50);
+        })
+        .catch((e) => {
+          console.warn("[Search] Pagefind failed to load:", e);
+          searchEl!.innerHTML = `<div style="padding:24px; color:#8a95a8; text-align:center;">
+          Search index not available.</div>`;
+        });
+    }
+
+    function closeSearch() {
+      searchModal!.hidden = true;
+      document.body.style.overflow = "";
+    }
+
+    searchOpenBtn.addEventListener("click", openSearch);
+    searchBackdrop?.addEventListener("click", closeSearch);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeSearch();
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        openSearch();
+      }
     });
-  }
-
-  // Init button states from saved preference
-  var saved = localStorage.getItem("dai-theme") || "system";
-  document.querySelectorAll("[data-theme-val]").forEach(function (btn) {
-    btn.setAttribute("aria-pressed", String(btn.dataset.themeVal === saved));
-  });
-
-  // Click handlers
-  document.querySelectorAll("[data-theme-val]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      applyTheme(btn.dataset.themeVal);
-    });
-  });
-
-  // Respond to OS-level theme change when user is on "system"
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", function () {
-      var pref = localStorage.getItem("dai-theme") || "system";
-      if (pref === "system") applyTheme("system");
-    });
+  }); // end DOMContentLoaded
 </script>
 
 <style>
@@ -416,7 +512,7 @@ import SearchModal from "./SearchModal.astro";
   }
   .navbar-logo em {
     font-style: italic;
-    color: #e8b84b; /* always gold regardless of theme — nav is always dark */
+    color: #e8b84b;
   }
 
   /* ── Desktop nav links ───────────────────── */
@@ -514,28 +610,6 @@ import SearchModal from "./SearchModal.astro";
     background: rgba(232, 184, 75, 0.07);
   }
 
-  /* Keyboard shortcut hint on search button */
-  .search-trigger {
-    width: auto;
-    padding: 0 10px;
-    gap: 7px;
-  }
-  .search-kbd-hint {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: rgba(244, 240, 232, 0.35);
-    letter-spacing: 0.04em;
-  }
-  @media (max-width: 900px) {
-    .search-kbd-hint {
-      display: none;
-    }
-    .search-trigger {
-      width: 36px;
-      padding: 0;
-    }
-  }
-
   /* ── Theme toggle ─────────────────────────── */
   .theme-toggle {
     display: flex;
@@ -567,7 +641,6 @@ import SearchModal from "./SearchModal.astro";
     color: rgba(244, 240, 232, 0.85);
     background: rgba(255, 255, 255, 0.06);
   }
-  /* Active state — aria-pressed="true" */
   .theme-btn[aria-pressed="true"] {
     background: rgba(232, 184, 75, 0.15);
     color: #e8b84b;
@@ -670,20 +743,87 @@ import SearchModal from "./SearchModal.astro";
     .hamburger {
       display: flex;
     }
-
-    /* Hide desktop theme toggle — mobile menu has its own */
-    .nav-actions .theme-toggle {
-      display: none;
-    }
-
-    /* Prevent nav-actions from overflowing viewport */
-    .nav-actions {
-      gap: 6px;
-    }
   }
 
-  /* Prevent navbar from ever causing horizontal scroll */
-  .navbar {
+  /* ── Search Modal ─────────────────────────── */
+  .search-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 80px;
+  }
+  .search-modal[hidden] {
+    display: none;
+  }
+  .search-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .search-container {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 var(--gutter);
+    background: #111828;
+    border: 1px solid rgba(232, 184, 75, 0.2);
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  }
+
+  /* ── PageFind UI overrides ────────────────── */
+  :global(.search-container .pagefind-ui) {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: #e8b84b;
+    --pagefind-ui-text: #f4f0e8;
+    --pagefind-ui-background: #111828;
+    --pagefind-ui-border: rgba(232, 184, 75, 0.18);
+    --pagefind-ui-tag: #1a2540;
+    font-family: var(--font-body);
+  }
+  :global(.search-container .pagefind-ui__search-input) {
+    background: #111828 !important;
+    color: #f4f0e8 !important;
+    border-bottom: 1px solid rgba(232, 184, 75, 0.18) !important;
+    border-radius: 0 !important;
+    padding: 18px 20px !important;
+    font-size: 16px !important;
+  }
+  :global(.search-container .pagefind-ui__search-input:focus) {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  :global(.search-container .pagefind-ui__results-area) {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  :global(.search-container .pagefind-ui__result) {
+    padding: 14px 20px !important;
+    border-bottom: 1px solid rgba(232, 184, 75, 0.08) !important;
+  }
+  :global(.search-container .pagefind-ui__result:hover) {
+    background: rgba(232, 184, 75, 0.06) !important;
+  }
+  :global(.search-container .pagefind-ui__result-title) {
+    color: #f4f0e8 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+  }
+  :global(.search-container .pagefind-ui__result-excerpt) {
+    color: #8a95a8 !important;
+    font-size: 13px !important;
+  }
+  :global(.search-container mark) {
+    background: rgba(232, 184, 75, 0.25) !important;
+    color: #e8b84b !important;
+    border-radius: 2px;
+    padding: 0 2px;
   }
 </style>
