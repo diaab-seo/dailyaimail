@@ -1,10 +1,15 @@
 ---
+
 ---
 
 <nav class="navbar" id="main-nav">
   <div class="navbar-inner">
-    <a href="/" class="navbar-logo">Daily <em>AI</em> Mail</a>
-    
+    <!-- Logo -->
+    <a href="/" class="navbar-logo" aria-label="Daily AI Mail — Home">
+      Daily <em>AI</em> Mail
+    </a>
+
+    <!-- Desktop nav links -->
     <ul class="desktop-nav">
       <li><a href="/">Home</a></li>
       <li class="has-dropdown">
@@ -41,7 +46,7 @@
         </ul>
       </li>
       <li class="has-dropdown">
-        <a href="/category/tools-and-apps">Tools & Apps</a>
+        <a href="/category/tools-and-apps">Tools &amp; Apps</a>
         <ul class="dropdown">
           <li><a href="/category/tools-and-apps">New Launches</a></li>
           <li><a href="/category/tools-and-apps">Reviews</a></li>
@@ -49,7 +54,7 @@
         </ul>
       </li>
       <li class="has-dropdown">
-        <a href="/category/policy-and-ethics">Policy & Ethics</a>
+        <a href="/category/policy-and-ethics">Policy &amp; Ethics</a>
         <ul class="dropdown">
           <li><a href="/category/policy-and-ethics">Regulation</a></li>
           <li><a href="/category/policy-and-ethics">Safety</a></li>
@@ -66,154 +71,577 @@
       </li>
     </ul>
 
+    <!-- Right-side actions -->
     <div class="nav-actions">
-      <button class="icon-btn" aria-label="Search">🔍</button>
-      <button class="icon-btn" aria-label="Newsletter">📩</button>
-      <button class="hamburger" id="hamburger-btn" aria-label="Menu">☰</button>
+      <!-- Search -->
+      <button class="icon-btn" aria-label="Search">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      <!-- Subscribe -->
+      <button class="icon-btn" aria-label="Subscribe to newsletter">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="M2 7l10 7 10-7"></path>
+        </svg>
+      </button>
+
+      <!-- Theme toggle -->
+      <div class="theme-toggle" role="group" aria-label="Color theme">
+        <!-- Light -->
+        <button
+          class="theme-btn"
+          data-theme-val="light"
+          aria-pressed="false"
+          aria-label="Light theme"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+        <!-- System -->
+        <button
+          class="theme-btn"
+          data-theme-val="system"
+          aria-pressed="true"
+          aria-label="System theme"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </button>
+        <!-- Dark -->
+        <button
+          class="theme-btn"
+          data-theme-val="dark"
+          aria-pressed="false"
+          aria-label="Dark theme"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Hamburger (mobile) -->
+      <button
+        class="hamburger"
+        id="hamburger-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
     </div>
   </div>
-  
-  <div class="mobile-nav" id="mobile-nav">
-    <!-- Mobile links (stacked) -->
-    <a href="/">Home</a>
-    <a href="/category/anthropic">Anthropic</a>
-    <a href="/category/google-ai">Google AI</a>
-    <a href="/category/openai">OpenAI</a>
-    <a href="/category/meta-ai">Meta AI</a>
-    <a href="/category/tools-and-apps">Tools & Apps</a>
-    <a href="/category/policy-and-ethics">Policy & Ethics</a>
-    <a href="/about-us">About</a>
-  </div>
+
+  <!-- Mobile nav -->
+  <ul class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <li><a href="/">Home</a></li>
+    <li><a href="/category/anthropic">Anthropic</a></li>
+    <li><a href="/category/google-ai">Google AI</a></li>
+    <li><a href="/category/openai">OpenAI</a></li>
+    <li><a href="/category/meta-ai">Meta AI</a></li>
+    <li><a href="/category/tools-and-apps">Tools &amp; Apps</a></li>
+    <li><a href="/category/policy-and-ethics">Policy &amp; Ethics</a></li>
+    <li><a href="/about-us">About</a></li>
+    <li class="mobile-theme-row" role="group" aria-label="Color theme">
+      <span class="mobile-theme-label">Theme</span>
+      <div class="theme-toggle theme-toggle--mobile">
+        <button
+          class="theme-btn"
+          data-theme-val="light"
+          aria-pressed="false"
+          aria-label="Light theme"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span>Light</span>
+        </button>
+        <button
+          class="theme-btn"
+          data-theme-val="system"
+          aria-pressed="true"
+          aria-label="System theme"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          <span>System</span>
+        </button>
+        <button
+          class="theme-btn"
+          data-theme-val="dark"
+          aria-pressed="false"
+          aria-label="Dark theme"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span>Dark</span>
+        </button>
+      </div>
+    </li>
+  </ul>
 </nav>
 
 <script>
-  const btn = document.getElementById('hamburger-btn');
-  const nav = document.getElementById('main-nav');
-  if(btn && nav) {
-    btn.addEventListener('click', () => {
-      nav.toggleAttribute('data-open');
+  // ── Hamburger ──────────────────────────────────
+  const hamburgerBtn = document.getElementById("hamburger-btn");
+  const mainNav = document.getElementById("main-nav");
+  const mobileNav = document.getElementById("mobile-nav");
+
+  if (hamburgerBtn && mainNav) {
+    hamburgerBtn.addEventListener("click", () => {
+      const isOpen = mainNav.hasAttribute("data-open");
+      mainNav.toggleAttribute("data-open");
+      hamburgerBtn.setAttribute("aria-expanded", String(!isOpen));
+      hamburgerBtn.setAttribute(
+        "aria-label",
+        isOpen ? "Open menu" : "Close menu",
+      );
     });
   }
+
+  // ── Theme toggle ───────────────────────────────
+  function applyTheme(pref: string) {
+    const root = document.documentElement;
+    let resolved = pref;
+    if (pref === "system") {
+      resolved = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+    root.setAttribute("data-theme", resolved);
+    root.setAttribute("data-theme-pref", pref);
+    localStorage.setItem("dai-theme", pref);
+
+    // Sync all theme buttons (desktop + mobile)
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-theme-val]")
+      .forEach((btn) => {
+        const active = btn.dataset.themeVal === pref;
+        btn.setAttribute("aria-pressed", String(active));
+      });
+  }
+
+  // Init button states from saved preference
+  const saved = localStorage.getItem("dai-theme") || "system";
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-theme-val]")
+    .forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(btn.dataset.themeVal === saved));
+    });
+
+  // Click handlers
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-theme-val]")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyTheme(btn.dataset.themeVal!);
+      });
+    });
+
+  // Respond to OS-level theme change when user is on "system"
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      const pref = localStorage.getItem("dai-theme") || "system";
+      if (pref === "system") applyTheme("system");
+    });
 </script>
 
 <style>
+  /* ── Navbar shell ─────────────────────────── */
   .navbar {
     background: var(--nav-bg);
     color: var(--nav-text);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid rgba(232, 184, 75, 0.1);
   }
   .navbar-inner {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--gutter);
-    height: 80px;
+    height: 72px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
   }
+
+  /* ── Logo ─────────────────────────────────── */
   .navbar-logo {
     font-family: var(--font-display);
     font-size: 22px;
+    font-weight: 900;
     text-decoration: none;
     color: var(--nav-text);
+    flex-shrink: 0;
+    letter-spacing: -0.01em;
   }
   .navbar-logo em {
     font-style: italic;
+    color: #e8b84b; /* always gold regardless of theme — nav is always dark */
   }
+
+  /* ── Desktop nav links ───────────────────── */
   .desktop-nav {
     display: flex;
     list-style: none;
-    gap: 24px;
+    gap: 4px;
     margin: 0;
     padding: 0;
+    flex: 1;
+    justify-content: center;
   }
   .desktop-nav > li {
     position: relative;
   }
   .desktop-nav > li > a {
-    font-size: 15px;
+    display: block;
+    font-size: 14px;
     font-weight: 500;
-    padding: 12px 0;
-    color: rgba(255,255,255,0.8);
-    transition: color 0.2s;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: rgba(244, 240, 232, 0.75);
+    transition:
+      color 0.15s,
+      background 0.15s;
+    white-space: nowrap;
   }
   .desktop-nav > li > a:hover {
-    color: white;
+    color: #f4f0e8;
+    background: rgba(255, 255, 255, 0.07);
   }
+
+  /* ── Dropdown ─────────────────────────────── */
   .has-dropdown .dropdown {
     display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 8px);
     left: 0;
-    background: #1A1A18;
-    padding: 8px 0;
-    border-radius: 4px;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+    background: #111828;
+    border: 1px solid rgba(232, 184, 75, 0.15);
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
     list-style: none;
-    min-width: 180px;
+    min-width: 188px;
+    z-index: 200;
   }
-  .has-dropdown:hover .dropdown {
+  .has-dropdown:hover .dropdown,
+  .has-dropdown:focus-within .dropdown {
     display: block;
   }
   .dropdown li a {
     display: block;
-    font-size: 14px;
-    padding: 10px 20px;
-    color: rgba(255,255,255,0.8);
-    transition: background 0.2s;
+    font-size: 13.5px;
+    padding: 9px 14px;
+    border-radius: 5px;
+    color: rgba(244, 240, 232, 0.75);
+    transition:
+      background 0.15s,
+      color 0.15s;
   }
   .dropdown li a:hover {
-    background: rgba(255,255,255,0.06);
-    color: white;
+    background: rgba(232, 184, 75, 0.09);
+    color: #e8b84b;
   }
+
+  /* ── Nav actions (right side) ────────────── */
   .nav-actions {
     display: flex;
-    gap: 16px;
     align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
   }
+
+  /* ── Icon buttons (search / subscribe) ───── */
   .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid rgba(244, 240, 232, 0.12);
+    border-radius: 8px;
+    color: rgba(244, 240, 232, 0.7);
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      border-color 0.15s,
+      background 0.15s;
+  }
+  .icon-btn:hover {
+    color: #f4f0e8;
+    border-color: rgba(232, 184, 75, 0.4);
+    background: rgba(232, 184, 75, 0.07);
+  }
+
+  /* ── Theme toggle ─────────────────────────── */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(244, 240, 232, 0.1);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 1px;
+  }
+  .theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 30px;
+    height: 28px;
     background: none;
     border: none;
-    color: var(--nav-text);
-    font-size: 18px;
+    border-radius: 5px;
+    color: rgba(244, 240, 232, 0.45);
     cursor: pointer;
-    padding: 4px;
+    transition:
+      color 0.15s,
+      background 0.15s;
+    padding: 0 6px;
   }
+  .theme-btn:hover {
+    color: rgba(244, 240, 232, 0.85);
+    background: rgba(255, 255, 255, 0.06);
+  }
+  /* Active state — aria-pressed="true" */
+  .theme-btn[aria-pressed="true"] {
+    background: rgba(232, 184, 75, 0.15);
+    color: #e8b84b;
+  }
+
+  /* ── Hamburger (mobile only) ─────────────── */
   .hamburger {
     display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
     background: none;
-    border: none;
-    color: var(--nav-text);
-    font-size: 24px;
+    border: 1px solid rgba(244, 240, 232, 0.12);
+    border-radius: 8px;
+    color: rgba(244, 240, 232, 0.8);
     cursor: pointer;
-    padding: 4px;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
   }
+  .hamburger:hover {
+    color: #f4f0e8;
+    border-color: rgba(232, 184, 75, 0.4);
+  }
+
+  /* ── Mobile nav ───────────────────────────── */
   .mobile-nav {
     display: none;
     flex-direction: column;
-    padding: 16px var(--gutter);
-    background: var(--nav-bg);
-    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 8px var(--gutter) 16px;
+    margin: 0;
+    list-style: none;
+    background: #0a1020;
+    border-top: 1px solid rgba(232, 184, 75, 0.1);
   }
-  .mobile-nav a {
-    padding: 12px 0;
-    font-size: 16px;
-    color: white;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+  .mobile-nav li a {
+    display: block;
+    padding: 13px 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(244, 240, 232, 0.75);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: color 0.15s;
   }
-  
+  .mobile-nav li a:hover {
+    color: #e8b84b;
+  }
+
+  /* Mobile theme row */
+  .mobile-theme-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0 4px;
+  }
+  .mobile-theme-label {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: rgba(244, 240, 232, 0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .theme-toggle--mobile {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .theme-toggle--mobile .theme-btn {
+    width: auto;
+    padding: 0 10px;
+    height: 30px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    gap: 6px;
+  }
+  .theme-toggle--mobile .theme-btn span {
+    letter-spacing: 0.04em;
+    font-size: 11px;
+  }
+
+  /* ── Open state ───────────────────────────── */
   nav[data-open] .mobile-nav {
     display: flex;
   }
+  nav[data-open] .hamburger {
+    color: #e8b84b;
+    border-color: rgba(232, 184, 75, 0.4);
+  }
 
-  @media (max-width: 768px) {
+  /* ── Responsive ───────────────────────────── */
+  @media (max-width: 1100px) {
+    .desktop-nav > li > a {
+      font-size: 13px;
+      padding: 8px 8px;
+    }
+  }
+  @media (max-width: 900px) {
     .desktop-nav {
       display: none;
     }
     .hamburger {
-      display: block;
+      display: flex;
     }
   }
 </style>
