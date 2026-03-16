@@ -24,6 +24,7 @@ const related = getArticlesByCategory(article.tag)
   <nav
     class="article-top-bar"
     style={`background: ${color}10; border-bottom: 1px solid ${color}25;`}
+    data-pagefind-ignore
   >
     <div class="article-top-inner">
       <a
@@ -37,19 +38,23 @@ const related = getArticlesByCategory(article.tag)
   </nav>
 
   <!-- Article header -->
-  <header class="article-header">
+  <header class="article-header" data-pagefind-ignore>
     <div class="article-header-inner">
       <span
         class="article-tag"
         style={`background: ${color}18; color: ${color}; border: 1px solid ${color}35;`}
         >{article.tag}</span
       >
-      <h1 class="article-headline">{article.headline}</h1>
+      <h1 class="article-headline" data-pagefind-meta="title">
+        {article.headline}
+      </h1>
       <p class="article-excerpt">{article.excerpt}</p>
       <div class="article-meta">
         <span class="article-author">By {article.author}</span>
         <span class="article-sep">·</span>
-        <time datetime={article.isoDate}>{article.date}</time>
+        <time datetime={article.isoDate} data-pagefind-meta="date"
+          >{article.date}</time
+        >
         <span class="article-sep">·</span>
         <span>{article.readingTime}</span>
       </div>
@@ -60,6 +65,7 @@ const related = getArticlesByCategory(article.tag)
   <figure
     class="article-hero-img"
     style={`background: linear-gradient(135deg, ${color}15 0%, ${color}05 100%);`}
+    data-pagefind-ignore
   >
     <div class="article-hero-icon" style={`color: ${color};`}>
       <svg
@@ -78,11 +84,11 @@ const related = getArticlesByCategory(article.tag)
 
   <!-- Article body + sidebar -->
   <main class="article-layout">
-    <article class="article-body">
+    <article class="article-body" data-pagefind-body>
       <slot />
     </article>
 
-    <aside class="article-sidebar">
+    <aside class="article-sidebar" data-pagefind-ignore>
       <!-- Author box -->
       <address class="sidebar-author-box">
         <div class="author-avatar">
@@ -102,8 +108,11 @@ const related = getArticlesByCategory(article.tag)
       <!-- Related articles -->
       {
         related.length > 0 && (
-          <section class="related-box">
-            <h3 class="related-title">More in {article.tag}</h3>
+          <section
+            class="related-box"
+            aria-label={`More articles in ${article.tag}`}
+          >
+            <p class="related-title">More in {article.tag}</p>
             <ul class="related-list">
               {related.map((r) => (
                 <li class="related-item">

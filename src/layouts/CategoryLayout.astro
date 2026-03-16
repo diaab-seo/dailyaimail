@@ -23,9 +23,10 @@ const count = articles.length;
   <Navbar />
 
   <!-- Category hero -->
-  <header
+  <div
     class="cat-hero"
     style={`background: linear-gradient(135deg, ${color}12 0%, transparent 60%); border-bottom: 2px solid ${color}25;`}
+    data-pagefind-ignore
   >
     <div class="cat-hero-inner">
       <span class="cat-tag" style={`background: ${color}18; color: ${color};`}
@@ -36,12 +37,12 @@ const count = articles.length;
         {count} article{count !== 1 ? "s" : ""} · Updated daily
       </p>
     </div>
-  </header>
+  </div>
 
   <!-- Articles grid -->
-  <main class="cat-content">
+  <div class="cat-content" data-pagefind-ignore>
     <div class="cat-inner">
-      <section class="cat-grid">
+      <div class="cat-grid">
         {
           articles.map((a) => (
             <NewsCard
@@ -55,9 +56,9 @@ const count = articles.length;
             />
           ))
         }
-      </section>
+      </div>
     </div>
-  </main>
+  </div>
 
   <Footer />
 </Layout>

@@ -2,10 +2,10 @@
 
 ---
 
-<section class="newsletter-banner">
+<section class="newsletter-banner" aria-labelledby="newsletter-label">
   <div class="banner-inner">
     <p class="icon" aria-hidden="true">📩</p>
-    <h2>Stay Ahead of AI</h2>
+    <p class="banner-title" id="newsletter-label">Stay Ahead of AI</p>
     <p>
       Join thousands of professionals getting the latest AI news right in their
       inbox.
@@ -36,10 +36,13 @@
     font-size: 32px;
     margin-bottom: 16px;
   }
-  h2 {
+  .banner-title {
     font-family: var(--font-display);
     font-size: 36px;
+    font-weight: 700;
     margin-bottom: 12px;
+    color: var(--nav-text);
+    line-height: 1.15;
   }
   p {
     font-size: 16px;
