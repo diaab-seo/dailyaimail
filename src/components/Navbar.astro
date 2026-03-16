@@ -670,5 +670,20 @@ import SearchModal from "./SearchModal.astro";
     .hamburger {
       display: flex;
     }
+
+    /* Hide desktop theme toggle — mobile menu has its own */
+    .nav-actions .theme-toggle {
+      display: none;
+    }
+
+    /* Prevent nav-actions from overflowing viewport */
+    .nav-actions {
+      gap: 6px;
+    }
+  }
+
+  /* Prevent navbar from ever causing horizontal scroll */
+  .navbar {
+    overflow: hidden;
   }
 </style>
