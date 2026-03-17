@@ -1,13 +1,12 @@
 import { getCollection } from 'astro:content';
 
-// ── Public type ───────────────────────────────────────────────────────────────
-// Kept identical to the original so no other files need to change their imports.
 export type Article = {
   slug: string;
   tag: string;
+  tags: string[];   // primary tag + any extras — deduped, used for Filed Under
   headline: string;
   excerpt: string;
-  body: string;   // raw markdown body
+  body: string;
   date: string;
   isoDate: string;
   modifiedDate: string;
@@ -22,15 +21,15 @@ export type Article = {
   articleSection: string[];
 };
 
-// ── Collection → Article adapter ─────────────────────────────────────────────
 async function fetchArticles(): Promise<Article[]> {
   const entries = await getCollection('articles');
   return entries.map((e) => ({
     slug: e.id,
     tag: e.data.tag,
+    tags: [...new Set([e.data.tag, ...(e.data.tags ?? [])])],
     headline: e.data.headline,
     excerpt: e.data.excerpt,
-    body: e.body,
+    body: e.body ?? '',
     date: e.data.date,
     isoDate: e.data.isoDate,
     modifiedDate: e.data.modifiedDate ?? e.data.isoDate,
@@ -46,35 +45,11 @@ async function fetchArticles(): Promise<Article[]> {
   }));
 }
 
-// ── Async helpers (used in .astro frontmatter blocks) ────────────────────────
-
-export async function getArticles(): Promise<Article[]> {
-  return fetchArticles();
-}
-
-export async function getAllCategories(): Promise<string[]> {
-  const all = await fetchArticles();
-  return [...new Set(all.map((a) => a.tag))];
-}
-
-export async function getArticlesByCategory(tag: string): Promise<Article[]> {
-  const all = await fetchArticles();
-  return all.filter((a) => a.tag === tag);
-}
-
-export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
-  const all = await fetchArticles();
-  return all.find((a) => a.slug === slug);
-}
-
-export async function getLatestArticles(count = 3): Promise<Article[]> {
-  const all = await fetchArticles();
-  return [...all]
-    .sort((a, b) => new Date(b.isoDate).getTime() - new Date(a.isoDate).getTime())
-    .slice(0, count);
-}
-
-// ── Pure helpers (no async needed) ───────────────────────────────────────────
+export async function getArticles(): Promise<Article[]> { return fetchArticles(); }
+export async function getAllCategories(): Promise<string[]> { const a = await fetchArticles(); return [...new Set(a.map(x => x.tag))]; }
+export async function getArticlesByCategory(tag: string): Promise<Article[]> { const a = await fetchArticles(); return a.filter(x => x.tag === tag); }
+export async function getArticleBySlug(slug: string): Promise<Article | undefined> { const a = await fetchArticles(); return a.find(x => x.slug === slug); }
+export async function getLatestArticles(count = 3): Promise<Article[]> { const a = await fetchArticles(); return [...a].sort((x, y) => new Date(y.isoDate).getTime() - new Date(x.isoDate).getTime()).slice(0, count); }
 
 export function categoryToSlug(tag: string): string {
   return tag.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and');
@@ -92,16 +67,15 @@ export function tagColor(tag: string): string {
   return map[tag] ?? 'var(--tag-default)';
 }
 
-// ── Markdown → plain text (for articleBody in schema) ────────────────────────
 export function stripMarkdown(md: string): string {
   return md
-    .replace(/^#{1,6}\s+/gm, '')        // headings
-    .replace(/\*\*(.+?)\*\*/g, '$1')    // bold
-    .replace(/\*(.+?)\*/g, '$1')        // italic
-    .replace(/`{1,3}[^`]*`{1,3}/g, '')  // code
-    .replace(/\[(.+?)\]\(.+?\)/g, '$1') // links
-    .replace(/^\s*[-*+]\s/gm, '')       // list bullets
-    .replace(/^\s*\d+\.\s/gm, '')       // numbered lists
-    .replace(/\n{3,}/g, '\n\n')         // extra blank lines
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/`{1,3}[^`]*`{1,3}/g, '')
+    .replace(/\[(.+?)\]\(.+?\)/g, '$1')
+    .replace(/^\s*[-*+]\s/gm, '')
+    .replace(/^\s*\d+\.\s/gm, '')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
