@@ -11,7 +11,6 @@ import type { Article } from "../data/articles";
 export interface Props {
   article: Article;
 }
-
 const { article } = Astro.props;
 
 const color = tagColor(article.tag);
@@ -19,7 +18,6 @@ const related = (await getArticlesByCategory(article.tag))
   .filter((a) => a.slug !== article.slug)
   .slice(0, 3);
 
-// ── Schema constants ──────────────────────────────────────────────────────────
 const siteUrl = "https://dailyaimail.com";
 const articleUrl = `${siteUrl}/articles/${article.slug}`;
 const pubDate = `${article.isoDate}T00:00:00+00:00`;
@@ -29,11 +27,9 @@ const plainBody = stripMarkdown(article.body);
 const hasImage = Boolean(article.image);
 const imageUrl = hasImage ? `${siteUrl}${article.image}` : null;
 
-// ── Full @graph schema ────────────────────────────────────────────────────────
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
-    // 1. NewsArticle
     {
       "@type": "NewsArticle",
       "@id": `${articleUrl}#article`,
@@ -43,7 +39,7 @@ const schema = {
       articleBody: plainBody,
       datePublished: pubDate,
       dateModified: modDate,
-      wordCount: wordCount,
+      wordCount,
       author: [{ "@id": `${siteUrl}/#/schema/person/mohamed-diab` }],
       publisher: { "@id": `${siteUrl}/#organization` },
       mainEntityOfPage: { "@id": articleUrl },
@@ -61,8 +57,6 @@ const schema = {
         cssSelector: [".article-headline", ".article-excerpt"],
       },
     },
-
-    // 2. WebPage
     {
       "@type": "WebPage",
       "@id": articleUrl,
@@ -81,8 +75,6 @@ const schema = {
       }),
       potentialAction: [{ "@type": "ReadAction", target: [articleUrl] }],
     },
-
-    // 3. ImageObject (only when image is declared in frontmatter)
     ...(hasImage
       ? [
           {
@@ -97,8 +89,6 @@ const schema = {
           },
         ]
       : []),
-
-    // 4. BreadcrumbList
     {
       "@type": "BreadcrumbList",
       "@id": `${articleUrl}#breadcrumb`,
@@ -113,8 +103,6 @@ const schema = {
         { "@type": "ListItem", position: 3, name: article.headline },
       ],
     },
-
-    // 5. WebSite
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
@@ -139,8 +127,6 @@ const schema = {
       ],
       inLanguage: "en-US",
     },
-
-    // 6. Organization (NewsMediaOrganization)
     {
       "@type": "NewsMediaOrganization",
       "@id": `${siteUrl}/#organization`,
@@ -165,8 +151,6 @@ const schema = {
         "https://diab.digital",
       ],
     },
-
-    // 7. Person (author)
     {
       "@type": "Person",
       "@id": `${siteUrl}/#/schema/person/mohamed-diab`,
@@ -185,26 +169,23 @@ const schema = {
   description={article.excerpt}
   metaTitle={`${article.headline} | Daily AI Mail`}
 >
-  <!-- NewsArticle JSON-LD injected into <head> via Layout slot -->
   <script
     type="application/ld+json"
     set:html={JSON.stringify(schema)}
     slot="head"
   />
 
-  <!-- Article breadcrumb bar -->
+  <!-- Breadcrumb bar -->
   <nav
     class="article-top-bar"
-    style={`background: ${color}10; border-bottom: 1px solid ${color}25;`}
+    style={`background:${color}10;border-bottom:1px solid ${color}25;`}
   >
     <div class="article-top-inner">
       <a
         href={`/category/${categoryToSlug(article.tag)}`}
         class="back-link"
-        style={`color: ${color};`}
+        style={`color:${color};`}>← {article.tag}</a
       >
-        ← {article.tag}
-      </a>
     </div>
   </nav>
 
@@ -213,7 +194,7 @@ const schema = {
     <div class="article-header-inner">
       <span
         class="article-tag"
-        style={`background: ${color}18; color: ${color}; border: 1px solid ${color}35;`}
+        style={`background:${color}18;color:${color};border:1px solid ${color}35;`}
         >{article.tag}</span
       >
       <h1 class="article-headline" data-pagefind-meta="title">
@@ -231,10 +212,96 @@ const schema = {
         <span class="article-sep">·</span>
         <span>{article.readingTime}</span>
       </div>
+
+      <!-- Share Bar -->
+      <div
+        class="share-bar"
+        id="share-bar"
+        data-url={articleUrl}
+        data-title={article.headline}
+      >
+        <span class="share-label">Share</span>
+        <button
+          class="share-btn share-btn--copy"
+          aria-label="Copy link"
+          title="Copy link"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><rect x="9" y="9" width="13" height="13" rx="2"></rect><path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+            ></path></svg
+          >
+          <span class="share-btn-label">Copy link</span>
+        </button>
+        <a
+          class="share-btn share-btn--x"
+          aria-label="Share on X"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+            ><path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            ></path></svg
+          >
+          <span class="share-btn-label">X</span>
+        </a>
+        <a
+          class="share-btn share-btn--li"
+          aria-label="Share on LinkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+            ><path
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+            ></path><rect x="2" y="9" width="4" height="12"></rect><circle
+              cx="4"
+              cy="4"
+              r="2"></circle></svg
+          >
+          <span class="share-btn-label">LinkedIn</span>
+        </a>
+        <a
+          class="share-btn share-btn--wa"
+          aria-label="Share on WhatsApp"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"
+            ><path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"
+            ></path></svg
+          >
+          <span class="share-btn-label">WhatsApp</span>
+        </a>
+        <a
+          class="share-btn share-btn--fb"
+          aria-label="Share on Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+            ><path
+              d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+            ></path></svg
+          >
+          <span class="share-btn-label">Facebook</span>
+        </a>
+        <span class="copy-toast" id="copy-toast">Copied!</span>
+      </div>
     </div>
   </header>
 
-  <!-- Hero image or gradient placeholder -->
+  <!-- Hero -->
   {
     hasImage ? (
       <figure class="article-hero-img article-hero-img--photo">
@@ -249,9 +316,9 @@ const schema = {
     ) : (
       <figure
         class="article-hero-img"
-        style={`background: linear-gradient(135deg, ${color}15 0%, ${color}05 100%);`}
+        style={`background:linear-gradient(135deg,${color}15 0%,${color}05 100%);`}
       >
-        <div class="article-hero-icon" style={`color: ${color};`}>
+        <div class="article-hero-icon" style={`color:${color};`}>
           <svg
             width="64"
             height="64"
@@ -267,12 +334,32 @@ const schema = {
     )
   }
 
-  <!-- Body + sidebar -->
+  <!-- Body + Sidebar -->
   <main class="article-layout">
     <article class="article-body" data-pagefind-body>
       <slot />
+
+      <!-- Filed Under -->
+      <footer class="filed-under">
+        <span class="filed-label">Filed under</span>
+        <div class="filed-tags">
+          {
+            article.tags.map((t) => (
+              <a
+                href={`/category/${categoryToSlug(t)}`}
+                class="filed-tag"
+                style={`background:${tagColor(t)}15;color:${tagColor(t)};border:1px solid ${tagColor(t)}35;`}
+              >
+                {t}
+              </a>
+            ))
+          }
+        </div>
+      </footer>
     </article>
+
     <aside class="article-sidebar">
+      <!-- Author -->
       <address class="sidebar-author-box">
         <div class="author-avatar">
           {
@@ -287,6 +374,31 @@ const schema = {
           <p class="author-role">Editor, Daily AI Mail</p>
         </div>
       </address>
+
+      <!-- Google Preferred Source badge -->
+      <div class="google-badge-widget">
+        <p class="google-badge-hint">
+          Follow us on Google for daily AI updates
+        </p>
+        <a
+          href="https://google.com/preferences/source?q=dailyaimail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="google-badge-link"
+          aria-label="Add Daily AI Mail as a preferred source on Google"
+        >
+          <img
+            id="google-badge-img"
+            src="/badges/google_preferred_source_badge_dark.png"
+            alt="Add as a preferred source on Google"
+            width="196"
+            height="40"
+            class="google-badge"
+          />
+        </a>
+      </div>
+
+      <!-- Related -->
       {
         related.length > 0 && (
           <section
@@ -311,6 +423,59 @@ const schema = {
   </main>
 </Layout>
 
+<script>
+  const bar = document.getElementById("share-bar");
+  if (bar) {
+    const url = bar.dataset.url ?? location.href;
+    const title = bar.dataset.title ?? document.title;
+    const enc = encodeURIComponent;
+    const xBtn = bar.querySelector<HTMLAnchorElement>(".share-btn--x");
+    const liBtn = bar.querySelector<HTMLAnchorElement>(".share-btn--li");
+    const waBtn = bar.querySelector<HTMLAnchorElement>(".share-btn--wa");
+    const fbBtn = bar.querySelector<HTMLAnchorElement>(".share-btn--fb");
+    if (xBtn)
+      xBtn.href = `https://x.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`;
+    if (liBtn)
+      liBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+    if (waBtn) waBtn.href = `https://wa.me/?text=${enc(title + " " + url)}`;
+    if (fbBtn)
+      fbBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`;
+    const copyBtn = bar.querySelector<HTMLButtonElement>(".share-btn--copy");
+    const toast = document.getElementById("copy-toast");
+    copyBtn?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(url);
+        if (toast) {
+          toast.classList.add("visible");
+          setTimeout(() => toast.classList.remove("visible"), 2000);
+        }
+      } catch {}
+    });
+  }
+</script>
+
+<script>
+  // Google badge — swap src to match current theme, then watch for theme changes
+  function updateBadge() {
+    const img = document.getElementById(
+      "google-badge-img",
+    ) as HTMLImageElement | null;
+    if (!img) return;
+    const theme = document.documentElement.getAttribute("data-theme") ?? "dark";
+    const variant = theme === "light" ? "light" : "dark";
+    img.src = `/badges/google_preferred_source_badge_${variant}.png`;
+  }
+
+  // Run immediately on load
+  updateBadge();
+
+  // Watch for theme attribute changes (triggered by Navbar theme toggle)
+  new MutationObserver(updateBadge).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+</script>
+
 <style>
   .article-top-bar {
     padding: 12px 0;
@@ -332,10 +497,11 @@ const schema = {
   .back-link:hover {
     opacity: 0.7;
   }
+
   .article-header {
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
-    padding: 48px 0 40px;
+    padding: 48px 0 32px;
   }
   .article-header-inner {
     max-width: 760px;
@@ -386,6 +552,98 @@ const schema = {
   .article-sep {
     opacity: 0.4;
   }
+
+  /* Share bar */
+  .share-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+  .share-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-right: 4px;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text);
+    font-size: 13px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background 0.15s,
+      border-color 0.15s,
+      color 0.15s;
+    white-space: nowrap;
+  }
+  .share-btn:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+  }
+  .share-btn--x:hover {
+    background: #000;
+    border-color: #000;
+    color: #fff;
+  }
+  .share-btn--li:hover {
+    background: #0a66c2;
+    border-color: #0a66c2;
+    color: #fff;
+  }
+  .share-btn--wa:hover {
+    background: #25d366;
+    border-color: #25d366;
+    color: #fff;
+  }
+  .share-btn--fb:hover {
+    background: #1877f2;
+    border-color: #1877f2;
+    color: #fff;
+  }
+  .copy-toast {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 6px);
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    padding: 4px 12px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .copy-toast.visible {
+    opacity: 1;
+  }
+  @media (max-width: 600px) {
+    .share-btn-label {
+      display: none;
+    }
+    .share-btn {
+      padding: 8px 10px;
+    }
+  }
+
+  /* Hero */
   .article-hero-img {
     width: 100%;
     height: 400px;
@@ -409,6 +667,8 @@ const schema = {
   .article-hero-icon {
     opacity: 0.25;
   }
+
+  /* Layout */
   .article-layout {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -418,6 +678,8 @@ const schema = {
     gap: 64px;
     align-items: start;
   }
+
+  /* Body */
   .article-body {
     font-size: 17px;
     line-height: 1.8;
@@ -466,6 +728,48 @@ const schema = {
     color: var(--color-text-muted);
     font-style: italic;
   }
+
+  /* Filed Under */
+  .filed-under {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 2px solid var(--color-border);
+  }
+  .filed-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+  .filed-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filed-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .filed-tag:hover {
+    opacity: 0.75;
+  }
+
+  /* Sidebar */
   .article-sidebar {
     position: sticky;
     top: 80px;
@@ -510,6 +814,32 @@ const schema = {
     margin-top: 3px;
     letter-spacing: 0.06em;
   }
+
+  /* Google badge */
+  .google-badge-widget {
+    padding: 18px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .google-badge-hint {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+  .google-badge-link {
+    display: inline-flex;
+  }
+  .google-badge {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+
+  /* Related */
   .related-box {
     padding: 20px;
     background: var(--card-bg);
@@ -554,6 +884,7 @@ const schema = {
     text-decoration: underline;
     color: var(--gold-light);
   }
+
   @media (max-width: 1024px) {
     .article-layout {
       grid-template-columns: 1fr;

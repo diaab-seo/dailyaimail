@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
-import { stripMarkdown } from "../../data/articles";
 
 export async function getStaticPaths() {
   const entries = await getCollection("articles");
@@ -17,6 +16,7 @@ const { Content } = await render(entry);
 const article = {
   slug: entry.id,
   tag: entry.data.tag,
+  tags: [...new Set([entry.data.tag, ...(entry.data.tags ?? [])])],
   headline: entry.data.headline,
   excerpt: entry.data.excerpt,
   body: entry.body ?? "",
