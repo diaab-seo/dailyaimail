@@ -1,0 +1,375 @@
+---
+export const prerender = true;
+
+import {
+    getArticles,
+    getAllCategories,
+    tagColor,
+    topicToSlug,
+} from "../../data/articles";
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import NewsCard from "../../components/NewsCard.astro";
+
+const allArticles = await getArticles();
+const allCategories = await getAllCategories();
+
+// Sort newest first by default
+const sorted = [...allArticles].sort((a, b) =>
+    b.isoDate.localeCompare(a.isoDate),
+);
+
+const SITE_URL = "https://dailyaimail.com";
+
+// Schema for the topics index page
+const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": `${SITE_URL}/topics`,
+            url: `${SITE_URL}/topics`,
+            name: "All AI Topics — Daily AI Mail",
+            description:
+                "Browse all artificial intelligence topics covered by Daily AI Mail, including Anthropic, Google AI, OpenAI, Meta AI, Tools & Apps, and Policy & Ethics.",
+            isPartOf: { "@id": `${SITE_URL}/#website` },
+            publisher: { "@id": `${SITE_URL}/#organization` },
+            about: { "@id": `${SITE_URL}/#topics` },
+            breadcrumb: { "@id": `${SITE_URL}/topics#breadcrumb` },
+            inLanguage: "en-US",
+            hasPart: allCategories.map((tag) => ({
+                "@type": "CollectionPage",
+                "@id": `${SITE_URL}/topics/${topicToSlug(tag)}`,
+                url: `${SITE_URL}/topics/${topicToSlug(tag)}`,
+                name: `${tag} News — Daily AI Mail`,
+            })),
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": `${SITE_URL}/topics#breadcrumb`,
+            itemListElement: [
+                {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${SITE_URL}/`,
+                },
+                {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Topics",
+                    item: `${SITE_URL}/topics`,
+                },
+            ],
+        },
+        {
+            "@type": "WebSite",
+            "@id": `${SITE_URL}/#website`,
+            url: `${SITE_URL}/`,
+            name: "Daily AI Mail",
+            publisher: { "@id": `${SITE_URL}/#organization` },
+        },
+        {
+            "@type": "NewsMediaOrganization",
+            "@id": `${SITE_URL}/#organization`,
+            name: "Daily AI Mail",
+            url: `${SITE_URL}/`,
+        },
+    ],
+};
+---
+
+<Layout
+    title="All Topics — Daily AI Mail"
+    metaTitle="All AI Topics — Daily AI Mail"
+    description="Browse all artificial intelligence topics covered by Daily AI Mail, including Anthropic, Google AI, OpenAI, Meta AI, Tools & Apps, and Policy & Ethics."
+    canonical={`${SITE_URL}/topics`}
+>
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+        slot="head"
+    />
+
+    <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Topics" }]} />
+
+    <!-- Hero -->
+    <div class="topics-hero">
+        <div class="topics-hero-inner">
+            <h1 class="topics-title">All Topics</h1>
+            <p class="topics-sub">
+                {allArticles.length} articles across {allCategories.length} topics
+            </p>
+        </div>
+    </div>
+
+    <!-- Topic pills -->
+    <div class="topics-filter-bar">
+        <div class="topics-filter-inner">
+            <div class="filter-row">
+                <!-- Topic chips -->
+                <div
+                    class="chip-group"
+                    role="group"
+                    aria-label="Filter by topic"
+                >
+                    <button class="chip chip--active" data-filter-topic="all"
+                        >All Topics</button
+                    >
+                    {
+                        allCategories.map((tag) => (
+                            <button
+                                class="chip"
+                                data-filter-topic={topicToSlug(tag)}
+                                style={`--chip-color:${tagColor(tag)};`}
+                            >
+                                {tag}
+                            </button>
+                        ))
+                    }
+                </div>
+
+                <!-- Sort -->
+                <div class="sort-group">
+                    <label for="sort-select" class="sort-label">Sort:</label>
+                    <select id="sort-select" class="sort-select">
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Result count -->
+            <p class="result-count" id="result-count">
+                {allArticles.length} articles
+            </p>
+        </div>
+    </div>
+
+    <!-- Article grid -->
+    <div class="topics-content">
+        <div class="topics-inner">
+            <div class="topics-grid" id="topics-grid">
+                {
+                    sorted.map((a) => (
+                        <div
+                            class="article-card-wrap"
+                            data-topic={topicToSlug(a.tag)}
+                            data-isodate={a.isoDate}
+                        >
+                            <NewsCard
+                                tag={a.tag}
+                                headline={a.headline}
+                                excerpt={a.excerpt}
+                                date={a.date}
+                                author={a.author}
+                                readingTime={a.readingTime}
+                                href={`/articles/${a.slug}`}
+                            />
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Empty state -->
+            <p class="no-results" id="no-results" style="display:none;">
+                No articles found for this topic. Try selecting a different
+                filter.
+            </p>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    const grid = document.getElementById("topics-grid")!;
+    const cards = () =>
+        Array.from(grid.querySelectorAll<HTMLElement>(".article-card-wrap"));
+    const count = document.getElementById("result-count")!;
+    const empty = document.getElementById("no-results")!;
+    const sort = document.getElementById("sort-select") as HTMLSelectElement;
+    const chips = document.querySelectorAll<HTMLButtonElement>(
+        ".chip[data-filter-topic]",
+    );
+
+    let activeTopic = "all";
+
+    function applyFilters() {
+        const sortDir = sort.value;
+        let visible = cards().filter((c) => {
+            return activeTopic === "all" || c.dataset.topic === activeTopic;
+        });
+
+        // Sort
+        visible.sort((a, b) => {
+            const da = a.dataset.isodate ?? "";
+            const db = b.dataset.isodate ?? "";
+            return sortDir === "newest"
+                ? db.localeCompare(da)
+                : da.localeCompare(db);
+        });
+
+        // Hide all, reorder & show matching
+        cards().forEach((c) => {
+            c.style.display = "none";
+        });
+        visible.forEach((c) => {
+            c.style.display = "";
+            grid.appendChild(c);
+        });
+
+        count.textContent = `${visible.length} article${visible.length !== 1 ? "s" : ""}`;
+        empty.style.display = visible.length === 0 ? "" : "none";
+    }
+
+    chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+            chips.forEach((c) => c.classList.remove("chip--active"));
+            chip.classList.add("chip--active");
+            activeTopic = chip.dataset.filterTopic ?? "all";
+            applyFilters();
+        });
+    });
+
+    sort.addEventListener("change", applyFilters);
+</script>
+
+<style>
+    .topics-hero {
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        padding: 56px 0 40px;
+    }
+    .topics-hero-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .topics-title {
+        font-family: var(--font-display);
+        font-size: clamp(36px, 5vw, 64px);
+        line-height: 1.05;
+    }
+    .topics-sub {
+        font-size: 16px;
+        color: var(--color-text-muted);
+    }
+
+    .topics-filter-bar {
+        border-bottom: 1px solid var(--color-border);
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        background: var(--color-bg);
+        z-index: 10;
+    }
+    .topics-filter-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    .chip-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--color-border);
+        background: transparent;
+        color: var(--color-text-muted);
+        font-size: 13px;
+        font-family: var(--font-mono);
+        cursor: pointer;
+        transition: all 0.15s;
+        white-space: nowrap;
+    }
+    .chip:hover {
+        border-color: var(--chip-color, var(--gold));
+        color: var(--chip-color, var(--gold));
+    }
+    .chip--active {
+        background: var(--chip-color, var(--gold));
+        border-color: var(--chip-color, var(--gold));
+        color: #fff;
+    }
+    .chip[data-filter-topic="all"].chip--active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #080d1a;
+    }
+
+    .sort-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .sort-label {
+        font-size: 12px;
+        font-family: var(--font-mono);
+        color: var(--color-text-muted);
+    }
+    .sort-select {
+        font-size: 13px;
+        font-family: var(--font-mono);
+        padding: 6px 10px;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        background: var(--color-surface);
+        color: var(--color-text);
+        cursor: pointer;
+    }
+
+    .result-count {
+        font-size: 12px;
+        font-family: var(--font-mono);
+        color: var(--color-text-muted);
+    }
+
+    .topics-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 48px var(--gutter) 80px;
+    }
+    .topics-inner {
+        width: 100%;
+    }
+    .topics-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+    .no-results {
+        text-align: center;
+        padding: 60px 0;
+        color: var(--color-text-muted);
+        font-size: 16px;
+    }
+
+    @media (max-width: 1024px) {
+        .topics-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 640px) {
+        .topics-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

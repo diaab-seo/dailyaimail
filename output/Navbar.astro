@@ -62,26 +62,20 @@
         </ul>
       </li>
       <li><a href="/topics">All Topics</a></li>
-      <li class="has-dropdown" id="about-nav-item">
+      <li class="has-dropdown">
         <a href="/about-us">About</a>
-        <ul class="dropdown" id="about-dropdown">
+        <ul class="dropdown">
           <li><a href="/about-us">About Us</a></li>
           <li><a href="/contact-us">Contact</a></li>
           <li><a href="#newsletter">Newsletter</a></li>
-          <!-- User session items injected by JS below -->
-          <li class="dropdown-divider" id="user-divider" style="display:none">
-            <hr class="nav-hr" />
+          <li class="nav-divider" aria-hidden="true"></li>
+          <li id="nav-account-item" style="display:none;">
+            <a href="/auth/login" id="nav-account-link">Sign In</a>
           </li>
-          <li id="nav-user-name" style="display:none">
-            <span class="nav-username"></span>
-          </li>
-          <li id="nav-signout" style="display:none">
-            <form method="POST" action="/auth/logout">
-              <button type="submit" class="nav-signout-btn">Sign Out</button>
+          <li id="nav-logout-item" style="display:none;">
+            <form method="POST" action="/auth/logout" style="margin:0;">
+              <button type="submit" class="nav-logout-btn">Sign Out</button>
             </form>
-          </li>
-          <li id="nav-signin" style="display:none">
-            <a href="/auth/login" class="nav-signin-link">Sign In</a>
           </li>
         </ul>
       </li>
@@ -344,40 +338,6 @@
 </div>
 
 <script>
-  // ── /api/me → populate About-dropdown user section ────────────────────────
-  (async () => {
-    try {
-      const res = await fetch('/api/me', { credentials: 'same-origin' });
-      if (!res.ok) return;
-      const { user } = await res.json() as { user: { displayName?: string; username?: string } | null };
-
-      const divider  = document.getElementById('user-divider');
-      const nameLi   = document.getElementById('nav-user-name');
-      const signout  = document.getElementById('nav-signout');
-      const signin   = document.getElementById('nav-signin');
-
-      if (!divider || !nameLi || !signout || !signin) return;
-
-      divider.style.display = '';
-
-      if (user) {
-        const span = nameLi.querySelector('.nav-username') as HTMLElement | null;
-        if (span) span.textContent = user.displayName || user.username;
-        nameLi.style.display  = '';
-        signout.style.display = '';
-        signin.style.display  = 'none';
-      } else {
-        nameLi.style.display  = 'none';
-        signout.style.display = 'none';
-        signin.style.display  = '';
-      }
-    } catch {
-      // Silently ignore (e.g. local dev without KV)
-    }
-  })();
-</script>
-
-<script>
   document.addEventListener("DOMContentLoaded", () => {
     // ── Force modal hidden on init (JS-controlled, no CSS [hidden] attribute) ──
     const searchModal = document.getElementById(
@@ -610,6 +570,9 @@
   .has-dropdown:focus-within .dropdown {
     display: block;
   }
+  .nav-divider { height:1px; background:var(--color-border); margin:4px 8px; }
+  .nav-logout-btn { background:none; border:none; padding:0; font-size:inherit; font-family:inherit; color:inherit; cursor:pointer; width:100%; text-align:left; }
+  .nav-logout-btn:hover { color:var(--gold); }
   .dropdown li a {
     display: block;
     font-size: 13.5px;
@@ -621,55 +584,6 @@
       color 0.15s;
   }
   .dropdown li a:hover {
-    background: rgba(232, 184, 75, 0.09);
-    color: #e8b84b;
-  }
-
-  /* ── User menu items in About dropdown ──────── */
-  .nav-hr {
-    border: none;
-    border-top: 1px solid rgba(232, 184, 75, 0.15);
-    margin: 4px 0;
-  }
-  .nav-username {
-    display: block;
-    font-size: 12px;
-    font-family: var(--font-mono);
-    color: #e8b84b;
-    padding: 6px 14px 4px;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
-  }
-  .nav-signout-btn {
-    display: block;
-    width: 100%;
-    text-align: left;
-    font-size: 13.5px;
-    padding: 9px 14px;
-    border-radius: 5px;
-    color: rgba(244, 240, 232, 0.75);
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s, color 0.15s;
-  }
-  .nav-signout-btn:hover {
-    background: rgba(255, 80, 80, 0.12);
-    color: #ff6b6b;
-  }
-  .nav-signin-link {
-    display: block;
-    font-size: 13.5px;
-    padding: 9px 14px;
-    border-radius: 5px;
-    color: #e8b84b;
-    transition: background 0.15s, color 0.15s;
-  }
-  .nav-signin-link:hover {
     background: rgba(232, 184, 75, 0.09);
     color: #e8b84b;
   }
@@ -928,3 +842,44 @@
     padding: 0 2px;
   }
 </style>
+
+<script>
+  // Fetch current user state and update nav accordingly
+  // Uses /api/me — short-lived private cache so it doesn't hammer the server
+  (async () => {
+    try {
+      const res  = await fetch('/api/me');
+      const user = await res.json();
+
+      const accountItem = document.getElementById('nav-account-item');
+      const accountLink = document.getElementById('nav-account-link');
+      const logoutItem  = document.getElementById('nav-logout-item');
+
+      if (!accountItem || !logoutItem) return;
+
+      if (user && user.displayName) {
+        // Logged in — show display name + sign out
+        if (accountLink) {
+          accountLink.textContent = user.displayName;
+          accountLink.href = '/auth/register'; // link to profile page (future)
+          accountLink.style.color = 'var(--gold)';
+          accountLink.style.fontWeight = '600';
+        }
+        accountItem.style.display = '';
+        logoutItem.style.display  = '';
+      } else {
+        // Logged out — show Sign In link only
+        if (accountLink) {
+          accountLink.textContent = 'Sign In';
+          accountLink.href = '/auth/login';
+          accountLink.style.color = '';
+          accountLink.style.fontWeight = '';
+        }
+        accountItem.style.display = '';
+        logoutItem.style.display  = 'none';
+      }
+    } catch {
+      // Silently fail — nav still works without auth state
+    }
+  })();
+</script>

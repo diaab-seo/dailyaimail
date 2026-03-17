@@ -1,17 +1,34 @@
 ---
+export const prerender = false;
+
 import { getCollection, render } from "astro:content";
+import { env } from "cloudflare:workers";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { getSession } from "../../lib/auth";
+import { getApprovedComments } from "../../lib/db";
+import type { DBComment } from "../../lib/db";
+import type { SessionUser } from "../../lib/auth";
 
-export async function getStaticPaths() {
-  const entries = await getCollection("articles");
-  return entries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
-}
+const db = (env as any).DB as D1Database | undefined;
+const kv = (env as any).SESSIONS as KVNamespace | undefined;
 
-const { entry } = Astro.props;
+const { slug } = Astro.params;
+const entries = await getCollection("articles");
+const entry = entries.find((e) => e.id === slug);
+
+if (!entry) return Astro.redirect("/404");
+
 const { Content } = await render(entry);
+
+let user: SessionUser | null = null;
+let comments: DBComment[] = [];
+
+if (db && kv) {
+  [user, comments] = await Promise.all([
+    getSession(kv, Astro.cookies),
+    getApprovedComments(db, slug!),
+  ]);
+}
 
 const article = {
   slug: entry.id,
@@ -35,6 +52,6 @@ const article = {
 };
 ---
 
-<ArticleLayout article={article}>
+<ArticleLayout article={article} comments={comments} user={user}>
   <Content />
 </ArticleLayout>

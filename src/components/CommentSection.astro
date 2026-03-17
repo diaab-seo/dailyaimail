@@ -1,0 +1,356 @@
+---
+/**
+ * src/components/CommentSection.astro
+ * Renders approved comments + submission form.
+ * Injected into ArticleLayout at the bottom of the article body.
+ */
+import type { DBComment } from "../lib/db";
+import type { SessionUser } from "../lib/auth";
+import { formatDate } from "../lib/db";
+
+interface Props {
+    articleSlug: string;
+    comments: DBComment[];
+    user: SessionUser | null;
+}
+
+const { articleSlug, comments, user } = Astro.props;
+const submitted = Astro.url.searchParams.get("commented") === "1";
+const tooLong = Astro.url.searchParams.get("err") === "toolong";
+---
+
+<section class="comments-section" id="comments" aria-label="Comments">
+    <h2 class="comments-heading">
+        {
+            comments.length > 0
+                ? `${comments.length} Comment${comments.length !== 1 ? "s" : ""}`
+                : "Comments"
+        }
+    </h2>
+
+    {/* Approved comments */}
+    {
+        comments.length > 0 ? (
+            <ol class="comments-list">
+                {comments.map((c) => (
+                    <li class="comment" id={`comment-${c.id}`}>
+                        <div class="comment-avatar" aria-hidden="true">
+                            {c.avatar_initials ?? "??"}
+                        </div>
+                        <div class="comment-body-wrap">
+                            <header class="comment-header">
+                                <span class="comment-author">
+                                    {c.display_name}
+                                </span>
+                                <time
+                                    class="comment-date"
+                                    datetime={c.created_at}
+                                >
+                                    {formatDate(c.created_at)}
+                                </time>
+                                <a
+                                    href={`#comment-${c.id}`}
+                                    class="comment-permalink"
+                                    aria-label="Permalink to comment"
+                                >
+                                    #
+                                </a>
+                            </header>
+                            <p class="comment-text">{c.body}</p>
+                        </div>
+                    </li>
+                ))}
+            </ol>
+        ) : (
+            <p class="comments-empty">
+                No comments yet. Be the first to share your thoughts.
+            </p>
+        )
+    }
+
+    {/* Submission area */}
+    <div class="comment-form-area">
+        {
+            submitted && (
+                <div class="comment-notice comment-notice--success">
+                    Your comment has been submitted and is awaiting moderation.
+                    It will appear here once approved.
+                </div>
+            )
+        }
+        {
+            tooLong && (
+                <div class="comment-notice comment-notice--error">
+                    Comment is too long. Please keep it under 2,000 characters.
+                </div>
+            )
+        }
+
+        {
+            user ? (
+                <form
+                    method="POST"
+                    action={`/api/comments/submit`}
+                    class="comment-form"
+                >
+                    <input
+                        type="hidden"
+                        name="articleSlug"
+                        value={articleSlug}
+                    />
+                    <div class="cf-user-row">
+                        <div class="cf-avatar">{user.avatarInitials}</div>
+                        <span class="cf-username">
+                            Commenting as <strong>{user.displayName}</strong>
+                        </span>
+                    </div>
+                    <textarea
+                        name="body"
+                        rows="4"
+                        maxlength="2000"
+                        placeholder="Share your thoughts on this article..."
+                        required
+                        class="cf-textarea"
+                    />
+                    <div class="cf-footer">
+                        <span class="cf-chars" id="char-count">
+                            0 / 2000
+                        </span>
+                        <button type="submit" class="cf-submit">
+                            Post Comment
+                        </button>
+                    </div>
+                    <p class="cf-moderation-note">
+                        Comments are moderated before appearing. Please keep
+                        discussion respectful and on-topic.
+                    </p>
+                </form>
+            ) : (
+                <div class="comment-auth-prompt">
+                    <p>
+                        <a
+                            href={`/auth/login?from=${encodeURIComponent(Astro.url.pathname)}`}
+                            class="comment-sign-in"
+                        >
+                            Sign in
+                        </a>
+                        or
+                        <a href="/auth/register" class="comment-sign-in">
+                            create an account
+                        </a>
+                        to leave a comment.
+                    </p>
+                </div>
+            )
+        }
+    </div>
+</section>
+
+<script>
+    const textarea =
+        document.querySelector<HTMLTextAreaElement>(".cf-textarea");
+    const charCount = document.getElementById("char-count");
+    textarea?.addEventListener("input", () => {
+        const len = textarea.value.length;
+        charCount!.textContent = `${len} / 2000`;
+        charCount!.style.color = len > 1800 ? "var(--tag-policy)" : "";
+    });
+</script>
+
+<style>
+    .comments-section {
+        margin-top: 56px;
+        padding-top: 40px;
+        border-top: 2px solid var(--color-border);
+    }
+    .comments-heading {
+        font-family: var(--font-display);
+        font-size: 22px;
+        margin-bottom: 28px;
+        color: var(--color-text);
+    }
+    .comments-empty {
+        color: var(--color-text-muted);
+        font-size: 15px;
+        margin-bottom: 28px;
+    }
+
+    .comments-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        margin-bottom: 40px;
+    }
+    .comment {
+        display: flex;
+        gap: 14px;
+        scroll-margin-top: 90px;
+    }
+    .comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%);
+        color: #080d1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 13px;
+        font-weight: 900;
+        flex-shrink: 0;
+    }
+    .comment-body-wrap {
+        flex: 1;
+    }
+    .comment-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+    }
+    .comment-author {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--color-text);
+    }
+    .comment-date {
+        font-size: 12px;
+        font-family: var(--font-mono);
+        color: var(--color-text-muted);
+    }
+    .comment-permalink {
+        font-size: 12px;
+        font-family: var(--font-mono);
+        color: var(--color-text-muted);
+        text-decoration: none;
+        opacity: 0.5;
+        transition: opacity 0.15s;
+    }
+    .comment-permalink:hover {
+        opacity: 1;
+        color: var(--gold);
+    }
+    .comment-text {
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--color-text);
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    /* Form */
+    .comment-form-area {
+    }
+    .comment-notice {
+        padding: 12px 16px;
+        border-radius: 4px;
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+    .comment-notice--success {
+        background: #16a34a20;
+        border: 1px solid #16a34a40;
+        color: #16a34a;
+    }
+    .comment-notice--error {
+        background: #ef444420;
+        border: 1px solid #ef444440;
+        color: #ef4444;
+    }
+
+    .comment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .cf-user-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .cf-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%);
+        color: #080d1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 12px;
+        font-weight: 900;
+        flex-shrink: 0;
+    }
+    .cf-username {
+        font-size: 13px;
+        color: var(--color-text-muted);
+    }
+    .cf-username strong {
+        color: var(--color-text);
+    }
+    .cf-textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-size: 15px;
+        font-family: var(--font-body);
+        resize: vertical;
+        line-height: 1.6;
+        transition: border-color 0.15s;
+    }
+    .cf-textarea:focus {
+        outline: none;
+        border-color: var(--gold);
+    }
+    .cf-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .cf-chars {
+        font-size: 11px;
+        font-family: var(--font-mono);
+        color: var(--color-text-muted);
+    }
+    .cf-submit {
+        padding: 10px 24px;
+        background: var(--gold);
+        color: #080d1a;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: opacity 0.15s;
+    }
+    .cf-submit:hover {
+        opacity: 0.88;
+    }
+    .cf-moderation-note {
+        font-size: 12px;
+        color: var(--color-text-muted);
+    }
+
+    .comment-auth-prompt {
+        padding: 20px;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        font-size: 15px;
+        color: var(--color-text-muted);
+        text-align: center;
+    }
+    .comment-sign-in {
+        color: var(--gold);
+        text-decoration: underline;
+        font-weight: 500;
+    }
+</style>

@@ -8,13 +8,18 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "wrangler pages dev",
+    "astro": "astro",
+    "db:init": "wrangler d1 execute dailyaimail-db --local --file=./schema.sql",
+    "db:init:prod": "wrangler d1 execute dailyaimail-db --remote --file=./schema.sql"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.0.0",
     "astro": "^6.0.4"
   },
   "devDependencies": {
-    "pagefind": "^1.3.0"
+    "@cloudflare/workers-types": "^4.0.0",
+    "pagefind": "^1.3.0",
+    "wrangler": "^3.0.0"
   }
 }

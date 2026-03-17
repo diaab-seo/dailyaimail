@@ -1,0 +1,65 @@
+---
+export interface BreadcrumbItem {
+    label: string;
+    href?: string;
+}
+interface Props {
+    items: BreadcrumbItem[];
+    class?: string;
+}
+const { items, class: extraClass = "" } = Astro.props;
+---
+
+<nav class={`breadcrumb ${extraClass}`} aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+        <ol
+            class="breadcrumb-list"
+            itemscope
+            itemtype="https://schema.org/BreadcrumbList"
+        >
+            {
+                items.map((item, i) => (
+                    <li
+                        class="breadcrumb-item"
+                        itemprop="itemListElement"
+                        itemscope
+                        itemtype="https://schema.org/ListItem"
+                    >
+                        {i < items.length - 1 ? (
+                            <>
+                                <a
+                                    href={item.href}
+                                    class="breadcrumb-link"
+                                    itemprop="item"
+                                >
+                                    <span itemprop="name">{item.label}</span>
+                                </a>
+                                <meta
+                                    itemprop="position"
+                                    content={String(i + 1)}
+                                />
+                                <span class="breadcrumb-sep" aria-hidden="true">
+                                    ›
+                                </span>
+                            </>
+                        ) : (
+                            <>
+                                <span
+                                    class="breadcrumb-current"
+                                    aria-current="page"
+                                    itemprop="name"
+                                >
+                                    {item.label}
+                                </span>
+                                <meta
+                                    itemprop="position"
+                                    content={String(i + 1)}
+                                />
+                            </>
+                        )}
+                    </li>
+                ))
+            }
+        </ol>
+    </div>
+</nav>

@@ -1,0 +1,303 @@
+---
+export const prerender = false;
+
+import { env } from "cloudflare:workers";
+import Layout from "../../layouts/Layout.astro";
+import { getSession } from "../../lib/auth";
+import {
+    getUserByEmail,
+    getUserByUsername,
+    createUser,
+    makeInitials,
+} from "../../lib/db";
+import { hashPassword } from "../../lib/password";
+
+const db = (env as any).DB as D1Database;
+const kv = (env as any).SESSIONS as KVNamespace;
+
+const user = await getSession(kv, Astro.cookies);
+if (user) return Astro.redirect("/");
+
+let errors: Record<string, string> = {};
+let values = { email: "", username: "", displayName: "" };
+
+if (Astro.request.method === "POST") {
+    const form = await Astro.request.formData();
+    const email = ((form.get("email") as string) ?? "").trim().toLowerCase();
+    const username = ((form.get("username") as string) ?? "")
+        .trim()
+        .toLowerCase();
+    const displayName = ((form.get("displayName") as string) ?? "").trim();
+    const password = (form.get("password") as string) ?? "";
+    const confirm = (form.get("confirm") as string) ?? "";
+
+    values = { email, username, displayName };
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+        errors.email = "A valid email address is required.";
+    if (
+        !username ||
+        username.length < 3 ||
+        username.length > 30 ||
+        !/^[a-z0-9_]+$/.test(username)
+    )
+        errors.username =
+            "Username must be 3–30 characters: letters, numbers, underscores only.";
+    if (!displayName || displayName.length < 2 || displayName.length > 60)
+        errors.displayName = "Display name must be 2–60 characters.";
+    if (!password || password.length < 8)
+        errors.password = "Password must be at least 8 characters.";
+    if (password !== confirm) errors.confirm = "Passwords do not match.";
+
+    if (Object.keys(errors).length === 0) {
+        const [existingEmail, existingUsername] = await Promise.all([
+            getUserByEmail(db, email),
+            getUserByUsername(db, username),
+        ]);
+        if (existingEmail) errors.email = "This email is already registered.";
+        if (existingUsername)
+            errors.username = "This username is already taken.";
+    }
+
+    if (Object.keys(errors).length === 0) {
+        const { hash, salt } = await hashPassword(password);
+        await createUser(db, {
+            email,
+            username,
+            display_name: displayName,
+            avatar_initials: makeInitials(displayName),
+            password_hash: hash,
+            password_salt: salt,
+        });
+        return Astro.redirect("/auth/login?registered=1");
+    }
+}
+---
+
+<Layout
+    title="Create Account — Daily AI Mail"
+    metaTitle="Create Account — Daily AI Mail"
+>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <a href="/" class="auth-brand">Daily <em>AI</em> Mail</a>
+            <h1 class="auth-title">Create your account</h1>
+            <p class="auth-sub">
+                Join Daily AI Mail to leave comments and engage with our
+                community.
+            </p>
+
+            <form method="POST" class="auth-form" novalidate>
+                <div class="field">
+                    <label for="displayName">Display Name</label>
+                    <input
+                        id="displayName"
+                        name="displayName"
+                        type="text"
+                        value={values.displayName}
+                        placeholder="Your full name or alias"
+                        autocomplete="name"
+                        required
+                    />
+                    {
+                        errors.displayName && (
+                            <span class="field-err">{errors.displayName}</span>
+                        )
+                    }
+                </div>
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        value={values.username}
+                        placeholder="e.g. john_doe"
+                        autocomplete="username"
+                        required
+                    />
+                    {
+                        errors.username && (
+                            <span class="field-err">{errors.username}</span>
+                        )
+                    }
+                    <span class="field-hint"
+                        >Letters, numbers and underscores only.</span
+                    >
+                </div>
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={values.email}
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    />
+                    {
+                        errors.email && (
+                            <span class="field-err">{errors.email}</span>
+                        )
+                    }
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="At least 8 characters"
+                        autocomplete="new-password"
+                        required
+                    />
+                    {
+                        errors.password && (
+                            <span class="field-err">{errors.password}</span>
+                        )
+                    }
+                </div>
+                <div class="field">
+                    <label for="confirm">Confirm Password</label>
+                    <input
+                        id="confirm"
+                        name="confirm"
+                        type="password"
+                        placeholder="Repeat your password"
+                        autocomplete="new-password"
+                        required
+                    />
+                    {
+                        errors.confirm && (
+                            <span class="field-err">{errors.confirm}</span>
+                        )
+                    }
+                </div>
+                <button type="submit" class="auth-btn">Create Account</button>
+                <p class="auth-legal">
+                    By creating an account you agree to our
+                    <a href="/terms-and-conditions">Terms</a> and
+                    <a href="/privacy-policy">Privacy Policy</a>.
+                </p>
+            </form>
+            <p class="auth-switch">
+                Already have an account? <a href="/auth/login">Sign in</a>
+            </p>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .auth-wrap {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px var(--gutter);
+        background: var(--color-bg);
+    }
+    .auth-card {
+        width: 100%;
+        max-width: 460px;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 40px;
+    }
+    .auth-brand {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 900;
+        display: block;
+        margin-bottom: 28px;
+        color: var(--color-text);
+    }
+    .auth-brand em {
+        color: var(--gold);
+        font-style: italic;
+    }
+    .auth-title {
+        font-family: var(--font-display);
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+    .auth-sub {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        margin-bottom: 28px;
+        line-height: 1.5;
+    }
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+    .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .field label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-text);
+    }
+    .field input {
+        padding: 10px 14px;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-size: 14px;
+        font-family: var(--font-body);
+        transition: border-color 0.15s;
+    }
+    .field input:focus {
+        outline: none;
+        border-color: var(--gold);
+    }
+    .field-err {
+        font-size: 12px;
+        color: #ef4444;
+        font-family: var(--font-mono);
+    }
+    .field-hint {
+        font-size: 12px;
+        color: var(--color-text-muted);
+    }
+    .auth-btn {
+        padding: 12px;
+        background: var(--gold);
+        color: #080d1a;
+        border: none;
+        border-radius: 4px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: opacity 0.15s;
+    }
+    .auth-btn:hover {
+        opacity: 0.88;
+    }
+    .auth-legal {
+        font-size: 12px;
+        color: var(--color-text-muted);
+        text-align: center;
+        line-height: 1.5;
+    }
+    .auth-legal a {
+        text-decoration: underline;
+    }
+    .auth-switch {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--color-text-muted);
+    }
+    .auth-switch a {
+        color: var(--gold);
+        text-decoration: underline;
+    }
+</style>

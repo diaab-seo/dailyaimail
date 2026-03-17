@@ -1,7 +1,20 @@
 {
-    "name": "dailyaimail",
-    "compatibility_date": "2026-03-16",
-    "assets": {
-        "directory": "./dist"
-    }
+	"name": "dailyaimail",
+	"compatibility_date": "2026-03-16",
+	"assets": {
+		"directory": "./dist"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "dailyaimail-db",
+			"database_id": "d8f2b6c0-d26a-4c11-8f23-bbf9e38a4464"
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "SESSIONS",
+			"id": "f74e630763ee49c48bcaf646d5775930"
+		}
+	]
 }
