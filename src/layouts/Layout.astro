@@ -1,11 +1,21 @@
 ---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
 interface Props {
   title?: string;
   description?: string;
   metaTitle?: string;
 }
 
-const { title, description, metaTitle } = Astro.props;
+// Astro markdown pages pass frontmatter both as direct props AND via Astro.props.frontmatter.
+// We merge both so Layout.astro works correctly whether called from .astro or .md files.
+const directProps = Astro.props as Props;
+const frontmatter = (Astro.props as any).frontmatter ?? {};
+
+const title = directProps.title ?? frontmatter.title;
+const description = directProps.description ?? frontmatter.description;
+const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
 ---
 
 <!doctype html>
@@ -24,9 +34,14 @@ const { title, description, metaTitle } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <title>{metaTitle ?? title ?? "Daily AI Mail"}</title>
+    <title>
+      {metaTitle ?? (title ? `${title} — Daily AI Mail` : "Daily AI Mail")}
+    </title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Per-page injections (JSON-LD, Open Graph overrides, etc.) -->
+    <slot name="head" />
 
     <!-- ⚡ Theme init — runs synchronously before paint to prevent flash of wrong theme -->
     <script is:inline>
@@ -44,7 +59,9 @@ const { title, description, metaTitle } = Astro.props;
     </script>
   </head>
   <body>
+    <Navbar />
     <slot />
+    <Footer />
   </body>
 </html>
 
@@ -143,7 +160,7 @@ const { title, description, metaTitle } = Astro.props;
 
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* prevent any element causing page-wide horizontal scroll */
+    overflow-x: hidden;
   }
 
   /* Smooth transitions only AFTER initial theme is applied (prevents FOUC) */
@@ -175,7 +192,6 @@ const { title, description, metaTitle } = Astro.props;
 
   /* ─────────────────────────────────────────
      GLOBAL FOCUS — visible in both themes
-     Uses offset so it doesn't overlap text
   ───────────────────────────────────────── */
   :focus-visible {
     outline: 2px solid var(--color-accent);

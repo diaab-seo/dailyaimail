@@ -1,27 +1,35 @@
 ---
-import { articles, getLatestArticles, getArticlesByCategory, categoryToSlug } from '../data/articles';
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import HeroCard from '../components/HeroCard.astro';
-import NewsCard from '../components/NewsCard.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import NewsletterBanner from '../components/NewsletterBanner.astro';
-import Footer from '../components/Footer.astro';
+import { getLatestArticles, getArticlesByCategory } from "../data/articles";
+import Layout from "../layouts/Layout.astro";
+import HeroCard from "../components/HeroCard.astro";
+import NewsCard from "../components/NewsCard.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import NewsletterBanner from "../components/NewsletterBanner.astro";
 
-const latestArticles   = getLatestArticles(3);
-const anthropicArticles = getArticlesByCategory('Anthropic').slice(0, 3);
-const googleArticles    = getArticlesByCategory('Google AI').slice(0, 3);
-const openaiArticles    = getArticlesByCategory('OpenAI').slice(0, 3);
-const toolsArticles     = getArticlesByCategory('Tools & Apps').slice(0, 3);
-const policyArticles    = getArticlesByCategory('Policy & Ethics').slice(0, 3);
-const heroArticle       = anthropicArticles[0];
+const [
+  latestArticles,
+  anthropicArticles,
+  googleArticles,
+  openaiArticles,
+  toolsArticles,
+  policyArticles,
+] = await Promise.all([
+  getLatestArticles(3),
+  getArticlesByCategory("Anthropic").then((a) => a.slice(0, 3)),
+  getArticlesByCategory("Google AI").then((a) => a.slice(0, 3)),
+  getArticlesByCategory("OpenAI").then((a) => a.slice(0, 3)),
+  getArticlesByCategory("Tools & Apps").then((a) => a.slice(0, 3)),
+  getArticlesByCategory("Policy & Ethics").then((a) => a.slice(0, 3)),
+]);
 
-const trendingArticles = getLatestArticles(5).map(a => ({ headline: a.headline, slug: a.slug }));
+const heroArticle = anthropicArticles[0];
+const trendingArticles = (await getLatestArticles(5)).map((a) => ({
+  headline: a.headline,
+  slug: a.slug,
+}));
 ---
 
 <Layout title="Daily AI Mail — AI News, Research & Tools">
-  <Navbar />
-
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
@@ -32,190 +40,339 @@ const trendingArticles = getLatestArticles(5).map(a => ({ headline: a.headline, 
   <!-- MAIN CONTENT + SIDEBAR -->
   <div class="content-with-sidebar">
     <main class="main-content">
-
-      <!-- LATEST NEWS -->
       <section class="news-section">
-        <SectionHeader title="Latest AI News" viewAllHref="/category/openai" viewAllLabel="View All →" />
+        <SectionHeader
+          title="Latest AI News"
+          viewAllHref="/category/openai"
+          viewAllLabel="View All →"
+        />
         <div class="card-grid">
-          {latestArticles.map(a => <NewsCard {...a} href={`/articles/${a.slug}`} />)}
+          {
+            latestArticles.map((a) => (
+              <NewsCard {...a} href={`/articles/${a.slug}`} />
+            ))
+          }
         </div>
       </section>
 
-      <!-- ANTHROPIC -->
       <section class="news-section">
-        <SectionHeader title="Anthropic News" viewAllHref={`/category/anthropic`} viewAllLabel="View All Anthropic →" />
+        <SectionHeader
+          title="Anthropic News"
+          viewAllHref="/category/anthropic"
+          viewAllLabel="View All Anthropic →"
+        />
         <div class="card-grid">
-          {anthropicArticles.map(a => <NewsCard {...a} href={`/articles/${a.slug}`} />)}
+          {
+            anthropicArticles.map((a) => (
+              <NewsCard {...a} href={`/articles/${a.slug}`} />
+            ))
+          }
         </div>
         <div class="section-cta">
-          <a href="/category/anthropic" class="view-more-btn">View More Anthropic Stories →</a>
+          <a href="/category/anthropic" class="view-more-btn"
+            >View More Anthropic Stories →</a
+          >
         </div>
       </section>
 
-      <!-- GOOGLE AI -->
       <section class="news-section">
-        <SectionHeader title="Google AI News" viewAllHref={`/category/google-ai`} viewAllLabel="View All Google AI →" />
+        <SectionHeader
+          title="Google AI News"
+          viewAllHref="/category/google-ai"
+          viewAllLabel="View All Google AI →"
+        />
         <div class="card-grid">
-          {googleArticles.map(a => <NewsCard {...a} href={`/articles/${a.slug}`} />)}
+          {
+            googleArticles.map((a) => (
+              <NewsCard {...a} href={`/articles/${a.slug}`} />
+            ))
+          }
         </div>
         <div class="section-cta">
-          <a href="/category/google-ai" class="view-more-btn">View More Google AI Stories →</a>
+          <a href="/category/google-ai" class="view-more-btn"
+            >View More Google AI Stories →</a
+          >
         </div>
       </section>
 
-      <!-- OPENAI -->
       <section class="news-section">
-        <SectionHeader title="OpenAI News" viewAllHref={`/category/openai`} viewAllLabel="View All OpenAI →" />
+        <SectionHeader
+          title="OpenAI News"
+          viewAllHref="/category/openai"
+          viewAllLabel="View All OpenAI →"
+        />
         <div class="card-grid">
-          {openaiArticles.map(a => <NewsCard {...a} href={`/articles/${a.slug}`} />)}
+          {
+            openaiArticles.map((a) => (
+              <NewsCard {...a} href={`/articles/${a.slug}`} />
+            ))
+          }
         </div>
         <div class="section-cta">
-          <a href="/category/openai" class="view-more-btn">View More OpenAI Stories →</a>
+          <a href="/category/openai" class="view-more-btn"
+            >View More OpenAI Stories →</a
+          >
         </div>
       </section>
-
     </main>
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
-      <!-- Trending Now -->
       <div class="sidebar-widget">
         <h3 class="sidebar-title">Trending Now</h3>
         <ol class="trending-list">
-          {trendingArticles.map((t, i) => (
-            <li class="trending-item">
-              <span class="trending-num">{String(i + 1).padStart(2, '0')}</span>
-              <a href={`/articles/${t.slug}`}>{t.headline}</a>
-            </li>
-          ))}
+          {
+            trendingArticles.map((t, i) => (
+              <li class="trending-item">
+                <span class="trending-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <a href={`/articles/${t.slug}`}>{t.headline}</a>
+              </li>
+            ))
+          }
         </ol>
       </div>
-
-      <!-- Topics tag cloud -->
       <div class="sidebar-widget">
         <h3 class="sidebar-title">Topics</h3>
         <div class="tag-cloud">
-          {['Anthropic','OpenAI','Google AI','Meta AI','LLM','Safety','Tools','Research','Policy','Gemini'].map(tag => (
-            <a href="#" class="tag-chip">{tag}</a>
-          ))}
+          {
+            [
+              "Anthropic",
+              "OpenAI",
+              "Google AI",
+              "Meta AI",
+              "LLM",
+              "Safety",
+              "Tools",
+              "Research",
+              "Policy",
+              "Gemini",
+            ].map((tag) => (
+              <a href="#" class="tag-chip">
+                {tag}
+              </a>
+            ))
+          }
         </div>
       </div>
-
-      <!-- Compact newsletter -->
       <div class="sidebar-widget sidebar-newsletter">
         <h3 class="sidebar-title">📩 Daily Digest</h3>
         <p>Get the biggest AI stories in your inbox every morning.</p>
-        <input type="email" placeholder="your@email.com" class="sidebar-email" />
+        <input
+          type="email"
+          placeholder="your@email.com"
+          class="sidebar-email"
+        />
         <button class="sidebar-subscribe-btn">Subscribe Free</button>
       </div>
     </aside>
   </div>
 
-  <!-- NEWSLETTER BANNER -->
   <NewsletterBanner />
 
-  <!-- TOOLS & APPS -->
   <div class="content-with-sidebar">
     <main class="main-content">
       <section class="news-section">
-        <SectionHeader title="New AI Tools & Apps" viewAllHref={`/category/tools-and-apps`} viewAllLabel="View All Tools →" />
+        <SectionHeader
+          title="New AI Tools & Apps"
+          viewAllHref="/category/tools-and-apps"
+          viewAllLabel="View All Tools →"
+        />
         <div class="card-grid">
-          {toolsArticles.map(a => <NewsCard {...a} href={`/articles/${a.slug}`} />)}
+          {
+            toolsArticles.map((a) => (
+              <NewsCard {...a} href={`/articles/${a.slug}`} />
+            ))
+          }
         </div>
         <div class="section-cta">
-          <a href="/category/tools-and-apps" class="view-more-btn">View More Tools & Apps →</a>
+          <a href="/category/tools-and-apps" class="view-more-btn"
+            >View More Tools & Apps →</a
+          >
         </div>
       </section>
-
-      <!-- POLICY & ETHICS -->
       <section class="news-section">
-        <SectionHeader title="AI Policy & Ethics" viewAllHref={`/category/policy-and-ethics`} viewAllLabel="View All →" />
+        <SectionHeader
+          title="AI Policy & Ethics"
+          viewAllHref="/category/policy-and-ethics"
+          viewAllLabel="View All →"
+        />
         <div class="card-grid">
-          {policyArticles.map(a => <NewsCard {...a} href={`/articles/${a.slug}`} />)}
+          {
+            policyArticles.map((a) => (
+              <NewsCard {...a} href={`/articles/${a.slug}`} />
+            ))
+          }
         </div>
         <div class="section-cta">
-          <a href="/category/policy-and-ethics" class="view-more-btn">View More Policy Stories →</a>
+          <a href="/category/policy-and-ethics" class="view-more-btn"
+            >View More Policy Stories →</a
+          >
         </div>
       </section>
     </main>
     <aside class="sidebar">
-        <div class="sidebar-widget">
-            <h3 class="sidebar-title">Trending Now</h3>
-            <ol class="trending-list">
-              {trendingArticles.map((t, i) => (
-                <li class="trending-item">
-                  <span class="trending-num">{String(i + 1).padStart(2, '0')}</span>
-                  <a href={`/articles/${t.slug}`}>{t.headline}</a>
-                </li>
-              ))}
-            </ol>
-          </div>
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title">Trending Now</h3>
+        <ol class="trending-list">
+          {
+            trendingArticles.map((t, i) => (
+              <li class="trending-item">
+                <span class="trending-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <a href={`/articles/${t.slug}`}>{t.headline}</a>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
     </aside>
   </div>
-
-  <Footer />
 </Layout>
 
 <style>
-.hero { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
-.hero-inner { max-width: var(--max-width); margin: 0 auto; padding: 32px var(--gutter); }
-
-.content-with-sidebar {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 48px;
-  align-items: start;
-}
-
-.news-section { padding: 48px 0; border-bottom: 1px solid var(--color-border); }
-.news-section:last-child { border-bottom: none; }
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 24px;
-}
-
-.section-cta { text-align: center; margin-top: 32px; }
-.view-more-btn {
-  display: inline-block;
-  padding: 12px 28px;
-  border: 1.5px solid var(--color-border);
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-.view-more-btn:hover {
-  background: var(--color-text);
-  color: white;
-  border-color: var(--color-text);
-}
-
-/* SIDEBAR */
-.sidebar { padding-top: 48px; position: sticky; top: 80px; }
-.sidebar-widget { margin-bottom: 32px; padding: 24px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); }
-.sidebar-title { font-family: var(--font-display); font-size: 18px; margin-bottom: 16px; }
-.trending-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-.trending-item { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.4; }
-.trending-num { font-size: 20px; font-family: var(--font-display); color: var(--color-border); min-width: 28px; }
-.trending-item a:hover { text-decoration: underline; }
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag-chip { font-size: 12px; padding: 4px 12px; border: 1px solid var(--color-border); border-radius: 999px; transition: all 0.15s; }
-.tag-chip:hover { background: var(--color-text); color: white; border-color: var(--color-text); }
-.sidebar-newsletter p { font-size: 13px; color: var(--color-text-muted); margin-bottom: 12px; }
-.sidebar-email { width: 100%; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 13px; margin-bottom: 8px; background: var(--color-bg); }
-.sidebar-subscribe-btn { width: 100%; padding: 10px; background: var(--color-text); color: white; border: none; border-radius: 4px; font-size: 13px; font-family: var(--font-body); cursor: pointer; }
-
-@media (max-width: 1024px) {
-  .content-with-sidebar { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-}
-@media (max-width: 768px) {
-  .card-grid { grid-template-columns: 1fr; }
-}
+  .hero {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 32px var(--gutter);
+  }
+  .content-with-sidebar {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+    align-items: start;
+  }
+  .news-section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .news-section:last-child {
+    border-bottom: none;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .section-cta {
+    text-align: center;
+    margin-top: 32px;
+  }
+  .view-more-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .view-more-btn:hover {
+    background: var(--color-text);
+    color: white;
+    border-color: var(--color-text);
+  }
+  .sidebar {
+    padding-top: 48px;
+    position: sticky;
+    top: 80px;
+  }
+  .sidebar-widget {
+    margin-bottom: 32px;
+    padding: 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+  .sidebar-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .trending-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .trending-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .trending-num {
+    font-size: 20px;
+    font-family: var(--font-display);
+    color: var(--color-border);
+    min-width: 28px;
+  }
+  .trending-item a:hover {
+    text-decoration: underline;
+  }
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag-chip {
+    font-size: 12px;
+    padding: 4px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    transition: all 0.15s;
+  }
+  .tag-chip:hover {
+    background: var(--color-text);
+    color: white;
+    border-color: var(--color-text);
+  }
+  .sidebar-newsletter p {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+  }
+  .sidebar-email {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 8px;
+    background: var(--color-bg);
+  }
+  .sidebar-subscribe-btn {
+    width: 100%;
+    padding: 10px;
+    background: var(--color-text);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    cursor: pointer;
+  }
+  @media (max-width: 1024px) {
+    .content-with-sidebar {
+      grid-template-columns: 1fr;
+    }
+    .sidebar {
+      display: none;
+    }
+  }
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
