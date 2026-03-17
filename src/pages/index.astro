@@ -27,9 +27,351 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
   headline: a.headline,
   slug: a.slug,
 }));
+
+// ── Schema constants ──────────────────────────────────────────────────────────
+const siteUrl = "https://dailyaimail.com";
+const logoUrl = `${siteUrl}/logo.png`;
+
+// Latest article date for dateModified
+const newestIso =
+  latestArticles[0]?.isoDate ?? new Date().toISOString().split("T")[0];
+
+// ── All six categories with full metadata ─────────────────────────────────────
+const categories = [
+  {
+    tag: "Anthropic",
+    slug: "anthropic",
+    sameAs: ["https://www.wikidata.org/wiki/Q116820069"],
+  },
+  {
+    tag: "Google AI",
+    slug: "google-ai",
+    sameAs: ["https://www.wikidata.org/wiki/Q95"],
+  },
+  {
+    tag: "OpenAI",
+    slug: "openai",
+    sameAs: ["https://www.wikidata.org/wiki/Q21708200"],
+  },
+  {
+    tag: "Meta AI",
+    slug: "meta-ai",
+    sameAs: ["https://www.wikidata.org/wiki/Q380"],
+  },
+  { tag: "Tools & Apps", slug: "tools-and-apps", sameAs: [] },
+  {
+    tag: "Policy & Ethics",
+    slug: "policy-and-ethics",
+    sameAs: ["https://www.wikidata.org/wiki/Q30059493"],
+  },
+];
+
+// ── Homepage JSON-LD @graph ───────────────────────────────────────────────────
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    // 1. WebPage — the homepage itself
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/`,
+      url: `${siteUrl}/`,
+      name: "Daily AI Mail — AI News, Research & Tools",
+      headline: "Your daily source for AI news, research and tools",
+      description:
+        "Daily AI Mail delivers authoritative coverage of artificial intelligence news, model releases, research breakthroughs, tools, and policy developments for a global audience.",
+      inLanguage: "en-US",
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#organization` },
+      publisher: { "@id": `${siteUrl}/#organization` },
+      author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+      dateModified: `${newestIso}T00:00:00+00:00`,
+      image: { "@id": `${siteUrl}/#/schema/logo/image/` },
+      primaryImageOfPage: { "@id": `${siteUrl}/#/schema/logo/image/` },
+      breadcrumb: { "@id": `${siteUrl}/#breadcrumb` },
+      isAccessibleForFree: true,
+      accessMode: ["textual"],
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: [".hero h1", ".hero-headline"],
+      },
+      // potentialAction — site-level search
+      potentialAction: [
+        {
+          "@type": "ReadAction",
+          target: [`${siteUrl}/`],
+        },
+      ],
+      // Explicit links to all section pages — internal mesh anchor
+      significantLink: [
+        `${siteUrl}/about-us`,
+        `${siteUrl}/contact-us`,
+        `${siteUrl}/publishing-principles`,
+        ...categories.map((c) => `${siteUrl}/category/${c.slug}`),
+      ],
+      // mentions — every topic entity + the author
+      mentions: [
+        { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+        ...categories.map((c) => ({
+          "@id": `${siteUrl}/category/${c.slug}#topic`,
+        })),
+      ],
+    },
+
+    // 2. BreadcrumbList — homepage is the root
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${siteUrl}/#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+      ],
+    },
+
+    // 3. WebSite — FULL canonical definition (lives here and is referenced everywhere else)
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: "Daily AI Mail",
+      alternateName: ["Daily AI Mail", "DailyAIMail"],
+      description: "Your daily source for AI news, research and tools.",
+      inLanguage: "en-US",
+      publisher: { "@id": `${siteUrl}/#organization` },
+      author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+      about: { "@id": `${siteUrl}/#organization` },
+      dateCreated: "2026-01-01T00:00:00+00:00",
+      dateModified: `${newestIso}T00:00:00+00:00`,
+      isAccessibleForFree: true,
+      license: `${siteUrl}/terms-and-conditions`,
+      publishingPrinciples: `${siteUrl}/publishing-principles`,
+      privacyPolicy: `${siteUrl}/privacy-policy`,
+      // SearchAction — enables sitelinks search box eligibility
+      potentialAction: [
+        {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${siteUrl}/?s={search_term_string}`,
+          },
+          "query-input": {
+            "@type": "PropertyValueSpecification",
+            valueRequired: true,
+            valueName: "search_term_string",
+          },
+        },
+      ],
+      // hasPart — explicitly connects website to all category collection pages
+      hasPart: categories.map((c) => ({
+        "@type": "CollectionPage",
+        "@id": `${siteUrl}/category/${c.slug}`,
+        url: `${siteUrl}/category/${c.slug}`,
+        name: `${c.tag} News — Daily AI Mail`,
+      })),
+    },
+
+    // 4. NewsMediaOrganization — FULL canonical definition
+    {
+      "@type": "NewsMediaOrganization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Daily AI Mail",
+      alternateName: "DailyAIMail",
+      url: `${siteUrl}/`,
+      foundingDate: "2026-01-01",
+      description:
+        "Daily AI Mail is an independent digital publication dedicated to covering the global artificial intelligence industry for researchers, engineers, business leaders, and policymakers.",
+      publishingPrinciples: `${siteUrl}/publishing-principles`,
+      logo: {
+        "@type": "ImageObject",
+        "@id": `${siteUrl}/#/schema/logo/image/`,
+        inLanguage: "en-US",
+        url: logoUrl,
+        contentUrl: logoUrl,
+        width: 512,
+        height: 512,
+        caption: "Daily AI Mail",
+      },
+      image: { "@id": `${siteUrl}/#/schema/logo/image/` },
+      // contactPoint — editorial and press channels
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          email: "editorial@dailyaimail.com",
+          contactType: "editorial",
+          availableLanguage: ["English"],
+        },
+        {
+          "@type": "ContactPoint",
+          email: "press@dailyaimail.com",
+          contactType: "press",
+          availableLanguage: ["English"],
+        },
+      ],
+      // member — the founding editor
+      member: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+      founder: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+      // areaServed — global coverage with MENA emphasis
+      areaServed: [
+        { "@type": "Place", name: "Worldwide" },
+        { "@type": "Country", name: "Egypt" },
+        { "@type": "Place", name: "MENA" },
+      ],
+      // knowsAbout — entity-level subject matter expertise
+      knowsAbout: [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Large Language Models",
+        "AI Safety",
+        "Generative AI",
+        "AI Policy",
+        "AI Ethics",
+        "Neural Networks",
+        "Natural Language Processing",
+        "AI Research",
+      ],
+      sameAs: [
+        "https://twitter.com/dailyaimail",
+        "https://linkedin.com/company/dailyaimail",
+        "https://diab.digital",
+      ],
+    },
+
+    // 5. Person — Mohamed Diab — FULL definition (also fully defined on About Us)
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#/schema/person/mohamed-diab`,
+      name: "Mohamed Diab",
+      givenName: "Mohamed",
+      familyName: "Diab",
+      url: "https://interactiveseo.digital",
+      image: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/mohamed-diab.jpg`,
+        caption: "Mohamed Diab",
+      },
+      jobTitle: "Founder & Editor-in-Chief",
+      description:
+        "Technical SEO Consultant and founder of Daily AI Mail, with over ten years of experience in the technology and digital marketing industry.",
+      worksFor: { "@id": `${siteUrl}/#organization` },
+      knowsAbout: [
+        "Technical SEO",
+        "Structured Data",
+        "Knowledge Graph Optimization",
+        "Artificial Intelligence",
+        "AI News",
+        "Digital Publishing",
+        "Entity-Based SEO",
+      ],
+      sameAs: ["https://interactiveseo.digital", "https://diab.digital"],
+    },
+
+    // 6. SiteNavigationElement — maps the full nav structure
+    // This is a strongly underused signal for site architecture
+    {
+      "@type": "SiteNavigationElement",
+      "@id": `${siteUrl}/#navigation`,
+      name: "Main Navigation",
+      url: `${siteUrl}/`,
+      hasPart: [
+        { "@type": "SiteNavigationElement", name: "Home", url: `${siteUrl}/` },
+        {
+          "@type": "SiteNavigationElement",
+          name: "Anthropic",
+          url: `${siteUrl}/category/anthropic`,
+        },
+        {
+          "@type": "SiteNavigationElement",
+          name: "Google AI",
+          url: `${siteUrl}/category/google-ai`,
+        },
+        {
+          "@type": "SiteNavigationElement",
+          name: "OpenAI",
+          url: `${siteUrl}/category/openai`,
+        },
+        {
+          "@type": "SiteNavigationElement",
+          name: "Meta AI",
+          url: `${siteUrl}/category/meta-ai`,
+        },
+        {
+          "@type": "SiteNavigationElement",
+          name: "Tools & Apps",
+          url: `${siteUrl}/category/tools-and-apps`,
+        },
+        {
+          "@type": "SiteNavigationElement",
+          name: "Policy & Ethics",
+          url: `${siteUrl}/category/policy-and-ethics`,
+        },
+        {
+          "@type": "SiteNavigationElement",
+          name: "About",
+          url: `${siteUrl}/about-us`,
+        },
+      ],
+    },
+
+    // 7. DefinedTermSet — the full topic taxonomy
+    // Anchors all category DefinedTerms to a named classification system
+    {
+      "@type": "DefinedTermSet",
+      "@id": `${siteUrl}/#topics`,
+      name: "Daily AI Mail Topic Taxonomy",
+      description:
+        "The editorial topic classification system used by Daily AI Mail to organize AI news coverage.",
+      url: `${siteUrl}/`,
+      publisher: { "@id": `${siteUrl}/#organization` },
+      hasDefinedTerm: categories.map((c) => ({
+        "@type": "DefinedTerm",
+        "@id": `${siteUrl}/category/${c.slug}#topic`,
+        name: c.tag,
+        url: `${siteUrl}/category/${c.slug}`,
+        inDefinedTermSet: { "@id": `${siteUrl}/#topics` },
+        ...(c.sameAs.length > 0 && { sameAs: c.sameAs }),
+      })),
+    },
+
+    // 8. ItemList — the latest articles shown on homepage
+    // Machine-readable content index for the front page
+    {
+      "@type": "ItemList",
+      "@id": `${siteUrl}/#latest`,
+      name: "Latest AI News — Daily AI Mail",
+      description:
+        "The most recently published articles across all topics on Daily AI Mail.",
+      numberOfItems: latestArticles.length,
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      itemListElement: latestArticles.map((a, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${siteUrl}/articles/${a.slug}`,
+        name: a.headline,
+        item: {
+          "@type": "NewsArticle",
+          "@id": `${siteUrl}/articles/${a.slug}#article`,
+          headline: a.headline,
+          description: a.excerpt,
+          datePublished: `${a.isoDate}T00:00:00+00:00`,
+          author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+          publisher: { "@id": `${siteUrl}/#organization` },
+          url: `${siteUrl}/articles/${a.slug}`,
+        },
+      })),
+    },
+  ],
+};
 ---
 
-<Layout title="Daily AI Mail — AI News, Research & Tools">
+<Layout
+  title="Daily AI Mail — AI News, Research & Tools"
+  description="Daily AI Mail delivers authoritative coverage of artificial intelligence news, model releases, research breakthroughs, tools, and policy developments for a global audience."
+  metaTitle="Daily AI Mail — AI News, Research & Tools"
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+    slot="head"
+  />
+
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
@@ -54,7 +396,6 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
           }
         </div>
       </section>
-
       <section class="news-section">
         <SectionHeader
           title="Anthropic News"
@@ -70,11 +411,9 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
         </div>
         <div class="section-cta">
           <a href="/category/anthropic" class="view-more-btn"
-            >View More Anthropic Stories →</a
-          >
+            >View More Anthropic Stories →</a>
         </div>
       </section>
-
       <section class="news-section">
         <SectionHeader
           title="Google AI News"
@@ -90,11 +429,9 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
         </div>
         <div class="section-cta">
           <a href="/category/google-ai" class="view-more-btn"
-            >View More Google AI Stories →</a
-          >
+            >View More Google AI Stories →</a>
         </div>
       </section>
-
       <section class="news-section">
         <SectionHeader
           title="OpenAI News"
@@ -110,8 +447,7 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
         </div>
         <div class="section-cta">
           <a href="/category/openai" class="view-more-btn"
-            >View More OpenAI Stories →</a
-          >
+            >View More OpenAI Stories →</a>
         </div>
       </section>
     </main>
@@ -187,8 +523,7 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
         </div>
         <div class="section-cta">
           <a href="/category/tools-and-apps" class="view-more-btn"
-            >View More Tools & Apps →</a
-          >
+            >View More Tools & Apps →</a>
         </div>
       </section>
       <section class="news-section">
@@ -206,8 +541,7 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
         </div>
         <div class="section-cta">
           <a href="/category/policy-and-ethics" class="view-more-btn"
-            >View More Policy Stories →</a
-          >
+            >View More Policy Stories →</a>
         </div>
       </section>
     </main>

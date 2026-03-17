@@ -2,7 +2,7 @@
 import Layout from "./Layout.astro";
 import NewsCard from "../components/NewsCard.astro";
 import type { Article } from "../data/articles";
-import { tagColor } from "../data/articles";
+import { tagColor, categoryToSlug } from "../data/articles";
 
 export interface Props {
   tag: string;
@@ -12,12 +12,334 @@ export interface Props {
 const { tag, articles } = Astro.props;
 const color = tagColor(tag);
 const count = articles.length;
+
+// ── Schema constants ──────────────────────────────────────────────────────────
+const siteUrl = "https://dailyaimail.com";
+const catSlug = categoryToSlug(tag);
+const catUrl = `${siteUrl}/category/${catSlug}`;
+const logoUrl = `${siteUrl}/logo.png`;
+
+// Most recent article date — used as dateModified on the page
+const latestIso =
+  articles.length > 0
+    ? [...articles].sort((a, b) => b.isoDate.localeCompare(a.isoDate))[0]
+        .isoDate
+    : new Date().toISOString().split("T")[0];
+const dateModified = `${latestIso}T00:00:00+00:00`;
+
+// Category-level keyword map — adds subject-matter keywords per topic
+const topicMeta: Record<
+  string,
+  { description: string; keywords: string[]; sameAs: string[] }
+> = {
+  Anthropic: {
+    description:
+      "Latest news, research, and product releases from Anthropic, the AI safety company behind the Claude family of large language models.",
+    keywords: [
+      "Anthropic",
+      "Claude",
+      "Constitutional AI",
+      "AI safety",
+      "large language models",
+      "LLM",
+    ],
+    sameAs: [
+      "https://www.wikidata.org/wiki/Q116820069",
+      "https://en.wikipedia.org/wiki/Anthropic",
+    ],
+  },
+  "Google AI": {
+    description:
+      "Coverage of Google's artificial intelligence research and products, including Gemini, DeepMind, Google Labs, and AI integrations across Google's product suite.",
+    keywords: [
+      "Google AI",
+      "Gemini",
+      "DeepMind",
+      "Google DeepMind",
+      "AI research",
+      "machine learning",
+    ],
+    sameAs: [
+      "https://www.wikidata.org/wiki/Q95",
+      "https://en.wikipedia.org/wiki/Google_AI",
+    ],
+  },
+  OpenAI: {
+    description:
+      "News and analysis covering OpenAI's models, products, and research — including GPT, ChatGPT, DALL-E, Sora, and the company's safety and governance decisions.",
+    keywords: [
+      "OpenAI",
+      "ChatGPT",
+      "GPT-5",
+      "Sora",
+      "DALL-E",
+      "AI models",
+      "generative AI",
+    ],
+    sameAs: [
+      "https://www.wikidata.org/wiki/Q21708200",
+      "https://en.wikipedia.org/wiki/OpenAI",
+    ],
+  },
+  "Meta AI": {
+    description:
+      "Reports on Meta's artificial intelligence division, covering Llama open-source models, AI research publications, and AI features across Meta's platforms.",
+    keywords: [
+      "Meta AI",
+      "Llama",
+      "open source AI",
+      "Meta",
+      "Facebook AI",
+      "large language models",
+    ],
+    sameAs: [
+      "https://www.wikidata.org/wiki/Q380",
+      "https://en.wikipedia.org/wiki/Meta_AI",
+    ],
+  },
+  "Tools & Apps": {
+    description:
+      "Reviews, comparisons, and release coverage of AI-powered tools, productivity applications, developer utilities, and consumer AI products.",
+    keywords: [
+      "AI tools",
+      "AI apps",
+      "AI software",
+      "productivity AI",
+      "AI assistants",
+      "developer tools",
+    ],
+    sameAs: [],
+  },
+  "Policy & Ethics": {
+    description:
+      "Reporting on artificial intelligence regulation, governance frameworks, safety research, ethical debates, and legislative developments worldwide.",
+    keywords: [
+      "AI policy",
+      "AI regulation",
+      "AI ethics",
+      "AI governance",
+      "AI safety",
+      "EU AI Act",
+    ],
+    sameAs: ["https://www.wikidata.org/wiki/Q30059493"],
+  },
+};
+
+const meta = topicMeta[tag] ?? {
+  description: `The latest ${tag} news, research and updates from Daily AI Mail.`,
+  keywords: [tag, "AI", "artificial intelligence"],
+  sameAs: [],
+};
+
+// Build ItemList — every article in this category as a ListItem
+const itemList = {
+  "@type": "ItemList",
+  "@id": `${catUrl}#itemlist`,
+  name: `${tag} Articles — Daily AI Mail`,
+  description: `A curated list of ${count} article${count !== 1 ? "s" : ""} covering ${tag}.`,
+  numberOfItems: count,
+  itemListOrder: "https://schema.org/ItemListOrderDescending",
+  itemListElement: articles
+    .sort((a, b) => b.isoDate.localeCompare(a.isoDate))
+    .map((article, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `${siteUrl}/articles/${article.slug}`,
+      name: article.headline,
+      item: {
+        "@type": "NewsArticle",
+        "@id": `${siteUrl}/articles/${article.slug}#article`,
+        headline: article.headline,
+        description: article.excerpt,
+        datePublished: `${article.isoDate}T00:00:00+00:00`,
+        dateModified: `${article.modifiedDate ?? article.isoDate}T00:00:00+00:00`,
+        url: `${siteUrl}/articles/${article.slug}`,
+        author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+        publisher: { "@id": `${siteUrl}/#organization` },
+        image: article.image ? `${siteUrl}${article.image}` : undefined,
+      },
+    })),
+};
+
+// DefinedTerm — makes the topic a named semantic entity
+const definedTerm = {
+  "@type": "DefinedTerm",
+  "@id": `${catUrl}#topic`,
+  name: tag,
+  description: meta.description,
+  inDefinedTermSet: {
+    "@type": "DefinedTermSet",
+    "@id": `${siteUrl}/#topics`,
+    name: "Daily AI Mail Topic Taxonomy",
+    url: `${siteUrl}/`,
+  },
+  ...(meta.sameAs.length > 0 && { sameAs: meta.sameAs }),
+};
+
+// Full @graph schema
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    // 1. CollectionPage — the category page itself
+    {
+      "@type": "CollectionPage",
+      "@id": catUrl,
+      url: catUrl,
+      name: `${tag} News & Research — Daily AI Mail`,
+      headline: `${tag} News`,
+      description: meta.description,
+      abstract: `Daily AI Mail's ${tag} coverage includes breaking news, in-depth analysis, research summaries, and product updates. All articles are written and edited to editorial standards by the Daily AI Mail team.`,
+      keywords: meta.keywords,
+      inLanguage: "en-US",
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${catUrl}#topic` },
+      hasPart: { "@id": `${catUrl}#itemlist` },
+      breadcrumb: { "@id": `${catUrl}#breadcrumb` },
+      image: { "@id": `${siteUrl}/#/schema/logo/image/` },
+      thumbnailUrl: logoUrl,
+      dateModified: dateModified,
+      publisher: { "@id": `${siteUrl}/#organization` },
+      creator: { "@id": `${siteUrl}/#organization` },
+      copyrightHolder: { "@id": `${siteUrl}/#organization` },
+      copyrightYear: "2026",
+      license: `${siteUrl}/terms-and-conditions`,
+      isAccessibleForFree: true,
+      accessMode: ["textual"],
+      accessModeSufficient: [
+        { "@type": "ItemList", itemListElement: ["textual"] },
+      ],
+
+      // Audience signals — tells crawlers who this content serves
+      audience: {
+        "@type": "Audience",
+        audienceType:
+          "Researchers, engineers, business leaders, and policymakers following artificial intelligence developments",
+        geographicArea: {
+          "@type": "AdministrativeArea",
+          name: "Worldwide",
+        },
+      },
+
+      // Speakable — marks the h1 and description as safe for voice/TTS surfaces
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: [".cat-title", ".cat-subtitle"],
+      },
+
+      // potentialAction — ReadAction marks this as content meant to be consumed
+      potentialAction: [
+        {
+          "@type": "ReadAction",
+          target: [catUrl],
+        },
+      ],
+
+      // significantLinks — the top 3 most recent articles
+      significantLink: articles
+        .sort((a, b) => b.isoDate.localeCompare(a.isoDate))
+        .slice(0, 3)
+        .map((a) => `${siteUrl}/articles/${a.slug}`),
+
+      // mentions — every distinct author and the topic entity
+      mentions: [
+        { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+        { "@id": `${catUrl}#topic` },
+      ],
+    },
+
+    // 2. DefinedTerm — the topic as a semantic entity
+    definedTerm,
+
+    // 3. ItemList — machine-readable article index for this category
+    itemList,
+
+    // 4. BreadcrumbList
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${catUrl}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+        { "@type": "ListItem", position: 2, name: `${tag} News`, item: catUrl },
+      ],
+    },
+
+    // 5. WebSite
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: "Daily AI Mail",
+      description: "Your daily source for AI news, research and tools.",
+      publisher: { "@id": `${siteUrl}/#organization` },
+      alternateName: "Daily AI Mail",
+      inLanguage: "en-US",
+      potentialAction: [
+        {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${siteUrl}/?s={search_term_string}`,
+          },
+          "query-input": {
+            "@type": "PropertyValueSpecification",
+            valueRequired: true,
+            valueName: "search_term_string",
+          },
+        },
+      ],
+    },
+
+    // 6. NewsMediaOrganization
+    {
+      "@type": "NewsMediaOrganization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Daily AI Mail",
+      url: `${siteUrl}/`,
+      foundingDate: "2026",
+      publishingPrinciples: `${siteUrl}/publishing-principles`,
+      logo: {
+        "@type": "ImageObject",
+        inLanguage: "en-US",
+        "@id": `${siteUrl}/#/schema/logo/image/`,
+        url: logoUrl,
+        contentUrl: logoUrl,
+        width: 512,
+        height: 512,
+        caption: "Daily AI Mail",
+      },
+      image: { "@id": `${siteUrl}/#/schema/logo/image/` },
+      sameAs: [
+        "https://twitter.com/dailyaimail",
+        "https://linkedin.com/company/dailyaimail",
+        "https://diab.digital",
+      ],
+    },
+
+    // 7. Person (author / editor)
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#/schema/person/mohamed-diab`,
+      name: "Mohamed Diab",
+      url: "https://interactiveseo.digital",
+      description:
+        "Technical SEO Consultant and founder of Daily AI Mail, with over ten years of experience covering the global AI and digital marketing industry.",
+      sameAs: ["https://interactiveseo.digital", "https://diab.digital"],
+    },
+  ],
+};
 ---
 
 <Layout
   title={`${tag} News — Daily AI Mail`}
-  description={`The latest ${tag} news, research and updates.`}
+  description={meta.description}
+  metaTitle={`${tag} News & Research — Daily AI Mail`}
 >
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+    slot="head"
+  />
+
   <!-- Category hero -->
   <div
     class="cat-hero"
@@ -88,7 +410,6 @@ const count = articles.length;
     font-size: 16px;
     color: var(--color-text-muted);
   }
-
   .cat-content {
     max-width: var(--max-width);
     margin: 0 auto;

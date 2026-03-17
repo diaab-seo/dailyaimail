@@ -6,6 +6,7 @@ description: "Daily AI Mail is an independent publication covering artificial in
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
 author: "Mohamed Diab"
+schemaType: "about"
 ---
 
 ## About Daily AI Mail
