@@ -6,6 +6,7 @@ description: "The editorial standards, sourcing requirements, correction policy,
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
 author: "Mohamed Diab"
+schemaType: "publishing-principles"
 ---
 
 ## Publishing Principles

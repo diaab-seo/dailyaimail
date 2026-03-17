@@ -6,6 +6,7 @@ description: "How Daily AI Mail collects, uses, stores, and protects your person
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
 author: "Mohamed Diab"
+schemaType: "privacy"
 ---
 
 ## Privacy Policy

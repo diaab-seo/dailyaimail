@@ -6,6 +6,7 @@ description: "Contact the Daily AI Mail editorial team for news tips, correction
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
 author: "Mohamed Diab"
+schemaType: "contact"
 ---
 
 ## Contact Daily AI Mail
