@@ -1,7 +1,19 @@
 ---
-import Layout from './Layout.astro';
-const { title, description, metaTitle, publishDate, lastModified, author } = Astro.props;
+import Layout from "./Layout.astro";
+
+// When a .md file uses this layout, Astro passes all frontmatter under
+// Astro.props.frontmatter — NOT as top-level props. We merge both sources
+// so this layout works whether called from .astro or .md files.
+const fm = (Astro.props as any).frontmatter ?? {};
+
+const title = Astro.props.title ?? fm.title;
+const description = Astro.props.description ?? fm.description;
+const metaTitle = Astro.props.metaTitle ?? fm.metaTitle;
+const publishDate = Astro.props.publishDate ?? fm.publishDate;
+const lastModified = Astro.props.lastModified ?? fm.lastModified;
+const author = Astro.props.author ?? fm.author;
 ---
+
 <Layout title={title} description={description} metaTitle={metaTitle}>
   <main class="page-main">
     <div class="page-container">
@@ -58,6 +70,49 @@ const { title, description, metaTitle, publishDate, lastModified, author } = Ast
     color: var(--color-text);
     margin: 40px 0 16px;
   }
-  .page-content p { margin-bottom: 16px; }
-  .page-content a { text-decoration: underline; }
+  .page-content h3 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    color: var(--color-text);
+    margin: 28px 0 12px;
+  }
+  .page-content p {
+    margin-bottom: 16px;
+  }
+  .page-content a {
+    text-decoration: underline;
+  }
+  .page-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .page-content th {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--color-border);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .page-content td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .page-content ul,
+  .page-content ol {
+    margin: 0 0 16px 24px;
+  }
+  .page-content li {
+    margin-bottom: 6px;
+  }
+  .page-content strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .page-content hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 40px 0;
+  }
 </style>

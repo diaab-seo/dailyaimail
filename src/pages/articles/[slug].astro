@@ -1,17 +1,40 @@
 ---
-import { articles } from '../../data/articles';
-import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getCollection, render } from "astro:content";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { stripMarkdown } from "../../data/articles";
 
 export async function getStaticPaths() {
-  return articles.map((article) => ({
-    params: { slug: article.slug },
-    props: { article },
+  const entries = await getCollection("articles");
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
   }));
 }
 
-const { article } = Astro.props;
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const article = {
+  slug: entry.id,
+  tag: entry.data.tag,
+  headline: entry.data.headline,
+  excerpt: entry.data.excerpt,
+  body: entry.body ?? "",
+  date: entry.data.date,
+  isoDate: entry.data.isoDate,
+  modifiedDate: entry.data.modifiedDate ?? entry.data.isoDate,
+  author: entry.data.author,
+  authorUrl: entry.data.authorUrl ?? "https://interactiveseo.digital",
+  readingTime: entry.data.readingTime,
+  image: entry.data.image,
+  imageWidth: entry.data.imageWidth,
+  imageHeight: entry.data.imageHeight,
+  imageCaption: entry.data.imageCaption,
+  keywords: entry.data.keywords ?? [entry.data.tag],
+  articleSection: entry.data.articleSection ?? [entry.data.tag],
+};
 ---
 
 <ArticleLayout article={article}>
-  <div set:html={article.body.replace(/\n\n/g, '</p><p>').replace(/^## (.+)$/gm, '</p><h2>$1</h2><p>').replace(/^<\/p>/, '')} />
+  <Content />
 </ArticleLayout>
