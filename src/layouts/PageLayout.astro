@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import { resolvePageSchema } from "../utils/schema";
 
 const fm = (Astro.props as any).frontmatter ?? {};
 
@@ -11,63 +12,56 @@ const lastModified = Astro.props.lastModified ?? fm.lastModified;
 const author = Astro.props.author ?? fm.author;
 const schemaType = Astro.props.schemaType ?? fm.schemaType ?? null;
 
-// ── Schema generation ─────────────────────────────────────────────────────────
+// ── Schema ────────────────────────────────────────────────────────────────────
+// "about" is handled inline here (it's complex enough to warrant its own block).
+// Everything else is resolved via the shared utility.
+
 const siteUrl = "https://dailyaimail.com";
 const logoUrl = `${siteUrl}/logo.png`;
+const pubIso = (publishDate ?? "2026-01-01").replace(/\//g, "-");
+const modIso = (lastModified ?? "2026-03-15").replace(/\//g, "-");
 
-// Helper — only generate schema blocks for specific page types
-// Currently handles "about" — expand with "contact", "press-kit" etc. as needed
 let pageSchema: object | null = null;
 
 if (schemaType === "about") {
-  const pubIso = publishDate?.replace(/\//g, "-") ?? "2026-01-01";
-  const modIso = lastModified?.replace(/\//g, "-") ?? "2026-03-15";
-
+  // About Us — the one page that fully redefines Organization + Person
   pageSchema = {
     "@context": "https://schema.org",
     "@graph": [
-      // 1. AboutPage — the page itself, with mainEntity pointing to the Organization
-      // mainEntity is the strongest "this page IS about this thing" signal in Schema.org
       {
         "@type": "AboutPage",
         "@id": `${siteUrl}/about-us`,
         url: `${siteUrl}/about-us`,
-        name: "About Daily AI Mail — Independent AI News, Research & Intelligence",
+        name:
+          metaTitle ??
+          "About Daily AI Mail — Independent AI News, Research & Intelligence",
         headline: "About Daily AI Mail",
         description:
-          "Daily AI Mail is an independent digital publication covering artificial intelligence news, research breakthroughs, tool releases, and policy developments for a global audience.",
+          description ??
+          "Daily AI Mail is an independent publication covering artificial intelligence news.",
         inLanguage: "en-US",
         isPartOf: { "@id": `${siteUrl}/#website` },
-        // mainEntity — the single strongest signal: this page IS the org's about page
         mainEntity: { "@id": `${siteUrl}/#organization` },
-        // about — secondary entity reference
         about: { "@id": `${siteUrl}/#organization` },
         author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-        creator: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
         publisher: { "@id": `${siteUrl}/#organization` },
         datePublished: `${pubIso}T00:00:00+00:00`,
         dateModified: `${modIso}T00:00:00+00:00`,
-        image: { "@id": `${siteUrl}/#/schema/logo/image/` },
         breadcrumb: { "@id": `${siteUrl}/about-us#breadcrumb` },
         isAccessibleForFree: true,
-        license: `${siteUrl}/terms-and-conditions`,
         speakable: {
           "@type": "SpeakableSpecification",
-          cssSelector: [".page-title", ".page-content p:first-of-type"],
+          cssSelector: [".page-title"],
         },
-        // relatedLinks — internal mesh to key editorial pages
         relatedLink: [
           `${siteUrl}/publishing-principles`,
           `${siteUrl}/contact-us`,
-          `${siteUrl}/privacy-policy`,
         ],
         mentions: [
           { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
           { "@id": `${siteUrl}/#organization` },
         ],
       },
-
-      // 2. BreadcrumbList
       {
         "@type": "BreadcrumbList",
         "@id": `${siteUrl}/about-us#breadcrumb`,
@@ -86,29 +80,22 @@ if (schemaType === "about") {
           },
         ],
       },
-
-      // 3. NewsMediaOrganization — FULL definition
-      // This is one of two pages (with Homepage) where the org is fully defined.
-      // The About page is the most semantically appropriate place to declare it.
       {
         "@type": "NewsMediaOrganization",
         "@id": `${siteUrl}/#organization`,
         name: "Daily AI Mail",
-        alternateName: "DailyAIMail",
         url: `${siteUrl}/`,
         foundingDate: "2026-01-01",
         description:
-          "Daily AI Mail is an independent digital publication dedicated to covering the global artificial intelligence industry for researchers, engineers, business leaders, and policymakers.",
+          "Daily AI Mail is an independent digital publication covering the global artificial intelligence industry.",
         publishingPrinciples: `${siteUrl}/publishing-principles`,
         ethicsPolicy: `${siteUrl}/publishing-principles`,
         masthead: `${siteUrl}/about-us`,
-        diversityPolicy: `${siteUrl}/publishing-principles`,
-        missionCoveragePrioritiesPolicy: `${siteUrl}/publishing-principles`,
         correctionsPolicy: `${siteUrl}/publishing-principles`,
+        missionCoveragePrioritiesPolicy: `${siteUrl}/publishing-principles`,
         logo: {
           "@type": "ImageObject",
           "@id": `${siteUrl}/#/schema/logo/image/`,
-          inLanguage: "en-US",
           url: logoUrl,
           contentUrl: logoUrl,
           width: 512,
@@ -116,32 +103,25 @@ if (schemaType === "about") {
           caption: "Daily AI Mail",
         },
         image: { "@id": `${siteUrl}/#/schema/logo/image/` },
+        member: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+        founder: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+        subjectOf: { "@id": `${siteUrl}/about-us` },
         contactPoint: [
           {
             "@type": "ContactPoint",
             email: "editorial@dailyaimail.com",
             contactType: "editorial",
-            availableLanguage: ["English"],
           },
           {
             "@type": "ContactPoint",
             email: "press@dailyaimail.com",
             contactType: "press",
-            availableLanguage: ["English"],
           },
           {
             "@type": "ContactPoint",
             email: "corrections@dailyaimail.com",
             contactType: "corrections",
-            availableLanguage: ["English"],
           },
-        ],
-        member: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-        founder: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-        areaServed: [
-          { "@type": "Place", name: "Worldwide" },
-          { "@type": "Country", name: "Egypt" },
-          { "@type": "Place", name: "MENA" },
         ],
         knowsAbout: [
           "Artificial Intelligence",
@@ -150,22 +130,13 @@ if (schemaType === "about") {
           "AI Safety",
           "Generative AI",
           "AI Policy",
-          "AI Ethics",
-          "Neural Networks",
-          "Natural Language Processing",
-          "AI Research",
         ],
-        // subjectOf — the about page IS the subject document for this org
-        subjectOf: { "@id": `${siteUrl}/about-us` },
         sameAs: [
           "https://twitter.com/dailyaimail",
           "https://linkedin.com/company/dailyaimail",
           "https://diab.digital",
         ],
       },
-
-      // 4. Person — Mohamed Diab — FULL definition
-      // Deeper bio-level properties live here since this is a human-authored about page
       {
         "@type": "Person",
         "@id": `${siteUrl}/#/schema/person/mohamed-diab`,
@@ -173,53 +144,39 @@ if (schemaType === "about") {
         givenName: "Mohamed",
         familyName: "Diab",
         url: "https://interactiveseo.digital",
-        image: {
-          "@type": "ImageObject",
-          url: `${siteUrl}/images/mohamed-diab.jpg`,
-          caption: "Mohamed Diab",
-        },
         jobTitle: "Founder & Editor-in-Chief",
         description:
-          "Technical SEO Consultant and founder of Daily AI Mail, with over ten years of experience in the technology and digital marketing industry. Specialises in entity-based SEO, structured data strategy, and Knowledge Graph optimization.",
+          "Technical SEO Consultant and founder of Daily AI Mail, with over ten years of experience in the technology and digital marketing industry.",
         worksFor: { "@id": `${siteUrl}/#organization` },
-        alumniOf: [],
-        hasCredential: {
-          "@type": "EducationalOccupationalCredential",
-          name: "Ten years of technical SEO practice",
-          credentialCategory: "professional experience",
-        },
         knowsAbout: [
           "Technical SEO",
           "Structured Data",
-          "Schema.org",
           "Knowledge Graph Optimization",
           "Artificial Intelligence",
-          "AI News",
           "Digital Publishing",
           "Entity-Based SEO",
-          "Google News",
-          "Google Discover",
         ],
-        // homeLocation — city-level, not personal address
-        homeLocation: {
-          "@type": "Place",
-          name: "Egypt",
-        },
+        homeLocation: { "@type": "Place", name: "Egypt" },
         sameAs: ["https://interactiveseo.digital", "https://diab.digital"],
       },
-
-      // 5. WebSite — referenced (fully defined on homepage)
       {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
         url: `${siteUrl}/`,
         name: "Daily AI Mail",
-        description: "Your daily source for AI news, research and tools.",
         publisher: { "@id": `${siteUrl}/#organization` },
-        inLanguage: "en-US",
       },
     ],
   };
+} else {
+  // All other page types resolved via the shared utility
+  pageSchema = resolvePageSchema(schemaType, {
+    title: title ?? "",
+    description: description ?? "",
+    publishDate: pubIso,
+    lastModified: modIso,
+    metaTitle,
+  });
 }
 ---
 

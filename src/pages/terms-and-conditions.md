@@ -6,6 +6,7 @@ description: "The terms and conditions governing access to and use of the Daily 
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
 author: "Mohamed Diab"
+schemaType: "terms"
 ---
 
 ## Terms and Conditions

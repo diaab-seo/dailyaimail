@@ -6,6 +6,7 @@ description: "A full explanation of how Daily AI Mail uses cookies, what data th
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
 author: "Mohamed Diab"
+schemaType: "cookies"
 ---
 
 ## Cookies Policy
