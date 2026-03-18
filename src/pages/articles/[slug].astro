@@ -13,21 +13,33 @@ const db = (env as any).DB as D1Database | undefined;
 const kv = (env as any).SESSION as KVNamespace | undefined;
 
 const { slug } = Astro.params;
-const entries = await getCollection("articles");
-const entry = entries.find((e) => e.id === slug);
-
-if (!entry) return Astro.redirect("/404");
-
-const { Content } = await render(entry);
-
 let user: SessionUser | null = null;
 let comments: DBComment[] = [];
+let error: string | null = null;
+let entry: any = null;
+let Content: any = null;
 
-if (db && kv) {
-  [user, comments] = await Promise.all([
-    getSession(kv, Astro.cookies),
-    getApprovedComments(db, slug!),
-  ]);
+try {
+  const entries = await getCollection("articles");
+  entry = entries.find((e) => e.id === slug);
+
+  if (!entry) return Astro.redirect("/404");
+
+  const rendered = await render(entry);
+  Content = rendered.Content;
+
+  if (db && kv) {
+    [user, comments] = await Promise.all([
+      getSession(kv, Astro.cookies),
+      getApprovedComments(db, slug!),
+    ]);
+  }
+} catch (e: any) {
+  error = e.message || String(e);
+}
+
+if (error) {
+  return new Response(`Error rendering article: ${error}`, { status: 500 });
 }
 
 const article = {
