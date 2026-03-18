@@ -3,6 +3,10 @@ import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
+    build: {
+        format: 'file',
+    },
+    trailingSlash: 'never',
     adapter: cloudflare({
         platformProxy: {
             enabled: true,
