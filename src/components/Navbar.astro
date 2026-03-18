@@ -68,21 +68,7 @@
           <li><a href="/about-us">About Us</a></li>
           <li><a href="/contact-us">Contact</a></li>
           <li><a href="#newsletter">Newsletter</a></li>
-          <!-- User session items injected by JS below -->
-          <li class="dropdown-divider" id="user-divider" style="display:none">
-            <hr class="nav-hr" />
-          </li>
-          <li id="nav-user-name" style="display:none">
-            <span class="nav-username"></span>
-          </li>
-          <li id="nav-signout" style="display:none">
-            <form method="POST" action="/auth/logout">
-              <button type="submit" class="nav-signout-btn">Sign Out</button>
-            </form>
-          </li>
-          <li id="nav-signin" style="display:none">
-            <a href="/auth/login" class="nav-signin-link">Sign In</a>
-          </li>
+
         </ul>
       </li>
     </ul>
@@ -126,6 +112,55 @@
           <path d="M2 7l10 7 10-7"></path>
         </svg>
       </button>
+
+      <!-- Avatar / Account menu -->
+      <div class="avatar-wrap hide-mobile" id="avatar-wrap">
+        <button
+          class="icon-btn avatar-btn"
+          id="avatar-btn"
+          aria-label="Account"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <!-- Shown when logged in -->
+          <span class="avatar-initials" id="avatar-initials" aria-hidden="true"></span>
+          <!-- Shown when logged out -->
+          <svg
+            id="avatar-icon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"></path>
+          </svg>
+        </button>
+
+        <div class="avatar-dropdown" id="avatar-dropdown" role="menu" hidden>
+          <!-- Guest state -->
+          <div id="avatar-guest">
+            <a href="/auth/register" class="avatar-item" role="menuitem">Create Account</a>
+            <a href="/auth/login" class="avatar-item" role="menuitem">Sign In</a>
+          </div>
+          <!-- Logged-in state -->
+          <div id="avatar-user" style="display:none;">
+            <p class="avatar-display-name" id="avatar-display-name"></p>
+            <div class="avatar-rule"></div>
+            <form method="POST" action="/auth/logout" style="margin:0;">
+              <button type="submit" class="avatar-item avatar-item--btn" role="menuitem">
+                Sign Out
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
 
       <!-- Theme toggle — hidden on mobile to make room for hamburger -->
       <div
@@ -245,6 +280,13 @@
     <li><a href="/topics/tools-and-apps">Tools &amp; Apps</a></li>
     <li><a href="/topics/policy-and-ethics">Policy &amp; Ethics</a></li>
     <li><a href="/about-us">About</a></li>
+    <li id="mobile-signin-item"><a href="/auth/login">Sign In</a></li>
+    <li id="mobile-register-item"><a href="/auth/register">Create Account</a></li>
+    <li id="mobile-logout-item" style="display:none;">
+      <form method="POST" action="/auth/logout" style="margin:0;">
+        <button type="submit" class="nav-logout-btn" style="padding:13px 0;width:100%;font-size:15px;font-weight:500;color:rgba(244,240,232,.75);border-bottom:1px solid rgba(255,255,255,.05);text-align:left;">Sign Out</button>
+      </form>
+    </li>
     <li class="mobile-theme-row" role="group" aria-label="Color theme">
       <span class="mobile-theme-label">Theme</span>
       <div class="theme-toggle theme-toggle--mobile">
@@ -344,37 +386,75 @@
 </div>
 
 <script>
-  // ── /api/me → populate About-dropdown user section ────────────────────────
+  // ── Auth state → avatar button + mobile nav ─────────────────────────────────
   (async () => {
     try {
-      const res = await fetch('/api/me', { credentials: 'same-origin' });
-      if (!res.ok) return;
-      const { user } = await res.json() as { user: { displayName?: string; username?: string } | null };
+      const res  = await fetch('/api/me');
+      const { user } = await res.json() as { user: { displayName: string | null; avatarInitials?: string | null } | null };
 
-      const divider  = document.getElementById('user-divider');
-      const nameLi   = document.getElementById('nav-user-name');
-      const signout  = document.getElementById('nav-signout');
-      const signin   = document.getElementById('nav-signin');
+      const avatarBtn      = document.getElementById('avatar-btn');
+      const avatarInitials = document.getElementById('avatar-initials');
+      const avatarIcon     = document.getElementById('avatar-icon');
+      const avatarGuest    = document.getElementById('avatar-guest');
+      const avatarUser     = document.getElementById('avatar-user');
+      const avatarName     = document.getElementById('avatar-display-name');
 
-      if (!divider || !nameLi || !signout || !signin) return;
+      // Mobile
+      const mobileSignin   = document.getElementById('mobile-signin-item');
+      const mobileRegister = document.getElementById('mobile-register-item');
+      const mobileLogout   = document.getElementById('mobile-logout-item');
 
-      divider.style.display = '';
-
-      if (user) {
-        const span = nameLi.querySelector('.nav-username') as HTMLElement | null;
-        if (span) span.textContent = user.displayName || user.username;
-        nameLi.style.display  = '';
-        signout.style.display = '';
-        signin.style.display  = 'none';
+      if (user && user.displayName) {
+        // ── Logged in ──────────────────────────────────────────────────────────
+        const initials = user.avatarInitials || (user.displayName as string).split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
+        if (avatarInitials) avatarInitials.textContent = initials;
+        if (avatarBtn)      avatarBtn.classList.add('is-logged-in');
+        if (avatarBtn)      avatarBtn.setAttribute('aria-label', user.displayName);
+        if (avatarGuest)    avatarGuest.style.display = 'none';
+        if (avatarUser)     avatarUser.style.display  = '';
+        if (avatarName)     avatarName.textContent     = user.displayName;
+        // Mobile
+        if (mobileSignin)   mobileSignin.style.display   = 'none';
+        if (mobileRegister) mobileRegister.style.display = 'none';
+        if (mobileLogout)   mobileLogout.style.display   = '';
       } else {
-        nameLi.style.display  = 'none';
-        signout.style.display = 'none';
-        signin.style.display  = '';
+        // ── Logged out ─────────────────────────────────────────────────────────
+        if (avatarGuest) avatarGuest.style.display = '';
+        if (avatarUser)  avatarUser.style.display  = 'none';
+        // Mobile already shows sign in by default
       }
     } catch {
-      // Silently ignore (e.g. local dev without KV)
+      // Silently fail
     }
   })();
+
+  // ── Avatar dropdown toggle ──────────────────────────────────────────────────
+  const avatarBtn      = document.getElementById('avatar-btn');
+  const avatarDropdown = document.getElementById('avatar-dropdown');
+
+  if (avatarBtn && avatarDropdown) {
+    avatarBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !avatarDropdown.hidden;
+      avatarDropdown.hidden = isOpen;
+      avatarBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!avatarDropdown.hidden && !avatarDropdown.contains(e.target as Node)) {
+        avatarDropdown.hidden = true;
+        avatarBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape" && !avatarDropdown.hidden) {
+        avatarDropdown.hidden = true;
+        avatarBtn.setAttribute('aria-expanded', 'false');
+        avatarBtn.focus();
+      }
+    });
+  }
 </script>
 
 <script>
@@ -926,5 +1006,107 @@
     color: #e8b84b !important;
     border-radius: 2px;
     padding: 0 2px;
+  }
+  /* ── Avatar / Account menu ───────────────── */
+  .avatar-wrap {
+    position: relative;
+  }
+  .avatar-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  /* Initials circle — replaces icon when logged in */
+  .avatar-initials {
+    display: none;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #080d1a;
+    background: var(--gold);
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+  }
+  .avatar-btn.is-logged-in .avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar-btn.is-logged-in #avatar-icon {
+    display: none;
+  }
+  .avatar-btn.is-logged-in {
+    border-color: rgba(232, 184, 75, 0.5);
+  }
+
+  /* Dropdown panel */
+  .avatar-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 180px;
+    background: #111828;
+    border: 1px solid rgba(232, 184, 75, 0.18);
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+    padding: 6px;
+    z-index: 500;
+    animation: avatar-drop-in 0.12s ease;
+  }
+  .avatar-dropdown[hidden] {
+    display: none !important;
+  }
+  @keyframes avatar-drop-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Dropdown items */
+  .avatar-item {
+    display: block;
+    width: 100%;
+    padding: 9px 14px;
+    font-size: 13.5px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: rgba(244, 240, 232, 0.75);
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+    text-align: left;
+  }
+  .avatar-item:hover {
+    background: rgba(232, 184, 75, 0.1);
+    color: var(--gold);
+  }
+  .avatar-item--btn {
+    background: none;
+    border: none;
+    font-size: 13.5px;
+    color: rgba(244, 240, 232, 0.75);
+  }
+
+  /* Display name header inside dropdown */
+  .avatar-display-name {
+    padding: 8px 14px 6px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  .avatar-rule {
+    height: 1px;
+    background: var(--color-border);
+    margin: 4px 8px;
   }
 </style>

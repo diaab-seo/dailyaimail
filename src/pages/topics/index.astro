@@ -300,19 +300,38 @@ const schema = {
         transition: all 0.15s;
         white-space: nowrap;
     }
-    .chip:hover {
+    /* Non-active hover — tinted background, chip-colored text */
+    .chip:not(.chip--active):hover {
+        background: color-mix(
+            in srgb,
+            var(--chip-color, var(--gold)) 12%,
+            transparent
+        );
         border-color: var(--chip-color, var(--gold));
         color: var(--chip-color, var(--gold));
     }
+    /* Active state */
     .chip--active {
         background: var(--chip-color, var(--gold));
         border-color: var(--chip-color, var(--gold));
         color: #fff;
     }
+    /* Active hover — keep white text, just dim slightly */
+    .chip--active:hover {
+        background: var(--chip-color, var(--gold));
+        border-color: var(--chip-color, var(--gold));
+        color: #fff;
+        opacity: 0.85;
+    }
+    /* All Topics chip overrides */
     .chip[data-filter-topic="all"].chip--active {
         background: var(--gold);
         border-color: var(--gold);
         color: #080d1a;
+    }
+    .chip[data-filter-topic="all"].chip--active:hover {
+        color: #080d1a;
+        opacity: 0.85;
     }
 
     .sort-group {
