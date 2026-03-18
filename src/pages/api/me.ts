@@ -15,7 +15,7 @@ import { env } from 'cloudflare:workers';
 import { getSession } from '../../lib/auth';
 
 export const GET: APIRoute = async ({ cookies }) => {
-  const kv = (env as any).SESSIONS as KVNamespace | undefined;
+  const kv = (env as any).SESSION as KVNamespace | undefined;
 
   if (!kv) {
     // KV not available (local dev without wrangler) — return null user silently

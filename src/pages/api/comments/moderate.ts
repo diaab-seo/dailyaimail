@@ -2,12 +2,12 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
-import { getSession, requireAdmin } from '../../lib/auth';
-import { approveComment, rejectComment, deleteComment } from '../../lib/db';
+import { getSession, requireAdmin } from '../../../lib/auth';
+import { approveComment, rejectComment, deleteComment } from '../../../lib/db';
 
 export const POST: APIRoute = async ({ request, cookies }) => {
     const db = (env as any).DB as D1Database;
-    const kv = (env as any).SESSIONS as KVNamespace;
+    const kv = (env as any).SESSION as KVNamespace;
 
     const user = await getSession(kv, cookies);
     const denied = requireAdmin(user);

@@ -5,7 +5,7 @@ import { env } from 'cloudflare:workers';
 import { destroySession } from '../../lib/auth';
 
 export const POST: APIRoute = async ({ cookies }) => {
-    const kv = (env as any).SESSIONS as KVNamespace;
+    const kv = (env as any).SESSION as KVNamespace;
     await destroySession(kv, cookies);
     return new Response(null, { status: 302, headers: { Location: '/' } });
 };

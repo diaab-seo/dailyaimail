@@ -13,7 +13,7 @@ import {
 import { hashPassword } from "../../lib/password";
 
 const db = (env as any).DB as D1Database;
-const kv = (env as any).SESSIONS as KVNamespace;
+const kv = (env as any).SESSION as KVNamespace;
 
 const user = await getSession(kv, Astro.cookies);
 if (user) return Astro.redirect("/");
