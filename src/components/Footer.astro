@@ -34,7 +34,6 @@
         </nav>
         <nav class="links-group" aria-label="Topics">
           <p class="footer-col-heading">Our Topics</p>
-          <li><a href="/topics">All Topics</a></li>
           <ul>
             <li><a href="/topics/anthropic">Anthropic</a></li>
             <li><a href="/topics/google-ai">Google AI</a></li>
@@ -42,6 +41,7 @@
             <li><a href="/topics/meta-ai">Meta AI</a></li>
             <li><a href="/topics/tools-and-apps">Tools & Apps</a></li>
             <li><a href="/topics/policy-and-ethics">Policy & Ethics</a></li>
+            <li class="all-topics-item"><a href="/topics">All Topics</a></li>
           </ul>
         </nav>
       </div>
@@ -130,6 +130,15 @@
   .footer-col ul a:hover {
     opacity: 1;
     color: white;
+  }
+  .all-topics-item {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .all-topics-item a {
+    color: var(--gold) !important;
+    font-weight: 500;
   }
   .footer-bottom {
     display: flex;
