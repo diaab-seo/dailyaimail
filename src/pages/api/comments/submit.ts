@@ -7,7 +7,7 @@ import { createComment } from '../../../lib/db';
 
 export const POST: APIRoute = async ({ request, cookies }) => {
     const db = (env as any).DB as D1Database;
-    const kv = (env as any).SESSIONS as KVNamespace;
+    const kv = (env as any).SESSION as KVNamespace;
 
     const user = await getSession(kv, cookies);
     if (!user) return new Response(null, { status: 302, headers: { Location: '/auth/login' } });

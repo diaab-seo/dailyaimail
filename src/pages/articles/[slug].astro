@@ -10,7 +10,7 @@ import type { DBComment } from "../../lib/db";
 import type { SessionUser } from "../../lib/auth";
 
 const db = (env as any).DB as D1Database | undefined;
-const kv = (env as any).SESSIONS as KVNamespace | undefined;
+const kv = (env as any).SESSION as KVNamespace | undefined;
 
 const { slug } = Astro.params;
 const entries = await getCollection("articles");

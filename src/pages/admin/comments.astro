@@ -7,7 +7,7 @@ import { getSession, requireAdmin } from "../../lib/auth";
 import { getAllCommentsForAdmin, formatDate } from "../../lib/db";
 
 const db = (env as any).DB as D1Database;
-const kv = (env as any).SESSIONS as KVNamespace;
+const kv = (env as any).SESSION as KVNamespace;
 
 const user = await getSession(kv, Astro.cookies);
 const denied = requireAdmin(user);
