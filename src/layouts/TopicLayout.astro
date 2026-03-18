@@ -1,0 +1,364 @@
+---
+import Layout from "./Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import NewsCard from "../components/NewsCard.astro";
+import type { Article } from "../data/articles";
+import { tagColor, topicToSlug } from "../data/articles";
+
+export interface Props {
+    tag: string;
+    articles: Article[];
+}
+
+const { tag, articles } = Astro.props;
+const color = tagColor(tag);
+const count = articles.length;
+const slug = topicToSlug(tag);
+
+const SITE_URL = "https://dailyaimail.com";
+const topicUrl = `${SITE_URL}/topics/${slug}`;
+const logoUrl = `${SITE_URL}/logo.png`;
+const latestIso =
+    articles.length > 0
+        ? [...articles].sort((a, b) => b.isoDate.localeCompare(a.isoDate))[0]
+              .isoDate
+        : new Date().toISOString().split("T")[0];
+
+const topicMeta: Record<
+    string,
+    { description: string; keywords: string[]; sameAs: string[] }
+> = {
+    Anthropic: {
+        description:
+            "Latest news, research, and product releases from Anthropic, the AI safety company behind the Claude family of large language models.",
+        keywords: [
+            "Anthropic",
+            "Claude",
+            "Constitutional AI",
+            "AI safety",
+            "large language models",
+            "LLM",
+        ],
+        sameAs: [
+            "https://www.wikidata.org/wiki/Q116820069",
+            "https://en.wikipedia.org/wiki/Anthropic",
+        ],
+    },
+    "Google AI": {
+        description:
+            "Coverage of Google's artificial intelligence research and products, including Gemini, DeepMind, Google Labs, and AI integrations across Google's product suite.",
+        keywords: [
+            "Google AI",
+            "Gemini",
+            "DeepMind",
+            "Google DeepMind",
+            "AI research",
+            "machine learning",
+        ],
+        sameAs: ["https://www.wikidata.org/wiki/Q95"],
+    },
+    OpenAI: {
+        description:
+            "News and analysis covering OpenAI's models, products, and research — including GPT, ChatGPT, DALL-E, Sora, and the company's safety and governance decisions.",
+        keywords: [
+            "OpenAI",
+            "ChatGPT",
+            "GPT-5",
+            "Sora",
+            "DALL-E",
+            "AI models",
+            "generative AI",
+        ],
+        sameAs: [
+            "https://www.wikidata.org/wiki/Q21708200",
+            "https://en.wikipedia.org/wiki/OpenAI",
+        ],
+    },
+    "Meta AI": {
+        description:
+            "Reports on Meta's artificial intelligence division, covering Llama open-source models, AI research publications, and AI features across Meta's platforms.",
+        keywords: [
+            "Meta AI",
+            "Llama",
+            "open source AI",
+            "Meta",
+            "Facebook AI",
+            "large language models",
+        ],
+        sameAs: ["https://www.wikidata.org/wiki/Q380"],
+    },
+    "Tools & Apps": {
+        description:
+            "Reviews, comparisons, and release coverage of AI-powered tools, productivity applications, developer utilities, and consumer AI products.",
+        keywords: [
+            "AI tools",
+            "AI apps",
+            "AI software",
+            "productivity AI",
+            "AI assistants",
+            "developer tools",
+        ],
+        sameAs: [],
+    },
+    "Policy & Ethics": {
+        description:
+            "Reporting on artificial intelligence regulation, governance frameworks, safety research, ethical debates, and legislative developments worldwide.",
+        keywords: [
+            "AI policy",
+            "AI regulation",
+            "AI ethics",
+            "AI governance",
+            "AI safety",
+            "EU AI Act",
+        ],
+        sameAs: ["https://www.wikidata.org/wiki/Q30059493"],
+    },
+};
+const meta = topicMeta[tag] ?? {
+    description: `The latest ${tag} news, research and updates from Daily AI Mail.`,
+    keywords: [tag, "AI", "artificial intelligence"],
+    sameAs: [],
+};
+
+const definedTerm = {
+    "@type": "DefinedTerm",
+    "@id": `${topicUrl}#topic`,
+    name: tag,
+    description: meta.description,
+    inDefinedTermSet: {
+        "@type": "DefinedTermSet",
+        "@id": `${SITE_URL}/#topics`,
+        name: "Daily AI Mail Topic Taxonomy",
+        url: `${SITE_URL}/`,
+    },
+    ...(meta.sameAs.length > 0 && { sameAs: meta.sameAs }),
+};
+
+const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": topicUrl,
+            url: topicUrl,
+            name: `${tag} News & Research — Daily AI Mail`,
+            headline: `${tag} News`,
+            description: meta.description,
+            keywords: meta.keywords,
+            inLanguage: "en-US",
+            isPartOf: { "@id": `${SITE_URL}/#website` },
+            about: { "@id": `${topicUrl}#topic` },
+            hasPart: { "@id": `${topicUrl}#itemlist` },
+            breadcrumb: { "@id": `${topicUrl}#breadcrumb` },
+            image: { "@id": `${SITE_URL}/#/schema/logo/image/` },
+            dateModified: `${latestIso}T00:00:00+00:00`,
+            publisher: { "@id": `${SITE_URL}/#organization` },
+            isAccessibleForFree: true,
+            speakable: {
+                "@type": "SpeakableSpecification",
+                cssSelector: [".cat-title", ".cat-subtitle"],
+            },
+            potentialAction: [{ "@type": "ReadAction", target: [topicUrl] }],
+            significantLink: articles
+                .sort((a, b) => b.isoDate.localeCompare(a.isoDate))
+                .slice(0, 3)
+                .map((a) => `${SITE_URL}/articles/${a.slug}`),
+        },
+        definedTerm,
+        {
+            "@type": "ItemList",
+            "@id": `${topicUrl}#itemlist`,
+            name: `${tag} Articles — Daily AI Mail`,
+            numberOfItems: count,
+            itemListOrder: "https://schema.org/ItemListOrderDescending",
+            itemListElement: articles
+                .sort((a, b) => b.isoDate.localeCompare(a.isoDate))
+                .map((a, i) => ({
+                    "@type": "ListItem",
+                    position: i + 1,
+                    url: `${SITE_URL}/articles/${a.slug}`,
+                    name: a.headline,
+                    item: {
+                        "@type": "NewsArticle",
+                        "@id": `${SITE_URL}/articles/${a.slug}#article`,
+                        headline: a.headline,
+                        description: a.excerpt,
+                        datePublished: `${a.isoDate}T00:00:00+00:00`,
+                        url: `${SITE_URL}/articles/${a.slug}`,
+                        author: {
+                            "@id": `${SITE_URL}/#/schema/person/mohamed-diab`,
+                        },
+                        publisher: { "@id": `${SITE_URL}/#organization` },
+                    },
+                })),
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": `${topicUrl}#breadcrumb`,
+            itemListElement: [
+                {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: `${SITE_URL}/`,
+                },
+                {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "Topics",
+                    item: `${SITE_URL}/topics`,
+                },
+                {
+                    "@type": "ListItem",
+                    position: 3,
+                    name: `${tag} News`,
+                    item: topicUrl,
+                },
+            ],
+        },
+        {
+            "@type": "WebSite",
+            "@id": `${SITE_URL}/#website`,
+            url: `${SITE_URL}/`,
+            name: "Daily AI Mail",
+            publisher: { "@id": `${SITE_URL}/#organization` },
+            inLanguage: "en-US",
+        },
+        {
+            "@type": "NewsMediaOrganization",
+            "@id": `${SITE_URL}/#organization`,
+            name: "Daily AI Mail",
+            url: `${SITE_URL}/`,
+            logo: {
+                "@type": "ImageObject",
+                "@id": `${SITE_URL}/#/schema/logo/image/`,
+                url: logoUrl,
+                width: 512,
+                height: 512,
+            },
+            image: { "@id": `${SITE_URL}/#/schema/logo/image/` },
+            sameAs: [
+                "https://twitter.com/dailyaimail",
+                "https://linkedin.com/company/dailyaimail",
+            ],
+        },
+    ],
+};
+---
+
+<Layout
+    title={`${tag} News — Daily AI Mail`}
+    description={meta.description}
+    metaTitle={`${tag} News & Research — Daily AI Mail`}
+    canonical={topicUrl}
+    ogType="website"
+    ogTitle={`${tag} News & Research — Daily AI Mail`}
+    ogDescription={meta.description}
+>
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+        slot="head"
+    />
+
+    <Breadcrumb
+        items={[
+            { label: "Home", href: "/" },
+            { label: "Topics", href: "/topics" },
+            { label: `${tag} News` },
+        ]}
+    />
+
+    <div
+        class="cat-hero"
+        style={`background:linear-gradient(135deg,${color}12 0%,transparent 60%);border-bottom:2px solid ${color}25;`}
+        data-pagefind-ignore
+    >
+        <div class="cat-hero-inner">
+            <span
+                class="cat-tag"
+                style={`background:${color}18;color:${color};`}>{tag}</span
+            >
+            <h1 class="cat-title">{tag} News</h1>
+            <p class="cat-subtitle">
+                {count} article{count !== 1 ? "s" : ""} · Updated daily
+            </p>
+        </div>
+    </div>
+
+    <div class="cat-content" data-pagefind-ignore>
+        <div class="cat-inner">
+            <div class="cat-grid">
+                {
+                    articles.map((a) => (
+                        <NewsCard
+                            tag={a.tag}
+                            headline={a.headline}
+                            excerpt={a.excerpt}
+                            date={a.date}
+                            author={a.author}
+                            readingTime={a.readingTime}
+                            href={`/articles/${a.slug}`}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .cat-hero {
+        padding: 56px 0 48px;
+    }
+    .cat-hero-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+    .cat-tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 4px 14px;
+        border-radius: 999px;
+        align-self: flex-start;
+    }
+    .cat-title {
+        font-family: var(--font-display);
+        font-size: clamp(36px, 5vw, 64px);
+        line-height: 1.05;
+    }
+    .cat-subtitle {
+        font-size: 16px;
+        color: var(--color-text-muted);
+    }
+    .cat-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 48px var(--gutter) 80px;
+    }
+    .cat-inner {
+        width: 100%;
+    }
+    .cat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+    @media (max-width: 1024px) {
+        .cat-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 640px) {
+        .cat-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

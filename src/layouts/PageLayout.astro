@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import { resolvePageSchema } from "../utils/schema";
 
 const fm = (Astro.props as any).frontmatter ?? {};
@@ -12,100 +13,107 @@ const lastModified = Astro.props.lastModified ?? fm.lastModified;
 const author = Astro.props.author ?? fm.author;
 const schemaType = Astro.props.schemaType ?? fm.schemaType ?? null;
 
-// ── Schema ────────────────────────────────────────────────────────────────────
-// "about" is handled inline here (it's complex enough to warrant its own block).
-// Everything else is resolved via the shared utility.
-
-const siteUrl = "https://dailyaimail.com";
-const logoUrl = `${siteUrl}/logo.png`;
+const SITE_URL = "https://dailyaimail.com";
 const pubIso = (publishDate ?? "2026-01-01").replace(/\//g, "-");
 const modIso = (lastModified ?? "2026-03-15").replace(/\//g, "-");
+const logoUrl = `${SITE_URL}/logo.png`;
 
+// ── Breadcrumb items (derived from schemaType) ────────────────────────────────
+const breadcrumbMap: Record<string, { label: string; href: string }> = {
+  about: { label: "About Us", href: "/about-us" },
+  contact: { label: "Contact Us", href: "/contact-us" },
+  "publishing-principles": {
+    label: "Publishing Principles",
+    href: "/publishing-principles",
+  },
+  privacy: { label: "Privacy Policy", href: "/privacy-policy" },
+  cookies: { label: "Cookies Policy", href: "/cookies-policy" },
+  terms: { label: "Terms & Conditions", href: "/terms-and-conditions" },
+};
+const crumb = breadcrumbMap[schemaType ?? ""];
+
+// ── About schema (stays inline — too deep to genericize) ──────────────────────
 let pageSchema: object | null = null;
 
 if (schemaType === "about") {
-  // About Us — the one page that fully redefines Organization + Person
   pageSchema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "AboutPage",
-        "@id": `${siteUrl}/about-us`,
-        url: `${siteUrl}/about-us`,
-        name:
-          metaTitle ??
-          "About Daily AI Mail — Independent AI News, Research & Intelligence",
-        headline: "About Daily AI Mail",
+        "@id": `${SITE_URL}/about-us`,
+        url: `${SITE_URL}/about-us`,
+        name: metaTitle ?? "About Daily AI Mail",
         description:
           description ??
           "Daily AI Mail is an independent publication covering artificial intelligence news.",
         inLanguage: "en-US",
-        isPartOf: { "@id": `${siteUrl}/#website` },
-        mainEntity: { "@id": `${siteUrl}/#organization` },
-        about: { "@id": `${siteUrl}/#organization` },
-        author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-        publisher: { "@id": `${siteUrl}/#organization` },
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        mainEntity: { "@id": `${SITE_URL}/#organization` },
+        about: { "@id": `${SITE_URL}/#organization` },
+        author: { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
         datePublished: `${pubIso}T00:00:00+00:00`,
         dateModified: `${modIso}T00:00:00+00:00`,
-        breadcrumb: { "@id": `${siteUrl}/about-us#breadcrumb` },
+        breadcrumb: { "@id": `${SITE_URL}/about-us#breadcrumb` },
         isAccessibleForFree: true,
         speakable: {
           "@type": "SpeakableSpecification",
           cssSelector: [".page-title"],
         },
         relatedLink: [
-          `${siteUrl}/publishing-principles`,
-          `${siteUrl}/contact-us`,
+          `${SITE_URL}/publishing-principles`,
+          `${SITE_URL}/contact-us`,
         ],
         mentions: [
-          { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-          { "@id": `${siteUrl}/#organization` },
+          { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+          { "@id": `${SITE_URL}/#organization` },
         ],
       },
       {
         "@type": "BreadcrumbList",
-        "@id": `${siteUrl}/about-us#breadcrumb`,
+        "@id": `${SITE_URL}/about-us#breadcrumb`,
         itemListElement: [
           {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: `${siteUrl}/`,
+            item: `${SITE_URL}/`,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "About Us",
-            item: `${siteUrl}/about-us`,
+            item: `${SITE_URL}/about-us`,
           },
         ],
       },
       {
         "@type": "NewsMediaOrganization",
-        "@id": `${siteUrl}/#organization`,
+        "@id": `${SITE_URL}/#organization`,
         name: "Daily AI Mail",
-        url: `${siteUrl}/`,
+        url: `${SITE_URL}/`,
         foundingDate: "2026-01-01",
         description:
           "Daily AI Mail is an independent digital publication covering the global artificial intelligence industry.",
-        publishingPrinciples: `${siteUrl}/publishing-principles`,
-        ethicsPolicy: `${siteUrl}/publishing-principles`,
-        masthead: `${siteUrl}/about-us`,
-        correctionsPolicy: `${siteUrl}/publishing-principles`,
-        missionCoveragePrioritiesPolicy: `${siteUrl}/publishing-principles`,
+        publishingPrinciples: `${SITE_URL}/publishing-principles`,
+        ethicsPolicy: `${SITE_URL}/publishing-principles`,
+        masthead: `${SITE_URL}/about-us`,
+        correctionsPolicy: `${SITE_URL}/publishing-principles`,
+        missionCoveragePrioritiesPolicy: `${SITE_URL}/publishing-principles`,
         logo: {
           "@type": "ImageObject",
-          "@id": `${siteUrl}/#/schema/logo/image/`,
+          "@id": `${SITE_URL}/#/schema/logo/image/`,
           url: logoUrl,
           contentUrl: logoUrl,
           width: 512,
           height: 512,
           caption: "Daily AI Mail",
         },
-        image: { "@id": `${siteUrl}/#/schema/logo/image/` },
-        member: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-        founder: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-        subjectOf: { "@id": `${siteUrl}/about-us` },
+        image: { "@id": `${SITE_URL}/#/schema/logo/image/` },
+        member: { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+        founder: { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+        subjectOf: { "@id": `${SITE_URL}/about-us` },
         contactPoint: [
           {
             "@type": "ContactPoint",
@@ -139,37 +147,34 @@ if (schemaType === "about") {
       },
       {
         "@type": "Person",
-        "@id": `${siteUrl}/#/schema/person/mohamed-diab`,
+        "@id": `${SITE_URL}/#/schema/person/mohamed-diab`,
         name: "Mohamed Diab",
         givenName: "Mohamed",
         familyName: "Diab",
         url: "https://interactiveseo.digital",
         jobTitle: "Founder & Editor-in-Chief",
-        description:
-          "Technical SEO Consultant and founder of Daily AI Mail, with over ten years of experience in the technology and digital marketing industry.",
-        worksFor: { "@id": `${siteUrl}/#organization` },
+        description: "Technical SEO Consultant and founder of Daily AI Mail.",
+        worksFor: { "@id": `${SITE_URL}/#organization` },
         knowsAbout: [
           "Technical SEO",
           "Structured Data",
           "Knowledge Graph Optimization",
           "Artificial Intelligence",
           "Digital Publishing",
-          "Entity-Based SEO",
         ],
         homeLocation: { "@type": "Place", name: "Egypt" },
         sameAs: ["https://interactiveseo.digital", "https://diab.digital"],
       },
       {
         "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
-        url: `${siteUrl}/`,
+        "@id": `${SITE_URL}/#website`,
+        url: `${SITE_URL}/`,
         name: "Daily AI Mail",
-        publisher: { "@id": `${siteUrl}/#organization` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
       },
     ],
   };
 } else {
-  // All other page types resolved via the shared utility
   pageSchema = resolvePageSchema(schemaType, {
     title: title ?? "",
     description: description ?? "",
@@ -180,13 +185,28 @@ if (schemaType === "about") {
 }
 ---
 
-<Layout title={title} description={description} metaTitle={metaTitle}>
+<Layout
+  title={title}
+  description={description}
+  metaTitle={metaTitle}
+  canonical={`${SITE_URL}${crumb?.href ?? ""}`}
+  ogTitle={metaTitle ?? title}
+  ogDescription={description}
+>
   {
     pageSchema && (
       <script
         type="application/ld+json"
         set:html={JSON.stringify(pageSchema)}
         slot="head"
+      />
+    )
+  }
+
+  {
+    crumb && (
+      <Breadcrumb
+        items={[{ label: "Home", href: "/" }, { label: crumb.label }]}
       />
     )
   }

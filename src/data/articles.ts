@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 export type Article = {
   slug: string;
   tag: string;
-  tags: string[];   // primary tag + any extras — deduped, used for Filed Under
+  tags: string[];
   headline: string;
   excerpt: string;
   body: string;
@@ -51,9 +51,13 @@ export async function getArticlesByCategory(tag: string): Promise<Article[]> { c
 export async function getArticleBySlug(slug: string): Promise<Article | undefined> { const a = await fetchArticles(); return a.find(x => x.slug === slug); }
 export async function getLatestArticles(count = 3): Promise<Article[]> { const a = await fetchArticles(); return [...a].sort((x, y) => new Date(y.isoDate).getTime() - new Date(x.isoDate).getTime()).slice(0, count); }
 
-export function categoryToSlug(tag: string): string {
+/** Converts a tag to a URL-safe slug. Used for /topics/ paths. */
+export function topicToSlug(tag: string): string {
   return tag.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and');
 }
+
+/** Alias kept for backward compatibility with existing imports */
+export const categoryToSlug = topicToSlug;
 
 export function tagColor(tag: string): string {
   const map: Record<string, string> = {

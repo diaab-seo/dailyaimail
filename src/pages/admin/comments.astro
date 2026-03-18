@@ -1,0 +1,322 @@
+---
+export const prerender = false;
+
+import { env } from "cloudflare:workers";
+import Layout from "../../layouts/Layout.astro";
+import { getSession, requireAdmin } from "../../lib/auth";
+import { getAllCommentsForAdmin, formatDate } from "../../lib/db";
+
+const db = (env as any).DB as D1Database;
+const kv = (env as any).SESSIONS as KVNamespace;
+
+const user = await getSession(kv, Astro.cookies);
+const denied = requireAdmin(user);
+if (denied) return denied;
+
+const comments = await getAllCommentsForAdmin(db);
+
+const pending = comments.filter((c) => c.status === "pending");
+const approved = comments.filter((c) => c.status === "approved");
+---
+
+<Layout
+    title="Comment Moderation — Daily AI Mail"
+    metaTitle="Comment Moderation"
+>
+    <div class="admin-wrap">
+        <header class="admin-header">
+            <h1 class="admin-title">Comment Moderation</h1>
+            <div class="admin-stats">
+                <span class="stat stat--pending">{pending.length} Pending</span>
+                <span class="stat stat--approved"
+                    >{approved.length} Approved</span
+                >
+            </div>
+        </header>
+
+        {
+            pending.length > 0 ? (
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Pending Review</h2>
+                    <div class="comment-queue">
+                        {pending.map((c) => (
+                            <div class="admin-comment admin-comment--pending">
+                                <div class="ac-meta">
+                                    <strong>{c.display_name}</strong>
+                                    <span class="ac-sep">·</span>
+                                    <a
+                                        href={`/articles/${c.article_slug}`}
+                                        class="ac-article"
+                                    >
+                                        {c.article_slug}
+                                    </a>
+                                    <span class="ac-sep">·</span>
+                                    <time>{formatDate(c.created_at)}</time>
+                                </div>
+                                <p class="ac-body">{c.body}</p>
+                                <div class="ac-actions">
+                                    <form
+                                        method="POST"
+                                        action="/api/comments/moderate"
+                                        style="display:inline;"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="commentId"
+                                            value={c.id}
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="approve"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="ac-btn ac-btn--approve"
+                                        >
+                                            ✓ Approve
+                                        </button>
+                                    </form>
+                                    <form
+                                        method="POST"
+                                        action="/api/comments/moderate"
+                                        style="display:inline;"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="commentId"
+                                            value={c.id}
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="reject"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="ac-btn ac-btn--reject"
+                                        >
+                                            ✗ Reject
+                                        </button>
+                                    </form>
+                                    <form
+                                        method="POST"
+                                        action="/api/comments/moderate"
+                                        style="display:inline;"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="commentId"
+                                            value={c.id}
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="delete"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="ac-btn ac-btn--delete"
+                                        >
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            ) : (
+                <div class="admin-empty">
+                    <p>No comments pending review. All caught up ✓</p>
+                </div>
+            )
+        }
+
+        {
+            approved.length > 0 && (
+                <section class="admin-section">
+                    <h2 class="admin-section-title">
+                        Approved ({approved.length})
+                    </h2>
+                    <div class="comment-queue">
+                        {approved.map((c) => (
+                            <div class="admin-comment admin-comment--approved">
+                                <div class="ac-meta">
+                                    <strong>{c.display_name}</strong>
+                                    <span class="ac-sep">·</span>
+                                    <a
+                                        href={`/articles/${c.article_slug}#comment-${c.id}`}
+                                        class="ac-article"
+                                    >
+                                        {c.article_slug}
+                                    </a>
+                                    <span class="ac-sep">·</span>
+                                    <time>{formatDate(c.created_at)}</time>
+                                </div>
+                                <p class="ac-body">{c.body}</p>
+                                <div class="ac-actions">
+                                    <form
+                                        method="POST"
+                                        action="/api/comments/moderate"
+                                        style="display:inline;"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="commentId"
+                                            value={c.id}
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="delete"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="ac-btn ac-btn--delete"
+                                        >
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )
+        }
+    </div>
+</Layout>
+
+<style>
+    .admin-wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 48px var(--gutter) 80px;
+    }
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 24px;
+    }
+    .admin-title {
+        font-family: var(--font-display);
+        font-size: 32px;
+    }
+    .admin-stats {
+        display: flex;
+        gap: 12px;
+    }
+    .stat {
+        font-size: 13px;
+        font-family: var(--font-mono);
+        padding: 4px 12px;
+        border-radius: 999px;
+    }
+    .stat--pending {
+        background: #d9770620;
+        color: #d97706;
+        border: 1px solid #d9770640;
+    }
+    .stat--approved {
+        background: #16a34a20;
+        color: #16a34a;
+        border: 1px solid #16a34a40;
+    }
+    .admin-section {
+        margin-bottom: 48px;
+    }
+    .admin-section-title {
+        font-family: var(--font-display);
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+    .comment-queue {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .admin-comment {
+        padding: 20px;
+        border-radius: 4px;
+        border: 1px solid var(--color-border);
+    }
+    .admin-comment--pending {
+        border-left: 3px solid #d97706;
+    }
+    .admin-comment--approved {
+        border-left: 3px solid #16a34a;
+    }
+    .ac-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        margin-bottom: 10px;
+    }
+    .ac-meta strong {
+        color: var(--color-text);
+    }
+    .ac-article {
+        color: var(--teal);
+        text-decoration: underline;
+        font-family: var(--font-mono);
+        font-size: 12px;
+    }
+    .ac-sep {
+        opacity: 0.3;
+    }
+    .ac-body {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--color-text);
+        white-space: pre-wrap;
+        margin-bottom: 14px;
+    }
+    .ac-actions {
+        display: flex;
+        gap: 8px;
+    }
+    .ac-btn {
+        padding: 6px 16px;
+        border-radius: 4px;
+        border: 1px solid var(--color-border);
+        background: transparent;
+        font-size: 13px;
+        font-family: var(--font-body);
+        cursor: pointer;
+        color: var(--color-text);
+        transition:
+            background 0.15s,
+            color 0.15s;
+    }
+    .ac-btn--approve:hover {
+        background: #16a34a;
+        color: #fff;
+        border-color: #16a34a;
+    }
+    .ac-btn--reject:hover {
+        background: #d97706;
+        color: #fff;
+        border-color: #d97706;
+    }
+    .ac-btn--delete:hover {
+        background: #ef4444;
+        color: #fff;
+        border-color: #ef4444;
+    }
+    .admin-empty {
+        padding: 40px;
+        text-align: center;
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+    }
+</style>

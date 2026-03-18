@@ -6,6 +6,14 @@ interface Props {
   title?: string;
   description?: string;
   metaTitle?: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogType?: string; // "website" | "article"
+  ogPublished?: string; // ISO date for articles
+  ogModified?: string;
+  ogAuthor?: string;
 }
 
 const directProps = Astro.props as Props;
@@ -14,6 +22,19 @@ const frontmatter = (Astro.props as any).frontmatter ?? {};
 const title = directProps.title ?? frontmatter.title;
 const description = directProps.description ?? frontmatter.description;
 const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
+
+const SITE_URL = "https://dailyaimail.com";
+const canonical = directProps.canonical ?? `${SITE_URL}${Astro.url.pathname}`;
+const ogTitle = directProps.ogTitle ?? metaTitle ?? title ?? "Daily AI Mail";
+const ogDesc =
+  directProps.ogDescription ??
+  description ??
+  "Your daily source for AI news, research and tools.";
+const ogImage = directProps.ogImage ?? `${SITE_URL}/og-default.png`;
+const ogType = directProps.ogType ?? "website";
+const ogPublished = directProps.ogPublished;
+const ogModified = directProps.ogModified;
+const ogAuthor = directProps.ogAuthor ?? "Mohamed Diab";
 ---
 
 <!doctype html>
@@ -26,22 +47,57 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
       content={description ??
         "Your daily source for AI news, research and tools."}
     />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDesc} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Daily AI Mail" />
+    <meta property="og:locale" content="en_US" />
+    {
+      ogPublished && (
+        <meta property="article:published_time" content={ogPublished} />
+      )
+    }
+    {
+      ogModified && (
+        <meta property="article:modified_time" content={ogModified} />
+      )
+    }
+    {
+      ogType === "article" && (
+        <meta property="article:author" content={ogAuthor} />
+      )
+    }
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@dailyaimail" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
     <title>
       {metaTitle ?? (title ? `${title} — Daily AI Mail` : "Daily AI Mail")}
     </title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Per-page injections (JSON-LD, OG overrides, etc.) -->
+    <!-- Per-page injections (JSON-LD, etc.) -->
     <slot name="head" />
 
-    <!-- ⚡ Theme init — runs synchronously before paint -->
     <script is:inline>
       (function () {
         var pref = localStorage.getItem("dai-theme") || "system";
@@ -61,7 +117,7 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
     <slot />
     <Footer />
 
-    <!-- ── Go To Top button (site-wide) ───────────────────── -->
+    <!-- Go To Top -->
     <button
       id="go-top-btn"
       class="go-top-btn"
@@ -89,23 +145,16 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
   window.addEventListener("DOMContentLoaded", function () {
     document.documentElement.classList.add("theme-ready");
   });
-
-  // Go To Top logic
   (function () {
     var btn = document.getElementById("go-top-btn");
     if (!btn) return;
-    var SHOW_AT = 400; // px scrolled before button appears
-
-    function onScroll() {
-      if (window.scrollY > SHOW_AT) {
-        btn.classList.add("visible");
-      } else {
-        btn.classList.remove("visible");
-      }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-
+    window.addEventListener(
+      "scroll",
+      function () {
+        btn.classList.toggle("visible", window.scrollY > 400);
+      },
+      { passive: true },
+    );
     btn.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
@@ -113,7 +162,6 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
 </script>
 
 <style is:global>
-  /* ─── DARK THEME ──────────────────────────────────────── */
   :root,
   [data-theme="dark"] {
     color-scheme: dark;
@@ -135,8 +183,6 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
     --shadow-card-hover:
       0 4px 12px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.32);
   }
-
-  /* ─── LIGHT THEME ─────────────────────────────────────── */
   [data-theme="light"] {
     color-scheme: light;
     --color-bg: #f4f0e8;
@@ -157,8 +203,6 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
     --shadow-card-hover:
       0 4px 12px rgba(15, 24, 41, 0.14), 0 12px 32px rgba(15, 24, 41, 0.1);
   }
-
-  /* ─── THEME-INDEPENDENT TOKENS ───────────────────────── */
   :root {
     --tag-anthropic: #7c3aed;
     --tag-google: #1967d2;
@@ -174,8 +218,6 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
     --max-width: 1280px;
     --gutter: clamp(16px, 4vw, 48px);
   }
-
-  /* ─── RESET ───────────────────────────────────────────── */
   *,
   *::before,
   *::after {
@@ -187,7 +229,6 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
     scroll-behavior: smooth;
     overflow-x: hidden;
   }
-
   html.theme-ready body,
   html.theme-ready body *:not(svg):not(path) {
     transition:
@@ -196,7 +237,6 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
       border-color 0.25s ease,
       box-shadow 0.25s ease;
   }
-
   body {
     font-family: var(--font-body);
     background: var(--color-bg);
@@ -218,7 +258,44 @@ const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
     border-radius: 2px;
   }
 
-  /* ─── GO TO TOP BUTTON ────────────────────────────────── */
+  /* Breadcrumb — site-wide */
+  .breadcrumb {
+    padding: 10px 0;
+  }
+  .breadcrumb-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    font-size: 12px;
+    font-family: var(--font-mono);
+  }
+  .breadcrumb-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .breadcrumb-link:hover {
+    color: var(--gold);
+  }
+  .breadcrumb-sep {
+    color: var(--color-text-muted);
+    opacity: 0.4;
+    margin: 0 2px;
+    user-select: none;
+  }
+  .breadcrumb-current {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  /* Go To Top */
   .go-top-btn {
     position: fixed;
     bottom: 28px;
