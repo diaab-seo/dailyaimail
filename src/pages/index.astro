@@ -29,8 +29,8 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
 }));
 
 // ── Schema constants ──────────────────────────────────────────────────────────
-const siteUrl = "https://dailyaimail.com";
-const logoUrl = `${siteUrl}/logo.png`;
+const siteUrl = "https://dailyaimail.news";
+const logoUrl = `${siteUrl}/dark-logo.svg`;
 
 // Latest article date for dateModified
 const newestIso =
@@ -194,13 +194,13 @@ const schema = {
       contactPoint: [
         {
           "@type": "ContactPoint",
-          email: "editorial@dailyaimail.com",
+          email: "editorial@dailyaimail.news",
           contactType: "editorial",
           availableLanguage: ["English"],
         },
         {
           "@type": "ContactPoint",
-          email: "press@dailyaimail.com",
+          email: "press@dailyaimail.news",
           contactType: "press",
           availableLanguage: ["English"],
         },

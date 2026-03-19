@@ -13,10 +13,10 @@ const lastModified = Astro.props.lastModified ?? fm.lastModified;
 const author = Astro.props.author ?? fm.author;
 const schemaType = Astro.props.schemaType ?? fm.schemaType ?? null;
 
-const SITE_URL = "https://dailyaimail.com";
+const SITE_URL = "https://dailyaimail.news";
 const pubIso = (publishDate ?? "2026-01-01").replace(/\//g, "-");
 const modIso = (lastModified ?? "2026-03-15").replace(/\//g, "-");
-const logoUrl = `${SITE_URL}/logo.png`;
+const logoUrl = `${SITE_URL}/dark-logo.svg`;
 
 // ── Breadcrumb items (derived from schemaType) ────────────────────────────────
 const breadcrumbMap: Record<string, { label: string; href: string }> = {
@@ -117,17 +117,17 @@ if (schemaType === "about") {
         contactPoint: [
           {
             "@type": "ContactPoint",
-            email: "editorial@dailyaimail.com",
+            email: "editorial@dailyaimail.news",
             contactType: "editorial",
           },
           {
             "@type": "ContactPoint",
-            email: "press@dailyaimail.com",
+            email: "press@dailyaimail.news",
             contactType: "press",
           },
           {
             "@type": "ContactPoint",
-            email: "corrections@dailyaimail.com",
+            email: "corrections@dailyaimail.news",
             contactType: "corrections",
           },
         ],

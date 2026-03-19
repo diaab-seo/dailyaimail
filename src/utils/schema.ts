@@ -17,8 +17,8 @@
  * └──────────────────────────────────────────────────────────────────────────┘
  */
 
-export const SITE_URL = "https://dailyaimail.com";
-export const LOGO_URL = `${SITE_URL}/logo.png`;
+export const SITE_URL = "https://dailyaimail.news";
+export const LOGO_URL = `${SITE_URL}/dark-logo.svg`;
 
 // ── Lightweight reference nodes (used on secondary pages) ─────────────────────
 // These @id pointers tell crawlers "the full definition is elsewhere on this site"
@@ -114,7 +114,6 @@ export function buildPageSchema(cfg: PageConfig) {
         "url": pageUrl,
         "name": cfg.name,
         "description": cfg.description,
-        "inLanguage": "en-US",
         "isPartOf": { "@id": `${SITE_URL}/#website` },
         "publisher": { "@id": `${SITE_URL}/#organization` },
         "author": { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },

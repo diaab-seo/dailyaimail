@@ -1,0 +1,375 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getArticles, topicToSlug, tagColor } from "../../data/articles";
+import { Image } from "astro:assets";
+import authorImage from "../../assets/authors/mohamed-diab.jpeg";
+
+const authorName = "Mohamed Diab";
+const allArticles = await getArticles();
+const authorArticles = allArticles
+  .filter((a) => a.author === authorName)
+  .sort((a, b) => new Date(b.isoDate).getTime() - new Date(a.isoDate).getTime());
+
+const title = `${authorName}, Author at Daily AI Mail`;
+const description = `Mohamed Diab is the founder of Daily AI Mail. Technical SEO consultant and digital publisher with over ten years of experience in the technology and digital marketing industry.`;
+
+const SITE_URL = "https://dailyaimail.news";
+const authorUrl = `${SITE_URL}/author/mohamed-diab`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": authorName,
+    "description": description,
+    "image": `${SITE_URL}${authorImage.src}`,
+    "jobTitle": "Founder & Editor",
+    "url": authorUrl,
+    "sameAs": [
+      "https://interactiveseo.digital",
+      "https://diab.digital",
+      "https://twitter.com/dailyaimail",
+      "https://linkedin.com/company/dailyaimail"
+    ],
+     "worksFor": {
+       "@type": "Organization",
+       "name": "Daily AI Mail",
+       "url": SITE_URL
+     }
+  }
+};
+---
+
+<Layout title={title} description={description} metaTitle={title}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+  <main class="author-page">
+    <!-- Header Section -->
+    <header class="author-header">
+      <div class="container">
+        <div class="author-header-grid">
+          <div class="author-image-wrapper">
+             <Image 
+                src={authorImage} 
+                alt={authorName} 
+                width={400} 
+                height={400} 
+                class="author-profile-img"
+                loading="eager"
+             />
+          </div>
+          <div class="author-info">
+            <h1 class="author-title">{authorName}</h1>
+            <p class="author-role">Founder & Editor, Daily AI Mail</p>
+            
+            <div class="author-bio-content">
+              <p>
+                Daily AI Mail was founded by <strong>Mohamed Diab</strong>, a technical SEO consultant and digital publisher with over ten years of experience in the technology and digital marketing industry. Diab operates under the brand <a href="https://interactiveseo.digital" target="_blank" rel="noopener">interactiveseo.digital</a> and has worked with enterprise clients across the MENA region on search visibility, structured data strategy, and Knowledge Graph optimization.
+              </p>
+              <p>
+                The publication is built on a technology stack designed for performance, accessibility, and editorial scalability — reflecting a belief that the infrastructure of journalism matters as much as its content.
+              </p>
+            </div>
+
+            <div class="author-socials">
+              <a href="https://interactiveseo.digital" class="social-link" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <span>Website</span>
+              </a>
+              <a href="https://twitter.com/dailyaimail" class="social-link" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span>Twitter</span>
+              </a>
+               <a href="https://linkedin.com/company/dailyaimail" class="social-link" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Articles Section -->
+    <section class="author-articles">
+      <div class="container">
+        <h2 class="section-title">Latest from {authorName}</h2>
+        
+        {authorArticles.length > 0 ? (
+          <div class="articles-grid">
+            {authorArticles.map(article => (
+              <a href={`/articles/${article.slug}`} class="article-card">
+                <div class="article-card-inner">
+                  <span 
+                    class="article-tag" 
+                    style={`background:${tagColor(article.tag)}15; color:${tagColor(article.tag)}; border:1px solid ${tagColor(article.tag)}35;`}
+                  >
+                    {article.tag}
+                  </span>
+                  <h3 class="article-headline">{article.headline}</h3>
+                  <p class="article-excerpt">{article.excerpt}</p>
+                  <div class="article-meta">
+                    <time datetime={article.isoDate}>{article.date}</time>
+                    <span class="sep">·</span>
+                    <span>{article.readingTime}</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="no-articles">No articles published yet.</p>
+        )}
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .author-page {
+    padding-bottom: 120px;
+  }
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* Header */
+  .author-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 100px 0 80px;
+    margin-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Decorative background element */
+  .author-header::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  .author-header-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media (max-width: 1024px) {
+    .author-header-grid {
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .author-header-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 48px;
+    }
+    .author-image-wrapper {
+      margin: 0 auto;
+    }
+    .author-socials {
+      justify-content: center;
+    }
+    .author-bio-content {
+      margin: 0 auto;
+    }
+  }
+
+  .author-image-wrapper {
+    width: 340px;
+    height: 340px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    background: var(--color-bg);
+  }
+  .author-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .author-header-grid:hover .author-profile-img {
+    transform: scale(1.06);
+  }
+
+  .author-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 12px;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+  .author-role {
+    font-family: var(--font-mono);
+    color: var(--gold);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+  .author-bio-content {
+    font-size: clamp(17px, 2vw, 19px);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    max-width: 760px;
+    font-weight: 300;
+  }
+  .author-bio-content p + p {
+    margin-top: 24px;
+  }
+  .author-bio-content strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .author-bio-content a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    transition: all 0.2s;
+  }
+  .author-bio-content a:hover {
+    color: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+
+  .author-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    opacity: 0.8;
+  }
+  .social-link:hover {
+    color: var(--gold);
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  /* Articles */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    margin-bottom: 48px;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 40px;
+  }
+  .article-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 32px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .article-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    background: var(--color-surface);
+  }
+  
+  .article-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+    align-self: flex-start;
+  }
+  .article-headline {
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    color: var(--color-text);
+    font-weight: 700;
+  }
+  .article-excerpt {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 300;
+  }
+  .article-meta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+  .sep {
+    opacity: 0.5;
+  }
+  
+  .no-articles {
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-size: 18px;
+    text-align: center;
+    padding: 60px 0;
+  }
+</style>

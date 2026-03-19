@@ -11,7 +11,7 @@ schemaType: "terms"
 
 ## Terms and Conditions
 
-These Terms and Conditions govern your access to and use of the Daily AI Mail website at **dailyaimail.com** and any associated subdomains (collectively, "the Website"). By accessing or using the Website, you agree to be bound by these terms. If you do not agree, you should discontinue use of the Website immediately.
+These Terms and Conditions govern your access to and use of the Daily AI Mail website at **dailyaimail.news** and any associated subdomains (collectively, "the Website"). By accessing or using the Website, you agree to be bound by these terms. If you do not agree, you should discontinue use of the Website immediately.
 
 These Terms and Conditions were last updated on **15 March 2026**.
 
@@ -21,7 +21,7 @@ These Terms and Conditions were last updated on **15 March 2026**.
 
 Daily AI Mail is an independent digital publication covering artificial intelligence news, research, and technology. The Website is operated by Mohamed Diab, trading as Interactive SEO Digital, based in Egypt ("we," "us," or "the Publisher").
 
-For questions about these terms, contact legal@dailyaimail.com.
+For questions about these terms, contact legal@dailyaimail.news.
 
 ---
 
@@ -72,7 +72,7 @@ You may not:
 - Use content from the Website to train, fine-tune, or evaluate artificial intelligence models without explicit written consent from the Publisher
 - Remove or alter any attribution, copyright notice, or byline associated with any content
 
-Requests for content licensing or reproduction permissions should be directed to editorial@dailyaimail.com.
+Requests for content licensing or reproduction permissions should be directed to editorial@dailyaimail.news.
 
 ### 3.4 Third-Party Content
 
@@ -162,4 +162,4 @@ These Terms and Conditions, read together with the [Privacy Policy](/privacy-pol
 
 ---
 
-*For questions about these Terms and Conditions, contact legal@dailyaimail.com.*
+*For questions about these Terms and Conditions, contact legal@dailyaimail.news.*

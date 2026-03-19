@@ -21,7 +21,7 @@ This policy was last updated on **15 March 2026**.
 
 A cookie is a small text file that a website stores on your device — computer, smartphone, or tablet — when you visit it. Cookies allow websites to recognize your device across page loads and visits, remember your preferences, understand how you navigate the site, and deliver relevant functionality.
 
-Cookies are not programs and cannot execute code or carry viruses. They are passive data files. A cookie set by dailyaimail.com can only be read by dailyaimail.com. Cookies set by third-party services embedded in the site (such as analytics platforms or video players) are governed by those services' own policies.
+Cookies are not programs and cannot execute code or carry viruses. They are passive data files. A cookie set by dailyaimail.news can only be read by dailyaimail.news. Cookies set by third-party services embedded in the site (such as analytics platforms or video players) are governed by those services' own policies.
 
 ---
 
@@ -50,7 +50,7 @@ Analytics cookies may collect:
 - Device type, browser, and operating system
 - Referral source (what site or search engine directed you to us)
 
-These cookies are set by analytics platforms and may be first-party (set by dailyaimail.com directly) or third-party (set by a service provider under a separate domain). Where third-party analytics services are used, IP addresses are anonymized where technically possible.
+These cookies are set by analytics platforms and may be first-party (set by dailyaimail.news directly) or third-party (set by a service provider under a separate domain). Where third-party analytics services are used, IP addresses are anonymized where technically possible.
 
 ### 2.3 Functional Cookies
 
@@ -66,7 +66,7 @@ Where third-party embeds are known to set cookies, we attempt to disclose this i
 
 ## 3. Specific Cookies Used
 
-The following table describes the primary cookies set on dailyaimail.com. This list is maintained on a best-efforts basis and may not capture all cookies at any given time, particularly those set by embedded third-party content.
+The following table describes the primary cookies set on dailyaimail.news. This list is maintained on a best-efforts basis and may not capture all cookies at any given time, particularly those set by embedded third-party content.
 
 | Cookie Name | Type | Purpose | Duration |
 |---|---|---|---|
@@ -80,7 +80,7 @@ The following table describes the primary cookies set on dailyaimail.com. This l
 
 ## 4. Managing Your Cookie Preferences
 
-You have several options for controlling how cookies are used when you visit dailyaimail.com:
+You have several options for controlling how cookies are used when you visit dailyaimail.news:
 
 ### 4.1 Through Our Consent Mechanism
 
@@ -115,4 +115,4 @@ Some browsers offer a "Do Not Track" (DNT) setting that sends a signal to websit
 
 This Cookies Policy is reviewed periodically and updated when the cookies used on the site change materially. The revision date at the top of the page reflects when the policy was last updated.
 
-Questions about cookies or this policy may be directed to privacy@dailyaimail.com.
+Questions about cookies or this policy may be directed to privacy@dailyaimail.news.

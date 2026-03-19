@@ -7,7 +7,10 @@
     <div class="footer-grid">
       <!-- Column 1 -->
       <div class="footer-col brand-col">
-        <a href="/" class="footer-logo">Daily <em>AI</em> Mail</a>
+        <a href="/" class="footer-logo">
+          <img src="/light-logo.svg" class="logo-light" alt="Daily AI Mail" />
+          <img src="/dark-logo.svg" class="logo-dark" alt="Daily AI Mail" />
+        </a>
         <p class="tagline">
           Daily AI Mail is an independent digital publication dedicated to
           covering the global artificial intelligence industry. Founded in 2026,
@@ -50,10 +53,13 @@
       <nav class="footer-col connect-col" aria-label="Connect">
         <p class="footer-col-heading">Connect</p>
         <ul>
-          <li><a href="#">Twitter / X</a></li>
-          <li><a href="#">LinkedIn</a></li>
+          <li><a href="https://x.com/dailyaimail" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+          <li><a href="https://www.facebook.com/dailyaimail/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="https://www.linkedin.com/company/dailaimail/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://medium.com/@dailyaimail" target="_blank" rel="noopener noreferrer">Medium</a></li>
+          <li><a href="https://www.reddit.com/user/dailyaimail/" target="_blank" rel="noopener noreferrer">Reddit</a></li>
           <li><a href="#newsletter">Newsletter</a></li>
-          <li><a href="#">RSS Feed</a></li>
+          <li><a href="/rss.xml">RSS Feed</a></li>
         </ul>
       </nav>
     </div>
@@ -88,16 +94,18 @@
     margin-bottom: 60px;
   }
   .footer-logo {
-    font-family: var(--font-display);
-    font-size: 26px;
-    text-decoration: none;
-    color: var(--nav-text);
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
-  .footer-logo em {
-    font-style: italic;
+  .footer-logo .logo-dark,
+  .footer-logo .logo-light {
+    display: none;
+    height: 44px;
+    width: auto;
   }
+  :global([data-theme="dark"]) .footer-logo .logo-dark { display: block; }
+  :global([data-theme="light"]) .footer-logo .logo-dark { display: block; }
+  :root:not([data-theme]) .footer-logo .logo-dark { display: block; }
   .tagline {
     color: rgba(255, 255, 255, 0.7);
     font-size: 15px;

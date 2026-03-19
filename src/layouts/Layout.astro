@@ -23,7 +23,7 @@ const title = directProps.title ?? frontmatter.title;
 const description = directProps.description ?? frontmatter.description;
 const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
 
-const SITE_URL = "https://dailyaimail.com";
+const SITE_URL = "https://dailyaimail.news";
 const canonical = directProps.canonical ?? `${SITE_URL}${Astro.url.pathname}`;
 const ogTitle = directProps.ogTitle ?? metaTitle ?? title ?? "Daily AI Mail";
 const ogDesc =
@@ -92,7 +92,7 @@ const ogAuthor = directProps.ogAuthor ?? "Mohamed Diab";
     <title>
       {metaTitle ?? (title ? `${title} — Daily AI Mail` : "Daily AI Mail")}
     </title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Per-page injections (JSON-LD, etc.) -->
