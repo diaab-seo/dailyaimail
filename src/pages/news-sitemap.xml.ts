@@ -3,7 +3,7 @@ import { getArticles } from '../data/articles';
 
 export const GET: APIRoute = async () => {
     const articles = await getArticles();
-    const SITE_URL = 'https://dailyaimail.com';
+    const SITE_URL = 'https://dailyaimail.news';
 
     const sorted = [...articles].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
 

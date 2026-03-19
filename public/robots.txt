@@ -3,8 +3,8 @@ Allow: /
 Disallow: /dist/
 
 # Sitemaps
-Sitemap: https://dailyaimail.com/sitemap-index.xml
-Sitemap: https://dailyaimail.com/news-sitemap.xml
+Sitemap: https://dailyaimail.news/sitemap-index.xml
+Sitemap: https://dailyaimail.news/news-sitemap.xml
 
 # Google-Extended (AI training opt-out — per robots.txt spec)
 User-agent: Google-Extended

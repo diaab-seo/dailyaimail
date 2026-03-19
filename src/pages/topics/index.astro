@@ -19,7 +19,7 @@ const sorted = [...allArticles].sort((a, b) =>
     b.isoDate.localeCompare(a.isoDate),
 );
 
-const SITE_URL = "https://dailyaimail.com";
+const SITE_URL = "https://dailyaimail.news";
 
 // Schema for the topics index page
 const schema = {
@@ -186,7 +186,7 @@ const schema = {
         Array.from(grid.querySelectorAll<HTMLElement>(".article-card-wrap"));
     const count = document.getElementById("result-count")!;
     const empty = document.getElementById("no-results")!;
-    const sort = document.getElementById("sort-select") as HTMLSelectElement;
+    const sort = document.getElementById("sort-select") as unknown as HTMLSelectElement;
     const chips = document.querySelectorAll<HTMLButtonElement>(
         ".chip[data-filter-topic]",
     );

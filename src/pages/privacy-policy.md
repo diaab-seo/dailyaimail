@@ -11,7 +11,7 @@ schemaType: "privacy"
 
 ## Privacy Policy
 
-This Privacy Policy describes how Daily AI Mail ("we," "our," or "the publication") collects, uses, stores, and protects personal data from visitors to the website at **dailyaimail.com** and any associated subdomains. It also describes your rights with respect to your personal data and how to exercise them.
+This Privacy Policy describes how Daily AI Mail ("we," "our," or "the publication") collects, uses, stores, and protects personal data from visitors to the website at **dailyaimail.news** and any associated subdomains. It also describes your rights with respect to your personal data and how to exercise them.
 
 This policy was last updated on **15 March 2026**. When material changes are made to this policy, the updated version will be published on this page with a revised date. Continued use of the website after a policy update constitutes acceptance of the revised terms.
 
@@ -23,7 +23,7 @@ Daily AI Mail is an independent digital publication covering artificial intellig
 
 For data protection purposes, Mohamed Diab is the data controller responsible for personal data collected through this website.
 
-**Contact for privacy matters:** privacy@dailyaimail.com
+**Contact for privacy matters:** privacy@dailyaimail.news
 
 ---
 
@@ -44,7 +44,7 @@ This data is used solely to respond to your inquiry or to deliver the service yo
 
 ### 2.2 Data Collected Automatically
 
-When you visit dailyaimail.com, certain technical data is collected automatically. This includes:
+When you visit dailyaimail.news, certain technical data is collected automatically. This includes:
 
 - Your IP address (which may indicate your approximate geographic location)
 - Browser type and version
@@ -95,7 +95,7 @@ You may control cookie settings through your browser preferences or through any 
 
 If you subscribe to the Daily AI Mail newsletter, your email address is stored in a mailing list managed through a third-party email service provider. Your email address is used exclusively to send you newsletter issues and relevant operational communications (such as subscription confirmations).
 
-You may unsubscribe from the newsletter at any time using the unsubscribe link included in every email, or by contacting privacy@dailyaimail.com. Upon unsubscription, your email address is removed from the active mailing list within a reasonable time.
+You may unsubscribe from the newsletter at any time using the unsubscribe link included in every email, or by contacting privacy@dailyaimail.news. Upon unsubscription, your email address is removed from the active mailing list within a reasonable time.
 
 ---
 
@@ -137,7 +137,7 @@ Depending on your jurisdiction, you may have the following rights with respect t
 
 **Right to withdraw consent** — Where processing is based on your consent, you may withdraw it at any time.
 
-To exercise any of these rights, contact privacy@dailyaimail.com. We aim to respond to all requests within 30 days.
+To exercise any of these rights, contact privacy@dailyaimail.news. We aim to respond to all requests within 30 days.
 
 If you believe your data protection rights have been violated, you have the right to lodge a complaint with your national data protection authority.
 
@@ -145,7 +145,7 @@ If you believe your data protection rights have been violated, you have the righ
 
 ## 10. Children's Privacy
 
-Daily AI Mail is not directed at children under the age of 16. The publication does not knowingly collect personal data from children. If we become aware that personal data from a child has been collected without verifiable parental consent, it will be deleted promptly. If you believe a child's data has been submitted to this website, please contact privacy@dailyaimail.com.
+Daily AI Mail is not directed at children under the age of 16. The publication does not knowingly collect personal data from children. If we become aware that personal data from a child has been collected without verifiable parental consent, it will be deleted promptly. If you believe a child's data has been submitted to this website, please contact privacy@dailyaimail.news.
 
 ---
 
@@ -161,4 +161,4 @@ No method of data transmission or storage is completely secure. While we take da
 
 When material changes are made to this Privacy Policy, the updated version will be published on this page with a revised "last updated" date. We encourage you to review this policy periodically.
 
-For questions about this policy, contact privacy@dailyaimail.com.
+For questions about this policy, contact privacy@dailyaimail.news.

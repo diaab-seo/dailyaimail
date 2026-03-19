@@ -15,9 +15,9 @@ const color = tagColor(tag);
 const count = articles.length;
 const slug = topicToSlug(tag);
 
-const SITE_URL = "https://dailyaimail.com";
+const SITE_URL = "https://dailyaimail.news";
 const topicUrl = `${SITE_URL}/topics/${slug}`;
-const logoUrl = `${SITE_URL}/logo.png`;
+const logoUrl = `${SITE_URL}/dark-logo.svg`;
 const latestIso =
     articles.length > 0
         ? [...articles].sort((a, b) => b.isoDate.localeCompare(a.isoDate))[0]

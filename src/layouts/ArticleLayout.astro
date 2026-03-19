@@ -24,7 +24,7 @@ const related = (await getArticlesByCategory(article.tag))
   .filter((a) => a.slug !== article.slug)
   .slice(0, 3);
 
-const SITE_URL = "https://dailyaimail.com";
+const SITE_URL = "https://dailyaimail.news";
 const articleUrl = `${SITE_URL}/articles/${article.slug}`;
 const pubDate = `${article.isoDate}T00:00:00+00:00`;
 const modDate = `${article.modifiedDate ?? article.isoDate}T00:00:00+00:00`;
@@ -32,7 +32,7 @@ const wordCount = article.body.trim().split(/\s+/).length;
 const plainBody = stripMarkdown(article.body);
 const hasImage = Boolean(article.image);
 const imageUrl = hasImage ? `${SITE_URL}${article.image}` : null;
-const logoUrl = `${SITE_URL}/logo.png`;
+const logoUrl = `${SITE_URL}/dark-logo.svg`;
 
 // Copy-as-Markdown content (built at server time, embedded as data)
 const markdownExport = [
@@ -176,7 +176,7 @@ const schema = {
       "@type": "Person",
       "@id": `${SITE_URL}/#/schema/person/mohamed-diab`,
       name: article.author,
-      url: article.authorUrl ?? "https://interactiveseo.digital",
+      url: `${SITE_URL}/author/mohamed-diab`,
       description: "Technical SEO Consultant and founder of Daily AI Mail.",
       sameAs: ["https://interactiveseo.digital", "https://diab.digital"],
     },
@@ -242,7 +242,7 @@ const schema = {
       <p class="article-excerpt">{article.excerpt}</p>
       <div class="article-meta">
         <span class="article-author" data-pagefind-meta="author"
-          >By {article.author}</span
+          >By <a href="/author/mohamed-diab">{article.author}</a></span
         >
         <span class="article-sep">·</span>
         <time datetime={article.isoDate} data-pagefind-meta="date"
@@ -502,16 +502,16 @@ const schema = {
 
     <aside class="article-sidebar">
       <address class="sidebar-author-box">
-        <div class="author-avatar">
+        <a href="/author/mohamed-diab" class="author-avatar">
           {
             article.author
               .split(" ")
               .map((n) => n[0])
               .join("")
           }
-        </div>
+        </a>
         <div>
-          <strong class="author-name">{article.author}</strong>
+          <strong class="author-name"><a href="/author/mohamed-diab">{article.author}</a></strong>
           <p class="author-role">Editor, Daily AI Mail</p>
         </div>
       </address>
@@ -522,7 +522,7 @@ const schema = {
           Follow us on Google for daily AI updates
         </p>
         <a
-          href="https://google.com/preferences/source?q=dailyaimail.com"
+          href="https://google.com/preferences/source?q=dailyaimail.news"
           target="_blank"
           rel="noopener noreferrer"
           class="google-badge-link"
@@ -695,6 +695,14 @@ const schema = {
   .article-author {
     font-weight: 500;
     color: var(--gold);
+  }
+  .article-author a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .article-author a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
   .article-sep {
     opacity: 0.4;
@@ -1020,6 +1028,22 @@ const schema = {
     font-size: 15px;
     display: block;
     color: var(--color-text);
+  }
+  .author-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .author-name a:hover {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .author-avatar {
+    text-decoration: none !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .author-avatar:hover {
+    transform: translateY(-2px);
   }
   .author-role {
     font-size: 12px;

@@ -6,7 +6,8 @@
   <div class="navbar-inner">
     <!-- Logo -->
     <a href="/" class="navbar-logo" aria-label="Daily AI Mail — Home">
-      Daily <em>AI</em> Mail
+      <img src="/light-logo.svg" class="logo-light" alt="Daily AI Mail" />
+      <img src="/dark-logo.svg" class="logo-dark" alt="Daily AI Mail" />
     </a>
 
     <!-- Desktop nav links -->
@@ -628,18 +629,27 @@
 
   /* ── Logo ─────────────────────────────────── */
   .navbar-logo {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 900;
-    text-decoration: none;
-    color: var(--nav-text);
+    display: flex;
+    align-items: center;
     flex-shrink: 0;
-    letter-spacing: -0.01em;
   }
-  .navbar-logo em {
-    font-style: italic;
-    color: #e8b84b;
+  .navbar-logo .logo-dark,
+  .navbar-logo .logo-light {
+    display: none;
+    height: 38px;
+    width: auto;
   }
+
+  /* 
+     Shared Mapping:
+     Using dark-logo.svg (white text) for both themes
+     because the header remains dark in both modes.
+  */
+  :global([data-theme="dark"]) .navbar-logo .logo-dark { display: block; }
+  :global([data-theme="light"]) .navbar-logo .logo-dark { display: block; }
+
+  /* Fallback */
+  :root:not([data-theme]) .logo-dark { display: block; }
 
   /* ── Desktop nav links ───────────────────── */
   .desktop-nav {
