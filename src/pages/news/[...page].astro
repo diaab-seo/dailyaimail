@@ -1,0 +1,120 @@
+---
+import type { Page } from "astro";
+import { getArticles } from "../../data/articles";
+import type { Article } from "../../data/articles";
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import NewsCard from "../../components/NewsCard.astro";
+import PaginationNav from "../../components/PaginationNav.astro";
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+    const allArticles = await getArticles();
+    const sorted = [...allArticles].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+    return paginate(sorted, { pageSize: 12 });
+}
+
+interface Props {
+    page: Page<Article>;
+}
+const { page } = Astro.props;
+const SITE_URL = "https://dailyaimail.news";
+
+const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "CollectionPage",
+            "@id": `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + '/' : ''}`,
+            url: `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + '/' : ''}`,
+            name: `All News${page.currentPage > 1 ? ` — Page ${page.currentPage}` : ''} - Daily AI Mail`,
+            description: "Browse the latest artificial intelligence news and analysis.",
+            isPartOf: { "@id": `${SITE_URL}/#website` },
+        }
+    ]
+};
+---
+
+<Layout
+    title={`All News${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} - Daily AI Mail`}
+    metaTitle={`All News${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} - Daily AI Mail`}
+    description="Browse the latest artificial intelligence news and analysis."
+    canonical={`${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + '/' : ''}`}
+>
+    <!-- Add Link Headers -->
+    {page.url.prev && <link rel="prev" href={page.url.prev} slot="head" />}
+    {page.url.next && <link rel="next" href={page.url.next} slot="head" />}
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+    <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "News" }]} />
+
+    <div class="news-hero">
+        <div class="news-hero-inner">
+            <h1 class="news-title">All News</h1>
+        </div>
+    </div>
+
+    <div class="news-content">
+        <div class="news-inner">
+            <div class="news-grid">
+                {page.data.map((a: any) => (
+                    <NewsCard
+                        tag={a.tag}
+                        headline={a.headline}
+                        excerpt={a.excerpt}
+                        date={a.date}
+                        author={a.author}
+                        readingTime={a.readingTime}
+                        href={`/articles/${a.slug}`}
+                    />
+                ))}
+            </div>
+
+            <PaginationNav page={page} />
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .news-hero {
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        padding: 56px 0 40px;
+    }
+    .news-hero-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .news-title {
+        font-family: var(--font-display);
+        font-size: clamp(36px, 5vw, 64px);
+        line-height: 1.05;
+    }
+    .news-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 48px var(--gutter) 80px;
+    }
+    .news-inner {
+        width: 100%;
+    }
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+    @media (max-width: 1024px) {
+        .news-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 640px) {
+        .news-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

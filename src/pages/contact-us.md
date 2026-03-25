@@ -5,7 +5,7 @@ metaTitle: "Contact Daily AI Mail — Editorial, Press & General Inquiries"
 description: "Contact the Daily AI Mail editorial team for news tips, corrections, press inquiries, advertising, and general questions."
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
-author: "Mohamed Diab"
+author: "Daily AI Mail Editorial Staff"
 schemaType: "contact"
 ---
 
@@ -72,4 +72,4 @@ The following response time guidelines reflect realistic operating capacity for 
 
 ---
 
-*Daily AI Mail is published by Mohamed Diab / Interactive SEO Digital. The publication's primary operational location is Egypt, with global editorial coverage.*
+*Daily AI Mail is published by Daily AI Mail Editorial Staff / Interactive SEO Digital. The publication's primary operational location is Egypt, with global editorial coverage.*

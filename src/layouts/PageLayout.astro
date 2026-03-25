@@ -16,7 +16,7 @@ const schemaType = Astro.props.schemaType ?? fm.schemaType ?? null;
 const SITE_URL = "https://dailyaimail.news";
 const pubIso = (publishDate ?? "2026-01-01").replace(/\//g, "-");
 const modIso = (lastModified ?? "2026-03-15").replace(/\//g, "-");
-const logoUrl = `${SITE_URL}/dark-logo.svg`;
+const logoUrl = `${SITE_URL}/daily-ai-mail-logo.svg`;
 
 // ── Breadcrumb items (derived from schemaType) ────────────────────────────────
 const breadcrumbMap: Record<string, { label: string; href: string }> = {
@@ -51,7 +51,7 @@ if (schemaType === "about") {
         isPartOf: { "@id": `${SITE_URL}/#website` },
         mainEntity: { "@id": `${SITE_URL}/#organization` },
         about: { "@id": `${SITE_URL}/#organization` },
-        author: { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+        author: { "@id": "https://dailyaimail.news/#/schema/editorial-team" },
         publisher: { "@id": `${SITE_URL}/#organization` },
         datePublished: `${pubIso}T00:00:00+00:00`,
         dateModified: `${modIso}T00:00:00+00:00`,
@@ -66,7 +66,7 @@ if (schemaType === "about") {
           `${SITE_URL}/contact-us`,
         ],
         mentions: [
-          { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+          { "@id": "https://dailyaimail.news/#/schema/editorial-team" },
           { "@id": `${SITE_URL}/#organization` },
         ],
       },
@@ -111,8 +111,7 @@ if (schemaType === "about") {
           caption: "Daily AI Mail",
         },
         image: { "@id": `${SITE_URL}/#/schema/logo/image/` },
-        member: { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
-        founder: { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+        member: { "@id": "https://dailyaimail.news/#/schema/editorial-team" },
         subjectOf: { "@id": `${SITE_URL}/about-us` },
         contactPoint: [
           {
@@ -142,28 +141,30 @@ if (schemaType === "about") {
         sameAs: [
           "https://twitter.com/dailyaimail",
           "https://linkedin.com/company/dailyaimail",
-          "https://diab.digital",
         ],
       },
       {
-        "@type": "Person",
-        "@id": `${SITE_URL}/#/schema/person/mohamed-diab`,
-        name: "Mohamed Diab",
-        givenName: "Mohamed",
-        familyName: "Diab",
-        url: "https://interactiveseo.digital",
-        jobTitle: "Founder & Editor-in-Chief",
-        description: "Technical SEO Consultant and founder of Daily AI Mail.",
-        worksFor: { "@id": `${SITE_URL}/#organization` },
-        knowsAbout: [
-          "Technical SEO",
-          "Structured Data",
-          "Knowledge Graph Optimization",
-          "Artificial Intelligence",
-          "Digital Publishing",
-        ],
-        homeLocation: { "@type": "Place", name: "Egypt" },
-        sameAs: ["https://interactiveseo.digital", "https://diab.digital"],
+        "@type": "Organization",
+        "@id": "https://dailyaimail.news/#/schema/editorial-team",
+        "name": "Daily AI Mail Editorial Staff",
+        "alternateName": ["Daily AI Mail Editors", "Daily AI Mail Staff Writers", "The Editors"],
+        "url": "https://dailyaimail.news/about-us/editorial-team",
+        "description": "The Daily AI Mail editorial staff is an independent team of AI journalists, researchers, and analysts with over 15 years of experience covering artificial intelligence, machine learning, and emerging technologies.",
+        "memberOf": { "@id": "https://dailyaimail.news/#organization" },
+        "knowsAbout": ["Artificial Intelligence","Machine Learning","Large Language Models","AI Safety","Generative AI","AI Policy","AI Ethics","Neural Networks","Natural Language Processing","AI Research","Technology Journalism"],
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Professional Experience",
+          "description": "Over 15 years of professional experience in AI journalism and technology reporting"
+        },
+        "publishingPrinciples": "https://dailyaimail.news/publishing-principles",
+        "sameAs": [
+          "https://www.facebook.com/dailyaimail/",
+          "https://www.linkedin.com/company/dailaimail/",
+          "https://x.com/dailyaimail",
+          "https://medium.com/@dailyaimail",
+          "https://www.reddit.com/user/dailyaimail/"
+        ]
       },
       {
         "@type": "WebSite",
@@ -243,7 +244,7 @@ if (schemaType === "about") {
     margin-bottom: 40px;
   }
   .page-title {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: clamp(32px, 5vw, 52px);
     line-height: 1.1;
     margin-bottom: 16px;
@@ -253,23 +254,23 @@ if (schemaType === "about") {
     flex-wrap: wrap;
     gap: 16px;
     font-size: 14px;
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
   }
   .page-content {
     font-size: 16px;
     line-height: 1.75;
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
   }
   .page-content h2 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: 24px;
-    color: var(--color-text);
+    color: var(--color-text-primary);
     margin: 40px 0 16px;
   }
   .page-content h3 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: 19px;
-    color: var(--color-text);
+    color: var(--color-text-primary);
     margin: 28px 0 12px;
   }
   .page-content p {
@@ -288,7 +289,7 @@ if (schemaType === "about") {
     text-align: left;
     padding: 10px 14px;
     border-bottom: 2px solid var(--color-border);
-    color: var(--color-text);
+    color: var(--color-text-primary);
     font-weight: 600;
   }
   .page-content td {
@@ -303,7 +304,7 @@ if (schemaType === "about") {
     margin-bottom: 6px;
   }
   .page-content strong {
-    color: var(--color-text);
+    color: var(--color-text-primary);
     font-weight: 600;
   }
   .page-content hr {

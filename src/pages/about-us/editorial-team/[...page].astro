@@ -1,0 +1,366 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import NewsCard from "../../../components/NewsCard.astro";
+import PaginationNav from "../../../components/PaginationNav.astro";
+import type { Page } from "astro";
+import type { Article } from "../../../data/articles";
+import { getArticles, tagColor } from "../../../data/articles";
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const allArticles = await getArticles();
+  const authorArticles = allArticles
+    .filter((a) => a.author === "Daily AI Mail Editorial Staff")
+    .sort(
+      (a, b) => new Date(b.isoDate).getTime() - new Date(a.isoDate).getTime(),
+    );
+  return paginate(authorArticles, { pageSize: 12 });
+}
+
+interface Props {
+  page: Page<Article>;
+}
+
+const { page } = Astro.props;
+const authorName = "Daily AI Mail Editorial Staff";
+const authorArticles = page.data;
+
+const title = `${authorName}`;
+const description = `The Daily AI Mail editorial staff is an independent team of AI journalists, researchers, and analysts with over 15 years of experience covering artificial intelligence, machine learning, and emerging technologies.`;
+
+const SITE_URL = "https://dailyaimail.news";
+const authorUrl = `${SITE_URL}/about-us/editorial-team`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: authorName,
+    description: description,
+    image: `${SITE_URL}/daily-ai-mail-logo.svg`,
+    jobTitle: "Staff Writers",
+    url: authorUrl,
+    sameAs: [
+      "https://www.facebook.com/dailyaimail/",
+      "https://www.linkedin.com/company/dailaimail/",
+      "https://x.com/dailyaimail",
+      "https://medium.com/@dailyaimail",
+      "https://www.reddit.com/user/dailyaimail/",
+    ],
+    worksFor: {
+      "@type": "Organization",
+      name: "Daily AI Mail",
+      url: SITE_URL,
+    },
+  },
+};
+---
+
+<Layout title={title} description={description} metaTitle={title}>
+  {page.url.prev && <link rel="prev" href={page.url.prev} slot="head" />}
+  {page.url.next && <link rel="next" href={page.url.next} slot="head" />}
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+    slot="head"
+  />
+
+  <main class="author-page">
+    <!-- Header Section -->
+    <header class="author-header">
+      <div class="container">
+        <div class="author-header-grid">
+          <div class="author-image-wrapper">
+            <img
+              src="/daily-ai-mail-logo.svg"
+              alt={authorName}
+              width="400"
+              height="400"
+              class="author-profile-img"
+              loading="eager"
+            />
+          </div>
+          <div class="author-info">
+            <h1 class="author-title">{authorName}</h1>
+            <p class="author-role">Staff Writers · 15+ Years Covering AI</p>
+
+            <div class="author-bio-content">
+              <p>
+                Daily AI Mail is written and edited by the <strong
+                  >Daily AI Mail Editorial Staff</strong
+                >, an independent team of AI journalists, researchers, and
+                analysts with over 15 years of experience covering artificial
+                intelligence, machine learning, and emerging technologies.
+              </p>
+              <p>
+                The publication is built on a technology stack designed for
+                performance, accessibility, and editorial scalability —
+                reflecting a belief that the infrastructure of journalism
+                matters as much as its content.
+              </p>
+            </div>
+
+            <div class="author-socials">
+              <a
+                href="https://www.facebook.com/dailyaimail/"
+                class="social-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>Facebook</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/dailaimail/"
+                class="social-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href="https://x.com/dailyaimail"
+                class="social-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>X / Twitter</span>
+              </a>
+              <a
+                href="https://medium.com/@dailyaimail"
+                class="social-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>Medium</span>
+              </a>
+              <a
+                href="https://www.reddit.com/user/dailyaimail/"
+                class="social-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <span>Reddit</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Articles Section -->
+    <section class="author-articles">
+      <div class="container">
+        <h2 class="section-title">
+          Latest from {authorName}
+          <span class="section-meta">
+            Page {page.currentPage} of {page.lastPage} · {page.total} articles
+          </span>
+        </h2>
+
+        {
+          authorArticles.length > 0 ? (
+            <div class="articles-grid">
+              {authorArticles.map((article) => (
+                <NewsCard
+                  tag={article.tag}
+                  headline={article.headline}
+                  excerpt={article.excerpt}
+                  date={article.date}
+                  author={article.author}
+                  readingTime={article.readingTime}
+                  image={article.image}
+                  href={`/articles/${article.slug}`}
+                />
+              ))}
+            </div>
+          ) : (
+            <p class="no-articles">No articles published yet.</p>
+          )
+        }
+        <PaginationNav page={page} />
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .author-page {
+    padding-bottom: 120px;
+  }
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* ── Header ── */
+  .author-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 80px 0 72px;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .author-header::after {
+    content: "";
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .author-header-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .author-image-wrapper {
+    width: 280px;
+    background: transparent;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .author-profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .author-header-grid:hover .author-profile-img {
+    transform: scale(1.06);
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .author-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+  }
+  .author-role {
+    font-family: var(--font-mono);
+    color: var(--gold);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 32px;
+    font-weight: 600;
+  }
+  .author-bio-content {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    max-width: 680px;
+  }
+  .author-bio-content p + p {
+    margin-top: 16px;
+  }
+  .author-bio-content strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .author-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 36px;
+  }
+  .social-link {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: color 0.15s;
+    opacity: 0.75;
+  }
+  .social-link:hover {
+    color: var(--gold);
+    opacity: 1;
+  }
+
+  /* ── Section header ── */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    margin-bottom: 36px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    color: var(--color-text);
+  }
+  .section-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Articles grid — use NewsCard's natural sizing ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .no-articles {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--color-text-muted);
+    font-size: 16px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .articles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 900px) {
+    .author-header-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+    .author-image-wrapper {
+      width: 200px;
+      margin: 0 auto;
+    }
+    .author-bio-content {
+      margin: 0 auto;
+    }
+    .author-socials {
+      justify-content: center;
+    }
+  }
+  @media (max-width: 640px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

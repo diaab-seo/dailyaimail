@@ -5,7 +5,7 @@ metaTitle: "Terms and Conditions — Daily AI Mail"
 description: "The terms and conditions governing access to and use of the Daily AI Mail website, including intellectual property, disclaimers, and user conduct."
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
-author: "Mohamed Diab"
+author: "Daily AI Mail Editorial Staff"
 schemaType: "terms"
 ---
 
@@ -19,7 +19,7 @@ These Terms and Conditions were last updated on **15 March 2026**.
 
 ## 1. About the Publication
 
-Daily AI Mail is an independent digital publication covering artificial intelligence news, research, and technology. The Website is operated by Mohamed Diab, trading as Interactive SEO Digital, based in Egypt ("we," "us," or "the Publisher").
+Daily AI Mail is an independent digital publication covering artificial intelligence news, research, and technology. The Website is operated by Daily AI Mail Editorial Staff, trading as Interactive SEO Digital, based in Egypt ("we," "us," or "the Publisher").
 
 For questions about these terms, contact legal@dailyaimail.news.
 

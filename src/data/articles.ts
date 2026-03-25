@@ -19,6 +19,9 @@ export type Article = {
   imageCaption?: string;
   keywords: string[];
   articleSection: string[];
+  mentions: { name: string; url: string; type: string; sameAs?: string }[];
+  about: { name: string; url: string; type: string; sameAs?: string }[];
+  citations: { name: string; url: string; type: string }[];
 };
 
 async function fetchArticles(): Promise<Article[]> {
@@ -34,7 +37,7 @@ async function fetchArticles(): Promise<Article[]> {
     isoDate: e.data.isoDate,
     modifiedDate: e.data.modifiedDate ?? e.data.isoDate,
     author: e.data.author,
-    authorUrl: e.data.authorUrl ?? 'https://interactiveseo.digital',
+    authorUrl: e.data.authorUrl ?? '',
     readingTime: e.data.readingTime,
     image: e.data.image,
     imageWidth: e.data.imageWidth,
@@ -42,12 +45,22 @@ async function fetchArticles(): Promise<Article[]> {
     imageCaption: e.data.imageCaption,
     keywords: e.data.keywords ?? [e.data.tag],
     articleSection: e.data.articleSection ?? [e.data.tag],
+    mentions: e.data.mentions ?? [],
+    about: e.data.about ?? [],
+    citations: e.data.citations ?? [],
   }));
 }
 
 export async function getArticles(): Promise<Article[]> { return fetchArticles(); }
-export async function getAllCategories(): Promise<string[]> { const a = await fetchArticles(); return [...new Set(a.map(x => x.tag))]; }
-export async function getArticlesByCategory(tag: string): Promise<Article[]> { const a = await fetchArticles(); return a.filter(x => x.tag === tag); }
+export async function getAllCategories(): Promise<string[]> {
+  const a = await fetchArticles();
+  const allTags = a.flatMap(x => x.tags);
+  return [...new Set(allTags)];
+}
+export async function getArticlesByCategory(tag: string): Promise<Article[]> {
+  const a = await fetchArticles();
+  return a.filter(x => x.tags.includes(tag));
+}
 export async function getArticleBySlug(slug: string): Promise<Article | undefined> { const a = await fetchArticles(); return a.find(x => x.slug === slug); }
 export async function getLatestArticles(count = 3): Promise<Article[]> { const a = await fetchArticles(); return [...a].sort((x, y) => new Date(y.isoDate).getTime() - new Date(x.isoDate).getTime()).slice(0, count); }
 
@@ -82,4 +95,21 @@ export function stripMarkdown(md: string): string {
     .replace(/^\s*\d+\.\s/gm, '')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
+}
+
+/** Extracts image URLs from Markdown content. */
+export function extractImages(md: string): string[] {
+  const images: string[] = [];
+  // Standard Markdown images: ![alt](url)
+  const mdRegex = /!\[.*?\]\((.*?)\)/g;
+  let match;
+  while ((match = mdRegex.exec(md)) !== null) {
+    if (match[1]) images.push(match[1]);
+  }
+  // HTML images: <img src="url" ...>
+  const htmlRegex = /<img.*?src=["'](.*?)["'].*?>/g;
+  while ((match = htmlRegex.exec(md)) !== null) {
+    if (match[1]) images.push(match[1]);
+  }
+  return [...new Set(images)];
 }

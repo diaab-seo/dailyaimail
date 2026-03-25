@@ -18,7 +18,7 @@
  */
 
 export const SITE_URL = "https://dailyaimail.news";
-export const LOGO_URL = `${SITE_URL}/dark-logo.svg`;
+export const LOGO_URL = `${SITE_URL}/daily-ai-mail-logo.svg`;
 
 // ── Lightweight reference nodes (used on secondary pages) ─────────────────────
 // These @id pointers tell crawlers "the full definition is elsewhere on this site"
@@ -33,9 +33,9 @@ export const websiteRef = () => ({
     "@id": `${SITE_URL}/#website`,
 });
 
-export const personRef = () => ({
-    "@type": "Person",
-    "@id": `${SITE_URL}/#/schema/person/mohamed-diab`,
+export const editorialTeamRef = () => ({
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#/schema/editorial-team`,
 });
 
 // ── BreadcrumbList factory ─────────────────────────────────────────────────────
@@ -93,11 +93,29 @@ export function buildPageSchema(cfg: PageConfig) {
             "sameAs": ["https://twitter.com/dailyaimail", "https://linkedin.com/company/dailyaimail"],
         },
 
-        // 3. Person — lightweight reference; full def on Homepage + About Us
+        // 3. Editorial Team
         {
-            ...personRef(),
-            "name": "Mohamed Diab",
-            "url": "https://interactiveseo.digital",
+            "@type": "Organization",
+            "@id": `${SITE_URL}/#/schema/editorial-team`,
+            "name": "Daily AI Mail Editorial Staff",
+            "alternateName": ["Daily AI Mail Editors", "Daily AI Mail Staff Writers", "The Editors"],
+            "url": "https://dailyaimail.news/about-us/editorial-team",
+            "description": "The Daily AI Mail editorial staff is an independent team of AI journalists, researchers, and analysts with over 15 years of experience covering artificial intelligence, machine learning, and emerging technologies.",
+            "memberOf": { "@id": "https://dailyaimail.news/#organization" },
+            "knowsAbout": ["Artificial Intelligence","Machine Learning","Large Language Models","AI Safety","Generative AI","AI Policy","AI Ethics","Neural Networks","Natural Language Processing","AI Research","Technology Journalism"],
+            "hasCredential": {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "Professional Experience",
+                "description": "Over 15 years of professional experience in AI journalism and technology reporting"
+            },
+            "publishingPrinciples": "https://dailyaimail.news/publishing-principles",
+            "sameAs": [
+                "https://www.facebook.com/dailyaimail/",
+                "https://www.linkedin.com/company/dailaimail/",
+                "https://x.com/dailyaimail",
+                "https://medium.com/@dailyaimail",
+                "https://www.reddit.com/user/dailyaimail/"
+            ]
         },
 
         // 4. BreadcrumbList — Home → This page
@@ -116,7 +134,7 @@ export function buildPageSchema(cfg: PageConfig) {
         "description": cfg.description,
         "isPartOf": { "@id": `${SITE_URL}/#website` },
         "publisher": { "@id": `${SITE_URL}/#organization` },
-        "author": { "@id": `${SITE_URL}/#/schema/person/mohamed-diab` },
+        "author": { "@id": "https://dailyaimail.news/#/schema/editorial-team" },
         "datePublished": `${cfg.publishDate}T00:00:00+00:00`,
         "dateModified": `${cfg.modifiedDate}T00:00:00+00:00`,
         "breadcrumb": { "@id": `${pageUrl}#breadcrumb` },
@@ -132,7 +150,7 @@ export function buildPageSchema(cfg: PageConfig) {
         // ContactPage — links to contact mechanisms + org
         webPageNode["mainEntity"] = orgRef();
         webPageNode["about"] = orgRef();
-        webPageNode["mentions"] = [orgRef(), personRef()];
+        webPageNode["mentions"] = [orgRef(), editorialTeamRef()];
         webPageNode["potentialAction"] = [
             {
                 "@type": "CommunicateAction",
@@ -150,7 +168,7 @@ export function buildPageSchema(cfg: PageConfig) {
         webPageNode["genre"] = "Editorial Policy";
         webPageNode["keywords"] = ["editorial standards", "publishing principles", "corrections policy", "editorial independence", "source attribution"];
         webPageNode["teaches"] = "Daily AI Mail editorial standards and publishing principles";
-        webPageNode["mentions"] = [orgRef(), personRef()];
+        webPageNode["mentions"] = [orgRef(), editorialTeamRef()];
         // Explicitly connects this page to the org's journalism policy properties
         // referenced from the org node on About Us + Homepage
         webPageNode["relatedLink"] = [

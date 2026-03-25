@@ -6,8 +6,7 @@
   <div class="navbar-inner">
     <!-- Logo -->
     <a href="/" class="navbar-logo" aria-label="Daily AI Mail — Home">
-      <img src="/light-logo.svg" class="logo-light" alt="Daily AI Mail" />
-      <img src="/dark-logo.svg" class="logo-dark" alt="Daily AI Mail" />
+      <img src="/daily-ai-mail-logo.svg" class="logo" alt="Daily AI Mail" />
     </a>
 
     <!-- Desktop nav links -->
@@ -22,7 +21,7 @@
         </ul>
       </li>
       <li class="has-dropdown">
-        <a href="/topics/google-ai">Google AI</a>
+        <a href="/topics/google-ai">Google</a>
         <ul class="dropdown">
           <li><a href="/topics/google-ai">Gemini</a></li>
           <li><a href="/topics/google-ai">DeepMind</a></li>
@@ -33,13 +32,13 @@
         <a href="/topics/openai">OpenAI</a>
         <ul class="dropdown">
           <li><a href="/topics/openai">GPT Series</a></li>
-          <li><a href="/articles/sora-2-4k-scenes">Sora</a></li>
+          <li><a href="/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down">Sora</a></li>
           <li><a href="/topics/openai">Research</a></li>
           <li><a href="/topics/openai">Policy</a></li>
         </ul>
       </li>
       <li class="has-dropdown">
-        <a href="/topics/meta-ai">Meta AI</a>
+        <a href="/topics/meta-ai">Meta</a>
         <ul class="dropdown">
           <li><a href="/topics/meta-ai">Llama</a></li>
           <li><a href="/topics/meta-ai">Research</a></li>
@@ -51,7 +50,7 @@
         <ul class="dropdown">
           <li><a href="/topics/tools-and-apps">New Launches</a></li>
           <li><a href="/topics/tools-and-apps">Reviews</a></li>
-          <li><a href="/articles/perplexity-vs-searchgpt">Comparisons</a></li>
+          <li><a href="/topics/tools-and-apps">Comparisons</a></li>
         </ul>
       </li>
       <li class="has-dropdown">
@@ -69,7 +68,6 @@
           <li><a href="/about-us">About Us</a></li>
           <li><a href="/contact-us">Contact</a></li>
           <li><a href="#newsletter">Newsletter</a></li>
-
         </ul>
       </li>
     </ul>
@@ -96,7 +94,7 @@
       </button>
 
       <!-- Subscribe — hidden on mobile to make room for hamburger -->
-      <button class="icon-btn hide-mobile" aria-label="Subscribe to newsletter">
+      <button class="icon-btn hide-mobile" id="nav-subscribe-btn" aria-label="Subscribe to newsletter">
         <svg
           width="18"
           height="18"
@@ -124,7 +122,8 @@
           aria-expanded="false"
         >
           <!-- Shown when logged in -->
-          <span class="avatar-initials" id="avatar-initials" aria-hidden="true"></span>
+          <span class="avatar-initials" id="avatar-initials" aria-hidden="true"
+          ></span>
           <!-- Shown when logged out -->
           <svg
             id="avatar-icon"
@@ -147,15 +146,22 @@
         <div class="avatar-dropdown" id="avatar-dropdown" role="menu" hidden>
           <!-- Guest state -->
           <div id="avatar-guest">
-            <a href="/auth/register" class="avatar-item" role="menuitem">Create Account</a>
-            <a href="/auth/login" class="avatar-item" role="menuitem">Sign In</a>
+            <a href="/auth/register" class="avatar-item" role="menuitem"
+              >Create Account</a
+            >
+            <a href="/auth/login" class="avatar-item" role="menuitem">Sign In</a
+            >
           </div>
           <!-- Logged-in state -->
           <div id="avatar-user" style="display:none;">
             <p class="avatar-display-name" id="avatar-display-name"></p>
             <div class="avatar-rule"></div>
             <form method="POST" action="/auth/logout" style="margin:0;">
-              <button type="submit" class="avatar-item avatar-item--btn" role="menuitem">
+              <button
+                type="submit"
+                class="avatar-item avatar-item--btn"
+                role="menuitem"
+              >
                 Sign Out
               </button>
             </form>
@@ -163,86 +169,7 @@
         </div>
       </div>
 
-      <!-- Theme toggle — hidden on mobile to make room for hamburger -->
-      <div
-        class="theme-toggle hide-mobile"
-        role="group"
-        aria-label="Color theme"
-      >
-        <button
-          class="theme-btn"
-          data-theme-val="light"
-          aria-pressed="false"
-          aria-label="Light theme"
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
-        <button
-          class="theme-btn"
-          data-theme-val="system"
-          aria-pressed="true"
-          aria-label="System theme"
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-        </button>
-        <button
-          class="theme-btn"
-          data-theme-val="dark"
-          aria-pressed="false"
-          aria-label="Dark theme"
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-      </div>
+
 
       <!-- Hamburger (mobile only) -->
       <button
@@ -275,99 +202,28 @@
   <ul class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
     <li><a href="/">Home</a></li>
     <li><a href="/topics/anthropic">Anthropic</a></li>
-    <li><a href="/topics/google-ai">Google AI</a></li>
+    <li><a href="/topics/google-ai">Google</a></li>
     <li><a href="/topics/openai">OpenAI</a></li>
-    <li><a href="/topics/meta-ai">Meta AI</a></li>
+    <li><a href="/topics/meta-ai">Meta</a></li>
     <li><a href="/topics/tools-and-apps">Tools &amp; Apps</a></li>
     <li><a href="/topics/policy-and-ethics">Policy &amp; Ethics</a></li>
     <li><a href="/about-us">About</a></li>
     <li id="mobile-signin-item"><a href="/auth/login">Sign In</a></li>
-    <li id="mobile-register-item"><a href="/auth/register">Create Account</a></li>
+    <li id="mobile-register-item">
+      <a href="/auth/register">Create Account</a>
+    </li>
     <li id="mobile-logout-item" style="display:none;">
       <form method="POST" action="/auth/logout" style="margin:0;">
-        <button type="submit" class="nav-logout-btn" style="padding:13px 0;width:100%;font-size:15px;font-weight:500;color:rgba(244,240,232,.75);border-bottom:1px solid rgba(255,255,255,.05);text-align:left;">Sign Out</button>
+        <button
+          type="submit"
+          class="nav-logout-btn"
+          style="padding:13px 0;width:100%;font-size:15px;font-weight:500;color:rgba(244,240,232,.75);border-bottom:1px solid rgba(255,255,255,.05);text-align:left;"
+          >Sign Out</button
+        >
       </form>
     </li>
-    <li class="mobile-theme-row" role="group" aria-label="Color theme">
-      <span class="mobile-theme-label">Theme</span>
-      <div class="theme-toggle theme-toggle--mobile">
-        <button
-          class="theme-btn"
-          data-theme-val="light"
-          aria-pressed="false"
-          aria-label="Light theme"
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <span>Light</span>
-        </button>
-        <button
-          class="theme-btn"
-          data-theme-val="system"
-          aria-pressed="true"
-          aria-label="System theme"
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-          <span>System</span>
-        </button>
-        <button
-          class="theme-btn"
-          data-theme-val="dark"
-          aria-pressed="false"
-          aria-label="Dark theme"
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <span>Dark</span>
-        </button>
-      </div>
+    <li id="mobile-nav-subscribe-btn">
+      <a href="#" id="mobile-subscribe-link">Subscribe to Newsletter</a>
     </li>
   </ul>
 </nav>
@@ -390,38 +246,46 @@
   // ── Auth state → avatar button + mobile nav ─────────────────────────────────
   (async () => {
     try {
-      const res  = await fetch('/api/me');
-      const { user } = await res.json() as { user: { displayName: string | null; avatarInitials?: string | null } | null };
+      const res = await fetch("/api/me");
+      const data = (await res.json()) as { user?: any };
+      const user = data.user;
 
-      const avatarBtn      = document.getElementById('avatar-btn');
-      const avatarInitials = document.getElementById('avatar-initials');
-      const avatarIcon     = document.getElementById('avatar-icon');
-      const avatarGuest    = document.getElementById('avatar-guest');
-      const avatarUser     = document.getElementById('avatar-user');
-      const avatarName     = document.getElementById('avatar-display-name');
+      const avatarBtn = document.getElementById("avatar-btn");
+      const avatarInitials = document.getElementById("avatar-initials");
+      const avatarIcon = document.getElementById("avatar-icon");
+      const avatarGuest = document.getElementById("avatar-guest");
+      const avatarUser = document.getElementById("avatar-user");
+      const avatarName = document.getElementById("avatar-display-name");
 
       // Mobile
-      const mobileSignin   = document.getElementById('mobile-signin-item');
-      const mobileRegister = document.getElementById('mobile-register-item');
-      const mobileLogout   = document.getElementById('mobile-logout-item');
+      const mobileSignin = document.getElementById("mobile-signin-item");
+      const mobileRegister = document.getElementById("mobile-register-item");
+      const mobileLogout = document.getElementById("mobile-logout-item");
 
       if (user && user.displayName) {
         // ── Logged in ──────────────────────────────────────────────────────────
-        const initials = user.avatarInitials || (user.displayName as string).split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
+        const initials =
+          user.avatarInitials ||
+          user.displayName
+            .split(" ")
+            .map((n: string) => n[0])
+            .join("")
+            .toUpperCase()
+            .slice(0, 2);
         if (avatarInitials) avatarInitials.textContent = initials;
-        if (avatarBtn)      avatarBtn.classList.add('is-logged-in');
-        if (avatarBtn)      avatarBtn.setAttribute('aria-label', user.displayName);
-        if (avatarGuest)    avatarGuest.style.display = 'none';
-        if (avatarUser)     avatarUser.style.display  = '';
-        if (avatarName)     avatarName.textContent     = user.displayName;
+        if (avatarBtn) avatarBtn.classList.add("is-logged-in");
+        if (avatarBtn) avatarBtn.setAttribute("aria-label", user.displayName);
+        if (avatarGuest) avatarGuest.style.display = "none";
+        if (avatarUser) avatarUser.style.display = "";
+        if (avatarName) avatarName.textContent = user.displayName;
         // Mobile
-        if (mobileSignin)   mobileSignin.style.display   = 'none';
-        if (mobileRegister) mobileRegister.style.display = 'none';
-        if (mobileLogout)   mobileLogout.style.display   = '';
+        if (mobileSignin) mobileSignin.style.display = "none";
+        if (mobileRegister) mobileRegister.style.display = "none";
+        if (mobileLogout) mobileLogout.style.display = "";
       } else {
         // ── Logged out ─────────────────────────────────────────────────────────
-        if (avatarGuest) avatarGuest.style.display = '';
-        if (avatarUser)  avatarUser.style.display  = 'none';
+        if (avatarGuest) avatarGuest.style.display = "";
+        if (avatarUser) avatarUser.style.display = "none";
         // Mobile already shows sign in by default
       }
     } catch {
@@ -430,28 +294,31 @@
   })();
 
   // ── Avatar dropdown toggle ──────────────────────────────────────────────────
-  const avatarBtn      = document.getElementById('avatar-btn');
-  const avatarDropdown = document.getElementById('avatar-dropdown');
+  const avatarBtn = document.getElementById("avatar-btn");
+  const avatarDropdown = document.getElementById("avatar-dropdown");
 
   if (avatarBtn && avatarDropdown) {
-    avatarBtn.addEventListener('click', (e) => {
+    avatarBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       const isOpen = !avatarDropdown.hidden;
       avatarDropdown.hidden = isOpen;
-      avatarBtn.setAttribute('aria-expanded', String(!isOpen));
+      avatarBtn.setAttribute("aria-expanded", String(!isOpen));
     });
 
-    document.addEventListener('click', (e) => {
-      if (!avatarDropdown.hidden && !avatarDropdown.contains(e.target as Node)) {
+    document.addEventListener("click", (e) => {
+      if (
+        !avatarDropdown.hidden &&
+        !avatarDropdown.contains(e.target as Node)
+      ) {
         avatarDropdown.hidden = true;
-        avatarBtn.setAttribute('aria-expanded', 'false');
+        avatarBtn.setAttribute("aria-expanded", "false");
       }
     });
 
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && !avatarDropdown.hidden) {
         avatarDropdown.hidden = true;
-        avatarBtn.setAttribute('aria-expanded', 'false');
+        avatarBtn.setAttribute("aria-expanded", "false");
         avatarBtn.focus();
       }
     });
@@ -461,9 +328,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     // ── Force modal hidden on init (JS-controlled, no CSS [hidden] attribute) ──
-    const searchModal = document.getElementById(
-      "search-modal",
-    ) as HTMLElement | null;
+    const searchModal = document.getElementById("search-modal") as HTMLElement | null;
     if (searchModal) searchModal.style.display = "none";
 
     // ── Hamburger ──────────────────────────────────────────────────────────────
@@ -482,45 +347,29 @@
       });
     }
 
-    // ── Theme toggle ───────────────────────────────────────────────────────────
-    function applyTheme(pref: string) {
-      const root = document.documentElement;
-      let resolved = pref;
-      if (pref === "system") {
-        resolved = window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+    // ── Newsletter modal ────────────────────────────────────────────────────────
+    function openNewsletterModal() {
+      const nlOverlay = document.getElementById("nl-modal-overlay");
+      if (nlOverlay) {
+        nlOverlay.hidden = false;
+        document.body.style.overflow = "hidden";
       }
-      root.setAttribute("data-theme", resolved);
-      root.setAttribute("data-theme-pref", pref);
-      localStorage.setItem("dai-theme", pref);
-      document
-        .querySelectorAll<HTMLButtonElement>("[data-theme-val]")
-        .forEach((btn) => {
-          btn.setAttribute(
-            "aria-pressed",
-            String(btn.dataset.themeVal === pref),
-          );
-        });
     }
 
-    const saved = localStorage.getItem("dai-theme") || "system";
-    document
-      .querySelectorAll<HTMLButtonElement>("[data-theme-val]")
-      .forEach((btn) => {
-        btn.setAttribute(
-          "aria-pressed",
-          String(btn.dataset.themeVal === saved),
-        );
-        btn.addEventListener("click", () => applyTheme(btn.dataset.themeVal!));
-      });
+    const navSubscribeBtn = document.getElementById("nav-subscribe-btn");
+    if (navSubscribeBtn) {
+      navSubscribeBtn.addEventListener("click", openNewsletterModal);
+    }
 
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", () => {
-        const pref = localStorage.getItem("dai-theme") || "system";
-        if (pref === "system") applyTheme("system");
+    const mobileSubscribeLink = document.getElementById("mobile-subscribe-link");
+    if (mobileSubscribeLink) {
+      mobileSubscribeLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        // Close the mobile menu
+        if (mainNav) mainNav.removeAttribute("data-open");
+        openNewsletterModal();
       });
+    }
 
     // ── Search modal ───────────────────────────────────────────────────────────
     const searchOpenBtn = document.getElementById("search-open-btn");
@@ -532,13 +381,11 @@
     let pagefindInitialised = false;
 
     function openSearch() {
-      searchModal!.style.display = "flex";
+      searchModal.style.display = "flex";
       document.body.style.overflow = "hidden";
 
-      if (pagefindInitialised) {
-        searchModal!
-          .querySelector<HTMLInputElement>("input[type=text]")
-          ?.focus();
+      if (pagefindInitialised && searchModal) {
+        (searchModal.querySelector("input[type=text]") as HTMLElement)?.focus();
         return;
       }
 
@@ -547,22 +394,13 @@
         window.location.hostname === "127.0.0.1";
 
       if (isDev) {
-        searchEl!.innerHTML = `
-          <div style="padding:32px 24px;color:#8a95a8;font-size:14px;
-                      font-family:var(--font-mono);text-align:center;line-height:1.9;">
-            <div style="font-size:32px;margin-bottom:12px;">🔍</div>
-            Search requires a production build.<br/>
-            Run <code style="color:#e8b84b;background:rgba(232,184,75,0.1);
-                             padding:2px 8px;border-radius:4px;">
-              npm run build &amp;&amp; npm run preview
-            </code><br/>to test search locally.
-          </div>`;
+        searchEl.innerHTML = `<div style="padding:32px 24px;color:#8a95a8;font-size:14px;font-family:var(--font-mono);text-align:center;line-height:1.9;"><div style="font-size:32px;margin-bottom:12px;">🔍</div>Search requires a production build.<br/>Run <code style="color:#e8b84b;background:rgba(232,184,75,0.1);padding:2px 8px;border-radius:4px;">npm run build &amp;&amp; npm run preview</code><br/>to test search locally.</div>`;
         pagefindInitialised = true;
         return;
       }
 
       // Production — lazy-load pagefind
-      const pagefindPath = ["", "pagefind", "pagefind-ui.js"].join("/");
+      const pagefindPath = "/_pagefind/pagefind-ui.js";
       // @ts-ignore
       import(/* @vite-ignore */ pagefindPath)
         .then(({ PagefindUI }) => {
@@ -574,23 +412,17 @@
           });
           pagefindInitialised = true;
           setTimeout(() => {
-            searchModal!
-              .querySelector<HTMLInputElement>("input[type=text]")
-              ?.focus();
+            if (searchModal) (searchModal.querySelector("input[type=text]") as HTMLElement)?.focus();
           }, 50);
         })
-        .catch((e: unknown) => {
+        .catch((e) => {
           console.warn("[Search] Pagefind failed to load:", e);
-          searchEl!.innerHTML = `
-          <div style="padding:24px;color:#8a95a8;text-align:center;
-                      font-family:var(--font-mono);font-size:14px;">
-            Search index not available.
-          </div>`;
+          searchEl.innerHTML = `<div style="padding:24px;color:#8a95a8;text-align:center;font-family:var(--font-mono);font-size:14px;">Search index not available.</div>`;
         });
     }
 
     function closeSearch() {
-      searchModal!.style.display = "none";
+      searchModal.style.display = "none";
       document.body.style.overflow = "";
     }
 
@@ -609,12 +441,12 @@
 <style>
   /* ── Navbar shell ─────────────────────────── */
   .navbar {
-    background: var(--nav-bg);
-    color: var(--nav-text);
+    background: var(--color-base);
+    color: var(--color-text-primary);
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid rgba(232, 184, 75, 0.1);
+    border-bottom: 1px solid var(--color-border);
   }
   .navbar-inner {
     max-width: var(--max-width);
@@ -633,23 +465,11 @@
     align-items: center;
     flex-shrink: 0;
   }
-  .navbar-logo .logo-dark,
-  .navbar-logo .logo-light {
-    display: none;
-    height: 38px;
+  .navbar-logo .logo {
+    display: block;
+    height: 56px;
     width: auto;
   }
-
-  /* 
-     Shared Mapping:
-     Using dark-logo.svg (white text) for both themes
-     because the header remains dark in both modes.
-  */
-  :global([data-theme="dark"]) .navbar-logo .logo-dark { display: block; }
-  :global([data-theme="light"]) .navbar-logo .logo-dark { display: block; }
-
-  /* Fallback */
-  :root:not([data-theme]) .logo-dark { display: block; }
 
   /* ── Desktop nav links ───────────────────── */
   .desktop-nav {
@@ -670,15 +490,13 @@
     font-weight: 500;
     padding: 8px 12px;
     border-radius: 6px;
-    color: rgba(244, 240, 232, 0.75);
-    transition:
-      color 0.15s,
-      background 0.15s;
+    color: var(--color-text-primary);
+    transition: var(--transition);
     white-space: nowrap;
   }
   .desktop-nav > li > a:hover {
-    color: #f4f0e8;
-    background: rgba(255, 255, 255, 0.07);
+    color: var(--color-gold);
+    background: rgba(255, 255, 255, 0.05);
   }
 
   /* ── Dropdown ─────────────────────────────── */
@@ -687,10 +505,10 @@
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    background: #111828;
-    border: 1px solid rgba(232, 184, 75, 0.15);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     padding: 6px;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
     list-style: none;
     min-width: 188px;
@@ -704,28 +522,26 @@
     display: block;
     font-size: 13.5px;
     padding: 9px 14px;
-    border-radius: 5px;
-    color: rgba(244, 240, 232, 0.75);
-    transition:
-      background 0.15s,
-      color 0.15s;
+    border-radius: var(--radius-md);
+    color: var(--color-text-primary);
+    transition: var(--transition);
   }
   .dropdown li a:hover {
-    background: rgba(232, 184, 75, 0.09);
-    color: #e8b84b;
+    background: rgba(245, 197, 24, 0.08);
+    color: var(--color-gold);
   }
 
   /* ── User menu items in About dropdown ──────── */
   .nav-hr {
     border: none;
-    border-top: 1px solid rgba(232, 184, 75, 0.15);
+    border-top: 1px solid var(--color-border);
     margin: 4px 0;
   }
   .nav-username {
     display: block;
     font-size: 12px;
     font-family: var(--font-mono);
-    color: #e8b84b;
+    color: var(--color-gold);
     padding: 6px 14px 4px;
     letter-spacing: 0.04em;
     white-space: nowrap;
@@ -739,29 +555,28 @@
     text-align: left;
     font-size: 13.5px;
     padding: 9px 14px;
-    border-radius: 5px;
-    color: rgba(244, 240, 232, 0.75);
+    border-radius: var(--radius-md);
+    color: var(--color-text-primary);
     background: none;
     border: none;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.15s, color 0.15s;
+    transition: var(--transition);
   }
   .nav-signout-btn:hover {
-    background: rgba(255, 80, 80, 0.12);
-    color: #ff6b6b;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-danger);
   }
   .nav-signin-link {
     display: block;
     font-size: 13.5px;
     padding: 9px 14px;
-    border-radius: 5px;
-    color: #e8b84b;
-    transition: background 0.15s, color 0.15s;
+    border-radius: var(--radius-md);
+    color: var(--color-gold);
+    transition: var(--transition);
   }
   .nav-signin-link:hover {
-    background: rgba(232, 184, 75, 0.09);
-    color: #e8b84b;
+    background: rgba(245, 197, 24, 0.08);
   }
 
   /* ── Nav actions ─────────────────────────── */
@@ -780,55 +595,16 @@
     width: 36px;
     height: 36px;
     background: none;
-    border: 1px solid rgba(244, 240, 232, 0.12);
-    border-radius: 8px;
-    color: rgba(244, 240, 232, 0.7);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
     cursor: pointer;
-    transition:
-      color 0.15s,
-      border-color 0.15s,
-      background 0.15s;
+    transition: var(--transition);
   }
   .icon-btn:hover {
-    color: #f4f0e8;
-    border-color: rgba(232, 184, 75, 0.4);
-    background: rgba(232, 184, 75, 0.07);
-  }
-
-  /* ── Theme toggle ─────────────────────────── */
-  .theme-toggle {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(244, 240, 232, 0.1);
-    border-radius: 8px;
-    padding: 3px;
-    gap: 1px;
-  }
-  .theme-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 30px;
-    height: 28px;
-    background: none;
-    border: none;
-    border-radius: 5px;
-    color: rgba(244, 240, 232, 0.45);
-    cursor: pointer;
-    transition:
-      color 0.15s,
-      background 0.15s;
-    padding: 0 6px;
-  }
-  .theme-btn:hover {
-    color: rgba(244, 240, 232, 0.85);
-    background: rgba(255, 255, 255, 0.06);
-  }
-  .theme-btn[aria-pressed="true"] {
-    background: rgba(232, 184, 75, 0.15);
-    color: #e8b84b;
+    color: var(--color-text-primary);
+    border-color: var(--color-gold);
+    background: rgba(245, 197, 24, 0.05);
   }
 
   /* ── Hide on mobile ──────────────────────── */
@@ -859,6 +635,76 @@
     border-color: rgba(232, 184, 75, 0.4);
   }
 
+  /* ── Avatar Dropdown ──────────────────────── */
+  .avatar-wrap {
+    position: relative;
+  }
+  .avatar-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+  }
+  .avatar-btn.is-logged-in {
+    background: #2a3441;
+  }
+  .avatar-initials {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .is-logged-in #avatar-icon {
+    display: none;
+  }
+  .avatar-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 200px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    z-index: 200;
+  }
+  .avatar-item {
+    display: block;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  .avatar-item:hover {
+    background: rgba(232, 184, 75, 0.1);
+    color: var(--color-gold);
+  }
+  .avatar-item--btn {
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .avatar-display-name {
+    padding: 8px 14px 4px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--color-gold);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .avatar-rule {
+    border-top: 1px solid var(--color-border);
+    margin: 4px 0;
+  }
+
   /* ── Mobile nav ───────────────────────────── */
   .mobile-nav {
     display: none;
@@ -880,34 +726,6 @@
   }
   .mobile-nav li a:hover {
     color: #e8b84b;
-  }
-  .mobile-theme-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 0 4px;
-  }
-  .mobile-theme-label {
-    font-size: 12px;
-    font-family: var(--font-mono);
-    color: rgba(244, 240, 232, 0.4);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .theme-toggle--mobile {
-    background: rgba(255, 255, 255, 0.05);
-  }
-  .theme-toggle--mobile .theme-btn {
-    width: auto;
-    padding: 0 10px;
-    height: 30px;
-    font-size: 12px;
-    font-family: var(--font-mono);
-    gap: 6px;
-  }
-  .theme-toggle--mobile .theme-btn span {
-    letter-spacing: 0.04em;
-    font-size: 11px;
   }
 
   /* ── Open state ───────────────────────────── */
@@ -936,8 +754,6 @@
   }
 
   /* ── Search Modal ─────────────────────────── */
-  /* NOTE: display is controlled entirely by JS (style.display),
-     never by CSS or the [hidden] attribute, to avoid SSR/hydration conflicts */
   .search-modal {
     position: fixed;
     inset: 0;
@@ -963,160 +779,71 @@
     background: #111828;
     border: 1px solid rgba(232, 184, 75, 0.2);
     border-radius: 12px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
-    z-index: 1;
   }
-
-  /* ── PageFind UI overrides ────────────────── */
-  :global(.search-container .pagefind-ui) {
-    --pagefind-ui-scale: 0.9;
-    --pagefind-ui-primary: #e8b84b;
-    --pagefind-ui-text: #f4f0e8;
-    --pagefind-ui-background: #111828;
-    --pagefind-ui-border: rgba(232, 184, 75, 0.18);
-    --pagefind-ui-tag: #1a2540;
-    font-family: var(--font-body);
-  }
-  :global(.search-container .pagefind-ui__search-input) {
-    background: #111828 !important;
-    color: #f4f0e8 !important;
-    border-bottom: 1px solid rgba(232, 184, 75, 0.18) !important;
-    border-radius: 0 !important;
-    padding: 18px 20px !important;
-    font-size: 16px !important;
-  }
-  :global(.search-container .pagefind-ui__search-input:focus) {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-  :global(.search-container .pagefind-ui__results-area) {
-    max-height: 60vh;
+  #search {
+    padding: 16px;
+    background: transparent;
+    max-height: calc(100vh - 200px);
     overflow-y: auto;
-    padding: 8px 0;
   }
-  :global(.search-container .pagefind-ui__result) {
-    padding: 14px 20px !important;
-    border-bottom: 1px solid rgba(232, 184, 75, 0.08) !important;
-  }
-  :global(.search-container .pagefind-ui__result:hover) {
-    background: rgba(232, 184, 75, 0.06) !important;
-  }
-  :global(.search-container .pagefind-ui__result-title) {
-    color: #f4f0e8 !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-  }
-  :global(.search-container .pagefind-ui__result-excerpt) {
-    color: #8a95a8 !important;
-    font-size: 13px !important;
-  }
-  :global(.search-container mark) {
-    background: rgba(232, 184, 75, 0.25) !important;
-    color: #e8b84b !important;
-    border-radius: 2px;
-    padding: 0 2px;
-  }
-  /* ── Avatar / Account menu ───────────────── */
-  .avatar-wrap {
-    position: relative;
-  }
-  .avatar-btn {
-    position: relative;
-    overflow: hidden;
-  }
-  /* Initials circle — replaces icon when logged in */
-  .avatar-initials {
-    display: none;
-    font-size: 11px;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: #080d1a;
-    background: var(--gold);
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    line-height: 22px;
-    text-align: center;
-  }
-  .avatar-btn.is-logged-in .avatar-initials {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .avatar-btn.is-logged-in #avatar-icon {
-    display: none;
-  }
-  .avatar-btn.is-logged-in {
-    border-color: rgba(232, 184, 75, 0.5);
-  }
-
-  /* Dropdown panel */
-  .avatar-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    min-width: 180px;
-    background: #111828;
-    border: 1px solid rgba(232, 184, 75, 0.18);
-    border-radius: 10px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
-    padding: 6px;
-    z-index: 500;
-    animation: avatar-drop-in 0.12s ease;
-  }
-  .avatar-dropdown[hidden] {
-    display: none !important;
-  }
-  @keyframes avatar-drop-in {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Dropdown items */
-  .avatar-item {
-    display: block;
+  /* Pagefind UI overrides */
+  #search :global(.pagefind-ui__search-input) {
     width: 100%;
-    padding: 9px 14px;
-    font-size: 13.5px;
-    font-family: var(--font-body);
-    font-weight: 500;
-    color: rgba(244, 240, 232, 0.75);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.12s, color 0.12s;
-    white-space: nowrap;
-    text-align: left;
+    padding: 12px 16px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 24px;
+    outline: none;
   }
-  .avatar-item:hover {
-    background: rgba(232, 184, 75, 0.1);
-    color: var(--gold);
+  #search :global(.pagefind-ui__search-input:focus) {
+    border-color: #e8b84b;
+    background: rgba(255, 255, 255, 0.05);
   }
-  .avatar-item--btn {
+  #search :global(.pagefind-ui__search-clear) {
     background: none;
     border: none;
-    font-size: 13.5px;
-    color: rgba(244, 240, 232, 0.75);
+    color: #8a95a8;
+    cursor: pointer;
   }
-
-  /* Display name header inside dropdown */
-  .avatar-display-name {
-    padding: 8px 14px 6px;
-    font-size: 12px;
-    font-family: var(--font-mono);
-    color: var(--gold);
+  #search :global(.pagefind-ui__result) {
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    margin-bottom: 1px;
+  }
+  #search :global(.pagefind-ui__result-link) {
+    display: block;
+    padding: 16px;
+    background: transparent;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  #search :global(.pagefind-ui__result-link:hover) {
+    background: rgba(232, 184, 75, 0.08);
+  }
+  #search :global(.pagefind-ui__result-title) {
+    font-family: var(--font-display);
+    font-size: 16px;
     font-weight: 600;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px;
+    margin-bottom: 4px;
+    color: #fff;
   }
-  .avatar-rule {
-    height: 1px;
-    background: var(--color-border);
-    margin: 4px 8px;
+  #search :global(.pagefind-ui__result-excerpt) {
+    font-size: 13.5px;
+    color: #8a95a8;
+    line-height: 1.5;
+  }
+  #search :global(.pagefind-ui__result-excerpt mark) {
+    background: rgba(232, 184, 75, 0.2);
+    color: #e8b84b;
+    padding: 0 2px;
+    border-radius: 2px;
   }
 </style>

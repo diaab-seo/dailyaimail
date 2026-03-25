@@ -4,118 +4,45 @@ import Breadcrumb from "../components/Breadcrumb.astro";
 import NewsCard from "../components/NewsCard.astro";
 import type { Article } from "../data/articles";
 import { tagColor, topicToSlug } from "../data/articles";
+import PaginationNav from "../components/PaginationNav.astro";
 
 export interface Props {
     tag: string;
     articles: Article[];
+    page?: any;
 }
 
-const { tag, articles } = Astro.props;
+const { tag, articles, page } = Astro.props;
 const color = tagColor(tag);
 const count = articles.length;
 const slug = topicToSlug(tag);
 
 const SITE_URL = "https://dailyaimail.news";
-const topicUrl = `${SITE_URL}/topics/${slug}`;
-const logoUrl = `${SITE_URL}/dark-logo.svg`;
+const baseTopicUrl = `${SITE_URL}/topics/${slug}`;
+const topicUrl = page && page.currentPage > 1 ? `${baseTopicUrl}/${page.currentPage}` : baseTopicUrl;
+const logoUrl = `${SITE_URL}/daily-ai-mail-logo.svg`;
 const latestIso =
     articles.length > 0
         ? [...articles].sort((a, b) => b.isoDate.localeCompare(a.isoDate))[0]
               .isoDate
         : new Date().toISOString().split("T")[0];
 
-const topicMeta: Record<
-    string,
-    { description: string; keywords: string[]; sameAs: string[] }
-> = {
-    Anthropic: {
-        description:
-            "Latest news, research, and product releases from Anthropic, the AI safety company behind the Claude family of large language models.",
-        keywords: [
-            "Anthropic",
-            "Claude",
-            "Constitutional AI",
-            "AI safety",
-            "large language models",
-            "LLM",
-        ],
-        sameAs: [
-            "https://www.wikidata.org/wiki/Q116820069",
-            "https://en.wikipedia.org/wiki/Anthropic",
-        ],
-    },
-    "Google AI": {
-        description:
-            "Coverage of Google's artificial intelligence research and products, including Gemini, DeepMind, Google Labs, and AI integrations across Google's product suite.",
-        keywords: [
-            "Google AI",
-            "Gemini",
-            "DeepMind",
-            "Google DeepMind",
-            "AI research",
-            "machine learning",
-        ],
-        sameAs: ["https://www.wikidata.org/wiki/Q95"],
-    },
-    OpenAI: {
-        description:
-            "News and analysis covering OpenAI's models, products, and research — including GPT, ChatGPT, DALL-E, Sora, and the company's safety and governance decisions.",
-        keywords: [
-            "OpenAI",
-            "ChatGPT",
-            "GPT-5",
-            "Sora",
-            "DALL-E",
-            "AI models",
-            "generative AI",
-        ],
-        sameAs: [
-            "https://www.wikidata.org/wiki/Q21708200",
-            "https://en.wikipedia.org/wiki/OpenAI",
-        ],
-    },
-    "Meta AI": {
-        description:
-            "Reports on Meta's artificial intelligence division, covering Llama open-source models, AI research publications, and AI features across Meta's platforms.",
-        keywords: [
-            "Meta AI",
-            "Llama",
-            "open source AI",
-            "Meta",
-            "Facebook AI",
-            "large language models",
-        ],
-        sameAs: ["https://www.wikidata.org/wiki/Q380"],
-    },
-    "Tools & Apps": {
-        description:
-            "Reviews, comparisons, and release coverage of AI-powered tools, productivity applications, developer utilities, and consumer AI products.",
-        keywords: [
-            "AI tools",
-            "AI apps",
-            "AI software",
-            "productivity AI",
-            "AI assistants",
-            "developer tools",
-        ],
-        sameAs: [],
-    },
-    "Policy & Ethics": {
-        description:
-            "Reporting on artificial intelligence regulation, governance frameworks, safety research, ethical debates, and legislative developments worldwide.",
-        keywords: [
-            "AI policy",
-            "AI regulation",
-            "AI ethics",
-            "AI governance",
-            "AI safety",
-            "EU AI Act",
-        ],
-        sameAs: ["https://www.wikidata.org/wiki/Q30059493"],
-    },
+// Function to generate dynamic description based on article keywords
+const getDynamicDescription = (topicName: string, articles: Article[]) => {
+    const allKeywords = [...new Set(articles.flatMap(a => a.keywords || []))].filter(k => k.toLowerCase() !== topicName.toLowerCase());
+    const selectedKeywords = allKeywords.slice(0, 4);
+    const keywordsSentence = selectedKeywords.length > 0 
+        ? ` Covering ${selectedKeywords.slice(0, -1).join(', ')}${selectedKeywords.length > 1 ? ' and ' : ''}${selectedKeywords.slice(-1)}.`
+        : "";
+    
+    return `The latest ${topicName} news, analysis, and updates for AI researchers, engineers, and business leaders.${keywordsSentence}`;
 };
-const meta = topicMeta[tag] ?? {
-    description: `The latest ${tag} news, research and updates from Daily AI Mail.`,
+
+const pageTitle = `${tag} Recent News and Updates - Daily AI Mail`;
+const pageDescription = getDynamicDescription(tag, articles);
+
+const meta = {
+    description: pageDescription,
     keywords: [tag, "AI", "artificial intelligence"],
     sameAs: [],
 };
@@ -141,9 +68,9 @@ const schema = {
             "@type": "CollectionPage",
             "@id": topicUrl,
             url: topicUrl,
-            name: `${tag} News & Research — Daily AI Mail`,
+            name: pageTitle,
             headline: `${tag} News`,
-            description: meta.description,
+            description: pageDescription,
             keywords: meta.keywords,
             inLanguage: "en-US",
             isPartOf: { "@id": `${SITE_URL}/#website` },
@@ -186,7 +113,7 @@ const schema = {
                         datePublished: `${a.isoDate}T00:00:00+00:00`,
                         url: `${SITE_URL}/articles/${a.slug}`,
                         author: {
-                            "@id": `${SITE_URL}/#/schema/person/mohamed-diab`,
+                            "@id": `${SITE_URL}/#/schema/person/editorial-team`,
                         },
                         publisher: { "@id": `${SITE_URL}/#organization` },
                     },
@@ -244,17 +171,29 @@ const schema = {
         },
     ],
 };
+
+if (page && page.currentPage > 1) {
+    schema["@graph"].push({
+        "@type": "CollectionPage",
+        "@id": topicUrl,
+        "url": topicUrl,
+        "isPartOf": { "@id": baseTopicUrl },
+        "name": `${tag} News — Page ${page.currentPage} — Daily AI Mail`
+    } as any);
+}
 ---
 
 <Layout
-    title={`${tag} News — Daily AI Mail`}
-    description={meta.description}
-    metaTitle={`${tag} News & Research — Daily AI Mail`}
+    title={pageTitle}
+    description={pageDescription}
+    metaTitle={pageTitle}
     canonical={topicUrl}
     ogType="website"
-    ogTitle={`${tag} News & Research — Daily AI Mail`}
-    ogDescription={meta.description}
+    ogTitle={pageTitle}
+    ogDescription={pageDescription}
 >
+    {page && page.url.prev && <link rel="prev" href={page.url.prev} slot="head" />}
+    {page && page.url.next && <link rel="next" href={page.url.next} slot="head" />}
     <script
         type="application/ld+json"
         set:html={JSON.stringify(schema)}
@@ -298,11 +237,13 @@ const schema = {
                             date={a.date}
                             author={a.author}
                             readingTime={a.readingTime}
+                            image={a.image}
                             href={`/articles/${a.slug}`}
                         />
                     ))
                 }
             </div>
+            {page && <PaginationNav page={page} />}
         </div>
     </div>
 </Layout>
@@ -321,30 +262,30 @@ const schema = {
     }
     .cat-tag {
         display: inline-block;
-        font-size: 11px;
+        font-size: 0.7rem;
+        font-family: var(--font-mono);
         font-weight: 600;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.05em;
         text-transform: uppercase;
         padding: 4px 14px;
-        border-radius: 999px;
+        border-radius: var(--radius-sm);
         align-self: flex-start;
     }
     .cat-title {
-        font-family: var(--font-display);
+        font-family: var(--font-sans);
+        font-weight: 700;
         font-size: clamp(36px, 5vw, 64px);
         line-height: 1.05;
+        color: var(--color-text-primary);
     }
     .cat-subtitle {
         font-size: 16px;
-        color: var(--color-text-muted);
+        color: var(--color-text-secondary);
     }
     .cat-content {
         max-width: var(--max-width);
         margin: 0 auto;
         padding: 48px var(--gutter) 80px;
-    }
-    .cat-inner {
-        width: 100%;
     }
     .cat-grid {
         display: grid;

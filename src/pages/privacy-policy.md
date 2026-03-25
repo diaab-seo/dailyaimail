@@ -5,7 +5,7 @@ metaTitle: "Privacy Policy — Daily AI Mail"
 description: "How Daily AI Mail collects, uses, stores, and protects your personal data. Full privacy policy in plain language."
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
-author: "Mohamed Diab"
+author: "Daily AI Mail Editorial Staff"
 schemaType: "privacy"
 ---
 
@@ -19,9 +19,9 @@ This policy was last updated on **15 March 2026**. When material changes are mad
 
 ## 1. Who We Are
 
-Daily AI Mail is an independent digital publication covering artificial intelligence news, research, and technology. The publication is operated by Mohamed Diab, trading as Interactive SEO Digital, based in Egypt.
+Daily AI Mail is an independent digital publication covering artificial intelligence news, research, and technology. The publication is operated by Daily AI Mail Editorial Staff, trading as Interactive SEO Digital, based in Egypt.
 
-For data protection purposes, Mohamed Diab is the data controller responsible for personal data collected through this website.
+For data protection purposes, Daily AI Mail Editorial Staff is the data controller responsible for personal data collected through this website.
 
 **Contact for privacy matters:** privacy@dailyaimail.news
 

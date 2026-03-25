@@ -29,6 +29,7 @@ export default defineConfig({
                 '/publishing-principles',
                 '/press-kit',
                 '/news-sitemap.xml',
+                '/rss.xml',
                 '/sitemap*',
             ],
         },

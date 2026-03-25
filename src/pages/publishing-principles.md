@@ -5,7 +5,7 @@ metaTitle: "Publishing Principles & Editorial Standards — Daily AI Mail"
 description: "The editorial standards, sourcing requirements, correction policy, and publishing principles that govern all content on Daily AI Mail."
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
-author: "Mohamed Diab"
+author: "Daily AI Mail Editorial Staff"
 schemaType: "publishing-principles"
 ---
 
