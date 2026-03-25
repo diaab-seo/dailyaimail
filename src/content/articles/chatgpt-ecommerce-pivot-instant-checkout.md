@@ -7,7 +7,7 @@ date: "Mar 25, 2026"
 isoDate: "2026-03-25"
 modifiedDate: "2026-03-25"
 author: "Daily AI Mail Editorial Staff"
-authorUrl: ""
+authorUrl: "https://dailyaimail.news/about-us/editorial-team"
 readingTime: "4 min read"
 image: "/images/chatgpt-ecommerce-pivot-instant-checkout.png"
 imageWidth: 1200
