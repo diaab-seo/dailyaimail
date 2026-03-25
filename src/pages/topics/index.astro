@@ -9,19 +9,25 @@ import {
 } from "../../data/articles";
 import Layout from "../../layouts/Layout.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
-import NewsCard from "../../components/NewsCard.astro";
 
 const allArticles = await getArticles();
 const allCategories = await getAllCategories();
 
-// Sort newest first by default
-const sorted = [...allArticles].sort((a, b) =>
-    b.isoDate.localeCompare(a.isoDate),
+// Count articles per topic slug
+const topicCounts: Record<string, number> = {};
+for (const a of allArticles) {
+    const slug = topicToSlug(a.tag);
+    topicCounts[slug] = (topicCounts[slug] ?? 0) + 1;
+}
+
+// Sort topics by article count descending
+const sortedTopics = [...allCategories].sort(
+    (a, b) =>
+        (topicCounts[topicToSlug(b)] ?? 0) - (topicCounts[topicToSlug(a)] ?? 0),
 );
 
 const SITE_URL = "https://dailyaimail.news";
 
-// Schema for the topics index page
 const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -77,6 +83,8 @@ const schema = {
         },
     ],
 };
+
+const ITEMS_PER_PAGE = 24;
 ---
 
 <Layout
@@ -98,142 +106,182 @@ const schema = {
         <div class="topics-hero-inner">
             <h1 class="topics-title">All Topics</h1>
             <p class="topics-sub">
-                {allArticles.length} articles across {allCategories.length} topics
+                {allArticles.length} articles across {sortedTopics.length} topics
             </p>
         </div>
     </div>
 
-    <!-- Topic pills -->
-    <div class="topics-filter-bar">
-        <div class="topics-filter-inner">
-            <div class="filter-row">
-                <!-- Topic chips -->
-                <div
-                    class="chip-group"
-                    role="group"
-                    aria-label="Filter by topic"
+    <!-- Search bar -->
+    <div class="search-bar-wrap">
+        <div class="search-bar-inner">
+            <div class="search-field">
+                <svg
+                    class="search-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                 >
-                    <button class="chip chip--active" data-filter-topic="all"
-                        >All Topics</button
-                    >
-                    {
-                        allCategories.map((tag) => (
-                            <button
-                                class="chip"
-                                data-filter-topic={topicToSlug(tag)}
-                                style={`--chip-color:${tagColor(tag)};`}
-                            >
-                                {tag}
-                            </button>
-                        ))
-                    }
-                </div>
-
-                <!-- Sort -->
-                <div class="sort-group">
-                    <label for="sort-select" class="sort-label">Sort:</label>
-                    <select id="sort-select" class="sort-select">
-                        <option value="newest">Newest first</option>
-                        <option value="oldest">Oldest first</option>
-                    </select>
-                </div>
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                    id="topic-search"
+                    type="search"
+                    class="search-input"
+                    placeholder="Search topics…"
+                    autocomplete="off"
+                    spellcheck="false"
+                />
             </div>
-
-            <!-- Result count -->
-            <p class="result-count" id="result-count">
-                {allArticles.length} articles
+            <p class="search-count" id="search-count">
+                {sortedTopics.length} topics
             </p>
         </div>
     </div>
 
-    <!-- Article grid -->
-    <div class="topics-content">
-        <div class="topics-inner">
+    <!-- Topics directory grid -->
+    <div class="topics-directory">
+        <div class="topics-directory-inner">
             <div class="topics-grid" id="topics-grid">
                 {
-                    sorted.map((a) => (
-                        <div
-                            class="article-card-wrap"
-                            data-topic={topicToSlug(a.tag)}
-                            data-isodate={a.isoDate}
-                        >
-                            <NewsCard
-                                tag={a.tag}
-                                headline={a.headline}
-                                excerpt={a.excerpt}
-                                date={a.date}
-                                author={a.author}
-                                readingTime={a.readingTime}
-                                href={`/articles/${a.slug}`}
-                            />
-                        </div>
-                    ))
+                    sortedTopics.map((tag) => {
+                        const slug = topicToSlug(tag);
+                        const count = topicCounts[slug] ?? 0;
+                        const color = tagColor(tag);
+                        return (
+                            <a
+                                href={`/topics/${slug}`}
+                                class="topic-card"
+                                data-name={tag.toLowerCase()}
+                                style={`--tc: ${color};`}
+                            >
+                                <span
+                                    class="topic-dot"
+                                    style={`background: ${color};`}
+                                />
+                                <div class="topic-info">
+                                    <span class="topic-name">{tag}</span>
+                                    <span class="topic-count">
+                                        {count} article{count !== 1 ? "s" : ""}
+                                    </span>
+                                </div>
+                                <svg
+                                    class="topic-arrow"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                    <polyline points="12 5 19 12 12 19" />
+                                </svg>
+                            </a>
+                        );
+                    })
                 }
             </div>
 
-            <!-- Empty state -->
             <p class="no-results" id="no-results" style="display:none;">
-                No articles found for this topic. Try selecting a different
-                filter.
+                No topics match your search.
             </p>
+
+            <!-- Pagination controls -->
+            <nav class="topics-pagination" id="topics-pagination" aria-label="Topics pagination">
+                <button id="topics-prev" class="page-btn" aria-label="Previous page" disabled>← Previous</button>
+                <span id="topics-page-info" class="page-info"></span>
+                <button id="topics-next" class="page-btn" aria-label="Next page">Next →</button>
+            </nav>
         </div>
     </div>
 </Layout>
 
-<script>
-    const grid = document.getElementById("topics-grid")!;
-    const cards = () =>
-        Array.from(grid.querySelectorAll<HTMLElement>(".article-card-wrap"));
-    const count = document.getElementById("result-count")!;
-    const empty = document.getElementById("no-results")!;
-    const sort = document.getElementById("sort-select") as unknown as HTMLSelectElement;
-    const chips = document.querySelectorAll<HTMLButtonElement>(
-        ".chip[data-filter-topic]",
-    );
+<script define:vars={{ ITEMS_PER_PAGE }}>
+    const input = document.getElementById("topic-search");
+    const grid = document.getElementById("topics-grid");
+    const countEl = document.getElementById("search-count");
+    const noResults = document.getElementById("no-results");
+    const pagination = document.getElementById("topics-pagination");
+    const prevBtn = document.getElementById("topics-prev");
+    const nextBtn = document.getElementById("topics-next");
+    const pageInfo = document.getElementById("topics-page-info");
 
-    let activeTopic = "all";
+    const allCards = Array.from(grid.querySelectorAll(".topic-card"));
+    let filteredCards = allCards;
+    let currentPage = 1;
 
-    function applyFilters() {
-        const sortDir = sort.value;
-        let visible = cards().filter((c) => {
-            return activeTopic === "all" || c.dataset.topic === activeTopic;
-        });
-
-        // Sort
-        visible.sort((a, b) => {
-            const da = a.dataset.isodate ?? "";
-            const db = b.dataset.isodate ?? "";
-            return sortDir === "newest"
-                ? db.localeCompare(da)
-                : da.localeCompare(db);
-        });
-
-        // Hide all, reorder & show matching
-        cards().forEach((c) => {
-            c.style.display = "none";
-        });
-        visible.forEach((c) => {
-            c.style.display = "";
-            grid.appendChild(c);
-        });
-
-        count.textContent = `${visible.length} article${visible.length !== 1 ? "s" : ""}`;
-        empty.style.display = visible.length === 0 ? "" : "none";
+    function totalPages() {
+        return Math.max(1, Math.ceil(filteredCards.length / ITEMS_PER_PAGE));
     }
 
-    chips.forEach((chip) => {
-        chip.addEventListener("click", () => {
-            chips.forEach((c) => c.classList.remove("chip--active"));
-            chip.classList.add("chip--active");
-            activeTopic = chip.dataset.filterTopic ?? "all";
-            applyFilters();
-        });
+    function render() {
+        const total = totalPages();
+        const start = (currentPage - 1) * ITEMS_PER_PAGE;
+        const end = start + ITEMS_PER_PAGE;
+
+        allCards.forEach((c) => (c.style.display = "none"));
+        const visible = filteredCards.slice(start, end);
+        visible.forEach((c) => (c.style.display = ""));
+
+        // Count label
+        countEl.textContent = `${filteredCards.length} topic${filteredCards.length !== 1 ? "s" : ""}`;
+
+        // No results
+        noResults.style.display = filteredCards.length === 0 ? "" : "none";
+
+        // Pagination visibility: hide if only 1 page and no search active
+        const searchActive = input.value.trim() !== "";
+        if (total <= 1 && !searchActive) {
+            pagination.style.display = "none";
+        } else {
+            pagination.style.display = "flex";
+            pageInfo.textContent = `Page ${currentPage} of ${total}`;
+            prevBtn.disabled = currentPage <= 1;
+            nextBtn.disabled = currentPage >= total;
+        }
+    }
+
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            render();
+            grid.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     });
 
-    sort.addEventListener("change", applyFilters);
+    nextBtn.addEventListener("click", () => {
+        if (currentPage < totalPages()) {
+            currentPage++;
+            render();
+            grid.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    });
+
+    input.addEventListener("input", () => {
+        const q = input.value.toLowerCase().trim();
+        filteredCards = q
+            ? allCards.filter((c) => (c.dataset.name ?? "").includes(q))
+            : allCards;
+        currentPage = 1;
+        render();
+    });
+
+    // Initial render
+    render();
 </script>
 
 <style>
+    /* ── Hero ── */
     .topics-hero {
         background: var(--color-surface);
         border-bottom: 1px solid var(--color-border);
@@ -257,123 +305,146 @@ const schema = {
         color: var(--color-text-muted);
     }
 
-    .topics-filter-bar {
+    /* ── Search bar ── */
+    .search-bar-wrap {
         border-bottom: 1px solid var(--color-border);
         padding: 20px 0;
+        background: var(--color-bg);
         position: sticky;
         top: 0;
-        background: var(--color-bg);
         z-index: 10;
     }
-    .topics-filter-inner {
+    .search-bar-inner {
         max-width: var(--max-width);
         margin: 0 auto;
         padding: 0 var(--gutter);
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-    .filter-row {
-        display: flex;
-        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
+        gap: 16px;
     }
-    .chip-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+    .search-field {
+        position: relative;
+        flex: 1;
+        max-width: 480px;
     }
-
-    .chip {
-        display: inline-flex;
-        align-items: center;
-        padding: 6px 16px;
-        border-radius: 999px;
-        border: 1px solid var(--color-border);
-        background: transparent;
+    .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
         color: var(--color-text-muted);
-        font-size: 13px;
-        font-family: var(--font-mono);
-        cursor: pointer;
-        transition: all 0.15s;
-        white-space: nowrap;
+        pointer-events: none;
     }
-    /* Non-active hover — tinted background, chip-colored text */
-    .chip:not(.chip--active):hover {
-        background: color-mix(
-            in srgb,
-            var(--chip-color, var(--gold)) 12%,
-            transparent
-        );
-        border-color: var(--chip-color, var(--gold));
-        color: var(--chip-color, var(--gold));
-    }
-    /* Active state */
-    .chip--active {
-        background: var(--chip-color, var(--gold));
-        border-color: var(--chip-color, var(--gold));
-        color: #fff;
-    }
-    /* Active hover — keep white text, just dim slightly */
-    .chip--active:hover {
-        background: var(--chip-color, var(--gold));
-        border-color: var(--chip-color, var(--gold));
-        color: #fff;
-        opacity: 0.85;
-    }
-    /* All Topics chip overrides */
-    .chip[data-filter-topic="all"].chip--active {
-        background: var(--gold);
-        border-color: var(--gold);
-        color: #080d1a;
-    }
-    .chip[data-filter-topic="all"].chip--active:hover {
-        color: #080d1a;
-        opacity: 0.85;
-    }
-
-    .sort-group {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .sort-label {
-        font-size: 12px;
-        font-family: var(--font-mono);
-        color: var(--color-text-muted);
-    }
-    .sort-select {
-        font-size: 13px;
-        font-family: var(--font-mono);
-        padding: 6px 10px;
+    .search-input {
+        width: 100%;
+        padding: 9px 14px 9px 38px;
         border: 1px solid var(--color-border);
-        border-radius: 4px;
+        border-radius: 6px;
         background: var(--color-surface);
         color: var(--color-text);
-        cursor: pointer;
+        font-size: 14px;
+        font-family: var(--font-mono);
+        outline: none;
+        transition: border-color 0.15s;
     }
-
-    .result-count {
+    .search-input:focus {
+        border-color: var(--color-gold);
+    }
+    .search-input::placeholder {
+        color: var(--color-text-muted);
+    }
+    /* hide browser clear button */
+    .search-input::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+    }
+    .search-count {
         font-size: 12px;
         font-family: var(--font-mono);
         color: var(--color-text-muted);
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
-    .topics-content {
+    /* ── Directory grid ── */
+    .topics-directory {
         max-width: var(--max-width);
         margin: 0 auto;
         padding: 48px var(--gutter) 80px;
     }
-    .topics-inner {
+    .topics-directory-inner {
         width: 100%;
     }
     .topics-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 28px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
     }
+
+    /* ── Topic card ── */
+    .topic-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        background: var(--color-surface);
+        text-decoration: none;
+        color: var(--color-text);
+        transition:
+            border-color 0.15s,
+            box-shadow 0.15s,
+            transform 0.15s;
+    }
+    .topic-card:hover {
+        border-color: var(--tc, var(--color-gold));
+        box-shadow: 0 2px 12px
+            color-mix(in srgb, var(--tc, var(--color-gold)) 15%, transparent);
+        transform: translateY(-1px);
+        text-decoration: none;
+    }
+    .topic-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+    .topic-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .topic-name {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.3;
+        color: var(--color-text-primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .topic-count {
+        font-size: 11px;
+        font-family: var(--font-mono);
+        color: var(--color-text-muted);
+    }
+    .topic-arrow {
+        color: var(--color-text-muted);
+        flex-shrink: 0;
+        opacity: 0;
+        transition:
+            opacity 0.15s,
+            transform 0.15s;
+    }
+    .topic-card:hover .topic-arrow {
+        opacity: 1;
+        color: var(--tc, var(--color-gold));
+        transform: translateX(2px);
+    }
+
     .no-results {
         text-align: center;
         padding: 60px 0;
@@ -381,12 +452,58 @@ const schema = {
         font-size: 16px;
     }
 
-    @media (max-width: 1024px) {
+    /* ── Pagination ── */
+    .topics-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        padding: 40px 0 0;
+    }
+    .page-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 20px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-border);
+        background: transparent;
+        color: var(--color-text-secondary);
+        font-size: 14px;
+        font-family: var(--font-sans);
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition: var(--transition);
+    }
+    .page-btn:hover:not(:disabled) {
+        color: var(--color-gold);
+        border-color: var(--color-gold);
+        background: rgba(245, 197, 24, 0.05);
+    }
+    .page-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        color: var(--color-text-hint);
+    }
+    .page-info {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        color: var(--color-gold);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1200px) {
+        .topics-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (max-width: 900px) {
         .topics-grid {
             grid-template-columns: repeat(2, 1fr);
         }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 500px) {
         .topics-grid {
             grid-template-columns: 1fr;
         }

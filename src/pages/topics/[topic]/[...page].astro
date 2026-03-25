@@ -1,0 +1,27 @@
+---
+import {
+    getAllCategories,
+    getArticlesByCategory,
+    topicToSlug,
+} from "../../../data/articles";
+import TopicLayout from "../../../layouts/TopicLayout.astro";
+
+export async function getStaticPaths({ paginate }: any) {
+    const categories = await getAllCategories();
+    const paths = await Promise.all(
+        categories.map(async (tag) => {
+            const articles = await getArticlesByCategory(tag);
+            return paginate(articles.sort((a, b) => b.isoDate.localeCompare(a.isoDate)), {
+                params: { topic: topicToSlug(tag) },
+                props: { tag },
+                pageSize: 12,
+            });
+        })
+    );
+    return paths.flat();
+}
+
+const { tag, page } = Astro.props;
+---
+
+<TopicLayout tag={tag} articles={page.data} page={page} />

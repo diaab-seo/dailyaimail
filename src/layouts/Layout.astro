@@ -1,6 +1,8 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import NewsletterModal from "../components/NewsletterModal.astro";
+import "../styles/global.css";
 
 interface Props {
   title?: string;
@@ -34,11 +36,11 @@ const ogImage = directProps.ogImage ?? `${SITE_URL}/og-default.png`;
 const ogType = directProps.ogType ?? "website";
 const ogPublished = directProps.ogPublished;
 const ogModified = directProps.ogModified;
-const ogAuthor = directProps.ogAuthor ?? "Mohamed Diab";
+const ogAuthor = directProps.ogAuthor ?? "Daily AI Mail Editorial Staff";
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <!-- Google Tag Manager -->
     <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -92,8 +94,8 @@ const ogAuthor = directProps.ogAuthor ?? "Mohamed Diab";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
     />
 
     <title>
@@ -104,20 +106,6 @@ const ogAuthor = directProps.ogAuthor ?? "Mohamed Diab";
 
     <!-- Per-page injections (JSON-LD, etc.) -->
     <slot name="head" />
-
-    <script is:inline>
-      (function () {
-        var pref = localStorage.getItem("dai-theme") || "system";
-        var resolved =
-          pref === "system"
-            ? window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light"
-            : pref;
-        document.documentElement.setAttribute("data-theme", resolved);
-        document.documentElement.setAttribute("data-theme-pref", pref);
-      })();
-    </script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -127,6 +115,7 @@ const ogAuthor = directProps.ogAuthor ?? "Mohamed Diab";
     <Navbar />
     <slot />
     <Footer />
+    <NewsletterModal />
 
     <!-- Go To Top -->
     <button
@@ -171,180 +160,3 @@ const ogAuthor = directProps.ogAuthor ?? "Mohamed Diab";
     });
   })();
 </script>
-
-<style is:global>
-  :root,
-  [data-theme="dark"] {
-    color-scheme: dark;
-    --color-bg: #080d1a;
-    --color-surface: #0f1829;
-    --color-border: rgba(232, 184, 75, 0.18);
-    --color-text: #f4f0e8;
-    --color-text-muted: #8a95a8;
-    --color-accent: #e8b84b;
-    --color-highlight: #3dd6c0;
-    --card-bg: #111828;
-    --gold: #e8b84b;
-    --gold-light: #f5d07a;
-    --teal: #3dd6c0;
-    --nav-bg: #080d1a;
-    --nav-text: #f4f0e8;
-    --shadow-card:
-      0 1px 3px rgba(0, 0, 0, 0.28), 0 4px 16px rgba(0, 0, 0, 0.22);
-    --shadow-card-hover:
-      0 4px 12px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.32);
-  }
-  [data-theme="light"] {
-    color-scheme: light;
-    --color-bg: #f4f0e8;
-    --color-surface: #ffffff;
-    --color-border: rgba(15, 24, 41, 0.13);
-    --color-text: #0f1829;
-    --color-text-muted: #4a5568;
-    --color-accent: #8a6200;
-    --color-highlight: #0a7a6e;
-    --card-bg: #ede8df;
-    --gold: #8a6200;
-    --gold-light: #a07820;
-    --teal: #0a7a6e;
-    --nav-bg: #0f1829;
-    --nav-text: #f4f0e8;
-    --shadow-card:
-      0 1px 3px rgba(15, 24, 41, 0.08), 0 4px 16px rgba(15, 24, 41, 0.06);
-    --shadow-card-hover:
-      0 4px 12px rgba(15, 24, 41, 0.14), 0 12px 32px rgba(15, 24, 41, 0.1);
-  }
-  :root {
-    --tag-anthropic: #7c3aed;
-    --tag-google: #1967d2;
-    --tag-openai: #10a37f;
-    --tag-meta: #0082fb;
-    --tag-tools: #d97706;
-    --tag-policy: #dc2626;
-    --tag-default: #4b5563;
-    --font-display: "Playfair Display", serif;
-    --font-body: "DM Sans", sans-serif;
-    --font-mono: "DM Mono", monospace;
-    --radius-card: 4px;
-    --max-width: 1280px;
-    --gutter: clamp(16px, 4vw, 48px);
-  }
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
-  html.theme-ready body,
-  html.theme-ready body *:not(svg):not(path) {
-    transition:
-      background-color 0.25s ease,
-      color 0.2s ease,
-      border-color 0.25s ease,
-      box-shadow 0.25s ease;
-  }
-  body {
-    font-family: var(--font-body);
-    background: var(--color-bg);
-    color: var(--color-text);
-    -webkit-font-smoothing: antialiased;
-  }
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  :focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  /* Breadcrumb — site-wide */
-  .breadcrumb {
-    padding: 10px 0;
-  }
-  .breadcrumb-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-  }
-  .breadcrumb-list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 4px;
-    list-style: none;
-    font-size: 12px;
-    font-family: var(--font-mono);
-  }
-  .breadcrumb-link {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-  .breadcrumb-link:hover {
-    color: var(--gold);
-  }
-  .breadcrumb-sep {
-    color: var(--color-text-muted);
-    opacity: 0.4;
-    margin: 0 2px;
-    user-select: none;
-  }
-  .breadcrumb-current {
-    color: var(--color-text);
-    font-weight: 500;
-  }
-
-  /* Go To Top */
-  .go-top-btn {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 900;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--gold);
-    color: #080d1a;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transform: translateY(12px);
-    pointer-events: none;
-    transition:
-      opacity 0.25s ease,
-      transform 0.25s ease,
-      background 0.15s;
-  }
-  .go-top-btn.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .go-top-btn:hover {
-    background: var(--gold-light);
-  }
-  @media (max-width: 600px) {
-    .go-top-btn {
-      bottom: 18px;
-      right: 18px;
-      width: 40px;
-      height: 40px;
-    }
-  }
-</style>

@@ -74,6 +74,30 @@ if (Astro.request.method === "POST") {
             }
             {error && <div class="auth-notice auth-notice--error">{error}</div>}
 
+            <!-- Google Identity Services -->
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+            <div id="g_id_onload"
+                 data-client_id="802268720910-3q6nme61fdhea2oe2514gsnmadcgdo28.apps.googleusercontent.com"
+                 data-login_uri="/auth/google"
+                 data-auto_prompt="false">
+            </div>
+            
+            <div class="google-btn-wrapper">
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-size="large"
+                     data-theme="outline"
+                     data-text="sign_in_with"
+                     data-shape="rectangular"
+                     data-logo_alignment="left"
+                     data-width="340">
+                </div>
+            </div>
+
+            <div class="auth-divider">
+                <span>or continue with email</span>
+            </div>
+
             <form method="POST" class="auth-form">
                 <div class="field">
                     <label for="email">Email Address</label>
@@ -141,6 +165,28 @@ if (Astro.request.method === "POST") {
         font-family: var(--font-display);
         font-size: 26px;
         margin-bottom: 24px;
+    }
+    .google-btn-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .auth-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: var(--color-text-muted);
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid var(--color-border);
+    }
+    .auth-divider span {
+        padding: 0 10px;
     }
     .auth-form {
         display: flex;

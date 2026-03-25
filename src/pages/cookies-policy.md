@@ -5,7 +5,7 @@ metaTitle: "Cookies Policy — Daily AI Mail"
 description: "A full explanation of how Daily AI Mail uses cookies, what data they collect, and how you can manage your cookie preferences."
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
-author: "Mohamed Diab"
+author: "Daily AI Mail Editorial Staff"
 schemaType: "cookies"
 ---
 

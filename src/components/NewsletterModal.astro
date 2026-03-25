@@ -1,0 +1,277 @@
+---
+// NewsletterModal.astro
+// Newsletter modal overlay — triggered by nav button click or scroll (55%).
+// Custom-styled form that posts directly to Kit's endpoint.
+---
+
+<div
+  id="nl-modal-overlay"
+  class="nl-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Subscribe to Daily AI Mail"
+  hidden
+>
+  <div class="nl-modal">
+    <button
+      id="nl-modal-close"
+      class="nl-close"
+      aria-label="Close newsletter modal"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="nl-card">
+      <h2 class="nl-heading">AI News for People Who Build With It</h2>
+      <p class="nl-sub">
+        Researchers, engineers, and founders read Daily AI Mail to stay sharp.
+        Join them.
+      </p>
+      <form
+        action="https://app.kit.com/forms/9241006/subscriptions"
+        method="post"
+        class="nl-form"
+        target="_blank"
+      >
+        <input type="hidden" name="utf8" value="✓" />
+        <div class="nl-row">
+          <input
+            type="email"
+            name="email_address"
+            class="nl-input"
+            placeholder="Email Address"
+            required
+          />
+          <button type="submit" class="nl-btn">Subscribe</button>
+        </div>
+        <p class="nl-disclaimer">We won't send you spam. Unsubscribe at any time.</p>
+      </form>
+      <p class="nl-powered">
+        <a
+          href="https://kit.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nl-powered-link"
+        >Built with Kit</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = "dame_nl_dismissed";
+    var SCROLL_THRESHOLD = 0.55;
+
+    var overlay = document.getElementById("nl-modal-overlay");
+    var closeBtn = document.getElementById("nl-modal-close");
+    if (!overlay) return;
+
+    // --- Close logic: ALWAYS registered (nav button also opens modal) ---
+    function closeModal() {
+      overlay.hidden = true;
+      document.body.style.overflow = "";
+      sessionStorage.setItem(STORAGE_KEY, "1");
+    }
+
+    closeBtn && closeBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !overlay.hidden) closeModal();
+    });
+
+    // --- Scroll auto-trigger: only fires if not already dismissed ---
+    if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+    function openModal() {
+      overlay.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    var fired = false;
+    function onScroll() {
+      if (fired) return;
+      var scrolled =
+        window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrolled >= SCROLL_THRESHOLD) {
+        fired = true;
+        window.removeEventListener("scroll", onScroll, { passive: true });
+        setTimeout(openModal, 600);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+  })();
+</script>
+
+<style>
+  .nl-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: nl-fade-in 0.25s ease;
+  }
+  .nl-overlay[hidden] {
+    display: none;
+  }
+  @keyframes nl-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .nl-modal {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    animation: nl-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes nl-slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .nl-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none !important;
+    background: rgb(30, 42, 58) !important;
+    color: rgb(138, 154, 181) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  .nl-close:hover {
+    background: rgb(245, 197, 24) !important;
+    color: rgb(8, 13, 26) !important;
+  }
+
+  .nl-card {
+    background: rgb(10, 14, 26);
+    border-radius: 8px;
+    padding: 44px 40px 32px;
+    text-align: center;
+  }
+
+  .nl-heading {
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
+    font-weight: 700;
+    color: rgb(240, 244, 250);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .nl-sub {
+    font-size: 1rem;
+    color: rgb(138, 154, 181);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .nl-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nl-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .nl-input {
+    flex: 1;
+    padding: 13px 16px;
+    border: 1px solid rgb(30, 42, 58) !important;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: rgb(240, 244, 250) !important;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .nl-input::placeholder {
+    color: rgb(90, 106, 130) !important;
+  }
+  .nl-input:focus {
+    border-color: rgb(245, 197, 24) !important;
+  }
+
+  .nl-btn {
+    padding: 13px 24px;
+    background: rgb(245, 197, 24) !important;
+    color: rgb(8, 13, 26) !important;
+    border: none !important;
+    border-radius: 4px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .nl-btn:hover {
+    background: rgb(220, 175, 15) !important;
+  }
+
+  .nl-disclaimer {
+    font-size: 0.8125rem;
+    color: rgb(90, 106, 130);
+    margin: 0;
+    text-align: center;
+  }
+
+  .nl-powered {
+    margin-top: 20px;
+    font-size: 0.75rem;
+    color: rgb(60, 80, 105);
+  }
+  .nl-powered-link {
+    color: rgb(90, 106, 130);
+    text-decoration: none;
+  }
+  .nl-powered-link:hover {
+    color: rgb(138, 154, 181);
+  }
+
+  @media (max-width: 480px) {
+    .nl-card {
+      padding: 36px 20px 24px;
+    }
+    .nl-row {
+      flex-direction: column;
+    }
+    .nl-btn {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,13 +1,15 @@
 import type { APIRoute } from 'astro';
 import { getArticles } from '../data/articles';
 
+export const prerender = true;
+
 export const GET: APIRoute = async () => {
     const articles = await getArticles();
     const SITE_URL = 'https://dailyaimail.news';
 
     const sorted = [...articles].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
 
-    const urls = sorted.map(a => `
+    let urls = sorted.map(a => `
   <url>
     <loc>${SITE_URL}/articles/${a.slug}</loc>
     <news:news>
@@ -21,6 +23,19 @@ export const GET: APIRoute = async () => {
     </news:news>
     <lastmod>${a.modifiedDate ?? a.isoDate}T00:00:00+00:00</lastmod>
   </url>`).join('');
+
+    // Main collection URLs
+    urls += `
+  <url>
+    <loc>${SITE_URL}/news/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${SITE_URL}/topics/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`;
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset

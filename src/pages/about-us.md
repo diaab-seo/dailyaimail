@@ -5,7 +5,7 @@ metaTitle: "About Daily AI Mail — Independent AI News, Research & Intelligence
 description: "Daily AI Mail is an independent publication covering artificial intelligence news, research breakthroughs, tool releases, and policy developments for a global audience."
 publishDate: "2026-01-01"
 lastModified: "2026-03-15"
-author: "Mohamed Diab"
+author: "Daily AI Mail Editorial Staff"
 schemaType: "about"
 ---
 
@@ -61,7 +61,7 @@ Corrections are handled transparently. When an error is identified in published 
 
 ## Founding & Leadership
 
-Daily AI Mail was founded by **[Mohamed Diab](/author/mohamed-diab)**, a technical SEO consultant and digital publisher with over ten years of experience in the technology and digital marketing industry. Diab operates under the brand [interactiveseo.digital](https://interactiveseo.digital) and has worked with enterprise clients across the MENA region on search visibility, structured data strategy, and Knowledge Graph optimization.
+Daily AI Mail was founded by **[Daily AI Mail Editorial Staff](/about-us/editorial-team)**, a technical SEO consultant and digital publisher with over ten years of experience in the technology and digital marketing industry. Diab operates under the brand []() and has worked with enterprise clients across the MENA region on search visibility, structured data strategy, and Knowledge Graph optimization.
 
 The publication is built on a technology stack designed for performance, accessibility, and editorial scalability — reflecting a belief that the infrastructure of journalism matters as much as its content.
 

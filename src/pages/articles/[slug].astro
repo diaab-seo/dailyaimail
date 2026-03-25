@@ -53,7 +53,7 @@ const article = {
   isoDate: entry.data.isoDate,
   modifiedDate: entry.data.modifiedDate ?? entry.data.isoDate,
   author: entry.data.author,
-  authorUrl: entry.data.authorUrl ?? "https://interactiveseo.digital",
+  authorUrl: entry.data.authorUrl ?? "",
   readingTime: entry.data.readingTime,
   image: entry.data.image,
   imageWidth: entry.data.imageWidth,
@@ -61,6 +61,9 @@ const article = {
   imageCaption: entry.data.imageCaption,
   keywords: entry.data.keywords ?? [entry.data.tag],
   articleSection: entry.data.articleSection ?? [entry.data.tag],
+  mentions: entry.data.mentions ?? [],
+  about: entry.data.about ?? [],
+  citations: entry.data.citations ?? [],
 };
 ---
 

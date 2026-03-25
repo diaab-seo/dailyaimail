@@ -1,0 +1,85 @@
+---
+// NewsletterForm.astro
+// Compact newsletter signup — used in article sidebars.
+// Posts directly to Kit's endpoint (no Kit JS required).
+---
+
+<div class="nl-form-wrap">
+  <p class="nl-form-tagline">AI news for people who build with it.</p>
+  <form
+    action="https://app.kit.com/forms/9241006/subscriptions"
+    method="post"
+    class="nl-form"
+    target="_blank"
+  >
+    <input type="hidden" name="utf8" value="✓" />
+    <input
+      type="email"
+      name="email_address"
+      class="nl-input"
+      placeholder="Your email address"
+      required
+    />
+    <button type="submit" class="nl-btn">Subscribe</button>
+    <p class="nl-disclaimer">No spam. Unsubscribe any time.</p>
+  </form>
+</div>
+
+<style>
+  .nl-form-wrap {
+    background: rgb(10, 14, 26);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .nl-form-tagline {
+    font-size: 0.8125rem;
+    color: rgb(138, 154, 181);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .nl-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .nl-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid rgb(30, 42, 58) !important;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: rgb(240, 244, 250) !important;
+    font-size: 0.875rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .nl-input::placeholder {
+    color: rgb(90, 106, 130) !important;
+  }
+  .nl-input:focus {
+    border-color: rgb(245, 197, 24) !important;
+  }
+  .nl-btn {
+    width: 100%;
+    padding: 11px;
+    background: rgb(245, 197, 24) !important;
+    color: rgb(8, 13, 26) !important;
+    border: none !important;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .nl-btn:hover {
+    background: rgb(220, 175, 15) !important;
+  }
+  .nl-disclaimer {
+    font-size: 0.6875rem;
+    color: rgb(90, 106, 130);
+    text-align: center;
+    margin: 0;
+  }
+</style>

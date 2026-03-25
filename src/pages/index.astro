@@ -5,6 +5,7 @@ import HeroCard from "../components/HeroCard.astro";
 import NewsCard from "../components/NewsCard.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import NewsletterBanner from "../components/NewsletterBanner.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
 
 const [
   latestArticles,
@@ -22,7 +23,7 @@ const [
   getArticlesByCategory("Policy & Ethics").then((a) => a.slice(0, 3)),
 ]);
 
-const heroArticle = anthropicArticles[0];
+const heroArticle = latestArticles[0];
 const trendingArticles = (await getLatestArticles(5)).map((a) => ({
   headline: a.headline,
   slug: a.slug,
@@ -30,7 +31,7 @@ const trendingArticles = (await getLatestArticles(5)).map((a) => ({
 
 // ── Schema constants ──────────────────────────────────────────────────────────
 const siteUrl = "https://dailyaimail.news";
-const logoUrl = `${siteUrl}/dark-logo.svg`;
+const logoUrl = `${siteUrl}/daily-ai-mail-logo.svg`;
 
 // Latest article date for dateModified
 const newestIso =
@@ -83,7 +84,7 @@ const schema = {
       isPartOf: { "@id": `${siteUrl}/#website` },
       about: { "@id": `${siteUrl}/#organization` },
       publisher: { "@id": `${siteUrl}/#organization` },
-      author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+      author: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
       dateModified: `${newestIso}T00:00:00+00:00`,
       image: { "@id": `${siteUrl}/#/schema/logo/image/` },
       primaryImageOfPage: { "@id": `${siteUrl}/#/schema/logo/image/` },
@@ -106,13 +107,13 @@ const schema = {
         `${siteUrl}/about-us`,
         `${siteUrl}/contact-us`,
         `${siteUrl}/publishing-principles`,
-        ...categories.map((c) => `${siteUrl}/category/${c.slug}`),
+        ...categories.map((c) => `${siteUrl}/topics/${c.slug}`),
       ],
       // mentions — every topic entity + the author
       mentions: [
-        { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+        { "@id": `${siteUrl}/#/schema/person/editorial-team` },
         ...categories.map((c) => ({
-          "@id": `${siteUrl}/category/${c.slug}#topic`,
+          "@id": `${siteUrl}/topics/${c.slug}#topic`,
         })),
       ],
     },
@@ -136,7 +137,7 @@ const schema = {
       description: "Your daily source for AI news, research and tools.",
       inLanguage: "en-US",
       publisher: { "@id": `${siteUrl}/#organization` },
-      author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+      author: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
       about: { "@id": `${siteUrl}/#organization` },
       dateCreated: "2026-01-01T00:00:00+00:00",
       dateModified: `${newestIso}T00:00:00+00:00`,
@@ -162,8 +163,8 @@ const schema = {
       // hasPart — explicitly connects website to all category collection pages
       hasPart: categories.map((c) => ({
         "@type": "CollectionPage",
-        "@id": `${siteUrl}/category/${c.slug}`,
-        url: `${siteUrl}/category/${c.slug}`,
+        "@id": `${siteUrl}/topics/${c.slug}`,
+        url: `${siteUrl}/topics/${c.slug}`,
         name: `${c.tag} News — Daily AI Mail`,
       })),
     },
@@ -206,8 +207,8 @@ const schema = {
         },
       ],
       // member — the founding editor
-      member: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
-      founder: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+      member: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
+      founder: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
       // areaServed — global coverage with MENA emphasis
       areaServed: [
         { "@type": "Place", name: "Worldwide" },
@@ -230,24 +231,24 @@ const schema = {
       sameAs: [
         "https://twitter.com/dailyaimail",
         "https://linkedin.com/company/dailyaimail",
-        "https://diab.digital",
+        "",
       ],
     },
 
-    // 5. Person — Mohamed Diab — FULL definition (also fully defined on About Us)
+    // 5. Person — Daily AI Mail Editorial Staff — FULL definition (also fully defined on About Us)
     {
       "@type": "Person",
-      "@id": `${siteUrl}/#/schema/person/mohamed-diab`,
-      name: "Mohamed Diab",
+      "@id": `${siteUrl}/#/schema/person/editorial-team`,
+      name: "Daily AI Mail Editorial Staff",
       givenName: "Mohamed",
       familyName: "Diab",
-      url: "https://interactiveseo.digital",
+      url: "",
       image: {
         "@type": "ImageObject",
-        url: `${siteUrl}/images/mohamed-diab.jpg`,
-        caption: "Mohamed Diab",
+        url: `${siteUrl}/images/editorial-team.jpg`,
+        caption: "Daily AI Mail Editorial Staff",
       },
-      jobTitle: "Founder & Editor-in-Chief",
+      jobTitle: "Editorial Staff",
       description:
         "Technical SEO Consultant and founder of Daily AI Mail, with over ten years of experience in the technology and digital marketing industry.",
       worksFor: { "@id": `${siteUrl}/#organization` },
@@ -260,7 +261,7 @@ const schema = {
         "Digital Publishing",
         "Entity-Based SEO",
       ],
-      sameAs: ["https://interactiveseo.digital", "https://diab.digital"],
+      sameAs: ["", ""],
     },
 
     // 6. SiteNavigationElement — maps the full nav structure
@@ -300,7 +301,7 @@ const schema = {
         {
           "@type": "SiteNavigationElement",
           name: "Policy & Ethics",
-          url: `${siteUrl}/category/policy-and-ethics`,
+          url: `${siteUrl}/topics/policy-and-ethics`,
         },
         {
           "@type": "SiteNavigationElement",
@@ -322,9 +323,9 @@ const schema = {
       publisher: { "@id": `${siteUrl}/#organization` },
       hasDefinedTerm: categories.map((c) => ({
         "@type": "DefinedTerm",
-        "@id": `${siteUrl}/category/${c.slug}#topic`,
+        "@id": `${siteUrl}/topics/${c.slug}#topic`,
         name: c.tag,
-        url: `${siteUrl}/category/${c.slug}`,
+        url: `${siteUrl}/topics/${c.slug}`,
         inDefinedTermSet: { "@id": `${siteUrl}/#topics` },
         ...(c.sameAs.length > 0 && { sameAs: c.sameAs }),
       })),
@@ -351,7 +352,7 @@ const schema = {
           headline: a.headline,
           description: a.excerpt,
           datePublished: `${a.isoDate}T00:00:00+00:00`,
-          author: { "@id": `${siteUrl}/#/schema/person/mohamed-diab` },
+          author: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
           publisher: { "@id": `${siteUrl}/#organization` },
           url: `${siteUrl}/articles/${a.slug}`,
         },
@@ -373,11 +374,17 @@ const schema = {
   />
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <HeroCard article={heroArticle} />
-    </div>
-  </section>
+  {heroArticle ? (
+    <section class="hero">
+      <div class="hero-inner">
+        <HeroCard article={{ ...heroArticle, href: `/articles/${heroArticle.slug}` }} />
+      </div>
+    </section>
+  ) : (
+    <section class="hero" style="min-height:480px;display:flex;align-items:center;justify-content:center;">
+        <h2>Publish engaging articles to populate the front page!</h2>
+    </section>
+  )}
 
   <!-- MAIN CONTENT + SIDEBAR -->
   <div class="content-with-sidebar">
@@ -385,7 +392,7 @@ const schema = {
       <section class="news-section">
         <SectionHeader
           title="Latest AI News"
-          viewAllHref="/category/openai"
+          viewAllHref="/news"
           viewAllLabel="View All →"
         />
         <div class="card-grid">
@@ -399,7 +406,7 @@ const schema = {
       <section class="news-section">
         <SectionHeader
           title="Anthropic News"
-          viewAllHref="/category/anthropic"
+          viewAllHref="/topics/anthropic"
           viewAllLabel="View All Anthropic →"
         />
         <div class="card-grid">
@@ -410,7 +417,7 @@ const schema = {
           }
         </div>
         <div class="section-cta">
-          <a href="/category/anthropic" class="view-more-btn"
+          <a href="/topics/anthropic" class="view-more-btn"
             >View More Anthropic Stories →</a
           >
         </div>
@@ -418,7 +425,7 @@ const schema = {
       <section class="news-section">
         <SectionHeader
           title="Google AI News"
-          viewAllHref="/category/google-ai"
+          viewAllHref="/topics/google-ai"
           viewAllLabel="View All Google AI →"
         />
         <div class="card-grid">
@@ -429,7 +436,7 @@ const schema = {
           }
         </div>
         <div class="section-cta">
-          <a href="/category/google-ai" class="view-more-btn"
+          <a href="/topics/google-ai" class="view-more-btn"
             >View More Google AI Stories →</a
           >
         </div>
@@ -437,7 +444,7 @@ const schema = {
       <section class="news-section">
         <SectionHeader
           title="OpenAI News"
-          viewAllHref="/category/openai"
+          viewAllHref="/topics/openai"
           viewAllLabel="View All OpenAI →"
         />
         <div class="card-grid">
@@ -448,7 +455,7 @@ const schema = {
           }
         </div>
         <div class="section-cta">
-          <a href="/category/openai" class="view-more-btn"
+          <a href="/topics/openai" class="view-more-btn"
             >View More OpenAI Stories →</a
           >
         </div>
@@ -480,29 +487,18 @@ const schema = {
               "OpenAI",
               "Google AI",
               "Meta AI",
-              "LLM",
-              "Safety",
-              "Tools",
-              "Research",
-              "Policy",
-              "Gemini",
+              "Tools & Apps",
+              "Policy & Ethics",
             ].map((tag) => (
-              <a href="#" class="tag-chip">
+              <a href={`/topics/${tag.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`} class="tag-chip">
                 {tag}
               </a>
             ))
           }
         </div>
       </div>
-      <div class="sidebar-widget sidebar-newsletter">
-        <h3 class="sidebar-title">📩 Daily Digest</h3>
-        <p>Get the biggest AI stories in your inbox every morning.</p>
-        <input
-          type="email"
-          placeholder="your@email.com"
-          class="sidebar-email"
-        />
-        <button class="sidebar-subscribe-btn">Subscribe Free</button>
+      <div class="sidebar-widget sidebar-newsletter" style="padding: 0; background: transparent; border: none;">
+        <NewsletterForm />
       </div>
     </aside>
   </div>
@@ -514,7 +510,7 @@ const schema = {
       <section class="news-section">
         <SectionHeader
           title="New AI Tools & Apps"
-          viewAllHref="/category/tools-and-apps"
+          viewAllHref="/topics/tools-and-apps"
           viewAllLabel="View All Tools →"
         />
         <div class="card-grid">
@@ -525,7 +521,7 @@ const schema = {
           }
         </div>
         <div class="section-cta">
-          <a href="/category/tools-and-apps" class="view-more-btn"
+          <a href="/topics/tools-and-apps" class="view-more-btn"
             >View More Tools & Apps →</a
           >
         </div>
@@ -533,7 +529,7 @@ const schema = {
       <section class="news-section">
         <SectionHeader
           title="AI Policy & Ethics"
-          viewAllHref="/category/policy-and-ethics"
+          viewAllHref="/topics/policy-and-ethics"
           viewAllLabel="View All →"
         />
         <div class="card-grid">
@@ -544,7 +540,7 @@ const schema = {
           }
         </div>
         <div class="section-cta">
-          <a href="/category/policy-and-ethics" class="view-more-btn"
+          <a href="/topics/policy-and-ethics" class="view-more-btn"
             >View More Policy Stories →</a
           >
         </div>
@@ -610,96 +606,116 @@ const schema = {
     display: inline-block;
     padding: 12px 28px;
     border: 1.5px solid var(--color-border);
-    border-radius: 999px;
+    border-radius: var(--radius-md);
     font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s;
+    font-weight: 600;
+    transition: var(--transition);
+    color: var(--color-text-primary);
   }
   .view-more-btn:hover {
-    background: var(--color-text);
-    color: white;
-    border-color: var(--color-text);
+    background: var(--color-text-primary);
+    color: var(--color-base);
+    border-color: var(--color-text-primary);
   }
   .sidebar {
     padding-top: 48px;
     position: sticky;
-    top: 80px;
+    top: 100px;
   }
   .sidebar-widget {
     margin-bottom: 32px;
     padding: 24px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
+    border-radius: var(--radius-md);
   }
   .sidebar-title {
-    font-family: var(--font-display);
-    font-size: 18px;
-    margin-bottom: 16px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-text-primary);
   }
   .trending-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 1.25rem;
   }
   .trending-item {
     display: flex;
-    gap: 12px;
+    gap: 1rem;
     align-items: flex-start;
-    font-size: 14px;
+    font-size: 0.9375rem;
     line-height: 1.4;
   }
   .trending-num {
-    font-size: 20px;
-    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-family: var(--font-mono);
     color: var(--color-border);
-    min-width: 28px;
+    font-weight: 700;
+    min-width: 2rem;
+  }
+  .trending-item a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: var(--transition);
   }
   .trending-item a:hover {
-    text-decoration: underline;
+    color: var(--color-gold);
   }
   .tag-cloud {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
   }
   .tag-chip {
-    font-size: 12px;
-    padding: 4px 12px;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.875rem;
     border: 1px solid var(--color-border);
-    border-radius: 999px;
-    transition: all 0.15s;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    color: var(--color-text-secondary);
+    text-decoration: none;
   }
   .tag-chip:hover {
-    background: var(--color-text);
-    color: white;
-    border-color: var(--color-text);
+    background: var(--color-gold);
+    color: var(--color-base);
+    border-color: var(--color-gold);
   }
   .sidebar-newsletter p {
-    font-size: 13px;
-    color: var(--color-text-muted);
-    margin-bottom: 12px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
   }
   .sidebar-email {
     width: 100%;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border: 1px solid var(--color-border);
-    border-radius: 4px;
-    font-size: 13px;
-    margin-bottom: 8px;
-    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+    background: rgba(240,244,250,0.04);
+    color: var(--color-text-primary);
+    outline: none;
+  }
+  .sidebar-email:focus {
+    border-color: var(--color-gold);
   }
   .sidebar-subscribe-btn {
     width: 100%;
-    padding: 10px;
-    background: var(--color-text);
-    color: white;
+    padding: 12px;
+    background: var(--color-gold);
+    color: var(--color-base);
     border: none;
-    border-radius: 4px;
-    font-size: 13px;
-    font-family: var(--font-body);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 700;
     cursor: pointer;
+    transition: var(--transition);
+  }
+  .sidebar-subscribe-btn:hover {
+    background: var(--color-gold-hover);
   }
   @media (max-width: 1024px) {
     .content-with-sidebar {
