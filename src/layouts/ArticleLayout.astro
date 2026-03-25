@@ -18,8 +18,9 @@ export interface Props {
   article: Article;
   comments?: DBComment[];
   user?: SessionUser | null;
+  ogImage?: string;
 }
-const { article, comments = [], user = null } = Astro.props;
+const { article, comments = [], user = null, ogImage } = Astro.props;
 
 const color = tagColor(article.tag);
 const related = (await getArticlesByCategory(article.tag))
@@ -261,7 +262,7 @@ const schema = {
   ogType="article"
   ogTitle={article.headline}
   ogDescription={article.excerpt}
-  ogImage={hasImage ? imageUrl! : undefined}
+  ogImage={ogImage ?? (hasImage ? imageUrl! : undefined)}
   ogPublished={pubDate}
   ogModified={modDate}
   ogAuthor={article.author}
