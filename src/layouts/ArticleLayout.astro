@@ -503,6 +503,7 @@ const schema = {
           width={article.imageWidth ?? 1200}
           height={article.imageHeight ?? 630}
           loading="eager"
+          fetchpriority="high"
         />
       </figure>
     ) : (
