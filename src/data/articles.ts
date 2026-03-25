@@ -62,7 +62,17 @@ export async function getArticlesByCategory(tag: string): Promise<Article[]> {
   return a.filter(x => x.tags.includes(tag));
 }
 export async function getArticleBySlug(slug: string): Promise<Article | undefined> { const a = await fetchArticles(); return a.find(x => x.slug === slug); }
-export async function getLatestArticles(count = 3): Promise<Article[]> { const a = await fetchArticles(); return [...a].sort((x, y) => new Date(y.isoDate).getTime() - new Date(x.isoDate).getTime()).slice(0, count); }
+export async function getLatestArticles(count = 3): Promise<Article[]> {
+  const a = await fetchArticles();
+  return [...a]
+    .sort((x, y) => {
+      const dateDiff = new Date(y.isoDate).getTime() - new Date(x.isoDate).getTime();
+      if (dateDiff !== 0) return dateDiff;
+      // Stable tiebreaker: sort by slug descending so recently-added articles surface first
+      return y.slug.localeCompare(x.slug);
+    })
+    .slice(0, count);
+}
 
 /** Converts a tag to a URL-safe slug. Used for /topics/ paths. */
 export function topicToSlug(tag: string): string {
