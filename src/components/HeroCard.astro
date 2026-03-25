@@ -37,7 +37,13 @@ const tagColor = (() => {
   <figure class="hero-img-col">
     {
       article.image ? (
-        <img src={article.image} alt={article.headline} class="hero-img" />
+        <img
+          src={article.image}
+          alt={article.headline}
+          class="hero-img"
+          loading="eager"
+          fetchpriority="high"
+        />
       ) : (
         <div
           class="hero-placeholder"
