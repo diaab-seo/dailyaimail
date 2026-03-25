@@ -26,7 +26,19 @@ const description = directProps.description ?? frontmatter.description;
 const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
 
 const SITE_URL = "https://dailyaimail.news";
-const canonical = directProps.canonical ?? `${SITE_URL}${Astro.url.pathname}`;
+let canonicalPath = Astro.url.pathname;
+if (canonicalPath.endsWith('/index.html')) {
+  canonicalPath = canonicalPath.slice(0, -11);
+} else if (canonicalPath.endsWith('.html')) {
+  canonicalPath = canonicalPath.slice(0, -5);
+}
+if (canonicalPath.length > 1 && canonicalPath.endsWith('/')) {
+  canonicalPath = canonicalPath.slice(0, -1);
+}
+if (!canonicalPath.startsWith('/')) {
+  canonicalPath = '/' + canonicalPath;
+}
+const canonical = directProps.canonical ?? `${SITE_URL}${canonicalPath}`;
 const ogTitle = directProps.ogTitle ?? metaTitle ?? title ?? "Daily AI Mail";
 const ogDesc =
   directProps.ogDescription ??
