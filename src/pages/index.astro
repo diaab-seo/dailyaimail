@@ -15,7 +15,7 @@ const [
   toolsArticles,
   policyArticles,
 ] = await Promise.all([
-  getLatestArticles(6),
+  getLatestArticles(7),
   getArticlesByCategory("Anthropic").then((a) => a.slice(0, 3)),
   getArticlesByCategory("Google AI").then((a) => a.slice(0, 3)),
   getArticlesByCategory("OpenAI").then((a) => a.slice(0, 3)),
@@ -397,7 +397,7 @@ const schema = {
         />
         <div class="card-grid">
           {
-            latestArticles.map((a) => (
+            latestArticles.slice(1).map((a) => (
               <NewsCard {...a} href={`/articles/${a.slug}`} />
             ))
           }
@@ -464,7 +464,7 @@ const schema = {
 
     <aside class="sidebar">
       <div class="sidebar-widget">
-        <h3 class="sidebar-title">Trending Now</h3>
+        <h3 class="sidebar-title">Latest Articles</h3>
         <ol class="trending-list">
           {
             trendingArticles.map((t, i) => (
@@ -548,7 +548,7 @@ const schema = {
     </main>
     <aside class="sidebar">
       <div class="sidebar-widget">
-        <h3 class="sidebar-title">Trending Now</h3>
+        <h3 class="sidebar-title">Latest Articles</h3>
         <ol class="trending-list">
           {
             trendingArticles.map((t, i) => (
