@@ -485,6 +485,29 @@ const schema = {
           >
           <span>Copy as Markdown</span>
         </button>
+
+        <!-- Follow on Google News -->
+        <a
+          class="action-btn google-news-btn"
+          id="google-news-btn"
+          href="https://news.google.com/publications/CAAqLAgKIiZDQklTRmdnTWFoSUtFR1JoYVd4NVlXbHRZV2xzTG01bGQzTW9BQVAB?ceid=US:en&oc=3"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Follow Daily AI Mail on Google News"
+          aria-label="Follow us on Google News"
+        >
+          <!-- Google News "G" icon -->
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/>
+          </svg>
+          <span>Follow on Google News</span>
+        </a>
         <span class="md-toast" id="md-toast">Copied as Markdown!</span>
 
         <!-- Hidden markdown payload -->
@@ -815,6 +838,15 @@ const schema = {
     background: var(--color-gold);
     color: var(--color-base);
     border-color: var(--color-gold);
+  }
+  .google-news-btn {
+    border-color: #4285f4;
+    color: #4285f4;
+  }
+  .google-news-btn:hover {
+    background: #4285f4;
+    color: #fff;
+    border-color: #4285f4;
   }
 
   .share-wrapper {
