@@ -65,8 +65,16 @@ const article = {
   about: entry.data.about ?? [],
   citations: entry.data.citations ?? [],
 };
+
+let ogImage = "https://dailyaimail.news/images/og-default.jpg";
+const featuredImage = entry.data.featuredImage ?? entry.data.image;
+if (featuredImage) {
+  ogImage = featuredImage.startsWith("http") 
+    ? featuredImage 
+    : `https://dailyaimail.news${featuredImage.startsWith("/") ? "" : "/"}${featuredImage}`;
+}
 ---
 
-<ArticleLayout article={article} comments={comments} user={user}>
+<ArticleLayout article={article} comments={comments} user={user} ogImage={ogImage}>
   <Content />
 </ArticleLayout>
