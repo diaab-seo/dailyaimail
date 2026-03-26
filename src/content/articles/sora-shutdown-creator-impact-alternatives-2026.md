@@ -65,7 +65,7 @@ citations:
     type: "CreativeWork"
 ---
 
-When OpenAI [announced the shutdown of Sora on March 25, 2026](https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down), the news landed without warning, without a specific shutdown date, and without a clear reason. For an industry conditioned to expect dramatic AI announcements, this one hit differently — not because it was a leap forward, but because it was a door closing on a community that had built real workflows around the platform.
+When OpenAI [announced the shutdown of Sora on March 25, 2026](https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down), the news landed without warning, without a specific shutdown date, and without a clear reason. For an industry conditioned to expect dramatic AI announcements, this one hit differently — not because it was a leap forward, but because it was a door closing on a community that had built real workflows around the platform.
 
 The immediate practical advice is unchanged from day one: if you have videos stored in Sora, download them now while the servers are still running.
 
