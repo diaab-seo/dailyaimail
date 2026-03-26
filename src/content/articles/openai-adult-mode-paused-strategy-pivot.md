@@ -53,7 +53,7 @@ citations:
     type: "CreativeWork"
 ---
 
-In the space of five days, OpenAI has quietly dismantled three of its most publicly discussed experimental directions. On Tuesday, [Instant Checkout was deprioritized](https://dailyaimail.news/news/chatgpt-amazon-ambitions-falter-instant-checkout-pivot). On Wednesday, [Sora was shut down](https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down). And on Thursday, the Financial Times reported that ChatGPT's long-debated adult mode has been placed on indefinite hold. When TechCrunch reached out for comment, OpenAI said it had "nothing further to add."
+In the space of five days, OpenAI has quietly dismantled three of its most publicly discussed experimental directions. On Tuesday, [Instant Checkout was deprioritized](https://dailyaimail.news/articles/chatgpt-amazon-ambitions-falter-instant-checkout-pivot). On Wednesday, [Sora was shut down](https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down). And on Thursday, the Financial Times reported that ChatGPT's long-debated adult mode has been placed on indefinite hold. When TechCrunch reached out for comment, OpenAI said it had "nothing further to add."
 
 The cleanup is complete. The question now is what it reveals about where OpenAI is actually heading.
 
