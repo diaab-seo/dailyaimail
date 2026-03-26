@@ -11,7 +11,7 @@ import { createSession, type SessionUser } from "../../lib/auth";
 import { getUserByEmail, getUserById, createUser, updateLastLogin, makeInitials, getUserByUsername } from "../../lib/db";
 import { hashPassword } from "../../lib/password";
 
-const CLIENT_ID = "802268720910-3q6nme61fdhea2oe2514gsnmadcgdo28.apps.googleusercontent.com";
+const CLIENT_ID = "211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com";
 
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {

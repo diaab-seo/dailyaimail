@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# sensitive credential files (never commit these)
+client-id-and-secret.txt
+new-recaptcha.txt
+*.secret
+*.credentials
+
+# wrangler local state (sqlite db etc.)
+.wrangler/
