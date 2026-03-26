@@ -77,7 +77,7 @@ if (Astro.request.method === "POST") {
             <!-- Google Identity Services -->
             <script src="https://accounts.google.com/gsi/client" async defer></script>
             <div id="g_id_onload"
-                 data-client_id="802268720910-3q6nme61fdhea2oe2514gsnmadcgdo28.apps.googleusercontent.com"
+                 data-client_id="211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com"
                  data-login_uri="/auth/google"
                  data-auto_prompt="false">
             </div>
@@ -89,8 +89,7 @@ if (Astro.request.method === "POST") {
                      data-theme="outline"
                      data-text="sign_in_with"
                      data-shape="rectangular"
-                     data-logo_alignment="left"
-                     data-width="340">
+                     data-logo_alignment="left">
                 </div>
             </div>
 
@@ -170,6 +169,12 @@ if (Astro.request.method === "POST") {
         display: flex;
         justify-content: center;
         margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .google-btn-wrapper > div,
+    .google-btn-wrapper iframe {
+        max-width: 100% !important;
+        width: 100% !important;
     }
     .auth-divider {
         display: flex;

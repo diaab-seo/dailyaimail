@@ -54,7 +54,7 @@ if (Astro.request.method === "POST") {
         errors.recaptcha = "Please complete the CAPTCHA.";
     } else {
         const verifyUrl = new URL("https://www.google.com/recaptcha/api/siteverify");
-        verifyUrl.searchParams.append("secret", "6LcyzJYsAAAAACQfhcViwZeWu6b-wQXK4efcDK0U");
+        verifyUrl.searchParams.append("secret", "6LcJOZksAAAAABaFfIj_MDiyu7c00BKL5AWKI-2T");
         verifyUrl.searchParams.append("response", recaptchaResponse);
         const ip = Astro.request.headers.get("CF-Connecting-IP");
         if (ip) verifyUrl.searchParams.append("remoteip", ip);
@@ -108,7 +108,7 @@ if (Astro.request.method === "POST") {
             <script src="https://accounts.google.com/gsi/client" async defer></script>
             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
             <div id="g_id_onload"
-                 data-client_id="802268720910-3q6nme61fdhea2oe2514gsnmadcgdo28.apps.googleusercontent.com"
+                 data-client_id="211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com"
                  data-login_uri="/auth/google"
                  data-auto_prompt="false">
             </div>
@@ -120,8 +120,7 @@ if (Astro.request.method === "POST") {
                      data-theme="outline"
                      data-text="signup_with"
                      data-shape="rectangular"
-                     data-logo_alignment="left"
-                     data-width="380">
+                     data-logo_alignment="left">
                 </div>
             </div>
 
@@ -218,7 +217,7 @@ if (Astro.request.method === "POST") {
                 </div>
                 
                 <div class="field" style="margin: 10px 0;">
-                    <div class="g-recaptcha" data-sitekey="6LcyzJYsAAAAAJzRvhcBiC12Gs_NZiwC0TCXfkNf" data-theme="dark"></div>
+                    <div class="g-recaptcha" data-sitekey="6LcJOZksAAAAABD9vCP5pUvfSXCIeOgTnCY01Fo3" data-theme="dark"></div>
                     {
                         errors.recaptcha && (
                             <span class="field-err">{errors.recaptcha}</span>
@@ -284,6 +283,12 @@ if (Astro.request.method === "POST") {
         display: flex;
         justify-content: center;
         margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .google-btn-wrapper > div,
+    .google-btn-wrapper iframe {
+        max-width: 100% !important;
+        width: 100% !important;
     }
     .auth-divider {
         display: flex;
