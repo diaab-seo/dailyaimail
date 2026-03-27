@@ -3,6 +3,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 import { buildExplainerTermSchema } from "../../lib/explainers-schema";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 
 export async function getStaticPaths() {
     const terms = await getCollection("explainers");
@@ -61,6 +62,17 @@ const SECTIONS = [
     { id: "related-terms",   label: "Related Terms" },
     { id: "further-reading", label: "Further Reading" },
 ];
+
+const formatDate = (isoStr: string) => {
+    return new Date(isoStr).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+};
+
+const dateAddedStr = formatDate(d.dateAdded);
+const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
 ---
 
 <Layout title={pageTitle} description={pageDesc} metaTitle={pageTitle} ogImage={ogImage}>
@@ -70,25 +82,53 @@ const SECTIONS = [
         slot="head"
     />
 
+    <Breadcrumb items={[
+        { label: "Home", href: "/" },
+        { label: "Explainers", href: "/explainers" },
+        { label: d.term }
+    ]} />
+
     <main class="term-page">
         <!-- ── Hero ── -->
         <header class="term-hero">
             <div class="term-inner">
-                <nav class="breadcrumb-row" aria-label="Breadcrumb">
-                    <a href="/">Home</a>
-                    <span aria-hidden="true">›</span>
-                    <a href="/explainers">Explainers</a>
-                    <span aria-hidden="true">›</span>
-                    <span aria-current="page">{d.term}</span>
-                </nav>
 
                 <div class="term-meta">
                     <span class="cat-badge">{CATEGORY_LABELS[d.category] ?? d.category}</span>
-                    {d.lastUpdated && (
-                        <time class="updated-date">
-                            Updated {d.lastUpdated}
-                        </time>
-                    )}
+                    <time class="updated-date" datetime={d.dateAdded}>
+                        Added {dateAddedStr}
+                    </time>
+                    <time class="updated-date" datetime={d.lastUpdated ?? d.dateAdded}>
+                        Updated {lastUpdatedStr}
+                    </time>
+
+                    <button id="copy-markdown-btn" class="term-meta-btn" title="Copy article as Markdown">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>Copy as Markdown</span>
+                    </button>
+
+                    <div class="share-wrapper">
+                        <button id="share-toggle" class="term-meta-btn" aria-expanded="false" aria-controls="share-popover">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            <span>Share</span>
+                            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+
+                        <div id="share-popover" class="share-popover" hidden>
+                            <button class="share-item" id="copy-link-btn">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                Copy link
+                            </button>
+                            <a class="share-item" id="share-x" target="_blank" rel="noopener noreferrer">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                                X / Twitter
+                            </a>
+                            <a class="share-item" id="share-li" target="_blank" rel="noopener noreferrer">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                LinkedIn
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <h1 class="term-title">
@@ -156,6 +196,99 @@ const SECTIONS = [
             )}
         </div>
     </main>
+
+    <script is:inline>
+        const copyBtn = document.getElementById("copy-markdown-btn");
+        const shareBtn = document.getElementById("share-btn");
+
+        if (copyBtn) {
+            copyBtn.addEventListener("click", async () => {
+                const term = document.querySelector(".term-title").innerText.trim();
+                const def = document.querySelector(".term-definition").innerText.trim();
+                const contentNodes = document.querySelector(".term-content").children;
+                const cat = document.querySelector(".cat-badge").innerText.trim();
+                const added = document.querySelector(".updated-date:nth-of-type(1)").innerText.replace("Added ", "").trim();
+                const updated = document.querySelector(".updated-date:nth-of-type(2)").innerText.replace("Updated ", "").trim();
+
+                let contentMarkdown = "";
+                for (const node of contentNodes) {
+                    if (node.tagName === 'H2') {
+                        contentMarkdown += `## ${node.innerText.trim()}\n\n`;
+                    } else {
+                        contentMarkdown += `${node.innerText.trim()}\n\n`;
+                    }
+                }
+
+                const url = window.location.href;
+                const finalMd = [
+                    `# ${term}`,
+                    ``,
+                    `> ${def}`,
+                    ``,
+                    `**Category:** ${cat}  `,
+                    `**Added:** ${added}  `,
+                    `**Updated:** ${updated}  `,
+                    `**Source:** ${url}  `,
+                    ``,
+                    `---`,
+                    ``,
+                    contentMarkdown.trim(),
+                    ``,
+                    `---`,
+                    `*Originally published on [Daily AI Mail](https://dailyaimail.news)*`,
+                ].join('\n');
+
+                try {
+                    await navigator.clipboard.writeText(finalMd);
+                    const label = copyBtn.querySelector("span");
+                    const original = label.innerText;
+                    label.innerText = "Copied!";
+                    setTimeout(() => { label.innerText = original; }, 2000);
+                } catch (e) {
+                    console.error("Copy failed", e);
+                }
+            });
+        }
+
+        // Share functionality
+        const shareToggle = document.getElementById("share-toggle");
+        const sharePopover = document.getElementById("share-popover");
+        const copyLinkBtn = document.getElementById("copy-link-btn");
+
+        if (shareToggle && sharePopover) {
+            const url = window.location.href;
+            const title = document.title;
+            const text = document.querySelector(".term-definition").innerText.trim();
+
+            // Set social links
+            const enc = encodeURIComponent;
+            document.getElementById("share-x").href = `https://x.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`;
+            document.getElementById("share-li").href = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+
+            shareToggle.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const isHidden = sharePopover.hidden;
+                sharePopover.hidden = !isHidden;
+                shareToggle.setAttribute("aria-expanded", String(isHidden));
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!sharePopover.contains(e.target) && e.target !== shareToggle) {
+                    sharePopover.hidden = true;
+                    shareToggle.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            copyLinkBtn.addEventListener("click", async () => {
+                try {
+                    await navigator.clipboard.writeText(url);
+                    const original = copyLinkBtn.innerHTML;
+                    copyLinkBtn.innerText = "Copied!";
+                    setTimeout(() => { copyLinkBtn.innerHTML = original; }, 2000);
+                } catch {}
+            });
+        }
+    </script>
 </Layout>
 
 <style>
@@ -169,29 +302,90 @@ const SECTIONS = [
         margin: 0 auto;
         padding: 0 var(--gutter);
     }
-    .breadcrumb-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        color: var(--color-text-muted);
-        margin-bottom: 24px;
-        font-family: var(--font-mono);
-    }
-    .breadcrumb-row a {
-        color: var(--color-text-muted);
-        text-decoration: none;
-        transition: color 0.12s;
-    }
-    .breadcrumb-row a:hover { color: var(--gold); }
-    .breadcrumb-row span[aria-current] { color: var(--color-text); }
 
     .term-meta {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         gap: 12px;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
+    .term-meta-btn {
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        padding: 5px 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--color-text-muted);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.12s;
+        white-space: nowrap;
+    }
+    .term-meta-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+    }
+    .term-meta-btn svg { opacity: 0.7; }
+    .term-meta-btn:hover svg { opacity: 1; }
+    .term-meta-btn .chevron {
+        margin-left: 2px;
+        opacity: 0.5;
+        transition: transform 0.2s;
+    }
+    .term-meta-btn[aria-expanded="true"] .chevron {
+        transform: rotate(180deg);
+    }
+
+    .share-wrapper {
+        position: relative;
+    }
+    .share-popover {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        padding: 6px;
+        border-radius: 6px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        z-index: 100;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2px;
+        min-width: 160px;
+    }
+    .share-popover[hidden] {
+        display: none;
+    }
+    .share-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-family: var(--font-sans);
+        color: var(--color-text-muted);
+        border-radius: 4px;
+        text-decoration: none;
+        background: none;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.12s;
+    }
+    .share-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--gold);
+    }
+    .share-item svg { opacity: 0.6; }
+    .share-item:hover svg { opacity: 1; }
+
     .cat-badge {
         font-family: var(--font-mono);
         font-size: 10px;

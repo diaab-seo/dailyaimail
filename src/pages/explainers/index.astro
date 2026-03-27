@@ -3,6 +3,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { buildExplainersHubSchema } from "../../lib/explainers-schema";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 
 const allTerms = await getCollection("explainers");
 
@@ -10,6 +11,19 @@ const allTerms = await getCollection("explainers");
 const sorted = [...allTerms].sort((a, b) =>
     a.data.term.localeCompare(b.data.term)
 );
+
+// Get the most recent date across all terms
+const maxDate = allTerms.reduce((max, t) => {
+    const current = new Date(t.data.lastUpdated ?? t.data.dateAdded);
+    return current > max ? current : max;
+}, new Date(0));
+
+const lastUpdatedStr = maxDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+});
+const lastUpdatedISO = maxDate.toISOString().split("T")[0];
 
 // Category display map
 const CATEGORY_LABELS: Record<string, string> = {
@@ -64,6 +78,8 @@ const description = "Plain-language definitions of every key term in artificial 
     />
     <link rel="sitemap" href="/sitemap-explainers.xml" slot="head" />
 
+    <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Explainers" }]} />
+
     <main class="explainers-hub">
 
         <!-- ── Hero ── -->
@@ -75,6 +91,9 @@ const description = "Plain-language definitions of every key term in artificial 
                     Your guide to every term in AI — plain language, no hype.
                     {sorted.length} concepts and counting.
                 </p>
+                <time class="updated-date" datetime={lastUpdatedISO}>
+                    Last updated: {lastUpdatedStr}
+                </time>
             </div>
         </header>
 
@@ -197,6 +216,13 @@ const description = "Plain-language definitions of every key term in artificial 
         color: var(--color-text-muted);
         max-width: 600px;
         line-height: 1.6;
+    }
+    .updated-date {
+        display: block;
+        margin-top: 16px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--color-text-muted);
     }
 
     /* ── Categories ── */
