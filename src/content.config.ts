@@ -40,4 +40,30 @@ const articles = defineCollection({
     }),
 });
 
-export const collections = { articles };
+const explainers = defineCollection({
+    loader: glob({ pattern: '**/*.md', base: './src/content/explainers' }),
+    schema: z.object({
+        term:           z.string(),
+        abbreviation:   z.string().optional(),
+        slug:           z.string(),
+        category:       z.enum([
+            'foundation-models',
+            'training',
+            'inference',
+            'agents',
+            'safety-alignment',
+            'architecture',
+            'data',
+            'applications',
+        ]),
+        definition:     z.string(),           // 1–2 sentence plain-text (tooltip + OG)
+        featuredImage:  z.string().optional(), // e.g. "/images/explainers/what-is-llm.png"
+        dateAdded:      z.string(),           // ISO date string e.g. "2026-03-26"
+        lastUpdated:    z.string().optional(),
+        relatedTerms:   z.array(z.string()).optional(), // slugs
+        seoTitle:       z.string().optional(),
+        seoDescription: z.string().optional(),
+    }),
+});
+
+export const collections = { articles, explainers };
