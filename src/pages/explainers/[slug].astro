@@ -1,0 +1,398 @@
+---
+// src/pages/explainers/[slug].astro
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+import { buildExplainerTermSchema } from "../../lib/explainers-schema";
+
+export async function getStaticPaths() {
+    const terms = await getCollection("explainers");
+    return terms.map(t => ({
+        params: { slug: t.data.slug },
+        props: { entry: t },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const CATEGORY_LABELS: Record<string, string> = {
+    "foundation-models":  "Foundation Models",
+    "training":           "Training",
+    "inference":          "Inference",
+    "agents":             "Agents",
+    "safety-alignment":   "Safety & Alignment",
+    "architecture":       "Architecture",
+    "data":               "Data",
+    "applications":       "Applications",
+};
+
+const schema = buildExplainerTermSchema({
+    slug:           d.slug,
+    term:           d.term,
+    abbreviation:   d.abbreviation,
+    category:       d.category,
+    definition:     d.definition,
+    dateAdded:      d.dateAdded,
+    lastUpdated:    d.lastUpdated,
+    relatedTerms:   d.relatedTerms,
+    seoTitle:       d.seoTitle,
+    seoDescription: d.seoDescription,
+});
+
+const pageTitle = d.seoTitle ?? `${d.term}${d.abbreviation ? ` (${d.abbreviation})` : ''} — AI Explainer`;
+const pageDesc  = d.seoDescription ?? d.definition;
+const ogImage   = d.featuredImage
+    ? `https://dailyaimail.news${d.featuredImage.startsWith("/") ? "" : "/"}${d.featuredImage}`
+    : undefined;
+
+// Related term collection entries for cross-links
+const allTerms     = await getCollection("explainers");
+const relatedTerms = (d.relatedTerms ?? [])
+    .map(slug => allTerms.find(t => t.data.slug === slug)?.data)
+    .filter(Boolean);
+
+const SECTIONS = [
+    { id: "definition",      label: "Definition" },
+    { id: "why-it-matters",  label: "Why It Matters" },
+    { id: "how-it-works",    label: "How It Works" },
+    { id: "applications",    label: "Applications" },
+    { id: "limitations",     label: "Limitations" },
+    { id: "related-terms",   label: "Related Terms" },
+    { id: "further-reading", label: "Further Reading" },
+];
+---
+
+<Layout title={pageTitle} description={pageDesc} metaTitle={pageTitle} ogImage={ogImage}>
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+        slot="head"
+    />
+
+    <main class="term-page">
+        <!-- ── Hero ── -->
+        <header class="term-hero">
+            <div class="term-inner">
+                <nav class="breadcrumb-row" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <span aria-hidden="true">›</span>
+                    <a href="/explainers">Explainers</a>
+                    <span aria-hidden="true">›</span>
+                    <span aria-current="page">{d.term}</span>
+                </nav>
+
+                <div class="term-meta">
+                    <span class="cat-badge">{CATEGORY_LABELS[d.category] ?? d.category}</span>
+                    {d.lastUpdated && (
+                        <time class="updated-date">
+                            Updated {d.lastUpdated}
+                        </time>
+                    )}
+                </div>
+
+                <h1 class="term-title">
+                    {d.term}
+                    {d.abbreviation && <span class="term-abbr-hero">({d.abbreviation})</span>}
+                </h1>
+
+                <p class="term-definition">{d.definition}</p>
+
+                <!-- Section jump bar -->
+                <nav class="jump-bar" aria-label="Jump to section">
+                    {SECTIONS.map(s => (
+                        <a href={`#${s.id}`} class="jump-link">{s.label}</a>
+                    ))}
+                </nav>
+            </div>
+            {d.featuredImage && (
+                <div class="term-featured-image-wrap">
+                    <div class="term-inner">
+                        <figure class="term-featured-figure">
+                            <img
+                                src={d.featuredImage}
+                                alt={`What is ${d.term}${d.abbreviation ? ` (${d.abbreviation})` : ''}? — Daily AI Mail`}
+                                class="term-featured-img"
+                                width="860"
+                                height="480"
+                                loading="eager"
+                                decoding="async"
+                            />
+                        </figure>
+                    </div>
+                </div>
+            )}
+        </header>
+
+        <!-- ── Body ── -->
+        <div class="term-inner term-body">
+            <article class="term-content">
+                <Content />
+            </article>
+
+            <!-- Related Terms sidebar card -->
+            {relatedTerms.length > 0 && (
+                <aside class="related-sidebar" aria-label="Related terms">
+                    <h2 class="related-heading">Related Terms</h2>
+                    <ul class="related-list">
+                        {relatedTerms.map(rt => rt && (
+                            <li>
+                                <a
+                                    href={`/explainers/${rt.slug}`}
+                                    class="related-link"
+                                    data-explainer={rt.slug}
+                                >
+                                    <strong>{rt.term}</strong>
+                                    {rt.abbreviation && (
+                                        <span class="related-abbr">({rt.abbreviation})</span>
+                                    )}
+                                    <span class="related-def">{rt.definition}</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                    <a href="/explainers" class="back-to-hub">← All Explainers</a>
+                </aside>
+            )}
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .term-hero {
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        padding: 48px 0 0;
+    }
+    .term-inner {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+    }
+    .breadcrumb-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--color-text-muted);
+        margin-bottom: 24px;
+        font-family: var(--font-mono);
+    }
+    .breadcrumb-row a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        transition: color 0.12s;
+    }
+    .breadcrumb-row a:hover { color: var(--gold); }
+    .breadcrumb-row span[aria-current] { color: var(--color-text); }
+
+    .term-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    .cat-badge {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 3px;
+        background: color-mix(in srgb, var(--gold) 15%, transparent);
+        color: var(--gold);
+        border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+    }
+    .updated-date {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--color-text-muted);
+    }
+
+    .term-title {
+        font-family: var(--font-display);
+        font-size: clamp(32px, 5vw, 52px);
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        color: var(--color-text);
+        margin-bottom: 20px;
+    }
+    .term-abbr-hero {
+        color: var(--gold);
+        font-size: 0.65em;
+        font-weight: 700;
+        vertical-align: middle;
+        margin-left: 8px;
+    }
+    .term-definition {
+        font-size: 18px;
+        line-height: 1.65;
+        color: var(--color-text-muted);
+        max-width: 680px;
+        margin-bottom: 36px;
+    }
+
+    /* Jump bar */
+    .jump-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        border-top: 1px solid var(--color-border);
+        margin: 0 calc(-1 * var(--gutter));
+        padding: 0 var(--gutter);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .jump-link {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--color-text-muted);
+        text-decoration: none;
+        padding: 12px 16px;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+        transition: all 0.12s;
+    }
+    .jump-link:hover {
+        color: var(--gold);
+        border-bottom-color: var(--gold);
+    }
+
+    /* Body layout */
+    .term-body {
+        padding-top: 48px;
+        padding-bottom: 120px;
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        gap: 64px;
+        align-items: start;
+        max-width: 1100px;
+    }
+    .term-content {
+        min-width: 0;
+    }
+
+    /* Content typography — mirrors article styles */
+    .term-content :global(h2) {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--color-text);
+        margin: 48px 0 16px;
+        padding-top: 24px;
+        border-top: 1px solid var(--color-border);
+        scroll-margin-top: 90px;
+    }
+    .term-content :global(h2:first-child) {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+    }
+    .term-content :global(p) {
+        font-size: 16px;
+        line-height: 1.8;
+        color: var(--color-text-muted);
+        margin-bottom: 20px;
+    }
+    .term-content :global(ul), .term-content :global(ol) {
+        padding-left: 24px;
+        margin-bottom: 20px;
+        color: var(--color-text-muted);
+    }
+    .term-content :global(li) {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 8px;
+    }
+    .term-content :global(strong) { color: var(--color-text); }
+    .term-content :global(a) {
+        color: var(--gold);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    .term-content :global(code) {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 3px;
+        padding: 1px 5px;
+    }
+
+    /* Related sidebar */
+    .related-sidebar {
+        position: sticky;
+        top: 100px;
+    }
+    .related-heading {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--color-text);
+        margin-bottom: 16px;
+    }
+    .related-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+    .related-link {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 12px 14px;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        text-decoration: none;
+        transition: border-color 0.12s;
+    }
+    .related-link:hover { border-color: var(--gold); }
+    .related-link strong { font-size: 13px; color: var(--color-text); }
+    .related-abbr { font-family: var(--font-mono); font-size: 10px; color: var(--gold); }
+    .related-def { font-size: 11px; color: var(--color-text-muted); line-height: 1.4; }
+    .back-to-hub {
+        font-size: 13px;
+        color: var(--color-text-muted);
+        text-decoration: none;
+        display: block;
+    }
+    .back-to-hub:hover { color: var(--gold); }
+
+    .term-featured-image-wrap {
+        margin-top: 36px;
+        background: var(--color-surface);
+    }
+    .term-featured-figure {
+        margin: 0;
+        border-radius: var(--radius-md, 8px);
+        overflow: hidden;
+        border: 1px solid var(--color-border);
+        margin-bottom: -1px;
+        line-height: 0;
+    }
+    .term-featured-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        display: block;
+    }
+    @media (max-width: 900px) {
+        .term-body {
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+        .related-sidebar { position: static; }
+    }
+    @media (max-width: 600px) {
+        .term-featured-figure {
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+        }
+    }
+</style>

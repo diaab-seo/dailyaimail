@@ -31,6 +31,9 @@ export default defineConfig({
                 '/news-sitemap.xml',
                 '/rss.xml',
                 '/sitemap*',
+                // ── Explainers (fully static, no worker needed) ──
+                '/explainers',
+                '/explainers/*',
             ],
         },
     }),

@@ -5,3 +5,4 @@ Disallow: /dist/
 # Sitemaps
 Sitemap: https://dailyaimail.news/sitemap-index.xml
 Sitemap: https://dailyaimail.news/news-sitemap.xml
+Sitemap: https://dailyaimail.news/sitemap-explainers.xml
