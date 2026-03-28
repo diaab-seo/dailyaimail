@@ -1,41 +1,60 @@
 ---
-tag: "Technology"
-tags: ["GitHub", "Microsoft", "Copilot", "AI Training Data", "AI Developer Tools"]
-headline: "GitHub Will Use Your Copilot Interactions as AI Training Data — Here's How to Opt Out"
-excerpt: "Microsoft is now collecting GitHub Copilot interactions — including code snippets, comments, and file names — to train its AI models, with an opt-out available but enabled by default."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "3 min read"
-image: "/images/github-copilot-ai-training-data-opt-out.png"
+tag: Technology
+tags:
+  - GitHub
+  - Microsoft
+  - Copilot
+  - AI Training Data
+  - AI Developer Tools
+headline: >-
+  GitHub Will Use Your Copilot Interactions as AI Training Data — Here's How to
+  Opt Out
+excerpt: >-
+  Microsoft is now collecting GitHub Copilot interactions — including code
+  snippets, comments, and file names — to train its AI models, with an opt-out
+  available but enabled by default.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 3 min read
+image: /images/github-copilot-ai-training-data-opt-out.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "GitHub is now using Copilot interactions to train its AI models by default, with free and paid users equally affected unless they opt out."
-keywords: ["GitHub Copilot training data", "GitHub AI opt out", "Microsoft Copilot privacy", "GitHub Copilot data collection", "AI training data policy"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  GitHub is now using Copilot interactions to train its AI models by default,
+  with free and paid users equally affected unless they opt out.
+keywords:
+  - GitHub Copilot training data
+  - GitHub AI opt out
+  - Microsoft Copilot privacy
+  - GitHub Copilot data collection
+  - AI training data policy
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "GitHub"
-    url: "https://github.com"
-    type: "Organization"
-  - name: "Microsoft"
-    url: "https://microsoft.com"
-    type: "Organization"
-  - name: "Visual Studio Code"
-    url: "https://code.visualstudio.com"
-    type: "SoftwareApplication"
+  - name: GitHub
+    url: 'https://github.com'
+    type: Organization
+  - name: Microsoft
+    url: 'https://microsoft.com'
+    type: Organization
+  - name: Visual Studio Code
+    url: 'https://code.visualstudio.com'
+    type: SoftwareApplication
 about:
-  - name: "GitHub Copilot"
-    url: "https://github.com/features/copilot"
-    type: "SoftwareApplication"
+  - name: GitHub Copilot
+    url: 'https://github.com/features/copilot'
+    type: SoftwareApplication
 citations:
-  - name: "GitHub Blog: Copilot AI Training Data Announcement"
-    url: "https://github.blog/changelog/copilot-ai-training-data"
-    type: "CreativeWork"
-  - name: "GitHub Copilot Privacy Settings"
-    url: "https://github.com/settings/copilot"
-    type: "CreativeWork"
+  - name: 'GitHub Blog: Copilot AI Training Data Announcement'
+    url: 'https://github.blog/changelog/copilot-ai-training-data'
+    type: CreativeWork
+  - name: GitHub Copilot Privacy Settings
+    url: 'https://github.com/settings/copilot'
+    type: CreativeWork
 ---
 
 Microsoft is turning one of its most widely used developer tools into a new source of AI training data. GitHub announced today that interactions with [GitHub Copilot](https://github.com/features/copilot) will now be collected and used to "train and improve our AI models" — by default, and across both free and paid accounts.

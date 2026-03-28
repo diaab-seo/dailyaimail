@@ -1,59 +1,79 @@
 ---
-tag: "Google AI"
-tags: ["Google", "Quantum Computing", "Neutral Atoms", "Superconducting Qubits", "Google Quantum AI"]
-headline: "Google Quantum AI Expands Into Neutral Atom Computing Alongside Its Superconducting Program"
-excerpt: "Google Quantum AI is betting on two complementary quantum modalities — superconducting qubits and neutral atoms — to accelerate the path to commercially relevant quantum computers by decade's end."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "4 min read"
-image: "/images/google-quantum-ai-neutral-atom-superconducting.png"
+tag: Google AI
+tags:
+  - Google
+  - Quantum Computing
+  - Neutral Atoms
+  - Superconducting Qubits
+  - Google Quantum AI
+headline: >-
+  Google Quantum AI Expands Into Neutral Atom Computing Alongside Its
+  Superconducting Program
+excerpt: >-
+  Google Quantum AI is betting on two complementary quantum modalities —
+  superconducting qubits and neutral atoms — to accelerate the path to
+  commercially relevant quantum computers by decade's end.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 4 min read
+image: /images/google-quantum-ai-neutral-atom-superconducting.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "Google Quantum AI doubles down on quantum hardware by expanding from superconducting qubits into neutral atom computing."
-keywords: ["Google Quantum AI", "neutral atom computing", "superconducting qubits", "quantum error correction", "Adam Kaufman Google"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  Google Quantum AI doubles down on quantum hardware by expanding from
+  superconducting qubits into neutral atom computing.
+keywords:
+  - Google Quantum AI
+  - neutral atom computing
+  - superconducting qubits
+  - quantum error correction
+  - Adam Kaufman Google
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "Google Quantum AI"
-    url: "https://quantumai.google"
-    type: "Organization"
-  - name: "QuEra Computing"
-    url: "https://www.quera.com"
-    type: "Organization"
-  - name: "CU Boulder"
-    url: "https://www.colorado.edu"
-    type: "Organization"
-  - name: "JILA"
-    url: "https://jila.colorado.edu"
-    type: "Organization"
-  - name: "NIST"
-    url: "https://www.nist.gov"
-    type: "Organization"
+  - name: Google Quantum AI
+    url: 'https://quantumai.google'
+    type: Organization
+  - name: QuEra Computing
+    url: 'https://www.quera.com'
+    type: Organization
+  - name: CU Boulder
+    url: 'https://www.colorado.edu'
+    type: Organization
+  - name: JILA
+    url: 'https://jila.colorado.edu'
+    type: Organization
+  - name: NIST
+    url: 'https://www.nist.gov'
+    type: Organization
 about:
-  - name: "Neutral Atom Quantum Computing"
-    url: "https://quantumai.google/research/neutral-atoms"
-    type: "Thing"
-  - name: "Superconducting Qubits"
-    url: "https://quantumai.google/hardware"
-    type: "Thing"
+  - name: Neutral Atom Quantum Computing
+    url: 'https://quantumai.google/research/neutral-atoms'
+    type: Thing
+  - name: Superconducting Qubits
+    url: 'https://quantumai.google/hardware'
+    type: Thing
 citations:
-  - name: "Google Quantum AI Official Announcement"
-    url: "https://blog.google/technology/research/google-quantum-ai-neutral-atom-computing/"
-    type: "CreativeWork"
-  - name: "QuEra Computing: Neutral Atom Pioneer"
-    url: "https://www.quera.com/blog/neutral-atom-computing-explained"
-    type: "CreativeWork"
-  - name: "CU Boulder Quantum Research Ecosystem"
-    url: "https://www.colorado.edu/research/quantum"
-    type: "CreativeWork"
-  - name: "JILA: Atomic, Molecular and Optical Physics"
-    url: "https://jila.colorado.edu/research"
-    type: "CreativeWork"
-  - name: "NSF Q-SEnSE Quantum Institute"
-    url: "https://q-sense.org"
-    type: "CreativeWork"
+  - name: Google Quantum AI Official Announcement
+    url: >-
+      https://blog.google/technology/research/google-quantum-ai-neutral-atom-computing/
+    type: CreativeWork
+  - name: 'QuEra Computing: Neutral Atom Pioneer'
+    url: 'https://www.quera.com/blog/neutral-atom-computing-explained'
+    type: CreativeWork
+  - name: CU Boulder Quantum Research Ecosystem
+    url: 'https://www.colorado.edu/research/quantum'
+    type: CreativeWork
+  - name: 'JILA: Atomic, Molecular and Optical Physics'
+    url: 'https://jila.colorado.edu/research'
+    type: CreativeWork
+  - name: NSF Q-SEnSE Quantum Institute
+    url: 'https://q-sense.org'
+    type: CreativeWork
 ---
 
 Google Quantum AI has spent over a decade pushing the boundaries of superconducting quantum hardware — achieving milestones in beyond-classical performance, error correction, and verifiable quantum advantage that once seemed generations away. Now, the team is making its most significant strategic expansion yet: adding [neutral atom quantum computing](https://blog.google/technology/research/google-quantum-ai-neutral-atom-computing/) as a second, parallel research track alongside its established superconducting program.

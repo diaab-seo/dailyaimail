@@ -1,68 +1,87 @@
 ---
-tag: "Technology"
-tags: ["OpenAI", "Sora", "AI Video", "Creator Economy", "Generative AI"]
-headline: "Sora Is Gone: What It Means for Creators and Where to Go Next"
-excerpt: "OpenAI's sudden shutdown of Sora leaves thousands of creators mid-workflow. Here's an honest look at the fallout, what was actually lost, and which platforms are ready to fill the gap right now."
-date: "Mar 26, 2026"
-isoDate: "2026-03-26"
-modifiedDate: "2026-03-26"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "5 min read"
-image: "/images/sora-shutdown-creator-impact-alternatives-2026.png"
+tag: Technology
+tags:
+  - OpenAI
+  - Sora
+  - AI Video
+  - Creator Economy
+  - Generative AI
+headline: 'Sora Is Gone: What It Means for Creators and Where to Go Next'
+excerpt: >-
+  OpenAI's sudden shutdown of Sora leaves thousands of creators mid-workflow.
+  Here's an honest look at the fallout, what was actually lost, and which
+  platforms are ready to fill the gap right now.
+date: 'Mar 26, 2026'
+isoDate: '2026-03-26'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 5 min read
+image: /images/sora-shutdown-creator-impact-alternatives-2026.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "With Sora's unexpected shutdown, creators are scrambling to find a new home for their AI video workflows — and the alternatives are more capable than ever."
-keywords: ["Sora shutdown impact", "Sora alternatives 2026", "AI video creators", "Runway Veo Kling", "OpenAI Sora discontinued"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  With Sora's unexpected shutdown, creators are scrambling to find a new home
+  for their AI video workflows — and the alternatives are more capable than
+  ever.
+keywords:
+  - Sora shutdown impact
+  - Sora alternatives 2026
+  - AI video creators
+  - Runway Veo Kling
+  - OpenAI Sora discontinued
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "OpenAI"
-    url: "https://openai.com"
-    type: "Organization"
-  - name: "Google Veo"
-    url: "https://deepmind.google/technologies/veo/"
-    type: "Organization"
-  - name: "Runway"
-    url: "https://runwayml.com"
-    type: "Organization"
-  - name: "Kling AI"
-    url: "https://klingai.com"
-    type: "Organization"
-  - name: "Pika"
-    url: "https://pika.art"
-    type: "Organization"
-  - name: "Seedance"
-    url: "https://seedance.ai"
-    type: "Organization"
-  - name: "Adobe Firefly"
-    url: "https://firefly.adobe.com"
-    type: "Organization"
+  - name: OpenAI
+    url: 'https://openai.com'
+    type: Organization
+  - name: Google Veo
+    url: 'https://deepmind.google/technologies/veo/'
+    type: Organization
+  - name: Runway
+    url: 'https://runwayml.com'
+    type: Organization
+  - name: Kling AI
+    url: 'https://klingai.com'
+    type: Organization
+  - name: Pika
+    url: 'https://pika.art'
+    type: Organization
+  - name: Seedance
+    url: 'https://seedance.ai'
+    type: Organization
+  - name: Adobe Firefly
+    url: 'https://firefly.adobe.com'
+    type: Organization
 about:
-  - name: "Sora"
-    url: "https://openai.com/sora"
-    type: "Thing"
+  - name: Sora
+    url: 'https://openai.com/sora'
+    type: Thing
 citations:
-  - name: "Daily AI Mail: OpenAI Pulls the Plug on Sora"
-    url: "https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down"
-    type: "CreativeWork"
-  - name: "VEED: Best Sora Alternatives 2026"
-    url: "https://www.veed.io/learn/sora-alternatives"
-    type: "CreativeWork"
-  - name: "Runway Gen-4.5 Overview"
-    url: "https://runwayml.com/gen4"
-    type: "CreativeWork"
-  - name: "Google Veo 3.1 Documentation"
-    url: "https://deepmind.google/technologies/veo/"
-    type: "CreativeWork"
-  - name: "Kling AI 3.0 Platform"
-    url: "https://klingai.com"
-    type: "CreativeWork"
-  - name: "Adobe Firefly Video"
-    url: "https://firefly.adobe.com/generate/video"
-    type: "CreativeWork"
-  - name: "Artificial Analysis Video Arena Rankings March 2026"
-    url: "https://artificialanalysis.ai/video"
-    type: "CreativeWork"
+  - name: 'Daily AI Mail: OpenAI Pulls the Plug on Sora'
+    url: >-
+      https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down
+    type: CreativeWork
+  - name: 'VEED: Best Sora Alternatives 2026'
+    url: 'https://www.veed.io/learn/sora-alternatives'
+    type: CreativeWork
+  - name: Runway Gen-4.5 Overview
+    url: 'https://runwayml.com/gen4'
+    type: CreativeWork
+  - name: Google Veo 3.1 Documentation
+    url: 'https://deepmind.google/technologies/veo/'
+    type: CreativeWork
+  - name: Kling AI 3.0 Platform
+    url: 'https://klingai.com'
+    type: CreativeWork
+  - name: Adobe Firefly Video
+    url: 'https://firefly.adobe.com/generate/video'
+    type: CreativeWork
+  - name: Artificial Analysis Video Arena Rankings March 2026
+    url: 'https://artificialanalysis.ai/video'
+    type: CreativeWork
 ---
 
 When OpenAI [announced the shutdown of Sora on March 25, 2026](https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down), the news landed without warning, without a specific shutdown date, and without a clear reason. For an industry conditioned to expect dramatic AI announcements, this one hit differently — not because it was a leap forward, but because it was a door closing on a community that had built real workflows around the platform.

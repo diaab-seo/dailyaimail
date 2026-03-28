@@ -1,53 +1,71 @@
 ---
-tag: "Anthropic"
-tags: ["Anthropic", "Claude Code", "AI Agents", "Developer Tools", "Agentic AI"]
-headline: "Anthropic Gives Claude Code an Autonomous Mode — With a Safety Net Built In"
-excerpt: "Anthropic's new 'auto mode' for Claude Code lets the AI decide which actions to take without waiting for human approval, using an AI safety layer to filter risky behavior in real time."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "3 min read"
-image: "/images/anthropic-claude-code-auto-mode-autonomous.png"
+tag: Anthropic
+tags:
+  - Anthropic
+  - Claude Code
+  - AI Agents
+  - Developer Tools
+  - Agentic AI
+headline: Anthropic Gives Claude Code an Autonomous Mode — With a Safety Net Built In
+excerpt: >-
+  Anthropic's new 'auto mode' for Claude Code lets the AI decide which actions
+  to take without waiting for human approval, using an AI safety layer to filter
+  risky behavior in real time.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 3 min read
+image: /images/anthropic-claude-code-auto-mode-autonomous.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "Anthropic's Claude Code gains an autonomous 'auto mode' that self-determines which actions are safe to execute — without waiting for the developer."
-keywords: ["Claude Code auto mode", "Anthropic autonomous AI", "Claude Code Review", "agentic coding tools", "prompt injection protection"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  Anthropic's Claude Code gains an autonomous 'auto mode' that self-determines
+  which actions are safe to execute — without waiting for the developer.
+keywords:
+  - Claude Code auto mode
+  - Anthropic autonomous AI
+  - Claude Code Review
+  - agentic coding tools
+  - prompt injection protection
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "Anthropic"
-    url: "https://www.anthropic.com"
-    type: "Organization"
-  - name: "GitHub"
-    url: "https://github.com"
-    type: "Organization"
-  - name: "OpenAI"
-    url: "https://openai.com"
-    type: "Organization"
+  - name: Anthropic
+    url: 'https://www.anthropic.com'
+    type: Organization
+  - name: GitHub
+    url: 'https://github.com'
+    type: Organization
+  - name: OpenAI
+    url: 'https://openai.com'
+    type: Organization
 about:
-  - name: "Claude Code"
-    url: "https://www.anthropic.com/claude-code"
-    type: "Thing"
-  - name: "Claude Code Review"
-    url: "https://www.anthropic.com/news/claude-code-review"
-    type: "Thing"
-  - name: "Dispatch for Cowork"
-    url: "https://www.anthropic.com/news/cowork"
-    type: "Thing"
+  - name: Claude Code
+    url: 'https://www.anthropic.com/claude-code'
+    type: Thing
+  - name: Claude Code Review
+    url: 'https://www.anthropic.com/news/claude-code-review'
+    type: Thing
+  - name: Dispatch for Cowork
+    url: 'https://www.anthropic.com/news/cowork'
+    type: Thing
 citations:
-  - name: "Anthropic: Claude Code Auto Mode Announcement"
-    url: "https://www.anthropic.com/news/claude-code-auto-mode"
-    type: "CreativeWork"
-  - name: "Anthropic: Claude Code Review Launch"
-    url: "https://www.anthropic.com/news/claude-code-review"
-    type: "CreativeWork"
-  - name: "Anthropic: Dispatch for Cowork"
-    url: "https://www.anthropic.com/news/cowork"
-    type: "CreativeWork"
-  - name: "OWASP: Prompt Injection Explained"
-    url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
-    type: "CreativeWork"
+  - name: 'Anthropic: Claude Code Auto Mode Announcement'
+    url: 'https://www.anthropic.com/news/claude-code-auto-mode'
+    type: CreativeWork
+  - name: 'Anthropic: Claude Code Review Launch'
+    url: 'https://www.anthropic.com/news/claude-code-review'
+    type: CreativeWork
+  - name: 'Anthropic: Dispatch for Cowork'
+    url: 'https://www.anthropic.com/news/cowork'
+    type: CreativeWork
+  - name: 'OWASP: Prompt Injection Explained'
+    url: >-
+      https://owasp.org/www-project-top-10-for-large-language-model-applications/
+    type: CreativeWork
 ---
 
 For developers leaning on AI to write and ship code, the current state of the art demands a constant trade-off: either watch every move the model makes, or step back and accept the unpredictability that comes with giving it free rein. Anthropic is now pushing to make that trade-off obsolete.

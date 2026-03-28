@@ -1,53 +1,74 @@
 ---
-tag: "OpenAI"
-tags: ["OpenAI", "ChatGPT", "E-Commerce", "Agentic Commerce", "Stripe"]
-headline: "ChatGPT's Amazon Ambitions Falter as OpenAI Quietly Retreats from Direct Checkout"
-excerpt: "OpenAI is stepping back from its vision of turning ChatGPT into a full shopping destination, pivoting from native checkout toward product discovery as users prove reluctant to buy inside the chatbot."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "4 min read"
-image: "/images/chatgpt-ecommerce-pivot-instant-checkout.png"
+tag: OpenAI
+tags:
+  - OpenAI
+  - ChatGPT
+  - E-Commerce
+  - Agentic Commerce
+  - Stripe
+headline: >-
+  ChatGPT's Amazon Ambitions Falter as OpenAI Quietly Retreats from Direct
+  Checkout
+excerpt: >-
+  OpenAI is stepping back from its vision of turning ChatGPT into a full
+  shopping destination, pivoting from native checkout toward product discovery
+  as users prove reluctant to buy inside the chatbot.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 4 min read
+image: /images/chatgpt-ecommerce-pivot-instant-checkout.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "OpenAI scales back its in-chat shopping ambitions, shifting focus from native checkout to AI-powered product discovery."
-keywords: ["ChatGPT shopping", "OpenAI Instant Checkout", "Agentic Commerce Protocol", "ChatGPT e-commerce pivot", "OpenAI Stripe"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  OpenAI scales back its in-chat shopping ambitions, shifting focus from native
+  checkout to AI-powered product discovery.
+keywords:
+  - ChatGPT shopping
+  - OpenAI Instant Checkout
+  - Agentic Commerce Protocol
+  - ChatGPT e-commerce pivot
+  - OpenAI Stripe
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "OpenAI"
-    url: "https://openai.com"
-    type: "Organization"
-  - name: "Stripe"
-    url: "https://stripe.com"
-    type: "Organization"
-  - name: "Shopify"
-    url: "https://shopify.com"
-    type: "Organization"
-  - name: "Etsy"
-    url: "https://etsy.com"
-    type: "Organization"
+  - name: OpenAI
+    url: 'https://openai.com'
+    type: Organization
+  - name: Stripe
+    url: 'https://stripe.com'
+    type: Organization
+  - name: Shopify
+    url: 'https://shopify.com'
+    type: Organization
+  - name: Etsy
+    url: 'https://etsy.com'
+    type: Organization
 about:
-  - name: "Instant Checkout"
-    url: "https://openai.com/index/buy-it-in-chatgpt/"
-    type: "Thing"
-  - name: "Agentic Commerce Protocol"
-    url: "https://developers.openai.com/commerce/guides/key-concepts"
-    type: "Thing"
+  - name: Instant Checkout
+    url: 'https://openai.com/index/buy-it-in-chatgpt/'
+    type: Thing
+  - name: Agentic Commerce Protocol
+    url: 'https://developers.openai.com/commerce/guides/key-concepts'
+    type: Thing
 citations:
-  - name: "OpenAI: Buy it in ChatGPT"
-    url: "https://openai.com/index/buy-it-in-chatgpt/"
-    type: "CreativeWork"
-  - name: "Stripe: Developing an Open Standard for Agentic Commerce"
-    url: "https://stripe.com/blog/developing-an-open-standard-for-agentic-commerce"
-    type: "CreativeWork"
-  - name: "Digital Commerce 360: OpenAI Shifts Checkout Plans"
-    url: "https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/"
-    type: "CreativeWork"
-  - name: "The Keyword: OpenAI Drops Plan for Direct Checkout"
-    url: "https://www.thekeyword.co/news/openai-drops-plan-for-direct-checkout-inside-chatgpt"
-    type: "CreativeWork"
+  - name: 'OpenAI: Buy it in ChatGPT'
+    url: 'https://openai.com/index/buy-it-in-chatgpt/'
+    type: CreativeWork
+  - name: 'Stripe: Developing an Open Standard for Agentic Commerce'
+    url: 'https://stripe.com/blog/developing-an-open-standard-for-agentic-commerce'
+    type: CreativeWork
+  - name: 'Digital Commerce 360: OpenAI Shifts Checkout Plans'
+    url: >-
+      https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/
+    type: CreativeWork
+  - name: 'The Keyword: OpenAI Drops Plan for Direct Checkout'
+    url: >-
+      https://www.thekeyword.co/news/openai-drops-plan-for-direct-checkout-inside-chatgpt
+    type: CreativeWork
 ---
 
 OpenAI's bid to transform ChatGPT into a full-scale shopping destination is running into a wall — and the company is now changing course. In an announcement published Tuesday, OpenAI confirmed it is pulling back from a feature that allowed users to complete purchases directly inside the chatbot's interface, citing a failure to deliver the flexibility the company had envisioned.

@@ -1,71 +1,90 @@
 ---
-tag: "Granola"
-tags: ["Granola", "AI Productivity", "Enterprise AI", "Meeting Notes", "Series C"]
-headline: "Granola Raises $125M at $1.5B Valuation, Evolving From Meeting Notetaker to Enterprise AI Platform"
-excerpt: "Backed by Index Ventures and Kleiner Perkins, Granola is moving well beyond transcription — introducing Spaces, dual APIs, and MCP integrations as it bets on context-driven enterprise workflows."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "4 min read"
-image: "/images/granola-series-c-enterprise-ai-spaces.png"
+tag: Granola
+tags:
+  - Granola
+  - AI Productivity
+  - Enterprise AI
+  - Meeting Notes
+  - Series C
+headline: >-
+  Granola Raises $125M at $1.5B Valuation, Evolving From Meeting Notetaker to
+  Enterprise AI Platform
+excerpt: >-
+  Backed by Index Ventures and Kleiner Perkins, Granola is moving well beyond
+  transcription — introducing Spaces, dual APIs, and MCP integrations as it bets
+  on context-driven enterprise workflows.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 4 min read
+image: /images/granola-series-c-enterprise-ai-spaces.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "Granola's new Spaces feature brings team-level collaboration and workspace controls to its AI meeting platform as it targets enterprise adoption."
-keywords: ["Granola funding", "Granola Series C", "AI meeting notes enterprise", "Granola Spaces API", "meeting AI startup"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  Granola's new Spaces feature brings team-level collaboration and workspace
+  controls to its AI meeting platform as it targets enterprise adoption.
+keywords:
+  - Granola funding
+  - Granola Series C
+  - AI meeting notes enterprise
+  - Granola Spaces API
+  - meeting AI startup
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "Granola"
-    url: "https://granola.so"
-    type: "Organization"
-  - name: "Index Ventures"
-    url: "https://www.indexventures.com"
-    type: "Organization"
-  - name: "Kleiner Perkins"
-    url: "https://www.kleinerperkins.com"
-    type: "Organization"
-  - name: "Read AI"
-    url: "https://www.read.ai"
-    type: "Organization"
-  - name: "Fireflies"
-    url: "https://fireflies.ai"
-    type: "Organization"
-  - name: "Quill"
-    url: "https://quill.chat"
-    type: "Organization"
-  - name: "Vanta"
-    url: "https://vanta.com"
-    type: "Organization"
-  - name: "Mistral AI"
-    url: "https://mistral.ai"
-    type: "Organization"
+  - name: Granola
+    url: 'https://granola.so'
+    type: Organization
+  - name: Index Ventures
+    url: 'https://www.indexventures.com'
+    type: Organization
+  - name: Kleiner Perkins
+    url: 'https://www.kleinerperkins.com'
+    type: Organization
+  - name: Read AI
+    url: 'https://www.read.ai'
+    type: Organization
+  - name: Fireflies
+    url: 'https://fireflies.ai'
+    type: Organization
+  - name: Quill
+    url: 'https://quill.chat'
+    type: Organization
+  - name: Vanta
+    url: 'https://vanta.com'
+    type: Organization
+  - name: Mistral AI
+    url: 'https://mistral.ai'
+    type: Organization
 about:
-  - name: "Granola Spaces"
-    url: "https://granola.so/spaces"
-    type: "Thing"
-  - name: "Model Context Protocol"
-    url: "https://modelcontextprotocol.io"
-    type: "Thing"
+  - name: Granola Spaces
+    url: 'https://granola.so/spaces'
+    type: Thing
+  - name: Model Context Protocol
+    url: 'https://modelcontextprotocol.io'
+    type: Thing
 citations:
-  - name: "Granola Series C Announcement"
-    url: "https://granola.so/blog/series-c"
-    type: "CreativeWork"
-  - name: "Index Ventures: Granola Investment"
-    url: "https://www.indexventures.com/portfolio/granola"
-    type: "CreativeWork"
-  - name: "Granola MCP Server Launch"
-    url: "https://granola.so/blog/mcp-server"
-    type: "CreativeWork"
-  - name: "Model Context Protocol Documentation"
-    url: "https://modelcontextprotocol.io/docs"
-    type: "CreativeWork"
-  - name: "Read AI: Meeting Intelligence Platform"
-    url: "https://www.read.ai"
-    type: "CreativeWork"
-  - name: "Fireflies: Meeting Transcription and Action Items"
-    url: "https://fireflies.ai"
-    type: "CreativeWork"
+  - name: Granola Series C Announcement
+    url: 'https://granola.so/blog/series-c'
+    type: CreativeWork
+  - name: 'Index Ventures: Granola Investment'
+    url: 'https://www.indexventures.com/portfolio/granola'
+    type: CreativeWork
+  - name: Granola MCP Server Launch
+    url: 'https://granola.so/blog/mcp-server'
+    type: CreativeWork
+  - name: Model Context Protocol Documentation
+    url: 'https://modelcontextprotocol.io/docs'
+    type: CreativeWork
+  - name: 'Read AI: Meeting Intelligence Platform'
+    url: 'https://www.read.ai'
+    type: CreativeWork
+  - name: 'Fireflies: Meeting Transcription and Action Items'
+    url: 'https://fireflies.ai'
+    type: CreativeWork
 ---
 
 There is a meaningful difference between a bot that visibly joins your video call and an app that quietly transcribes from the background of someone's computer. That distinction — subtle to describe, significant in practice — is what built Granola's user base. And that user base has now helped the company raise $125 million in Series C funding led by Danny Rimer at [Index Ventures](https://www.indexventures.com/portfolio/granola), with Mamoon Hamid at [Kleiner Perkins](https://www.kleinerperkins.com) also participating. Existing investors Lightspeed, Spark, and NFDG joined the round as well. The raise values Granola at $1.5 billion — a six-fold jump from its $250 million valuation at its previous round less than a year ago — and brings its total funding to $192 million.

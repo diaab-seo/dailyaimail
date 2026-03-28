@@ -1,59 +1,81 @@
 ---
-tag: "Google AI"
-tags: ["Google", "TurboQuant", "AI Compression", "LLM Efficiency", "ICLR 2026"]
-headline: "Google's TurboQuant Slashes AI Memory by 6x — Could It End the RAM Crisis?"
-excerpt: "Google's new TurboQuant compression algorithm reduces LLM key-value cache memory by at least 6x with zero accuracy loss, delivering up to 8x speedup on H100 GPUs — and rattling memory stock prices on day one."
-date: "Mar 26, 2026"
-isoDate: "2026-03-26"
-modifiedDate: "2026-03-26"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "4 min read"
-image: "/images/google-turboquant-ai-memory-compression-algorithm.png"
+tag: Google AI
+tags:
+  - Google
+  - TurboQuant
+  - AI Compression
+  - LLM Efficiency
+  - ICLR 2026
+headline: Google's TurboQuant Slashes AI Memory by 6x — Could It End the RAM Crisis?
+excerpt: >-
+  Google's new TurboQuant compression algorithm reduces LLM key-value cache
+  memory by at least 6x with zero accuracy loss, delivering up to 8x speedup on
+  H100 GPUs — and rattling memory stock prices on day one.
+date: 'Mar 26, 2026'
+isoDate: '2026-03-26'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 4 min read
+image: /images/google-turboquant-ai-memory-compression-algorithm.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "Google's TurboQuant compresses LLM key-value caches to 3 bits per value with no accuracy loss, combining PolarQuant and QJL into a unified pipeline."
-keywords: ["Google TurboQuant", "AI memory compression", "KV cache compression", "PolarQuant QJL", "LLM inference efficiency"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  Google's TurboQuant compresses LLM key-value caches to 3 bits per value with
+  no accuracy loss, combining PolarQuant and QJL into a unified pipeline.
+keywords:
+  - Google TurboQuant
+  - AI memory compression
+  - KV cache compression
+  - PolarQuant QJL
+  - LLM inference efficiency
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "Google Research"
-    url: "https://research.google"
-    type: "Organization"
-  - name: "Cloudflare"
-    url: "https://cloudflare.com"
-    type: "Organization"
-  - name: "Micron Technology"
-    url: "https://micron.com"
-    type: "Organization"
+  - name: Google Research
+    url: 'https://research.google'
+    type: Organization
+  - name: Cloudflare
+    url: 'https://cloudflare.com'
+    type: Organization
+  - name: Micron Technology
+    url: 'https://micron.com'
+    type: Organization
 about:
-  - name: "TurboQuant"
-    url: "https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/"
-    type: "Thing"
-  - name: "PolarQuant"
-    url: "https://arxiv.org/abs/2502.02617"
-    type: "Thing"
-  - name: "ICLR 2026"
-    url: "https://iclr.cc/Conferences/2026"
-    type: "Event"
+  - name: TurboQuant
+    url: >-
+      https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/
+    type: Thing
+  - name: PolarQuant
+    url: 'https://arxiv.org/abs/2502.02617'
+    type: Thing
+  - name: ICLR 2026
+    url: 'https://iclr.cc/Conferences/2026'
+    type: Event
 citations:
-  - name: "Google Research: TurboQuant Blog Post"
-    url: "https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/"
-    type: "CreativeWork"
-  - name: "TechCrunch: Google TurboQuant Coverage"
-    url: "https://techcrunch.com/2026/03/25/google-turboquant-ai-memory-compression-silicon-valley-pied-piper/"
-    type: "CreativeWork"
-  - name: "Tom's Hardware: TurboQuant Technical Deep Dive"
-    url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/googles-turboquant-compresses-llm-kv-caches-to-3-bits-with-no-accuracy-loss"
-    type: "CreativeWork"
-  - name: "VentureBeat: TurboQuant Economic Impact"
-    url: "https://venturebeat.com/infrastructure/googles-new-turboquant-algorithm-speeds-up-ai-memory-8x-cutting-costs-by-50"
-    type: "CreativeWork"
-  - name: "The Next Web: TurboQuant and Memory Stocks"
-    url: "https://thenextweb.com/news/google-turboquant-ai-compression-memory-stocks"
-    type: "CreativeWork"
-  - name: "TurboQuant arXiv Paper"
-    url: "https://arxiv.org/abs/2504.19874"
-    type: "CreativeWork"
+  - name: 'Google Research: TurboQuant Blog Post'
+    url: >-
+      https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/
+    type: CreativeWork
+  - name: 'TechCrunch: Google TurboQuant Coverage'
+    url: >-
+      https://techcrunch.com/2026/03/25/google-turboquant-ai-memory-compression-silicon-valley-pied-piper/
+    type: CreativeWork
+  - name: 'Tom''s Hardware: TurboQuant Technical Deep Dive'
+    url: >-
+      https://www.tomshardware.com/tech-industry/artificial-intelligence/googles-turboquant-compresses-llm-kv-caches-to-3-bits-with-no-accuracy-loss
+    type: CreativeWork
+  - name: 'VentureBeat: TurboQuant Economic Impact'
+    url: >-
+      https://venturebeat.com/infrastructure/googles-new-turboquant-algorithm-speeds-up-ai-memory-8x-cutting-costs-by-50
+    type: CreativeWork
+  - name: 'The Next Web: TurboQuant and Memory Stocks'
+    url: 'https://thenextweb.com/news/google-turboquant-ai-compression-memory-stocks'
+    type: CreativeWork
+  - name: TurboQuant arXiv Paper
+    url: 'https://arxiv.org/abs/2504.19874'
+    type: CreativeWork
 ---
 
 Google Research has unveiled TurboQuant, a new compression algorithm that the company claims reduces the working memory an AI model requires during inference by at least 6x — with zero accuracy loss. The announcement landed with an immediate market reaction: shares of major memory suppliers including Micron and Western Digital fell on the same day as the release.

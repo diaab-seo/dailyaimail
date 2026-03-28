@@ -1,59 +1,79 @@
 ---
-tag: "Google AI"
-tags: ["Google", "Tools & Apps", "AI Music Generation", "Gemini", "Vertex AI"]
-headline: "Google Launches Lyria 3 Pro: Longer Tracks, Deeper Control, and Enterprise Access"
-excerpt: "A month after Lyria 3's debut, Google is releasing a Pro tier with three-minute track generation, structural composition control, and rollout across Gemini, Vertex AI, and ProducerAI."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "3 min read"
-image: "/images/google-lyria-3-pro-music-generation.png"
+tag: Google AI
+tags:
+  - Google
+  - Tools & Apps
+  - AI Music Generation
+  - Gemini
+  - Vertex AI
+headline: >-
+  Google Launches Lyria 3 Pro: Longer Tracks, Deeper Control, and Enterprise
+  Access
+excerpt: >-
+  A month after Lyria 3's debut, Google is releasing a Pro tier with
+  three-minute track generation, structural composition control, and rollout
+  across Gemini, Vertex AI, and ProducerAI.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 3 min read
+image: /images/google-lyria-3-pro-music-generation.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "Google's Lyria 3 Pro brings extended music generation and structural composition intelligence to Gemini subscribers and enterprise developers."
-keywords: ["Google Lyria 3 Pro", "AI music generation", "Gemini music AI", "Lyria Vertex AI", "ProducerAI Google"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  Google's Lyria 3 Pro brings extended music generation and structural
+  composition intelligence to Gemini subscribers and enterprise developers.
+keywords:
+  - Google Lyria 3 Pro
+  - AI music generation
+  - Gemini music AI
+  - Lyria Vertex AI
+  - ProducerAI Google
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "Google"
-    url: "https://google.com"
-    type: "Organization"
-  - name: "Spotify"
-    url: "https://spotify.com"
-    type: "Organization"
-  - name: "Deezer"
-    url: "https://deezer.com"
-    type: "Organization"
-  - name: "ProducerAI"
-    url: "https://producerai.com"
-    type: "Organization"
+  - name: Google
+    url: 'https://google.com'
+    type: Organization
+  - name: Spotify
+    url: 'https://spotify.com'
+    type: Organization
+  - name: Deezer
+    url: 'https://deezer.com'
+    type: Organization
+  - name: ProducerAI
+    url: 'https://producerai.com'
+    type: Organization
 about:
-  - name: "Lyria 3 Pro"
-    url: "https://deepmind.google/technologies/lyria/"
-    type: "Thing"
-  - name: "SynthID"
-    url: "https://deepmind.google/technologies/synthid/"
-    type: "Thing"
+  - name: Lyria 3 Pro
+    url: 'https://deepmind.google/technologies/lyria/'
+    type: Thing
+  - name: SynthID
+    url: 'https://deepmind.google/technologies/synthid/'
+    type: Thing
 citations:
-  - name: "Google DeepMind: Lyria Music Generation"
-    url: "https://deepmind.google/technologies/lyria/"
-    type: "CreativeWork"
-  - name: "Google Vertex AI: Lyria 3 Pro in Public Preview"
-    url: "https://cloud.google.com/blog/products/ai-machine-learning/lyria-3-pro-vertex-ai"
-    type: "CreativeWork"
-  - name: "Google AI Studio: Lyria API Access"
-    url: "https://aistudio.google.com"
-    type: "CreativeWork"
-  - name: "SynthID: Watermarking AI-Generated Content"
-    url: "https://deepmind.google/technologies/synthid/"
-    type: "CreativeWork"
-  - name: "Spotify: Tools to Combat AI Music Misattribution"
-    url: "https://newsroom.spotify.com/2026-03/artist-ai-music-review-tools"
-    type: "CreativeWork"
-  - name: "Deezer: AI Music Detection Across Streaming"
-    url: "https://www.deezer.com/en/company/news/ai-detection-tools"
-    type: "CreativeWork"
+  - name: 'Google DeepMind: Lyria Music Generation'
+    url: 'https://deepmind.google/technologies/lyria/'
+    type: CreativeWork
+  - name: 'Google Vertex AI: Lyria 3 Pro in Public Preview'
+    url: >-
+      https://cloud.google.com/blog/products/ai-machine-learning/lyria-3-pro-vertex-ai
+    type: CreativeWork
+  - name: 'Google AI Studio: Lyria API Access'
+    url: 'https://aistudio.google.com'
+    type: CreativeWork
+  - name: 'SynthID: Watermarking AI-Generated Content'
+    url: 'https://deepmind.google/technologies/synthid/'
+    type: CreativeWork
+  - name: 'Spotify: Tools to Combat AI Music Misattribution'
+    url: 'https://newsroom.spotify.com/2026-03/artist-ai-music-review-tools'
+    type: CreativeWork
+  - name: 'Deezer: AI Music Detection Across Streaming'
+    url: 'https://www.deezer.com/en/company/news/ai-detection-tools'
+    type: CreativeWork
 ---
 
 Just one month after releasing [Lyria 3](https://deepmind.google/technologies/lyria/), Google is already stepping up its AI music ambitions with the launch of Lyria 3 Pro — a more capable tier of its music generation model that pushes beyond the limits of what the original release could do.

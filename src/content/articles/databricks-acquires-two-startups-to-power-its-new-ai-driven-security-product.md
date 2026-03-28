@@ -1,41 +1,59 @@
 ---
-tag: "Google AI"
-tags: ["Databricks", "Lakewatch", "AI Security", "Acquisitions", "Anthropic"]
-headline: "Databricks Acquires Two Startups to Power Its New AI-Driven Security Product"
-excerpt: "Flush with capital from a $5 billion raise, Databricks is moving into enterprise security with Lakewatch, a new SIEM platform backed by Claude and two quiet acquisitions."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "3 min read"
-image: "/images/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product.png"
+tag: Google AI
+tags:
+  - Databricks
+  - Lakewatch
+  - AI Security
+  - Acquisitions
+  - Anthropic
+headline: Databricks Acquires Two Startups to Power Its New AI-Driven Security Product
+excerpt: >-
+  Flush with capital from a $5 billion raise, Databricks is moving into
+  enterprise security with Lakewatch, a new SIEM platform backed by Claude and
+  two quiet acquisitions.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 3 min read
+image: >-
+  /images/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "Databricks enters the AI security market with Lakewatch, acquiring Antimatter and SiftD.ai to anchor the new platform."
-keywords: ["Databricks Lakewatch", "Databricks acquisitions", "AI security SIEM", "Antimatter Databricks", "SiftD.ai acquisition"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  Databricks enters the AI security market with Lakewatch, acquiring Antimatter
+  and SiftD.ai to anchor the new platform.
+keywords:
+  - Databricks Lakewatch
+  - Databricks acquisitions
+  - AI security SIEM
+  - Antimatter Databricks
+  - SiftD.ai acquisition
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "Databricks"
-    url: "https://www.databricks.com"
-    type: "Organization"
-  - name: "Anthropic"
-    url: "https://www.anthropic.com"
-    type: "Organization"
-  - name: "Antimatter"
-    url: "https://antimatter.io"
-    type: "Organization"
-  - name: "SiftD.ai"
-    url: "https://siftd.ai"
-    type: "Organization"
+  - name: Databricks
+    url: 'https://www.databricks.com'
+    type: Organization
+  - name: Anthropic
+    url: 'https://www.anthropic.com'
+    type: Organization
+  - name: Antimatter
+    url: 'https://antimatter.io'
+    type: Organization
+  - name: SiftD.ai
+    url: 'https://siftd.ai'
+    type: Organization
 about:
-  - name: "Lakewatch"
-    url: "https://www.databricks.com/product/lakewatch"
-    type: "Thing"
+  - name: Lakewatch
+    url: 'https://www.databricks.com/product/lakewatch'
+    type: Thing
 citations:
-  - name: "Databricks Lakewatch Announcement"
-    url: "https://www.databricks.com/blog/lakewatch"
-    type: "CreativeWork"
+  - name: Databricks Lakewatch Announcement
+    url: 'https://www.databricks.com/blog/lakewatch'
+    type: CreativeWork
 ---
 
 Databricks is putting its war chest to work. Fresh off a $5 billion funding round that closed last month — on top of billions in existing revenue — the cloud data analytics giant is making its move into enterprise security.

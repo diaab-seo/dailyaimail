@@ -1,44 +1,65 @@
 ---
-tag: "OpenAI"
-tags: ["OpenAI", "AI Safety", "Bug Bounty", "Cybersecurity", "Policy & Ethics"]
-headline: "OpenAI Launches Safety Bug Bounty Program to Reward Researchers Who Find AI Abuse Risks"
-excerpt: "OpenAI is opening a public Safety Bug Bounty program targeting AI-specific misuse scenarios — from agentic prompt injection to platform integrity bypasses — that fall outside traditional security vulnerability scopes."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "3 min read"
-image: "/images/openai-safety-bug-bounty-program-launch.png"
+tag: OpenAI
+tags:
+  - OpenAI
+  - AI Safety
+  - Bug Bounty
+  - Cybersecurity
+  - Policy & Ethics
+headline: >-
+  OpenAI Launches Safety Bug Bounty Program to Reward Researchers Who Find AI
+  Abuse Risks
+excerpt: >-
+  OpenAI is opening a public Safety Bug Bounty program targeting AI-specific
+  misuse scenarios — from agentic prompt injection to platform integrity
+  bypasses — that fall outside traditional security vulnerability scopes.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 3 min read
+image: /images/openai-safety-bug-bounty-program-launch.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "OpenAI's new Safety Bug Bounty program expands its researcher partnership model to cover AI abuse scenarios, agentic risks, and platform integrity issues."
-keywords: ["OpenAI Safety Bug Bounty", "AI abuse reporting", "prompt injection bounty", "OpenAI security researchers", "agentic AI safety"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  OpenAI's new Safety Bug Bounty program expands its researcher partnership
+  model to cover AI abuse scenarios, agentic risks, and platform integrity
+  issues.
+keywords:
+  - OpenAI Safety Bug Bounty
+  - AI abuse reporting
+  - prompt injection bounty
+  - OpenAI security researchers
+  - agentic AI safety
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "OpenAI"
-    url: "https://openai.com"
-    type: "Organization"
-  - name: "HackerOne"
-    url: "https://hackerone.com"
-    type: "Organization"
+  - name: OpenAI
+    url: 'https://openai.com'
+    type: Organization
+  - name: HackerOne
+    url: 'https://hackerone.com'
+    type: Organization
 about:
-  - name: "OpenAI Safety Bug Bounty"
-    url: "https://openai.com/index/safety-bug-bounty/"
-    type: "Thing"
-  - name: "OpenAI Security Bug Bounty"
-    url: "https://openai.com/security/"
-    type: "Thing"
+  - name: OpenAI Safety Bug Bounty
+    url: 'https://openai.com/index/safety-bug-bounty/'
+    type: Thing
+  - name: OpenAI Security Bug Bounty
+    url: 'https://openai.com/security/'
+    type: Thing
 citations:
-  - name: "OpenAI: Introducing the Safety Bug Bounty Program"
-    url: "https://openai.com/index/safety-bug-bounty/"
-    type: "CreativeWork"
-  - name: "OpenAI Security Bug Bounty Program"
-    url: "https://openai.com/security/"
-    type: "CreativeWork"
-  - name: "OWASP: Prompt Injection in LLM Applications"
-    url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
-    type: "CreativeWork"
+  - name: 'OpenAI: Introducing the Safety Bug Bounty Program'
+    url: 'https://openai.com/index/safety-bug-bounty/'
+    type: CreativeWork
+  - name: OpenAI Security Bug Bounty Program
+    url: 'https://openai.com/security/'
+    type: CreativeWork
+  - name: 'OWASP: Prompt Injection in LLM Applications'
+    url: >-
+      https://owasp.org/www-project-top-10-for-large-language-model-applications/
+    type: CreativeWork
 ---
 
 OpenAI is expanding its researcher partnership model in a meaningful direction. The company has launched a public [Safety Bug Bounty program](https://openai.com/index/safety-bug-bounty/) designed to surface AI-specific abuse and safety risks — a category of vulnerability that its existing [Security Bug Bounty](https://openai.com/security/) was never built to capture.
