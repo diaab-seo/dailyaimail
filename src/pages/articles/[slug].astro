@@ -9,24 +9,28 @@ import { getApprovedComments } from "../../lib/db";
 import type { DBComment } from "../../lib/db";
 import type { SessionUser } from "../../lib/auth";
 
-const db = (env as any).DB as D1Database | undefined;
-const kv = (env as any).SESSION as KVNamespace | undefined;
+export async function getStaticPaths() {
+  const entries = await getCollection("articles");
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
 
-const { slug } = Astro.params;
+const { entry } = Astro.props;
 let user: SessionUser | null = null;
 let comments: DBComment[] = [];
 let error: string | null = null;
-let entry: any = null;
+
 let Content: any = null;
 
 try {
-  const entries = await getCollection("articles");
-  entry = entries.find((e) => e.id === slug);
-
-  if (!entry) return Astro.redirect("/404");
-
   const rendered = await render(entry);
   Content = rendered.Content;
+  const slug = entry.id;
+
+  const db = (env as any)?.DB as D1Database | undefined;
+  const kv = (env as any)?.SESSION as KVNamespace | undefined;
 
   if (db && kv) {
     [user, comments] = await Promise.all([
@@ -37,6 +41,7 @@ try {
 } catch (e: any) {
   error = e.message || String(e);
 }
+
 
 if (error) {
   return new Response(`Error rendering article: ${error}`, { status: 500 });
