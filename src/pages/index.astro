@@ -15,7 +15,7 @@ const [
   toolsArticles,
   policyArticles,
 ] = await Promise.all([
-  getLatestArticles(7),
+  getLatestArticles(12),
   getArticlesByCategory("Anthropic").then((a) => a.slice(0, 3)),
   getArticlesByCategory("Google AI").then((a) => a.slice(0, 3)),
   getArticlesByCategory("OpenAI").then((a) => a.slice(0, 3)),
@@ -24,7 +24,7 @@ const [
 ]);
 
 const heroArticle = latestArticles[0];
-const trendingArticles = (await getLatestArticles(6)).map((a) => ({
+const trendingArticles = latestArticles.slice(0, 6).map((a) => ({
   headline: a.headline,
   slug: a.slug,
 }));
@@ -397,7 +397,7 @@ const schema = {
         />
         <div class="card-grid">
           {
-            latestArticles.slice(1).map((a) => (
+            latestArticles.map((a) => (
               <NewsCard {...a} href={`/articles/${a.slug}`} />
             ))
           }
