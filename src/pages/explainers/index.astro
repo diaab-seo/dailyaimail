@@ -9,7 +9,7 @@ const allTerms = await getCollection("explainers");
 
 // Sort alphabetically by term name
 const sorted = [...allTerms].sort((a, b) =>
-    a.data.term.localeCompare(b.data.term)
+    a.data.term.localeCompare(b.data.term),
 );
 
 // Get the most recent date across all terms
@@ -27,14 +27,14 @@ const lastUpdatedISO = maxDate.toISOString().split("T")[0];
 
 // Category display map
 const CATEGORY_LABELS: Record<string, string> = {
-    "foundation-models":  "Foundation Models",
-    "training":           "Training",
-    "inference":          "Inference",
-    "agents":             "Agents",
-    "safety-alignment":   "Safety & Alignment",
-    "architecture":       "Architecture",
-    "data":               "Data",
-    "applications":       "Applications",
+    "foundation-models": "Foundation Models",
+    training: "Training",
+    inference: "Inference",
+    agents: "Agents",
+    "safety-alignment": "Safety & Alignment",
+    architecture: "Architecture",
+    data: "Data",
+    applications: "Applications",
 };
 
 // Build A–Z groups
@@ -56,18 +56,19 @@ for (const t of sorted) {
 const categories = Object.keys(catGroups).sort();
 
 // Schema stubs for DefinedTermSet
-const termStubs = sorted.map(t => ({
-    slug:         t.data.slug,
-    term:         t.data.term,
+const termStubs = sorted.map((t) => ({
+    slug: t.data.slug,
+    term: t.data.term,
     abbreviation: t.data.abbreviation,
-    category:     t.data.category,
-    definition:   t.data.definition,
+    category: t.data.category,
+    definition: t.data.definition,
 }));
 
 const schema = buildExplainersHubSchema(termStubs);
 
-const title       = "AI Explainers — Daily AI Mail";
-const description = "Plain-language definitions of every key term in artificial intelligence — from LLMs and agents to training and safety alignment.";
+const title = "The AI Explainers — Daily AI Mail";
+const description =
+    "Plain-language definitions of every key term in artificial intelligence — from LLMs and agents to training and safety alignment.";
 ---
 
 <Layout title={title} description={description} metaTitle={title}>
@@ -78,10 +79,11 @@ const description = "Plain-language definitions of every key term in artificial 
     />
     <link rel="sitemap" href="/sitemap-explainers.xml" slot="head" />
 
-    <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Explainers" }]} />
+    <Breadcrumb
+        items={[{ label: "Home", href: "/" }, { label: "AI Explainers" }]}
+    />
 
     <main class="explainers-hub">
-
         <!-- ── Hero ── -->
         <header class="hub-hero">
             <div class="hub-inner">
@@ -98,82 +100,104 @@ const description = "Plain-language definitions of every key term in artificial 
         </header>
 
         <div class="hub-inner hub-body">
-
             <!-- ── Categories ── -->
             <section class="categories-section" aria-label="Browse by category">
                 <h2 class="section-heading">Browse by Category</h2>
                 <div class="cat-grid">
-                    {categories.map(cat => (
-                        <a href={`#cat-${cat}`} class="cat-chip">
-                            <span class="cat-label">{CATEGORY_LABELS[cat] ?? cat}</span>
-                            <span class="cat-count">{catGroups[cat].length}</span>
-                        </a>
-                    ))}
+                    {
+                        categories.map((cat) => (
+                            <a href={`#cat-${cat}`} class="cat-chip">
+                                <span class="cat-label">
+                                    {CATEGORY_LABELS[cat] ?? cat}
+                                </span>
+                                <span class="cat-count">
+                                    {catGroups[cat].length}
+                                </span>
+                            </a>
+                        ))
+                    }
                 </div>
             </section>
 
             <!-- ── Category sections ── -->
-            {categories.map(cat => (
-                <section
-                    id={`cat-${cat}`}
-                    class="az-section"
-                    aria-label={CATEGORY_LABELS[cat] ?? cat}
-                >
-                    <h2 class="az-letter">{CATEGORY_LABELS[cat] ?? cat}</h2>
-                    <ul class="term-list">
-                        {catGroups[cat].map(t => (
-                            <li class="term-item">
-                                <a
-                                    href={`/explainers/${t.data.slug}`}
-                                    class="term-link"
-                                    data-explainer={t.data.slug}
-                                >
-                                    <span class="term-name">
-                                        {t.data.term}
-                                        {t.data.abbreviation && (
-                                            <abbr class="term-abbr">({t.data.abbreviation})</abbr>
-                                        )}
-                                    </span>
-                                    <span class="term-def">{t.data.definition}</span>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </section>
-            ))}
+            {
+                categories.map((cat) => (
+                    <section
+                        id={`cat-${cat}`}
+                        class="az-section"
+                        aria-label={CATEGORY_LABELS[cat] ?? cat}
+                    >
+                        <h2 class="az-letter">{CATEGORY_LABELS[cat] ?? cat}</h2>
+                        <ul class="term-list">
+                            {catGroups[cat].map((t) => (
+                                <li class="term-item">
+                                    <a
+                                        href={`/explainers/${t.data.slug}`}
+                                        class="term-link"
+                                        data-explainer={t.data.slug}
+                                    >
+                                        <span class="term-name">
+                                            {t.data.term}
+                                            {t.data.abbreviation && (
+                                                <abbr class="term-abbr">
+                                                    ({t.data.abbreviation})
+                                                </abbr>
+                                            )}
+                                        </span>
+                                        <span class="term-def">
+                                            {t.data.definition}
+                                        </span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                ))
+            }
 
             <!-- ── A–Z Index ── -->
             <section class="az-index-section" aria-label="All terms A to Z">
                 <h2 class="section-heading">All Terms A–Z</h2>
                 <nav class="az-jump" aria-label="Jump to letter">
-                    {letters.map(l => (
-                        <a href={`#letter-${l}`} class="az-jump-link">{l}</a>
-                    ))}
+                    {
+                        letters.map((l) => (
+                            <a href={`#letter-${l}`} class="az-jump-link">
+                                {l}
+                            </a>
+                        ))
+                    }
                 </nav>
-                {letters.map(letter => (
-                    <div id={`letter-${letter}`} class="az-group">
-                        <h3 class="az-letter-mark">{letter}</h3>
-                        <ul class="term-list term-list--compact">
-                            {azGroups[letter].map(t => (
-                                <li class="term-item term-item--compact">
-                                    <a
-                                        href={`/explainers/${t.data.slug}`}
-                                        class="term-link term-link--compact"
-                                        data-explainer={t.data.slug}
-                                    >
-                                        {t.data.term}
-                                        {t.data.abbreviation && (
-                                            <span class="term-abbr-inline">({t.data.abbreviation})</span>
-                                        )}
-                                        <span class="term-cat-badge">{CATEGORY_LABELS[t.data.category] ?? t.data.category}</span>
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                {
+                    letters.map((letter) => (
+                        <div id={`letter-${letter}`} class="az-group">
+                            <h3 class="az-letter-mark">{letter}</h3>
+                            <ul class="term-list term-list--compact">
+                                {azGroups[letter].map((t) => (
+                                    <li class="term-item term-item--compact">
+                                        <a
+                                            href={`/explainers/${t.data.slug}`}
+                                            class="term-link term-link--compact"
+                                            data-explainer={t.data.slug}
+                                        >
+                                            {t.data.term}
+                                            {t.data.abbreviation && (
+                                                <span class="term-abbr-inline">
+                                                    ({t.data.abbreviation})
+                                                </span>
+                                            )}
+                                            <span class="term-cat-badge">
+                                                {CATEGORY_LABELS[
+                                                    t.data.category
+                                                ] ?? t.data.category}
+                                            </span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                }
             </section>
-
         </div>
     </main>
 </Layout>
@@ -289,7 +313,8 @@ const description = "Plain-language definitions of every key term in artificial 
         flex-direction: column;
         gap: 12px;
     }
-    .term-item {}
+    .term-item {
+    }
     .term-link {
         display: flex;
         flex-direction: column;
@@ -415,6 +440,8 @@ const description = "Plain-language definitions of every key term in artificial 
     }
 
     @media (max-width: 768px) {
-        .hub-hero { padding: 48px 0 40px; }
+        .hub-hero {
+            padding: 48px 0 40px;
+        }
     }
 </style>

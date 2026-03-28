@@ -1,5 +1,6 @@
 ---
 // src/pages/explainers/[slug].astro
+export const prerender = true;
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 import { buildExplainerTermSchema } from "../../lib/explainers-schema";
@@ -7,7 +8,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 
 export async function getStaticPaths() {
     const terms = await getCollection("explainers");
-    return terms.map(t => ({
+    return terms.map((t) => ({
         params: { slug: t.data.slug },
         props: { entry: t },
     }));
@@ -18,48 +19,50 @@ const { Content } = await render(entry);
 const d = entry.data;
 
 const CATEGORY_LABELS: Record<string, string> = {
-    "foundation-models":  "Foundation Models",
-    "training":           "Training",
-    "inference":          "Inference",
-    "agents":             "Agents",
-    "safety-alignment":   "Safety & Alignment",
-    "architecture":       "Architecture",
-    "data":               "Data",
-    "applications":       "Applications",
+    "foundation-models": "Foundation Models",
+    training: "Training",
+    inference: "Inference",
+    agents: "Agents",
+    "safety-alignment": "Safety & Alignment",
+    architecture: "Architecture",
+    data: "Data",
+    applications: "Applications",
 };
 
 const schema = buildExplainerTermSchema({
-    slug:           d.slug,
-    term:           d.term,
-    abbreviation:   d.abbreviation,
-    category:       d.category,
-    definition:     d.definition,
-    dateAdded:      d.dateAdded,
-    lastUpdated:    d.lastUpdated,
-    relatedTerms:   d.relatedTerms,
-    seoTitle:       d.seoTitle,
+    slug: d.slug,
+    term: d.term,
+    abbreviation: d.abbreviation,
+    category: d.category,
+    definition: d.definition,
+    dateAdded: d.dateAdded,
+    lastUpdated: d.lastUpdated,
+    relatedTerms: d.relatedTerms,
+    seoTitle: d.seoTitle,
     seoDescription: d.seoDescription,
 });
 
-const pageTitle = d.seoTitle ?? `${d.term}${d.abbreviation ? ` (${d.abbreviation})` : ''} — AI Explainer`;
-const pageDesc  = d.seoDescription ?? d.definition;
-const ogImage   = d.featuredImage
+const pageTitle =
+    d.seoTitle ??
+    `${d.term}${d.abbreviation ? ` (${d.abbreviation})` : ""} — AI Explainer`;
+const pageDesc = d.seoDescription ?? d.definition;
+const ogImage = d.featuredImage
     ? `https://dailyaimail.news${d.featuredImage.startsWith("/") ? "" : "/"}${d.featuredImage}`
     : undefined;
 
 // Related term collection entries for cross-links
-const allTerms     = await getCollection("explainers");
+const allTerms = await getCollection("explainers");
 const relatedTerms = (d.relatedTerms ?? [])
-    .map(slug => allTerms.find(t => t.data.slug === slug)?.data)
+    .map((slug) => allTerms.find((t) => t.data.slug === slug)?.data)
     .filter(Boolean);
 
 const SECTIONS = [
-    { id: "definition",      label: "Definition" },
-    { id: "why-it-matters",  label: "Why It Matters" },
-    { id: "how-it-works",    label: "How It Works" },
-    { id: "applications",    label: "Applications" },
-    { id: "limitations",     label: "Limitations" },
-    { id: "related-terms",   label: "Related Terms" },
+    { id: "definition", label: "Definition" },
+    { id: "why-it-matters", label: "Why It Matters" },
+    { id: "how-it-works", label: "How It Works" },
+    { id: "applications", label: "Applications" },
+    { id: "limitations", label: "Limitations" },
+    { id: "related-terms", label: "Related Terms" },
     { id: "further-reading", label: "Further Reading" },
 ];
 
@@ -75,56 +78,181 @@ const dateAddedStr = formatDate(d.dateAdded);
 const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
 ---
 
-<Layout title={pageTitle} description={pageDesc} metaTitle={pageTitle} ogImage={ogImage}>
+<Layout
+    title={pageTitle}
+    description={pageDesc}
+    metaTitle={pageTitle}
+    ogImage={ogImage}
+>
     <script
         type="application/ld+json"
         set:html={JSON.stringify(schema)}
         slot="head"
     />
 
-    <Breadcrumb items={[
-        { label: "Home", href: "/" },
-        { label: "Explainers", href: "/explainers" },
-        { label: d.term }
-    ]} />
+    <Breadcrumb
+        items={[
+            { label: "Home", href: "/" },
+            { label: "AI Explainers", href: "/explainers" },
+            { label: d.term },
+        ]}
+    />
 
     <main class="term-page">
         <!-- ── Hero ── -->
         <header class="term-hero">
             <div class="term-inner">
-
                 <div class="term-meta">
-                    <span class="cat-badge">{CATEGORY_LABELS[d.category] ?? d.category}</span>
+                    <span class="cat-badge"
+                        >{CATEGORY_LABELS[d.category] ?? d.category}</span
+                    >
                     <time class="updated-date" datetime={d.dateAdded}>
                         Added {dateAddedStr}
                     </time>
-                    <time class="updated-date" datetime={d.lastUpdated ?? d.dateAdded}>
+                    <time
+                        class="updated-date"
+                        datetime={d.lastUpdated ?? d.dateAdded}
+                    >
                         Updated {lastUpdatedStr}
                     </time>
 
-                    <button id="copy-markdown-btn" class="term-meta-btn" title="Copy article as Markdown">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        <span>Copy as Markdown</span>
+                    <button
+                        id="copy-markdown-btn"
+                        class="term-meta-btn"
+                        title="Copy article as Markdown"
+                    >
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                            ><rect
+                                x="9"
+                                y="9"
+                                width="13"
+                                height="13"
+                                rx="2"
+                                ry="2"></rect><path
+                                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            ></path></svg
+                        >
+                        <span>Copy as Markdown For LLMs</span>
                     </button>
 
                     <div class="share-wrapper">
-                        <button id="share-toggle" class="term-meta-btn" aria-expanded="false" aria-controls="share-popover">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        <button
+                            id="share-toggle"
+                            class="term-meta-btn"
+                            aria-expanded="false"
+                            aria-controls="share-popover"
+                        >
+                            <svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                                ><circle cx="18" cy="5" r="3"></circle><circle
+                                    cx="6"
+                                    cy="12"
+                                    r="3"></circle><circle cx="18" cy="19" r="3"
+                                ></circle><line
+                                    x1="8.59"
+                                    y1="13.51"
+                                    x2="15.42"
+                                    y2="17.49"></line><line
+                                    x1="15.41"
+                                    y1="6.51"
+                                    x2="8.59"
+                                    y2="10.49"></line></svg
+                            >
                             <span>Share</span>
-                            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            <svg
+                                class="chevron"
+                                width="12"
+                                height="12"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                                ><polyline points="6 9 12 15 18 9"
+                                ></polyline></svg
+                            >
                         </button>
 
                         <div id="share-popover" class="share-popover" hidden>
                             <button class="share-item" id="copy-link-btn">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <svg
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    ><rect
+                                        x="9"
+                                        y="9"
+                                        width="13"
+                                        height="13"
+                                        rx="2"></rect><path
+                                        d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                                    ></path></svg
+                                >
                                 Copy link
                             </button>
-                            <a class="share-item" id="share-x" target="_blank" rel="noopener noreferrer">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                            <a
+                                class="share-item"
+                                id="share-x"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <svg
+                                    width="13"
+                                    height="13"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    ><path
+                                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                                    ></path></svg
+                                >
                                 X / Twitter
                             </a>
-                            <a class="share-item" id="share-li" target="_blank" rel="noopener noreferrer">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            <a
+                                class="share-item"
+                                id="share-li"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <svg
+                                    width="13"
+                                    height="13"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    ><path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                                    ></path><rect
+                                        x="2"
+                                        y="9"
+                                        width="4"
+                                        height="12"></rect><circle
+                                        cx="4"
+                                        cy="4"
+                                        r="2"></circle></svg
+                                >
                                 LinkedIn
                             </a>
                         </div>
@@ -133,35 +261,47 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
 
                 <h1 class="term-title">
                     {d.term}
-                    {d.abbreviation && <span class="term-abbr-hero">({d.abbreviation})</span>}
+                    {
+                        d.abbreviation && (
+                            <span class="term-abbr-hero">
+                                ({d.abbreviation})
+                            </span>
+                        )
+                    }
                 </h1>
 
                 <p class="term-definition">{d.definition}</p>
 
                 <!-- Section jump bar -->
                 <nav class="jump-bar" aria-label="Jump to section">
-                    {SECTIONS.map(s => (
-                        <a href={`#${s.id}`} class="jump-link">{s.label}</a>
-                    ))}
+                    {
+                        SECTIONS.map((s) => (
+                            <a href={`#${s.id}`} class="jump-link">
+                                {s.label}
+                            </a>
+                        ))
+                    }
                 </nav>
             </div>
-            {d.featuredImage && (
-                <div class="term-featured-image-wrap">
-                    <div class="term-inner">
-                        <figure class="term-featured-figure">
-                            <img
-                                src={d.featuredImage}
-                                alt={`What is ${d.term}${d.abbreviation ? ` (${d.abbreviation})` : ''}? — Daily AI Mail`}
-                                class="term-featured-img"
-                                width="860"
-                                height="480"
-                                loading="eager"
-                                decoding="async"
-                            />
-                        </figure>
+            {
+                d.featuredImage && (
+                    <div class="term-featured-image-wrap">
+                        <div class="term-inner">
+                            <figure class="term-featured-figure">
+                                <img
+                                    src={d.featuredImage}
+                                    alt={`What is ${d.term}${d.abbreviation ? ` (${d.abbreviation})` : ""}? — Daily AI Mail`}
+                                    class="term-featured-img"
+                                    width="860"
+                                    height="480"
+                                    loading="eager"
+                                    decoding="async"
+                                />
+                            </figure>
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
         </header>
 
         <!-- ── Body ── -->
@@ -171,29 +311,40 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
             </article>
 
             <!-- Related Terms sidebar card -->
-            {relatedTerms.length > 0 && (
-                <aside class="related-sidebar" aria-label="Related terms">
-                    <h2 class="related-heading">Related Terms</h2>
-                    <ul class="related-list">
-                        {relatedTerms.map(rt => rt && (
-                            <li>
-                                <a
-                                    href={`/explainers/${rt.slug}`}
-                                    class="related-link"
-                                    data-explainer={rt.slug}
-                                >
-                                    <strong>{rt.term}</strong>
-                                    {rt.abbreviation && (
-                                        <span class="related-abbr">({rt.abbreviation})</span>
-                                    )}
-                                    <span class="related-def">{rt.definition}</span>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                    <a href="/explainers" class="back-to-hub">← All Explainers</a>
-                </aside>
-            )}
+            {
+                relatedTerms.length > 0 && (
+                    <aside class="related-sidebar" aria-label="Related terms">
+                        <h2 class="related-heading">Related Terms</h2>
+                        <ul class="related-list">
+                            {relatedTerms.map(
+                                (rt) =>
+                                    rt && (
+                                        <li>
+                                            <a
+                                                href={`/explainers/${rt.slug}`}
+                                                class="related-link"
+                                                data-explainer={rt.slug}
+                                            >
+                                                <strong>{rt.term}</strong>
+                                                {rt.abbreviation && (
+                                                    <span class="related-abbr">
+                                                        ({rt.abbreviation})
+                                                    </span>
+                                                )}
+                                                <span class="related-def">
+                                                    {rt.definition}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    ),
+                            )}
+                        </ul>
+                        <a href="/explainers" class="back-to-hub">
+                            ← All Explainers
+                        </a>
+                    </aside>
+                )
+            }
         </div>
     </main>
 
@@ -203,16 +354,29 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
 
         if (copyBtn) {
             copyBtn.addEventListener("click", async () => {
-                const term = document.querySelector(".term-title").innerText.trim();
-                const def = document.querySelector(".term-definition").innerText.trim();
-                const contentNodes = document.querySelector(".term-content").children;
-                const cat = document.querySelector(".cat-badge").innerText.trim();
-                const added = document.querySelector(".updated-date:nth-of-type(1)").innerText.replace("Added ", "").trim();
-                const updated = document.querySelector(".updated-date:nth-of-type(2)").innerText.replace("Updated ", "").trim();
+                const term = document
+                    .querySelector(".term-title")
+                    .innerText.trim();
+                const def = document
+                    .querySelector(".term-definition")
+                    .innerText.trim();
+                const contentNodes =
+                    document.querySelector(".term-content").children;
+                const cat = document
+                    .querySelector(".cat-badge")
+                    .innerText.trim();
+                const added = document
+                    .querySelector(".updated-date:nth-of-type(1)")
+                    .innerText.replace("Added ", "")
+                    .trim();
+                const updated = document
+                    .querySelector(".updated-date:nth-of-type(2)")
+                    .innerText.replace("Updated ", "")
+                    .trim();
 
                 let contentMarkdown = "";
                 for (const node of contentNodes) {
-                    if (node.tagName === 'H2') {
+                    if (node.tagName === "H2") {
                         contentMarkdown += `## ${node.innerText.trim()}\n\n`;
                     } else {
                         contentMarkdown += `${node.innerText.trim()}\n\n`;
@@ -236,14 +400,16 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
                     ``,
                     `---`,
                     `*Originally published on [Daily AI Mail](https://dailyaimail.news)*`,
-                ].join('\n');
+                ].join("\n");
 
                 try {
                     await navigator.clipboard.writeText(finalMd);
                     const label = copyBtn.querySelector("span");
                     const original = label.innerText;
                     label.innerText = "Copied!";
-                    setTimeout(() => { label.innerText = original; }, 2000);
+                    setTimeout(() => {
+                        label.innerText = original;
+                    }, 2000);
                 } catch (e) {
                     console.error("Copy failed", e);
                 }
@@ -258,12 +424,16 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
         if (shareToggle && sharePopover) {
             const url = window.location.href;
             const title = document.title;
-            const text = document.querySelector(".term-definition").innerText.trim();
+            const text = document
+                .querySelector(".term-definition")
+                .innerText.trim();
 
             // Set social links
             const enc = encodeURIComponent;
-            document.getElementById("share-x").href = `https://x.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`;
-            document.getElementById("share-li").href = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+            document.getElementById("share-x").href =
+                `https://x.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`;
+            document.getElementById("share-li").href =
+                `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
 
             shareToggle.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -273,7 +443,10 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
             });
 
             document.addEventListener("click", (e) => {
-                if (!sharePopover.contains(e.target) && e.target !== shareToggle) {
+                if (
+                    !sharePopover.contains(e.target) &&
+                    e.target !== shareToggle
+                ) {
                     sharePopover.hidden = true;
                     shareToggle.setAttribute("aria-expanded", "false");
                 }
@@ -284,7 +457,9 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
                     await navigator.clipboard.writeText(url);
                     const original = copyLinkBtn.innerHTML;
                     copyLinkBtn.innerText = "Copied!";
-                    setTimeout(() => { copyLinkBtn.innerHTML = original; }, 2000);
+                    setTimeout(() => {
+                        copyLinkBtn.innerHTML = original;
+                    }, 2000);
                 } catch {}
             });
         }
@@ -330,8 +505,12 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
         border-color: var(--gold);
         color: var(--gold);
     }
-    .term-meta-btn svg { opacity: 0.7; }
-    .term-meta-btn:hover svg { opacity: 1; }
+    .term-meta-btn svg {
+        opacity: 0.7;
+    }
+    .term-meta-btn:hover svg {
+        opacity: 1;
+    }
     .term-meta-btn .chevron {
         margin-left: 2px;
         opacity: 0.5;
@@ -383,8 +562,12 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
         background: rgba(255, 255, 255, 0.05);
         color: var(--gold);
     }
-    .share-item svg { opacity: 0.6; }
-    .share-item:hover svg { opacity: 1; }
+    .share-item svg {
+        opacity: 0.6;
+    }
+    .share-item:hover svg {
+        opacity: 1;
+    }
 
     .cat-badge {
         font-family: var(--font-mono);
@@ -490,7 +673,8 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
         color: var(--color-text-muted);
         margin-bottom: 20px;
     }
-    .term-content :global(ul), .term-content :global(ol) {
+    .term-content :global(ul),
+    .term-content :global(ol) {
         padding-left: 24px;
         margin-bottom: 20px;
         color: var(--color-text-muted);
@@ -500,7 +684,9 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
         line-height: 1.7;
         margin-bottom: 8px;
     }
-    .term-content :global(strong) { color: var(--color-text); }
+    .term-content :global(strong) {
+        color: var(--color-text);
+    }
     .term-content :global(a) {
         color: var(--gold);
         text-decoration: underline;
@@ -544,17 +730,32 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
         text-decoration: none;
         transition: border-color 0.12s;
     }
-    .related-link:hover { border-color: var(--gold); }
-    .related-link strong { font-size: 13px; color: var(--color-text); }
-    .related-abbr { font-family: var(--font-mono); font-size: 10px; color: var(--gold); }
-    .related-def { font-size: 11px; color: var(--color-text-muted); line-height: 1.4; }
+    .related-link:hover {
+        border-color: var(--gold);
+    }
+    .related-link strong {
+        font-size: 13px;
+        color: var(--color-text);
+    }
+    .related-abbr {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--gold);
+    }
+    .related-def {
+        font-size: 11px;
+        color: var(--color-text-muted);
+        line-height: 1.4;
+    }
     .back-to-hub {
         font-size: 13px;
         color: var(--color-text-muted);
         text-decoration: none;
         display: block;
     }
-    .back-to-hub:hover { color: var(--gold); }
+    .back-to-hub:hover {
+        color: var(--gold);
+    }
 
     .term-featured-image-wrap {
         margin-top: 36px;
@@ -580,7 +781,9 @@ const lastUpdatedStr = formatDate(d.lastUpdated ?? d.dateAdded);
             grid-template-columns: 1fr;
             gap: 48px;
         }
-        .related-sidebar { position: static; }
+        .related-sidebar {
+            position: static;
+        }
     }
     @media (max-width: 600px) {
         .term-featured-figure {

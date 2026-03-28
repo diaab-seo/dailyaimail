@@ -1,5 +1,5 @@
 ---
-tag: "Technology"
+tag: "Google AI"
 tags: ["Google", "TurboQuant", "AI Compression", "LLM Efficiency", "ICLR 2026"]
 headline: "Google's TurboQuant Slashes AI Memory by 6x — Could It End the RAM Crisis?"
 excerpt: "Google's new TurboQuant compression algorithm reduces LLM key-value cache memory by at least 6x with zero accuracy loss, delivering up to 8x speedup on H100 GPUs — and rattling memory stock prices on day one."

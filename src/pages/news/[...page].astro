@@ -9,7 +9,9 @@ import PaginationNav from "../../components/PaginationNav.astro";
 
 export async function getStaticPaths({ paginate }: { paginate: any }) {
     const allArticles = await getArticles();
-    const sorted = [...allArticles].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+    const sorted = [...allArticles].sort((a, b) =>
+        b.isoDate.localeCompare(a.isoDate),
+    );
     return paginate(sorted, { pageSize: 12 });
 }
 
@@ -24,51 +26,58 @@ const schema = {
     "@graph": [
         {
             "@type": "CollectionPage",
-            "@id": `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + '/' : ''}`,
-            url: `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + '/' : ''}`,
-            name: `All News${page.currentPage > 1 ? ` — Page ${page.currentPage}` : ''} - Daily AI Mail`,
-            description: "Browse the latest artificial intelligence news and analysis.",
+            "@id": `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + "/" : ""}`,
+            url: `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + "/" : ""}`,
+            name: `All News${page.currentPage > 1 ? ` — Page ${page.currentPage}` : ""} - Daily AI Mail`,
+            description:
+                "Browse the latest artificial intelligence news and analysis.",
             isPartOf: { "@id": `${SITE_URL}/#website` },
-        }
-    ]
+        },
+    ],
 };
 ---
 
 <Layout
-    title={`All News${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} - Daily AI Mail`}
-    metaTitle={`All News${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} - Daily AI Mail`}
+    title={`Latest AI News, Updates And Coverage${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ""} - Daily AI Mail`}
+    metaTitle={`Latest AI News, Updates And Coverage${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ""} - Daily AI Mail`}
     description="Browse the latest artificial intelligence news and analysis."
-    canonical={`${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + '/' : ''}`}
+    canonical={`${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + "/" : ""}`}
 >
     <!-- Add Link Headers -->
     {page.url.prev && <link rel="prev" href={page.url.prev} slot="head" />}
     {page.url.next && <link rel="next" href={page.url.next} slot="head" />}
 
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+        slot="head"
+    />
 
     <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "News" }]} />
 
     <div class="news-hero">
         <div class="news-hero-inner">
-            <h1 class="news-title">All News</h1>
+            <h1 class="news-title">Latest AI News, Updates And Coverage</h1>
         </div>
     </div>
 
     <div class="news-content">
         <div class="news-inner">
             <div class="news-grid">
-                {page.data.map((a: any) => (
-                    <NewsCard
-                        tag={a.tag}
-                        headline={a.headline}
-                        excerpt={a.excerpt}
-                        date={a.date}
-                        author={a.author}
-                        readingTime={a.readingTime}
-                        image={a.image}
-                        href={`/articles/${a.slug}`}
-                    />
-                ))}
+                {
+                    page.data.map((a: any) => (
+                        <NewsCard
+                            tag={a.tag}
+                            headline={a.headline}
+                            excerpt={a.excerpt}
+                            date={a.date}
+                            author={a.author}
+                            readingTime={a.readingTime}
+                            image={a.image}
+                            href={`/articles/${a.slug}`}
+                        />
+                    ))
+                }
             </div>
 
             <PaginationNav page={page} />

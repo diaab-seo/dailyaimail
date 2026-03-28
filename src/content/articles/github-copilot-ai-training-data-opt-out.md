@@ -1,6 +1,6 @@
 ---
 tag: "Technology"
-tags: ["GitHub", "Microsoft", "Copilot", "AI Training Data", "Developer Tools"]
+tags: ["GitHub", "Microsoft", "Copilot", "AI Training Data", "AI Developer Tools"]
 headline: "GitHub Will Use Your Copilot Interactions as AI Training Data — Here's How to Opt Out"
 excerpt: "Microsoft is now collecting GitHub Copilot interactions — including code snippets, comments, and file names — to train its AI models, with an opt-out available but enabled by default."
 date: "Mar 25, 2026"
