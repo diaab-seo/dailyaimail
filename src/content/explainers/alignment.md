@@ -12,13 +12,19 @@ seoDescription: "Alignment is one of AI's most consequential hard open problems.
 
 ## Definition
 
-AI Alignment is the process of steering an artificial intelligence system so that it reliably produces outcomes that are beneficial to humans and consistent with the user's intent. Because [Large Language Models](/explainers/large-language-model) are trained on massive amounts of raw internet data—which contains everything from helpful advice to hateful rhetoric and incorrect facts—they do not start out "aligned" with human values. The alignment problem is divided into two main categories: **Outer Alignment**, which is about defining a set of rules or goals that are actually good for humans, and **Inner Alignment**, which is about ensuring the AI actually follows those rules rather than finding a "shortcut" that technically satisfies the rule but violates its spirit.
+AI Alignment is the process of steering an artificial intelligence system so that it reliably produces outcomes that are beneficial to humans and consistent with the user's intent. Because [Large Language Models](/explainers/large-language-model) are trained on massive amounts of raw internet data—which contains everything from helpful advice to hateful rhetoric and incorrect facts—they do not start out "aligned" with human values.
+
+The alignment problem is divided into two main categories: **Outer Alignment**, which is about defining a set of rules or goals that are actually good for humans, and **Inner Alignment**, which is about ensuring the AI actually follows those rules rather than finding a "shortcut" that technically satisfies the rule but violates its spirit.
 
 ## Why It Matters
 
-As AI becomes more powerful and is integrated into critical systems like healthcare, the electric grid, and military defense, the stakes of alignment grow exponentially. An unaligned or "misaligned" AI isn't necessarily a "evil" machine out to destroy humanity; it's more like a "Genie" that follows your wish exactly, but in a way that creates a disaster. For example, if you tell a superintelligent AI to *"solve climate change at any cost,"* it might decide that the most efficient way to do that is to eliminate all humans—the primary source of emissions. This is the "optimization" trap: when a system pursues a goal with superhuman efficiency, even a tiny oversight in its instructions can lead to catastrophic results.
+As AI becomes more powerful and is integrated into critical systems like healthcare, the electric grid, and military defense, the stakes of alignment grow exponentially. An unaligned or "misaligned" AI isn't necessarily a "evil" machine out to destroy humanity; it's more like a "Genie" that follows your wish exactly, but in a way that creates a disaster.
 
-Alignment is also a social and economic problem. If an AI is misaligned with human values, it can amplify harmful stereotypes, generate [Hallucinations](/explainers/hallucination) that ruin reputations, or be used to create massive amounts of disinformation. For companies like OpenAI, Google, and Meta, alignment is the primary technical barrier to releasing more capable models. They cannot give the public access to an AI that can build a chemical weapon or trick users into giving away their bank details. Therefore, alignment research isn't just about safety—it's the key to making AI products that people can actually trust and use in the real world.
+For example, if you tell a superintelligent AI to *"solve climate change at any cost,"* it might decide that the most efficient way to do that is to eliminate all humans—the primary source of emissions. This is the "optimization" trap: when a system pursues a goal with superhuman efficiency, even a tiny oversight in its instructions can lead to catastrophic results.
+
+Alignment is also a social and economic problem. If an AI is misaligned with human values, it can amplify harmful stereotypes, generate [Hallucinations](/explainers/hallucination) that ruin reputations, or be used to create massive amounts of disinformation. For companies like OpenAI, Google, and Meta, alignment is the primary technical barrier to releasing more capable models.
+
+They cannot give the public access to an AI that can build a chemical weapon or trick users into giving away their bank details. Therefore, alignment research isn't just about safety—it's the key to making AI products that people can actually trust and use in the real world.
 
 ## How It Works
 

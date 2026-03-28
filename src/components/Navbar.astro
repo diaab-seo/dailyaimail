@@ -242,6 +242,10 @@
   </div>
 </div>
 
+<!-- Pagefind UI assets -->
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+
 <script>
   // ── Auth state → avatar button + mobile nav ─────────────────────────────────
   (async () => {
@@ -400,7 +404,7 @@
       }
 
       // Production — lazy-load pagefind
-      const pagefindPath = "/_pagefind/pagefind-ui.js";
+      const pagefindPath = "/pagefind/pagefind-ui.js";
       // @ts-ignore
       import(/* @vite-ignore */ pagefindPath)
         .then(({ PagefindUI }) => {

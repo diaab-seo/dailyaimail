@@ -13,7 +13,9 @@ seoDescription: "Retrieval-Augmented Generation gives language models access to 
 
 ## Definition
 
-Retrieval-Augmented Generation (RAG) is a framework that combines the creative power of a [Large Language Model](/explainers/large-language-model) like ChatGPT with the accuracy of a search engine. In a standard AI setup, the model answers questions based solely on what it learned during its original training. With RAG, the system acts like an open-book test: when asked a question, it first searches a private or public database for relevant documents, then "reads" those documents, and finally uses the model to summarize the findings into a natural-sounding answer. This process ensures the AI’s output is "grounded" in verifiable facts, drastically reducing the risk of errors while allowing the model to answer questions about events or data that happened after its training was completed.
+Retrieval-Augmented Generation (RAG) is a framework that combines the creative power of a [Large Language Model](/explainers/large-language-model) like ChatGPT with the accuracy of a search engine. In a standard AI setup, the model answers questions based solely on what it learned during its original training.
+
+With RAG, the system acts like an open-book test: when asked a question, it first searches a private or public database for relevant documents, then "reads" those documents, and finally uses the model to summarize the findings into a natural-sounding answer. This process ensures the AI’s output is "grounded" in verifiable facts, drastically reducing the risk of errors while allowing the model to answer questions about events or data that happened after its training was completed.
 
 ## Why It Matters
 

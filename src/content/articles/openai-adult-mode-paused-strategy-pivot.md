@@ -1,6 +1,6 @@
 ---
 tag: "OpenAI"
-tags: ["OpenAI", "ChatGPT", "Adult Mode", "AI Strategy", "Anthropic"]
+tags: ["OpenAI", "ChatGPT", "Policy & Ethics", "AI Strategy", "Anthropic"]
 headline: "OpenAI Abandons Its Erotic ChatGPT Mode — The Latest in a Week of Strategic Retreats"
 excerpt: "Adult mode is now indefinitely paused, joining Sora and Instant Checkout on the shelf as OpenAI executes a sweeping pivot away from side projects toward enterprise, coding, and a ChatGPT superapp."
 date: "Mar 26, 2026"

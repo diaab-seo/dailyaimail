@@ -12,13 +12,17 @@ seoDescription: "The context window determines how much an AI can 'remember' mid
 
 ## Definition
 
-In the world of artificial intelligence, the "Context Window" is the boundary of a model's active awareness. Every time you send a message to a [Large Language Model](/explainers/large-language-model), the model doesn't just read that single message; it re-reads the entire history of the conversation to "understand" what has already been said. However, every model has a hardware and architectural limit on how much data it can hold in this "active" state. This limit is measured in [tokens](/explainers/tokenization)—chunks of text that are roughly 0.75 words long. If a conversation exceeds the context window, the model will "drop" the earliest parts of the chat, which can lead to it forgetting your name, ignoring past instructions, or losing track of the story it was writing.
+In the world of artificial intelligence, the "Context Window" is the boundary of a model's active awareness. Every time you send a message to a [Large Language Model](/explainers/large-language-model), the model doesn't just read that single message; it re-reads the entire history of the conversation to "understand" what has already been said. However, every model has a hardware and architectural limit on how much data it can hold in this "active" state.
+
+This limit is measured in [tokens](/explainers/tokenization)—chunks of text that are roughly 0.75 words long. If a conversation exceeds the context window, the model will "drop" the earliest parts of the chat, which can lead to it forgetting your name, ignoring past instructions, or losing track of the story it was writing.
 
 ## Why It Matters
 
 The size of the context window is one of the most important technical specs for anyone using AI professionally. A small context window (like the 4,000 tokens in the original ChatGPT) is fine for a quick email or a simple question. But if you want the AI to analyze a 300-page legal contract, debug a massive software codebase, or act as a personalized tutor who remembers an entire semester of lessons, you need a "long-context" model.
 
-Expanding the context window is arguably the biggest trend in AI research today. Google’s Gemini 1.5, for instance, offers a 2-million-token context window—enough to "ingest" several hours of video or a dozen full-length novels in a single go. This capability is revolutionary because it reduces the need for "training." Instead of [Fine-Tuning](/explainers/fine-tuning) a model on your data (which is slow and expensive), you can simply "paste" all your data into a long-context window, and the AI can reason across all of it instantly. This shift is making AI systems far more capable of handling the "big data" tasks that previously required human researchers to spend weeks Reading and synthesizing information.
+Expanding the context window is arguably the biggest trend in AI research today. Google’s Gemini 1.5, for instance, offers a 2-million-token context window—enough to "ingest" several hours of video or a dozen full-length novels in a single go. This capability is revolutionary because it reduces the need for "training.
+
+" Instead of [Fine-Tuning](/explainers/fine-tuning) a model on your data (which is slow and expensive), you can simply "paste" all your data into a long-context window, and the AI can reason across all of it instantly. This shift is making AI systems far more capable of handling the "big data" tasks that previously required human researchers to spend weeks Reading and synthesizing information.
 
 ## How It Works
 

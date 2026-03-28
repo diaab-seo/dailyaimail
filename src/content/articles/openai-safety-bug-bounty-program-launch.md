@@ -1,6 +1,6 @@
 ---
-tag: "Technology"
-tags: ["OpenAI", "AI Safety", "Bug Bounty", "Cybersecurity", "Responsible AI"]
+tag: "OpenAI"
+tags: ["OpenAI", "AI Safety", "Bug Bounty", "Cybersecurity", "Policy & Ethics"]
 headline: "OpenAI Launches Safety Bug Bounty Program to Reward Researchers Who Find AI Abuse Risks"
 excerpt: "OpenAI is opening a public Safety Bug Bounty program targeting AI-specific misuse scenarios — from agentic prompt injection to platform integrity bypasses — that fall outside traditional security vulnerability scopes."
 date: "Mar 25, 2026"

@@ -43,7 +43,7 @@ about:
     type: "Thing"
 citations:
   - name: "Daily AI Mail: OpenAI Pulls the Plug on Sora"
-    url: "https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down"
+    url: "https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down"
     type: "CreativeWork"
   - name: "VEED: Best Sora Alternatives 2026"
     url: "https://www.veed.io/learn/sora-alternatives"

@@ -19,7 +19,10 @@ const slug = topicToSlug(tag);
 
 const SITE_URL = "https://dailyaimail.news";
 const baseTopicUrl = `${SITE_URL}/topics/${slug}`;
-const topicUrl = page && page.currentPage > 1 ? `${baseTopicUrl}/${page.currentPage}` : baseTopicUrl;
+const topicUrl =
+    page && page.currentPage > 1
+        ? `${baseTopicUrl}/${page.currentPage}`
+        : baseTopicUrl;
 const logoUrl = `${SITE_URL}/daily-ai-mail-logo.svg`;
 const latestIso =
     articles.length > 0
@@ -29,12 +32,15 @@ const latestIso =
 
 // Function to generate dynamic description based on article keywords
 const getDynamicDescription = (topicName: string, articles: Article[]) => {
-    const allKeywords = [...new Set(articles.flatMap(a => a.keywords || []))].filter(k => k.toLowerCase() !== topicName.toLowerCase());
+    const allKeywords = [
+        ...new Set(articles.flatMap((a) => a.keywords || [])),
+    ].filter((k) => k.toLowerCase() !== topicName.toLowerCase());
     const selectedKeywords = allKeywords.slice(0, 4);
-    const keywordsSentence = selectedKeywords.length > 0 
-        ? ` Covering ${selectedKeywords.slice(0, -1).join(', ')}${selectedKeywords.length > 1 ? ' and ' : ''}${selectedKeywords.slice(-1)}.`
-        : "";
-    
+    const keywordsSentence =
+        selectedKeywords.length > 0
+            ? ` Covering ${selectedKeywords.slice(0, -1).join(", ")}${selectedKeywords.length > 1 ? " and " : ""}${selectedKeywords.slice(-1)}.`
+            : "";
+
     return `The latest ${topicName} news, analysis, and updates for AI researchers, engineers, and business leaders.${keywordsSentence}`;
 };
 
@@ -165,7 +171,7 @@ const schema = {
             },
             image: { "@id": `${SITE_URL}/#/schema/logo/image/` },
             sameAs: [
-                "https://twitter.com/dailyaimail",
+                "https://x.com/dailyaimail",
                 "https://linkedin.com/company/dailyaimail",
             ],
         },
@@ -176,9 +182,9 @@ if (page && page.currentPage > 1) {
     schema["@graph"].push({
         "@type": "CollectionPage",
         "@id": topicUrl,
-        "url": topicUrl,
-        "isPartOf": { "@id": baseTopicUrl },
-        "name": `${tag} News — Page ${page.currentPage} — Daily AI Mail`
+        url: topicUrl,
+        isPartOf: { "@id": baseTopicUrl },
+        name: `${tag} News — Page ${page.currentPage} — Daily AI Mail`,
     } as any);
 }
 ---
@@ -192,8 +198,16 @@ if (page && page.currentPage > 1) {
     ogTitle={pageTitle}
     ogDescription={pageDescription}
 >
-    {page && page.url.prev && <link rel="prev" href={page.url.prev} slot="head" />}
-    {page && page.url.next && <link rel="next" href={page.url.next} slot="head" />}
+    {
+        page && page.url.prev && (
+            <link rel="prev" href={page.url.prev} slot="head" />
+        )
+    }
+    {
+        page && page.url.next && (
+            <link rel="next" href={page.url.next} slot="head" />
+        )
+    }
     <script
         type="application/ld+json"
         set:html={JSON.stringify(schema)}
@@ -218,7 +232,7 @@ if (page && page.currentPage > 1) {
                 class="cat-tag"
                 style={`background:${color}18;color:${color};`}>{tag}</span
             >
-            <h1 class="cat-title">{tag} News</h1>
+            <h1 class="cat-title">{tag} Recent Updates And News</h1>
             <p class="cat-subtitle">
                 {count} article{count !== 1 ? "s" : ""} · Updated daily
             </p>

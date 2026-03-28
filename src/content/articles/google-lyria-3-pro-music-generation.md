@@ -1,6 +1,6 @@
 ---
 tag: "Google AI"
-tags: ["Google", "Lyria 3 Pro", "AI Music Generation", "Gemini", "Vertex AI"]
+tags: ["Google", "Tools & Apps", "AI Music Generation", "Gemini", "Vertex AI"]
 headline: "Google Launches Lyria 3 Pro: Longer Tracks, Deeper Control, and Enterprise Access"
 excerpt: "A month after Lyria 3's debut, Google is releasing a Pro tier with three-minute track generation, structural composition control, and rollout across Gemini, Vertex AI, and ProducerAI."
 date: "Mar 25, 2026"
