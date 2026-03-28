@@ -1,56 +1,81 @@
 ---
-tag: "OpenAI"
-tags: ["OpenAI", "ChatGPT", "Policy & Ethics", "AI Strategy", "Anthropic"]
-headline: "OpenAI Abandons Its Erotic ChatGPT Mode — The Latest in a Week of Strategic Retreats"
-excerpt: "Adult mode is now indefinitely paused, joining Sora and Instant Checkout on the shelf as OpenAI executes a sweeping pivot away from side projects toward enterprise, coding, and a ChatGPT superapp."
-date: "Mar 26, 2026"
-isoDate: "2026-03-26"
-modifiedDate: "2026-03-26"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "4 min read"
-image: "/images/openai-adult-mode-paused-strategy-pivot.png"
+tag: OpenAI
+tags:
+  - OpenAI
+  - ChatGPT
+  - Policy & Ethics
+  - AI Strategy
+  - Anthropic
+headline: >-
+  OpenAI Abandons Its Erotic ChatGPT Mode — The Latest in a Week of Strategic
+  Retreats
+excerpt: >-
+  Adult mode is now indefinitely paused, joining Sora and Instant Checkout on
+  the shelf as OpenAI executes a sweeping pivot away from side projects toward
+  enterprise, coding, and a ChatGPT superapp.
+date: 'Mar 26, 2026'
+isoDate: '2026-03-26'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 4 min read
+image: /images/openai-adult-mode-paused-strategy-pivot.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "OpenAI's week of cancellations is complete: adult mode joins Sora and Instant Checkout in the graveyard as the company sharpens its focus on enterprise users and developers."
-keywords: ["OpenAI adult mode paused", "ChatGPT erotic mode cancelled", "OpenAI strategy pivot 2026", "OpenAI superapp", "OpenAI Anthropic competition"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  OpenAI's week of cancellations is complete: adult mode joins Sora and Instant
+  Checkout in the graveyard as the company sharpens its focus on enterprise
+  users and developers.
+keywords:
+  - OpenAI adult mode paused
+  - ChatGPT erotic mode cancelled
+  - OpenAI strategy pivot 2026
+  - OpenAI superapp
+  - OpenAI Anthropic competition
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "OpenAI"
-    url: "https://openai.com"
-    type: "Organization"
-  - name: "Anthropic"
-    url: "https://www.anthropic.com"
-    type: "Organization"
-  - name: "Financial Times"
-    url: "https://ft.com"
-    type: "Organization"
-  - name: "The Wall Street Journal"
-    url: "https://wsj.com"
-    type: "Organization"
+  - name: OpenAI
+    url: 'https://openai.com'
+    type: Organization
+  - name: Anthropic
+    url: 'https://www.anthropic.com'
+    type: Organization
+  - name: Financial Times
+    url: 'https://ft.com'
+    type: Organization
+  - name: The Wall Street Journal
+    url: 'https://wsj.com'
+    type: Organization
 about:
-  - name: "ChatGPT Adult Mode"
-    url: "https://openai.com/chatgpt"
-    type: "Thing"
+  - name: ChatGPT Adult Mode
+    url: 'https://openai.com/chatgpt'
+    type: Thing
 citations:
-  - name: "Financial Times: OpenAI Pauses Erotic ChatGPT Plans"
-    url: "https://www.ft.com/content/openai-chatgpt-adult-mode-paused"
-    type: "CreativeWork"
-  - name: "Daily AI Mail: OpenAI Pulls the Plug on Sora"
-    url: "https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down"
-    type: "CreativeWork"
-  - name: "Daily AI Mail: ChatGPT's Amazon Ambitions Falter"
-    url: "https://dailyaimail.news/news/chatgpt-amazon-ambitions-falter-instant-checkout-pivot"
-    type: "CreativeWork"
-  - name: "PCWorld: OpenAI Nixes ChatGPT Erotic Adult Mode"
-    url: "https://www.pcworld.com/article/3099680/openai-just-nixed-chatgpt-erotic-adult-mode.html"
-    type: "CreativeWork"
-  - name: "Reuters: OpenAI Indefinitely Pauses Erotic Chatbot Plans"
-    url: "https://finance.yahoo.com/sectors/technology/articles/openai-indefinitely-pauses-plans-release-100934244.html"
-    type: "CreativeWork"
-  - name: "Yahoo Tech: OpenAI Shelves Erotic Chatbot Plans"
-    url: "https://tech.yahoo.com/ai/chatgpt/article/openai-shelves-plans-for-erotic-chatbot-indefinitely-152619842.html"
-    type: "CreativeWork"
+  - name: 'Financial Times: OpenAI Pauses Erotic ChatGPT Plans'
+    url: 'https://www.ft.com/content/openai-chatgpt-adult-mode-paused'
+    type: CreativeWork
+  - name: 'Daily AI Mail: OpenAI Pulls the Plug on Sora'
+    url: >-
+      https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down
+    type: CreativeWork
+  - name: 'Daily AI Mail: ChatGPT''s Amazon Ambitions Falter'
+    url: >-
+      https://dailyaimail.news/news/chatgpt-amazon-ambitions-falter-instant-checkout-pivot
+    type: CreativeWork
+  - name: 'PCWorld: OpenAI Nixes ChatGPT Erotic Adult Mode'
+    url: >-
+      https://www.pcworld.com/article/3099680/openai-just-nixed-chatgpt-erotic-adult-mode.html
+    type: CreativeWork
+  - name: 'Reuters: OpenAI Indefinitely Pauses Erotic Chatbot Plans'
+    url: >-
+      https://finance.yahoo.com/sectors/technology/articles/openai-indefinitely-pauses-plans-release-100934244.html
+    type: CreativeWork
+  - name: 'Yahoo Tech: OpenAI Shelves Erotic Chatbot Plans'
+    url: >-
+      https://tech.yahoo.com/ai/chatgpt/article/openai-shelves-plans-for-erotic-chatbot-indefinitely-152619842.html
+    type: CreativeWork
 ---
 
 In the space of five days, OpenAI has quietly dismantled three of its most publicly discussed experimental directions. On Tuesday, [Instant Checkout was deprioritized](https://dailyaimail.news/articles/chatgpt-amazon-ambitions-falter-instant-checkout-pivot). On Wednesday, [Sora was shut down](https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down). And on Thursday, the Financial Times reported that ChatGPT's long-debated adult mode has been placed on indefinite hold. When TechCrunch reached out for comment, OpenAI said it had "nothing further to add."

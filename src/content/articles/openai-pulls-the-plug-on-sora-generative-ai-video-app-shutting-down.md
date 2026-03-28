@@ -1,44 +1,62 @@
 ---
-tag: "OpenAI"
-tags: ["OpenAI", "Sora", "Generative AI", "Video Generation", "Disney Partnership"]
-headline: "OpenAI Pulls the Plug on Sora: Generative AI Video App Shutting Down"
-excerpt: "In a surprising move, OpenAI has announced the discontinuation of its text-to-video generation tool, Sora, marking a significant pivot away from its video business."
-date: "Mar 25, 2026"
-isoDate: "2026-03-25"
-modifiedDate: "2026-03-25"
-author: "Daily AI Mail Editorial Staff"
-authorUrl: "https://dailyaimail.news/about-us/editorial-team"
-readingTime: "3 min read"
-image: "/images/openai-shut-sora-generative-ai-video-app.png"
+tag: OpenAI
+tags:
+  - OpenAI
+  - Sora
+  - Generative AI
+  - Video Generation
+  - Disney Partnership
+headline: 'OpenAI Pulls the Plug on Sora: Generative AI Video App Shutting Down'
+excerpt: >-
+  In a surprising move, OpenAI has announced the discontinuation of its
+  text-to-video generation tool, Sora, marking a significant pivot away from its
+  video business.
+date: 'Mar 25, 2026'
+isoDate: '2026-03-25'
+modifiedDate: '2026-03-28'
+author: Daily AI Mail Editorial Staff
+authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
+readingTime: 3 min read
+image: /images/openai-shut-sora-generative-ai-video-app.png
 imageWidth: 1200
 imageHeight: 675
-imageCaption: "OpenAI announces the sunsetting of its generative video application, Sora, leaving creators seeking alternatives."
-keywords: ["OpenAI Sora shutdown", "Sora AI discontinued", "Generative AI Video", "Disney OpenAI partnership", "OpenAI news 2026"]
-articleSection: ["Technology", "Artificial Intelligence"]
+imageCaption: >-
+  OpenAI announces the sunsetting of its generative video application, Sora,
+  leaving creators seeking alternatives.
+keywords:
+  - OpenAI Sora shutdown
+  - Sora AI discontinued
+  - Generative AI Video
+  - Disney OpenAI partnership
+  - OpenAI news 2026
+articleSection:
+  - Technology
+  - Artificial Intelligence
 mentions:
-  - name: "OpenAI"
-    url: "https://openai.com"
-    type: "Organization"
-  - name: "Disney"
-    url: "https://www.disney.com"
-    type: "Organization"
-  - name: "Variety"
-    url: "https://variety.com"
-    type: "Organization"
+  - name: OpenAI
+    url: 'https://openai.com'
+    type: Organization
+  - name: Disney
+    url: 'https://www.disney.com'
+    type: Organization
+  - name: Variety
+    url: 'https://variety.com'
+    type: Organization
 about:
-  - name: "Sora"
-    url: "https://openai.com/sora"
-    type: "Thing"
+  - name: Sora
+    url: 'https://openai.com/sora'
+    type: Thing
 citations:
-  - name: "Sora Official Announcement on X"
-    url: "https://x.com/soraofficialapp/status/2036546752535470382"
-    type: "CreativeWork"
-  - name: "OpenAI and Disney Agreement"
-    url: "https://openai.com/index/disney-sora-agreement/"
-    type: "CreativeWork"
-  - name: "Variety: OpenAI Shutting Down Sora"
-    url: "https://variety.com/2026/digital/news/openai-shutting-down-sora-video-disney-1236698277/"
-    type: "CreativeWork"
+  - name: Sora Official Announcement on X
+    url: 'https://x.com/soraofficialapp/status/2036546752535470382'
+    type: CreativeWork
+  - name: OpenAI and Disney Agreement
+    url: 'https://openai.com/index/disney-sora-agreement/'
+    type: CreativeWork
+  - name: 'Variety: OpenAI Shutting Down Sora'
+    url: >-
+      https://variety.com/2026/digital/news/openai-shutting-down-sora-video-disney-1236698277/
+    type: CreativeWork
 ---
 
 OpenAI is officially sunsetting Sora, its highly anticipated generative AI application built to transform text prompts into high-quality video content. At the time of the announcement, the tech giant did not disclose a specific reason for the abrupt closure of the platform.
