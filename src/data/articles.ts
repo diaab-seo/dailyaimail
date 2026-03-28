@@ -51,27 +51,40 @@ async function fetchArticles(): Promise<Article[]> {
   }));
 }
 
-export async function getArticles(): Promise<Article[]> { return fetchArticles(); }
+function sortArticles(articles: Article[]): Article[] {
+  return [...articles].sort((x, y) => {
+    const dateDiff = new Date(y.isoDate).getTime() - new Date(x.isoDate).getTime();
+    if (dateDiff !== 0) return dateDiff;
+    // Stable tiebreaker: sort by slug descending so recently-added articles surface first
+    return y.slug.localeCompare(x.slug);
+  });
+}
+
+export async function getArticles(): Promise<Article[]> { 
+  const a = await fetchArticles();
+  return sortArticles(a);
+}
+
 export async function getAllCategories(): Promise<string[]> {
   const a = await fetchArticles();
   const allTags = a.flatMap(x => x.tags);
   return [...new Set(allTags)];
 }
+
 export async function getArticlesByCategory(tag: string): Promise<Article[]> {
   const a = await fetchArticles();
-  return a.filter(x => x.tags.includes(tag));
+  const filtered = a.filter(x => x.tags.includes(tag));
+  return sortArticles(filtered);
 }
-export async function getArticleBySlug(slug: string): Promise<Article | undefined> { const a = await fetchArticles(); return a.find(x => x.slug === slug); }
+
+export async function getArticleBySlug(slug: string): Promise<Article | undefined> { 
+  const a = await fetchArticles(); 
+  return a.find(x => x.slug === slug); 
+}
+
 export async function getLatestArticles(count = 3): Promise<Article[]> {
   const a = await fetchArticles();
-  return [...a]
-    .sort((x, y) => {
-      const dateDiff = new Date(y.isoDate).getTime() - new Date(x.isoDate).getTime();
-      if (dateDiff !== 0) return dateDiff;
-      // Stable tiebreaker: sort by slug descending so recently-added articles surface first
-      return y.slug.localeCompare(x.slug);
-    })
-    .slice(0, count);
+  return sortArticles(a).slice(0, count);
 }
 
 /** Converts a tag to a URL-safe slug. Used for /topics/ paths. */
