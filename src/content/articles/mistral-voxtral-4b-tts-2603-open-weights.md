@@ -14,7 +14,7 @@ excerpt: >-
   production-grade performance that runs on a single GPU. Here's everything it
   can do, who it's built for, and why it matters.
 date: 'Mar 29, 2026'
-isoDate: '2026-03-29'
+isoDate: "2026-03-29T21:10:00+00:00"
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
