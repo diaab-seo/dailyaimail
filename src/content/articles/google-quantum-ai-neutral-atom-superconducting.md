@@ -1,11 +1,8 @@
 ---
 tag: Google AI
 tags:
-  - Google
+  - Google AI
   - Quantum Computing
-  - Neutral Atoms
-  - Superconducting Qubits
-  - Google Quantum AI
 headline: >-
   Google Quantum AI Expands Into Neutral Atom Computing Alongside Its
   Superconducting Program

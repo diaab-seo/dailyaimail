@@ -3,9 +3,7 @@ tag: OpenAI
 tags:
   - OpenAI
   - ChatGPT
-  - E-Commerce
   - Agentic Commerce
-  - Stripe
 headline: >-
   ChatGPT's Amazon Ambitions Falter as OpenAI Quietly Retreats from Direct
   Checkout

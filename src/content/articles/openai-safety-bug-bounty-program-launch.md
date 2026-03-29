@@ -3,9 +3,8 @@ tag: OpenAI
 tags:
   - OpenAI
   - AI Safety
-  - Bug Bounty
-  - Cybersecurity
-  - Policy & Ethics
+  - AI Security
+  - "Policy & Ethics"
 headline: >-
   OpenAI Launches Safety Bug Bounty Program to Reward Researchers Who Find AI
   Abuse Risks

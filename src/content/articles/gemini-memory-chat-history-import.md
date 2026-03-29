@@ -1,8 +1,8 @@
 ---
 tag: Google AI
 tags:
-  - Google
-  - Tools & Apps
+  - Google AI
+  - "AI Tools & Apps"
   - Gemini
   - AI Assistants
   - Personal AI

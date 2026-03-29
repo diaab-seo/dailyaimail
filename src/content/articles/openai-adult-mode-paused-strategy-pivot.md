@@ -3,7 +3,7 @@ tag: OpenAI
 tags:
   - OpenAI
   - ChatGPT
-  - Policy & Ethics
+  - "Policy & Ethics"
   - AI Strategy
   - Anthropic
 headline: >-

@@ -4,7 +4,7 @@ tags:
   - Anthropic
   - Claude Code
   - AI Agents
-  - Developer Tools
+  - AI Developer Tools
   - Agentic AI
 headline: Anthropic Gives Claude Code an Autonomous Mode — With a Safety Net Built In
 excerpt: >-

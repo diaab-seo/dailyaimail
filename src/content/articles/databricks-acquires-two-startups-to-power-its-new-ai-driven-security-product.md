@@ -1,10 +1,9 @@
 ---
 tag: Google AI
 tags:
-  - Databricks
-  - Lakewatch
+  - Enterprise AI
   - AI Security
-  - Acquisitions
+  - Big Tech AI
   - Anthropic
 headline: Databricks Acquires Two Startups to Power Its New AI-Driven Security Product
 excerpt: >-
