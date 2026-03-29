@@ -2,9 +2,6 @@
 tag: Meta AI
 tags:
   - Meta AI
-  - Data Centers
-  - AI Infrastructure
-  - Capital Expenditure
   - Big Tech AI
 headline: >-
   Meta Raises Texas AI Data Center Investment From $1.5B to $10B as Compute

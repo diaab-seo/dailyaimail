@@ -4,8 +4,7 @@ tags:
   - OpenAI
   - Sora
   - Generative AI
-  - Video Generation
-  - Disney Partnership
+  - AI Video
 headline: 'OpenAI Pulls the Plug on Sora: Generative AI Video App Shutting Down'
 excerpt: >-
   In a surprising move, OpenAI has announced the discontinuation of its

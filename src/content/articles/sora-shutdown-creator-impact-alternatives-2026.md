@@ -4,7 +4,6 @@ tags:
   - OpenAI
   - Sora
   - AI Video
-  - Creator Economy
   - Generative AI
 headline: 'Sora Is Gone: What It Means for Creators and Where to Go Next'
 excerpt: >-

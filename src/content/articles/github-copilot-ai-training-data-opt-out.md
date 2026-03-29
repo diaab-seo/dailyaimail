@@ -1,11 +1,10 @@
 ---
 tag: Technology
 tags:
-  - GitHub
+  - AI Developer Tools
   - Microsoft
   - Copilot
   - AI Training Data
-  - AI Developer Tools
 headline: >-
   GitHub Will Use Your Copilot Interactions as AI Training Data — Here's How to
   Opt Out

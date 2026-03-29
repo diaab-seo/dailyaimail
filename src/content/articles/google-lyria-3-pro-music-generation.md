@@ -1,8 +1,8 @@
 ---
 tag: Google AI
 tags:
-  - Google
-  - Tools & Apps
+  - Google AI
+  - "AI Tools & Apps"
   - AI Music Generation
   - Gemini
   - Vertex AI

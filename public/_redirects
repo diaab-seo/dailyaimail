@@ -1,1 +1,44 @@
 /sitemap.xml /sitemap-index.xml 301
+
+# ── Topic consolidation 301s ──────────────────────────────
+
+# Company/product overlaps
+/topics/google                      /topics/google-ai                   301
+/topics/github                      /topics/ai-developer-tools          301
+/topics/developer-tools             /topics/ai-developer-tools          301
+/topics/stripe                      /topics/agentic-commerce            301
+
+# Topic rename: tools-and-apps → ai-tools-and-apps
+/topics/tools-and-apps              /topics/ai-tools-and-apps           301
+/topics/tools-and-apps/*            /topics/ai-tools-and-apps/:splat    301
+
+# Quantum computing → umbrella
+/topics/neutral-atoms               /topics/quantum-computing           301
+/topics/superconducting-qubits      /topics/quantum-computing           301
+/topics/google-quantum-ai           /topics/quantum-computing           301
+
+# Tech niche → parent
+/topics/turboquant                  /topics/ai-compression              301
+/topics/video-generation            /topics/ai-video                    301
+/topics/creator-economy             /topics/ai-video                    301
+/topics/disney-partnership          /topics/sora                        301
+/topics/bug-bounty                  /topics/ai-safety                   301
+/topics/cybersecurity               /topics/ai-security                 301
+/topics/e-commerce                  /topics/agentic-commerce            301
+
+# Infrastructure → Big Tech AI
+/topics/data-centers                /topics/big-tech-ai                 301
+/topics/ai-infrastructure           /topics/big-tech-ai                 301
+/topics/capital-expenditure         /topics/big-tech-ai                 301
+/topics/acquisitions                /topics/big-tech-ai                 301
+
+# Business/funding → Enterprise AI
+/topics/granola                     /topics/enterprise-ai               301
+/topics/databricks                  /topics/enterprise-ai               301
+/topics/lakewatch                   /topics/enterprise-ai               301
+/topics/series-c                    /topics/enterprise-ai               301
+/topics/meeting-notes               /topics/enterprise-ai               301
+
+# Generics
+/topics/technology                  /news                               301
+/topics/iclr-2026                   /topics/generative-ai               301

@@ -1,11 +1,8 @@
 ---
 tag: Granola
 tags:
-  - Granola
-  - AI Productivity
   - Enterprise AI
-  - Meeting Notes
-  - Series C
+  - AI Productivity
 headline: >-
   Granola Raises $125M at $1.5B Valuation, Evolving From Meeting Notetaker to
   Enterprise AI Platform

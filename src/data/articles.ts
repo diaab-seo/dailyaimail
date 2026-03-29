@@ -101,8 +101,17 @@ export function tagColor(tag: string): string {
     'Google AI': 'var(--tag-google)',
     'OpenAI': 'var(--tag-openai)',
     'Meta AI': 'var(--tag-meta)',
-    'Tools & Apps': 'var(--tag-tools)',
+    'AI Tools & Apps': 'var(--tag-tools)',
     'Policy & Ethics': 'var(--tag-policy)',
+    'AI Developer Tools': 'var(--tag-developer)',
+    'Agentic Commerce': 'var(--tag-commerce)',
+    'Big Tech AI': 'var(--tag-bigtech)',
+    'Enterprise AI': 'var(--tag-enterprise)',
+    'Quantum Computing': 'var(--tag-quantum)',
+    'AI Video': 'var(--tag-video)',
+    'Sora': 'var(--tag-sora)',
+    'AI Safety': 'var(--tag-safety)',
+    'AI Security': 'var(--tag-security)',
   };
   return map[tag] ?? 'var(--tag-default)';
 }
