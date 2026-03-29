@@ -12,7 +12,7 @@ excerpt: >-
   4,000 construction workers — as the company faces mounting cost scrutiny and
   its first wave of AI-driven layoffs.
 date: 'Mar 28, 2026'
-isoDate: '2026-03-28'
+isoDate: "2026-03-29T15:14:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

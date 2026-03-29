@@ -12,7 +12,7 @@ excerpt: >-
   and no published usage budgets. A viral Reddit open letter is demanding
   answers.
 date: 'Mar 29, 2026'
-isoDate: '2026-03-29'
+isoDate: "2026-03-29T20:38:00+00:00"
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

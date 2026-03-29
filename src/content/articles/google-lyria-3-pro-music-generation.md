@@ -14,7 +14,7 @@ excerpt: >-
   three-minute track generation, structural composition control, and rollout
   across Gemini, Vertex AI, and ProducerAI.
 date: 'Mar 25, 2026'
-isoDate: '2026-03-25'
+isoDate: "2026-03-29T15:22:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

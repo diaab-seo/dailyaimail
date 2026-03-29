@@ -11,7 +11,7 @@ excerpt: >-
   text-to-video generation tool, Sora, marking a significant pivot away from its
   video business.
 date: 'Mar 25, 2026'
-isoDate: '2026-03-25'
+isoDate: "2026-03-29T15:10:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

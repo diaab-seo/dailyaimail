@@ -12,7 +12,7 @@ excerpt: >-
   shopping destination, pivoting from native checkout toward product discovery
   as users prove reluctant to buy inside the chatbot.
 date: 'Mar 25, 2026'
-isoDate: '2026-03-25'
+isoDate: "2026-03-29T15:30:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

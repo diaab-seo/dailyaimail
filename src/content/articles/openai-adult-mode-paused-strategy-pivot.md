@@ -14,7 +14,7 @@ excerpt: >-
   the shelf as OpenAI executes a sweeping pivot away from side projects toward
   enterprise, coding, and a ChatGPT superapp.
 date: 'Mar 26, 2026'
-isoDate: '2026-03-26'
+isoDate: "2026-03-29T15:12:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
