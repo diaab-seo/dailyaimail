@@ -28,9 +28,7 @@ export default defineConfig({
                 '/terms-and-conditions',
                 '/publishing-principles',
                 '/press-kit',
-                '/news-sitemap.xml',
                 '/rss.xml',
-                '/sitemap*',
                 // ── Explainers (fully static, no worker needed) ──
                 '/explainers',
                 '/explainers/*',
