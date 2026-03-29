@@ -13,7 +13,7 @@ excerpt: >-
   misuse scenarios — from agentic prompt injection to platform integrity
   bypasses — that fall outside traditional security vulnerability scopes.
 date: 'Mar 25, 2026'
-isoDate: '2026-03-25'
+isoDate: "2026-03-29T15:08:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

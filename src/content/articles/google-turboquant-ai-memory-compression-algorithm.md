@@ -10,7 +10,7 @@ excerpt: >-
   memory by at least 6x with zero accuracy loss, delivering up to 8x speedup on
   H100 GPUs — and rattling memory stock prices on day one.
 date: 'Mar 26, 2026'
-isoDate: '2026-03-26'
+isoDate: "2026-03-29T15:18:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

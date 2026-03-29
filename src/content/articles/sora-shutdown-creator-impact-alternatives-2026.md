@@ -11,7 +11,7 @@ excerpt: >-
   Here's an honest look at the fallout, what was actually lost, and which
   platforms are ready to fill the gap right now.
 date: 'Mar 26, 2026'
-isoDate: '2026-03-26'
+isoDate: "2026-03-29T15:06:00+00:00"
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'

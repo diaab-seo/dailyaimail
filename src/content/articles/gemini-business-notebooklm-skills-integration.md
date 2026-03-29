@@ -12,7 +12,7 @@ excerpt: >-
   no-code Skill Architect tool — moves that would bring the Business tier
   closer to parity with Enterprise and push directly into Microsoft's turf.
 date: 'Mar 29, 2026'
-isoDate: '2026-03-29'
+isoDate: "2026-03-29T21:01:00+00:00"
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
