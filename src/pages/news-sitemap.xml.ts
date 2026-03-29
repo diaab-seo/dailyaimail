@@ -9,7 +9,14 @@ export const GET: APIRoute = async () => {
 
     const sorted = [...articles].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
 
-    let urls = sorted.map(a => `
+    const urls = sorted.map(a => {
+        const pubDate = new Date(a.isoDate);
+        if (isNaN(pubDate.getTime())) return null;
+
+        const modDate = new Date(a.modifiedDate || a.isoDate);
+        const lastmod = !isNaN(modDate.getTime()) ? modDate.toISOString() : pubDate.toISOString();
+
+        return `
   <url>
     <loc>${SITE_URL}/articles/${a.slug}</loc>
     <news:news>
@@ -17,12 +24,13 @@ export const GET: APIRoute = async () => {
         <news:name>Daily AI Mail</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>${a.isoDate}T00:00:00+00:00</news:publication_date>
+      <news:publication_date>${pubDate.toISOString()}</news:publication_date>
       <news:title>${a.headline.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</news:title>
       <news:keywords>${a.keywords.join(', ')}</news:keywords>
     </news:news>
-    <lastmod>${a.modifiedDate ?? a.isoDate}T00:00:00+00:00</lastmod>
-  </url>`).join('');
+    <lastmod>${lastmod}</lastmod>
+  </url>`;
+    }).filter(Boolean).join('');
 
     // Main collection URLs
     urls += `

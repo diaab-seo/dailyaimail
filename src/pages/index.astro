@@ -34,8 +34,8 @@ const siteUrl = "https://dailyaimail.news";
 const logoUrl = `${siteUrl}/daily-ai-mail-logo.svg`;
 
 // Latest article date for dateModified
-const newestIso =
-  latestArticles[0]?.isoDate ?? new Date().toISOString().split("T")[0];
+const newestDate = new Date(latestArticles[0]?.isoDate || new Date());
+const newestIso = !isNaN(newestDate.getTime()) ? newestDate.toISOString() : new Date().toISOString();
 
 // ── All six categories with full metadata ─────────────────────────────────────
 const categories = [
@@ -85,7 +85,7 @@ const schema = {
       about: { "@id": `${siteUrl}/#organization` },
       publisher: { "@id": `${siteUrl}/#organization` },
       author: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
-      dateModified: `${newestIso}T00:00:00+00:00`,
+      dateModified: newestIso,
       image: { "@id": `${siteUrl}/#/schema/logo/image/` },
       primaryImageOfPage: { "@id": `${siteUrl}/#/schema/logo/image/` },
       breadcrumb: { "@id": `${siteUrl}/#breadcrumb` },
@@ -140,7 +140,7 @@ const schema = {
       author: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
       about: { "@id": `${siteUrl}/#organization` },
       dateCreated: "2026-01-01T00:00:00+00:00",
-      dateModified: `${newestIso}T00:00:00+00:00`,
+      dateModified: newestIso,
       isAccessibleForFree: true,
       license: `${siteUrl}/terms-and-conditions`,
       publishingPrinciples: `${siteUrl}/publishing-principles`,
@@ -351,7 +351,7 @@ const schema = {
           "@id": `${siteUrl}/articles/${a.slug}#article`,
           headline: a.headline,
           description: a.excerpt,
-          datePublished: `${a.isoDate}T00:00:00+00:00`,
+          datePublished: new Date(a.isoDate).toISOString(),
           author: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
           publisher: { "@id": `${siteUrl}/#organization` },
           url: `${siteUrl}/articles/${a.slug}`,

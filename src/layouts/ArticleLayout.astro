@@ -29,8 +29,10 @@ const related = (await getArticlesByCategory(article.tag))
 
 const SITE_URL = "https://dailyaimail.news";
 const articleUrl = `${SITE_URL}/articles/${article.slug}`;
-const pubDate = `${article.isoDate}T00:00:00+00:00`;
-const modDate = `${article.modifiedDate ?? article.isoDate}T00:00:00+00:00`;
+const dateObj = new Date(article.isoDate);
+const pubDate = !isNaN(dateObj.getTime()) ? dateObj.toISOString() : article.isoDate;
+const modObj = new Date(article.modifiedDate || article.isoDate);
+const modDate = !isNaN(modObj.getTime()) ? modObj.toISOString() : pubDate;
 const wordCount = article.body.trim().split(/\s+/).length;
 const plainBody = stripMarkdown(article.body);
 const hasImage = Boolean(article.image);
