@@ -924,6 +924,8 @@ const schema = {
 
   .article-body {
     max-width: 720px;
+    min-width: 0;
+    width: 100%;
     font-size: 17px;
     line-height: 1.8;
     color: var(--color-text-secondary);
@@ -988,6 +990,7 @@ const schema = {
     padding: 20px;
     border-radius: var(--radius-md);
     overflow-x: auto;
+    max-width: 100%;
     margin-bottom: 32px;
     border: 1px solid var(--color-border);
   }
@@ -1159,6 +1162,16 @@ const schema = {
     }
     .article-sidebar {
       position: static;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .article-body {
+      font-size: 16px;
+    }
+    .article-body :global(pre) {
+      padding: 14px;
+      font-size: 13px;
     }
   }
 </style>
