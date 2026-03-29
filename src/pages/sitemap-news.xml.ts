@@ -14,7 +14,12 @@ export const GET: APIRoute = async () => {
     return pubDate >= fortyEightHoursAgo;
   });
 
-  const urls = recentArticles.map(article => `
+  const urls = recentArticles
+    .map(article => {
+      const pubDate = new Date(article.data.isoDate);
+      if (isNaN(pubDate.getTime())) return null;
+
+      return `
     <url>
       <loc>https://dailyaimail.news/articles/${article.id}</loc>
       <news:news>
@@ -22,10 +27,13 @@ export const GET: APIRoute = async () => {
           <news:name>Daily AI Mail</news:name>
           <news:language>en</news:language>
         </news:publication>
-        <news:publication_date>${new Date(article.data.isoDate || article.data.date).toISOString()}</news:publication_date>
+        <news:publication_date>${pubDate.toISOString()}</news:publication_date>
         <news:title>${escapeXml(article.data.headline)}</news:title>
       </news:news>
-    </url>`).join('');
+    </url>`;
+    })
+    .filter(Boolean)
+    .join('');
 
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">${urls}\n</urlset>`,
