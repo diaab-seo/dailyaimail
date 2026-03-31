@@ -10,6 +10,7 @@ const articles = defineCollection({
         excerpt: z.string(),
         date: z.string(),
         isoDate: z.string(),
+        updatedAt: z.string().datetime({ offset: true }).optional(),
         modifiedDate: z.string().optional(),
         author: z.string(),
         authorUrl: z.string().optional(),
