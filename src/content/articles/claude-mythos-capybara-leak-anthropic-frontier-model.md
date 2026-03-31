@@ -121,7 +121,7 @@ None of these specifics — the April 16 date, the pricing structure, the contex
 
 ## A Pattern Worth Noting
 
-This is the second significant information leak from Anthropic in the span of a week — following the [Claude Code source map exposure](https://dailyaimail.news/news/claude-code-leaks-its-own-source-code-for-the-second-time-in-a-year) that exposed 1,906 proprietary TypeScript files on npm the same day. Both incidents stem from configuration defaults rather than external attacks: in each case, a system set to public by default when it should have been private.
+This is the second significant information leak from Anthropic in the span of a week — following the [Claude Code source map exposure](https://dailyaimail.news/articles/claude-code-leaks-its-own-source-code-for-the-second-time-in-a-year) that exposed 1,906 proprietary TypeScript files on npm the same day. Both incidents stem from configuration defaults rather than external attacks: in each case, a system set to public by default when it should have been private.
 
 For a company whose entire brand proposition is built on safety and careful deployment, the optics of two self-inflicted leaks in one week — one of them revealing a model the company itself describes as an unprecedented security risk — will be difficult to separate from the underlying capability story, however strong that story turns out to be.
 
