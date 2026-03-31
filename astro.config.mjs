@@ -29,6 +29,7 @@ export default defineConfig({
                 '/publishing-principles',
                 '/press-kit',
                 '/rss.xml',
+                '/newsletter',
                 // ── Explainers (fully static, no worker needed) ──
                 '/explainers',
                 '/explainers/*',

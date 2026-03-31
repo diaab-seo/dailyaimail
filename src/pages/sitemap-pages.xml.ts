@@ -17,6 +17,7 @@ export const GET: APIRoute = async () => {
         '/cookies-policy',
         '/topics',
         '/news',
+        '/newsletter',
         '/explainers',          // ← hub added
     ];
 
