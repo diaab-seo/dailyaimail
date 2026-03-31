@@ -4,7 +4,7 @@ tags:
   - Anthropic
   - Claude Code
   - Cybersecurity
-  - Developer Tools
+  - AI Tools
   - Open Source
 headline: "Claude Code Leaks Its Own Source Code for the Second Time in a Year via npm Source Maps"
 excerpt: >-
