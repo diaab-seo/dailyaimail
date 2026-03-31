@@ -9,6 +9,7 @@ export type Article = {
   body: string;
   date: string;
   isoDate: string;
+  updatedAt?: string;
   modifiedDate: string;
   author: string;
   authorUrl: string;
@@ -35,6 +36,7 @@ async function fetchArticles(): Promise<Article[]> {
     body: e.body ?? '',
     date: e.data.date,
     isoDate: e.data.isoDate,
+    updatedAt: e.data.updatedAt,
     modifiedDate: e.data.modifiedDate ?? e.data.isoDate,
     author: e.data.author,
     authorUrl: e.data.authorUrl ?? '',

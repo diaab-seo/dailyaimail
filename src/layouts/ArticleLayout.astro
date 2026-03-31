@@ -8,6 +8,7 @@ import {
   stripMarkdown,
   extractImages,
 } from "../data/articles";
+import { getDateModified, formatModifiedTime, toSchemaDate } from "../lib/dateUtils";
 import CommentSection from "../components/CommentSection.astro";
 import NewsletterForm from "../components/NewsletterForm.astro";
 import type { DBComment } from "../lib/db";
@@ -29,10 +30,10 @@ const related = (await getArticlesByCategory(article.tag))
 
 const SITE_URL = "https://dailyaimail.news";
 const articleUrl = `${SITE_URL}/articles/${article.slug}`;
-const dateObj = new Date(article.isoDate);
-const pubDate = !isNaN(dateObj.getTime()) ? dateObj.toISOString() : article.isoDate;
-const modObj = new Date(article.modifiedDate || article.isoDate);
-const modDate = !isNaN(modObj.getTime()) ? modObj.toISOString() : pubDate;
+const pubDate = toSchemaDate(article.isoDate) || new Date(article.isoDate).toISOString();
+const modified = getDateModified(article);
+const modDate = toSchemaDate(modified);
+const modifiedDisplay = formatModifiedTime(modified);
 const wordCount = article.body.trim().split(/\s+/).length;
 const plainBody = stripMarkdown(article.body);
 const hasImage = Boolean(article.image);
@@ -281,6 +282,10 @@ const schema = {
         <time datetime={article.isoDate} data-pagefind-meta="date"
           >{article.date}</time
         >
+        <span class="article-sep">·</span>
+        <time datetime={modDate} class="article-modified">
+          Updated {modifiedDisplay}
+        </time>
         <span class="article-sep">·</span>
         <span>{article.readingTime}</span>
       </div>

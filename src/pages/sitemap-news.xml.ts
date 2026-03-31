@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { getDateModified, toSchemaDate } from '../lib/dateUtils';
 
 export const GET: APIRoute = async () => {
   const articles = await getCollection('articles');
@@ -19,6 +20,8 @@ export const GET: APIRoute = async () => {
       const pubDate = new Date(article.data.isoDate);
       if (isNaN(pubDate.getTime())) return null;
 
+      const lastmod = toSchemaDate(getDateModified(article));
+
       return `
     <url>
       <loc>https://dailyaimail.news/articles/${article.id}</loc>
@@ -30,6 +33,7 @@ export const GET: APIRoute = async () => {
         <news:publication_date>${pubDate.toISOString()}</news:publication_date>
         <news:title>${escapeXml(article.data.headline)}</news:title>
       </news:news>
+      <lastmod>${lastmod}</lastmod>
     </url>`;
     })
     .filter(Boolean)
