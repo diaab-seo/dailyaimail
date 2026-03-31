@@ -71,5 +71,3 @@ The following response time guidelines reflect realistic operating capacity for 
 | General feedback | Where a response is warranted |
 
 ---
-
-*Daily AI Mail is published by Daily AI Mail Editorial Staff / Interactive SEO Digital. The publication's primary operational location is Egypt, with global editorial coverage.*
