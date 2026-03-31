@@ -1,7 +1,7 @@
 ---
+import NewsletterForm from "./NewsletterForm.astro";
 // NewsletterModal.astro
 // Newsletter modal overlay — triggered by nav button click or scroll (55%).
-// Custom-styled form that posts directly to Kit's endpoint.
 ---
 
 <div
@@ -40,33 +40,7 @@
         Researchers, engineers, and founders read Daily AI Mail to stay sharp.
         Join them.
       </p>
-      <form
-        action="https://app.kit.com/forms/9241006/subscriptions"
-        method="post"
-        class="nl-form"
-        target="_blank"
-      >
-        <input type="hidden" name="utf8" value="✓" />
-        <div class="nl-row">
-          <input
-            type="email"
-            name="email_address"
-            class="nl-input"
-            placeholder="Email Address"
-            required
-          />
-          <button type="submit" class="nl-btn">Subscribe</button>
-        </div>
-        <p class="nl-disclaimer">We won't send you spam. Unsubscribe at any time.</p>
-      </form>
-      <p class="nl-powered">
-        <a
-          href="https://kit.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="nl-powered-link"
-        >Built with Kit</a>
-      </p>
+      <NewsletterForm />
     </div>
   </div>
 </div>
@@ -196,82 +170,9 @@
     margin-bottom: 28px;
   }
 
-  .nl-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .nl-row {
-    display: flex;
-    gap: 10px;
-  }
-
-  .nl-input {
-    flex: 1;
-    padding: 13px 16px;
-    border: 1px solid rgb(30, 42, 58) !important;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: rgb(240, 244, 250) !important;
-    font-size: 0.9375rem;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .nl-input::placeholder {
-    color: rgb(90, 106, 130) !important;
-  }
-  .nl-input:focus {
-    border-color: rgb(245, 197, 24) !important;
-  }
-
-  .nl-btn {
-    padding: 13px 24px;
-    background: rgb(245, 197, 24) !important;
-    color: rgb(8, 13, 26) !important;
-    border: none !important;
-    border-radius: 4px;
-    font-size: 0.9375rem;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
-  .nl-btn:hover {
-    background: rgb(220, 175, 15) !important;
-  }
-
-  .nl-disclaimer {
-    font-size: 0.8125rem;
-    color: rgb(90, 106, 130);
-    margin: 0;
-    text-align: center;
-  }
-
-  .nl-powered {
-    margin-top: 20px;
-    font-size: 0.75rem;
-    color: rgb(60, 80, 105);
-  }
-  .nl-powered-link {
-    color: rgb(90, 106, 130);
-    text-decoration: none;
-  }
-  .nl-powered-link:hover {
-    color: rgb(138, 154, 181);
-  }
-
   @media (max-width: 480px) {
     .nl-card {
       padding: 36px 20px 24px;
-    }
-    .nl-row {
-      flex-direction: column;
-    }
-    .nl-btn {
-      width: 100%;
     }
   }
 </style>

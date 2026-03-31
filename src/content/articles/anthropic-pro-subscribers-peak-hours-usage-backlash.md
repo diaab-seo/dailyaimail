@@ -1,5 +1,5 @@
 ---
-tag: Generative AI
+tag: Anthropic
 tags:
   - Generative AI
   - Big Tech AI

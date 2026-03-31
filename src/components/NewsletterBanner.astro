@@ -1,39 +1,22 @@
 ---
+import NewsletterForm from "./NewsletterForm.astro";
 // NewsletterBanner.astro
 // Full-width newsletter banner — used between content sections on the homepage.
-// Posts directly to Kit's endpoint (no Kit JS required).
 ---
 
 <section class="nl-banner" aria-label="Newsletter sign-up">
   <div class="nl-banner-inner">
     <div class="nl-banner-text">
-      <h2 class="nl-banner-heading">AI News for People Who Build With It</h2>
+      <h2 class="nl-banner-heading">Subscribe To Our Daily AI Newsletter</h2>
       <p class="nl-banner-sub">
-        Researchers, engineers, and founders read Daily AI Mail to stay sharp.
-        Join them.
+        Get the latest AI news and insights delivered straight to your inbox.
+        Join thousands of subscribers who rely on Daily AI Mail to stay ahead in
+        the fast-moving world of artificial intelligence.
       </p>
     </div>
-    <form
-      action="https://app.kit.com/forms/9241006/subscriptions"
-      method="post"
-      class="nl-banner-form"
-      target="_blank"
-    >
-      <input type="hidden" name="utf8" value="✓" />
-      <div class="nl-banner-row">
-        <input
-          type="email"
-          name="email_address"
-          class="nl-banner-input"
-          placeholder="Email Address"
-          required
-        />
-        <button type="submit" class="nl-banner-btn">Subscribe</button>
-      </div>
-      <p class="nl-banner-disclaimer">
-        We won't send you spam. Unsubscribe at any time.
-      </p>
-    </form>
+    <div class="nl-banner-form-container">
+      <NewsletterForm />
+    </div>
   </div>
 </section>
 
@@ -61,64 +44,8 @@
     margin-bottom: 28px;
     line-height: 1.6;
   }
-  .nl-banner-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .nl-banner-row {
-    display: flex;
-    width: 100%;
+  .nl-banner-form-container {
     max-width: 520px;
-    gap: 10px;
-  }
-  .nl-banner-input {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid rgb(30, 42, 58) !important;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.06) !important;
-    color: rgb(240, 244, 250) !important;
-    font-size: 0.9375rem;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .nl-banner-input::placeholder {
-    color: rgb(90, 106, 130) !important;
-  }
-  .nl-banner-input:focus {
-    border-color: rgb(245, 197, 24) !important;
-  }
-  .nl-banner-btn {
-    padding: 12px 24px;
-    background: rgb(245, 197, 24) !important;
-    color: rgb(8, 13, 26) !important;
-    border: none !important;
-    border-radius: 4px;
-    font-size: 0.9375rem;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
-  .nl-banner-btn:hover {
-    background: rgb(220, 175, 15) !important;
-  }
-  .nl-banner-disclaimer {
-    font-size: 0.8125rem;
-    color: rgb(90, 106, 130);
-    margin: 0;
-  }
-
-  @media (max-width: 480px) {
-    .nl-banner-row {
-      flex-direction: column;
-    }
-    .nl-banner-btn {
-      width: 100%;
-    }
+    margin: 0 auto;
   }
 </style>

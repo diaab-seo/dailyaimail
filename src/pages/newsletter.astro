@@ -1,0 +1,107 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
+
+const seo = {
+  title: "The Daily AI Newsletter By Daily AI Mail",
+  description:
+    "Subscribe to the Daily AI Mail newsletter. Get the latest AI news, model releases, and industry developments delivered to your inbox.",
+  canonicalURL: "https://dailyaimail.news/newsletter",
+  schemaType: "newsletter",
+};
+---
+
+<PageLayout {...seo}>
+  <main class="newsletter-page">
+    <section class="newsletter-hero">
+      <h1 class="hero-title">The Daily AI Newsletter</h1>
+      <p class="hero-lead">
+        Stay ahead of the curve. Every weekday, Daily AI Mail delivers the most
+        important AI developments — model releases, funding rounds, policy
+        shifts and coverage — straight to your inbox.
+      </p>
+    </section>
+
+    <section class="newsletter-form-section">
+      <div class="form-container">
+        <NewsletterForm />
+      </div>
+    </section>
+
+    <section class="why-subscribe">
+      <ul class="benefits-list">
+        <li>Curated AI news daily</li>
+        <li>Exclusive AI News coverage</li>
+        <li>No spam, strictly signal</li>
+        <li>100% free forever</li>
+      </ul>
+    </section>
+  </main>
+</PageLayout>
+
+<style>
+  .newsletter-page {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--color-text);
+  }
+
+  .newsletter-hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .hero-title {
+    font-family: var(--font-display, inherit);
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 16px;
+    color: var(--color-text, #fff);
+  }
+
+  .hero-lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text, #ccc);
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .newsletter-form-section {
+    margin-bottom: 40px;
+  }
+
+  .form-container {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .why-subscribe {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: var(--color-text, #fff);
+    justify-content: center;
+  }
+
+  .benefits-list li::before {
+    content: "✓";
+    color: var(--color-gold, #f5c518);
+    font-weight: bold;
+  }
+</style>
