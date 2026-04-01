@@ -14,7 +14,7 @@ excerpt: >-
   Opus that the company itself warns is 'far ahead of any other AI model in
   cyber capabilities.' Anthropic has confirmed the model exists.
 date: 'Apr 01, 2026'
-isoDate: "2026-04-01T20:00:00+00:00"
+isoDate: "2026-04-01T14:00:00+02:00"
 modifiedDate: '2026-04-01'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
