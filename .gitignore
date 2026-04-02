@@ -30,3 +30,4 @@ new-recaptcha.txt
 
 # wrangler local state (sqlite db etc.)
 .wrangler/
+context.md
