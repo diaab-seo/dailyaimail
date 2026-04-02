@@ -11,7 +11,7 @@ excerpt: >-
   text-to-video generation tool, Sora, marking a significant pivot away from its
   video business.
 date: 'Mar 25, 2026'
-isoDate: "2026-03-29T15:10:00+00:00"
+isoDate: '2026-03-29T15:10:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -31,16 +31,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: OpenAI
-    url: 'https://openai.com'
-    type: Organization
-  - name: Disney
-    url: 'https://www.disney.com'
-    type: Organization
-  - name: Variety
-    url: 'https://variety.com'
-    type: Organization
+mentions: []
 about:
   - name: Sora
     url: 'https://openai.com/sora'

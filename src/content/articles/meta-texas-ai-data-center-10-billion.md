@@ -7,12 +7,12 @@ headline: >-
   Meta Raises Texas AI Data Center Investment From $1.5B to $10B as Compute
   Ambitions Grow
 excerpt: >-
-  Meta's El Paso facility has ballooned from a $1.5 billion project to a
-  $10 billion one, with the site now targeting one gigawatt of capacity and
-  4,000 construction workers — as the company faces mounting cost scrutiny and
-  its first wave of AI-driven layoffs.
+  Meta's El Paso facility has ballooned from a $1.5 billion project to a $10
+  billion one, with the site now targeting one gigawatt of capacity and 4,000
+  construction workers — as the company faces mounting cost scrutiny and its
+  first wave of AI-driven layoffs.
 date: 'Mar 28, 2026'
-isoDate: "2026-03-29T15:14:00+00:00"
+isoDate: '2026-03-29T15:14:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -21,9 +21,9 @@ image: /images/meta-texas-ai-data-center-10-billion.png
 imageWidth: 1200
 imageHeight: 675
 imageCaption: >-
-  Meta's El Paso data center has grown from a $1.5 billion project into a
-  $10 billion, one-gigawatt AI infrastructure commitment — the company's
-  largest single facility investment to date.
+  Meta's El Paso data center has grown from a $1.5 billion project into a $10
+  billion, one-gigawatt AI infrastructure commitment — the company's largest
+  single facility investment to date.
 keywords:
   - Meta AI data center
   - Meta El Paso Texas
@@ -33,13 +33,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Meta
-    url: 'https://meta.com'
-    type: Organization
-  - name: The Register
-    url: 'https://theregister.com'
-    type: Organization
+mentions: []
 about:
   - name: Meta El Paso Data Center
     url: 'https://about.fb.com/news/2026/03/meta-el-paso-data-center-expansion'
@@ -51,8 +45,9 @@ citations:
   - name: 'Meta Blog: El Paso Data Center Expansion'
     url: 'https://about.fb.com/news/2026/03/meta-el-paso-data-center-expansion'
     type: CreativeWork
-  - name: 'Meta Q4 2025 Earnings Report'
-    url: 'https://investor.fb.com/investor-news/press-release-details/2026/Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results'
+  - name: Meta Q4 2025 Earnings Report
+    url: >-
+      https://investor.fb.com/investor-news/press-release-details/2026/Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results
     type: CreativeWork
   - name: 'The Register: Meta Job Cuts Confirmation'
     url: 'https://theregister.com'

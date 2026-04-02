@@ -8,9 +8,15 @@ import {
   stripMarkdown,
   extractImages,
 } from "../data/articles";
-import { getDateModified, formatModifiedTime, toSchemaDate } from "../lib/dateUtils";
+import {
+  getDateModified,
+  formatModifiedTime,
+  toSchemaDate,
+} from "../lib/dateUtils";
 import CommentSection from "../components/CommentSection.astro";
 import NewsletterForm from "../components/NewsletterForm.astro";
+import ExplainerTooltipStyles from "../components/ExplainerTooltipStyles.astro";
+import { getExplainerList } from "../lib/explainers";
 import type { DBComment } from "../lib/db";
 import type { SessionUser } from "../lib/auth";
 import type { Article } from "../data/articles";
@@ -28,9 +34,15 @@ const related = (await getArticlesByCategory(article.tag))
   .filter((a) => a.slug !== article.slug)
   .slice(0, 3);
 
+const allExplainers = await getExplainerList();
+const mentionedExplainers = allExplainers.filter((e) =>
+  (article.mentions || []).includes(e.slug),
+);
+
 const SITE_URL = "https://dailyaimail.news";
 const articleUrl = `${SITE_URL}/articles/${article.slug}`;
-const pubDate = toSchemaDate(article.isoDate) || new Date(article.isoDate).toISOString();
+const pubDate =
+  toSchemaDate(article.isoDate) || new Date(article.isoDate).toISOString();
 const modified = getDateModified(article);
 const modDate = toSchemaDate(modified);
 const modifiedDisplay = formatModifiedTime(modified);
@@ -41,12 +53,14 @@ const imageUrl = hasImage ? `${SITE_URL}${article.image}` : null;
 const logoUrl = `${SITE_URL}/daily-ai-mail-logo.svg`;
 
 // Collect all images for Article Schema (Featured + Inline)
-const inlineImages = extractImages(article.body).map(img => 
-  img.startsWith('http') ? img : `${SITE_URL}${img.startsWith('/') ? '' : '/'}${img}`
+const inlineImages = extractImages(article.body).map((img) =>
+  img.startsWith("http")
+    ? img
+    : `${SITE_URL}${img.startsWith("/") ? "" : "/"}${img}`,
 );
 const allImagesSchema = [
   ...(hasImage ? [{ "@id": `${articleUrl}#primaryimage` }] : []),
-  ...inlineImages
+  ...inlineImages,
 ];
 const hasAnyImage = allImagesSchema.length > 0;
 
@@ -94,12 +108,11 @@ const schema = {
       keywords: article.keywords,
       articleSection: article.articleSection,
       inLanguage: "en-US",
-      ...(article.mentions.length > 0 && {
-        mentions: article.mentions.map((m) => ({
-          "@type": m.type,
-          name: m.name,
-          url: m.url,
-          ...(m.sameAs && { sameAs: m.sameAs }),
+      ...(mentionedExplainers.length > 0 && {
+        mentions: mentionedExplainers.map((term) => ({
+          "@type": "Thing",
+          name: term.title,
+          url: `${SITE_URL}/explainers/${term.slug}`,
         })),
       }),
       ...(article.about.length > 0 && {
@@ -166,25 +179,43 @@ const schema = {
     {
       "@type": "Organization",
       "@id": "https://dailyaimail.news/#/schema/editorial-team",
-      "name": "Daily AI Mail Editorial Staff",
-      "alternateName": ["Daily AI Mail Editors", "Daily AI Mail Staff Writers", "The Editors"],
-      "url": "https://dailyaimail.news/about-us/editorial-team",
-      "description": "The Daily AI Mail editorial staff is an independent team of AI journalists, researchers, and analysts with over 15 years of experience covering artificial intelligence, machine learning, and emerging technologies.",
-      "memberOf": { "@id": "https://dailyaimail.news/#organization" },
-      "knowsAbout": ["Artificial Intelligence","Machine Learning","Large Language Models","AI Safety","Generative AI","AI Policy","AI Ethics","Neural Networks","Natural Language Processing","AI Research","Technology Journalism"],
-      "hasCredential": {
+      name: "Daily AI Mail Editorial Staff",
+      alternateName: [
+        "Daily AI Mail Editors",
+        "Daily AI Mail Staff Writers",
+        "The Editors",
+      ],
+      url: "https://dailyaimail.news/about-us/editorial-team",
+      description:
+        "The Daily AI Mail editorial staff is an independent team of AI journalists, researchers, and analysts with over 15 years of experience covering artificial intelligence, machine learning, and emerging technologies.",
+      memberOf: { "@id": "https://dailyaimail.news/#organization" },
+      knowsAbout: [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Large Language Models",
+        "AI Safety",
+        "Generative AI",
+        "AI Policy",
+        "AI Ethics",
+        "Neural Networks",
+        "Natural Language Processing",
+        "AI Research",
+        "Technology Journalism",
+      ],
+      hasCredential: {
         "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "Professional Experience",
-        "description": "Over 15 years of professional experience in AI journalism and technology reporting"
+        credentialCategory: "Professional Experience",
+        description:
+          "Over 15 years of professional experience in AI journalism and technology reporting",
       },
-      "publishingPrinciples": "https://dailyaimail.news/publishing-principles",
-      "sameAs": [
+      publishingPrinciples: "https://dailyaimail.news/publishing-principles",
+      sameAs: [
         "https://www.facebook.com/dailyaimail/",
         "https://www.linkedin.com/company/dailaimail/",
         "https://x.com/dailyaimail",
         "https://medium.com/@dailyaimail",
-        "https://www.reddit.com/user/dailyaimail/"
-      ]
+        "https://www.reddit.com/user/dailyaimail/",
+      ],
     },
     // Comment nodes — only injected when approved comments exist
     ...comments.map((c) => ({
@@ -247,9 +278,10 @@ const schema = {
 >
   <script
     type="application/ld+json"
-    set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+    set:html={JSON.stringify(schema).replace(/</g, "\\u003c")}
     slot="head"
   />
+  <ExplainerTooltipStyles slot="head" />
   <meta name="robots" content="max-image-preview:large" slot="head" />
 
   <!-- Breadcrumb -->
@@ -486,7 +518,9 @@ const schema = {
             fill="currentColor"
             aria-hidden="true"
           >
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/>
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"
+            ></path>
           </svg>
           <span>Follow on Google News</span>
         </a>
@@ -536,7 +570,10 @@ const schema = {
     <article class="article-body" data-pagefind-body>
       <slot />
 
-      <div id="inline-newsletter-template" style="display: none; margin: 32px 0;">
+      <div
+        id="inline-newsletter-template"
+        style="display: none; margin: 32px 0;"
+      >
         <NewsletterForm />
       </div>
 
@@ -558,6 +595,39 @@ const schema = {
         </div>
       </footer>
 
+      {
+        mentionedExplainers.length > 0 && (
+          <div
+            class="terms-mentioned"
+            style="margin-top: 0.5rem; font-size: 0.82rem;"
+          >
+            <span class="terms-label" style="color: #666; margin-right: 4px;">
+              Terms Mentioned:
+            </span>
+            {mentionedExplainers.map((term, i) => (
+              <>
+                <a
+                  href={`/explainers/${term.slug}`}
+                  class="term-link explainer-link-hover"
+                  style="color: #f5c518; text-decoration: none;"
+                >
+                  {term.title}
+                </a>
+                {i < mentionedExplainers.length - 1 && (
+                  <span style="color: #666;">, </span>
+                )}
+              </>
+            ))}
+          </div>
+        )
+      }
+
+      <style>
+        .explainer-link-hover:hover {
+          text-decoration: underline !important;
+        }
+      </style>
+
       <CommentSection
         articleSlug={article.slug}
         comments={comments}
@@ -576,7 +646,9 @@ const schema = {
           }
         </a>
         <div>
-          <strong class="author-name"><a href="/about-us/editorial-team">{article.author}</a></strong>
+          <strong class="author-name"
+            ><a href="/about-us/editorial-team">{article.author}</a></strong
+          >
           <p class="author-role">Editor, Daily AI Mail</p>
         </div>
       </address>
@@ -710,7 +782,9 @@ const schema = {
 
   // ── Inline Newsletter ───────────────────────────────────────────────────────
   const inlineTpl = document.getElementById("inline-newsletter-template");
-  const firstParagraph = document.querySelector(".article-body > p:first-of-type");
+  const firstParagraph = document.querySelector(
+    ".article-body > p:first-of-type",
+  );
   if (inlineTpl && firstParagraph) {
     inlineTpl.style.display = "block";
     firstParagraph.insertAdjacentElement("afterend", inlineTpl);
@@ -984,7 +1058,7 @@ const schema = {
     border: 1px solid var(--color-border);
   }
   .article-body :global(code) {
-    background: rgba(240,244,250,0.06);
+    background: rgba(240, 244, 250, 0.06);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: var(--font-mono);

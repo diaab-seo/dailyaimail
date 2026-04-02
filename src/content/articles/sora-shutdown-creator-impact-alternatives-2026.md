@@ -11,7 +11,7 @@ excerpt: >-
   Here's an honest look at the fallout, what was actually lost, and which
   platforms are ready to fill the gap right now.
 date: 'Mar 26, 2026'
-isoDate: "2026-03-29T15:06:00+00:00"
+isoDate: '2026-03-29T15:06:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -32,28 +32,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: OpenAI
-    url: 'https://openai.com'
-    type: Organization
-  - name: Google Veo
-    url: 'https://deepmind.google/technologies/veo/'
-    type: Organization
-  - name: Runway
-    url: 'https://runwayml.com'
-    type: Organization
-  - name: Kling AI
-    url: 'https://klingai.com'
-    type: Organization
-  - name: Pika
-    url: 'https://pika.art'
-    type: Organization
-  - name: Seedance
-    url: 'https://seedance.ai'
-    type: Organization
-  - name: Adobe Firefly
-    url: 'https://firefly.adobe.com'
-    type: Organization
+mentions: []
 about:
   - name: Sora
     url: 'https://openai.com/sora'

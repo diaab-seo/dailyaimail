@@ -4,7 +4,7 @@ tags:
   - OpenAI
   - AI Safety
   - AI Security
-  - "Policy & Ethics"
+  - Policy & Ethics
 headline: >-
   OpenAI Launches Safety Bug Bounty Program to Reward Researchers Who Find AI
   Abuse Risks
@@ -13,7 +13,7 @@ excerpt: >-
   misuse scenarios — from agentic prompt injection to platform integrity
   bypasses — that fall outside traditional security vulnerability scopes.
 date: 'Mar 25, 2026'
-isoDate: "2026-03-29T15:08:00+00:00"
+isoDate: '2026-03-29T15:08:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,13 +34,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: OpenAI
-    url: 'https://openai.com'
-    type: Organization
-  - name: HackerOne
-    url: 'https://hackerone.com'
-    type: Organization
+mentions: []
 about:
   - name: OpenAI Safety Bug Bounty
     url: 'https://openai.com/index/safety-bug-bounty/'

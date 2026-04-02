@@ -4,15 +4,15 @@ tags:
   - Enterprise AI
   - Google AI
 headline: >-
-  Gemini for Business Is Quietly Getting NotebookLM Integration and a
-  Skills Layer — Here's What's Surfacing in the Builds
+  Gemini for Business Is Quietly Getting NotebookLM Integration and a Skills
+  Layer — Here's What's Surfacing in the Builds
 excerpt: >-
   Hidden features in recent Gemini for Business builds point to deeper
-  NotebookLM integration, a pre-built skills library from Google, and a
-  no-code Skill Architect tool — moves that would bring the Business tier
-  closer to parity with Enterprise and push directly into Microsoft's turf.
+  NotebookLM integration, a pre-built skills library from Google, and a no-code
+  Skill Architect tool — moves that would bring the Business tier closer to
+  parity with Enterprise and push directly into Microsoft's turf.
 date: 'Mar 29, 2026'
-isoDate: "2026-03-29T21:01:00+00:00"
+isoDate: '2026-03-29T21:01:00+00:00'
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -22,8 +22,8 @@ imageWidth: 1200
 imageHeight: 675
 imageCaption: >-
   A Skills catalog has appeared inside Gemini for Business builds, featuring
-  pre-made Google skills and a Skill Architect tool for building custom
-  AI assistants — though the tab remains non-functional for now.
+  pre-made Google skills and a Skill Architect tool for building custom AI
+  assistants — though the tab remains non-functional for now.
 keywords:
   - Gemini for Business
   - NotebookLM integration
@@ -34,22 +34,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Google
-    url: 'https://google.com'
-    type: Organization
-  - name: NotebookLM
-    url: 'https://notebooklm.google.com'
-    type: SoftwareApplication
-  - name: Gemini for Business
-    url: 'https://workspace.google.com/products/gemini'
-    type: SoftwareApplication
-  - name: Antigravity
-    url: 'https://antigravity.google'
-    type: SoftwareApplication
-  - name: Gemini CLI
-    url: 'https://github.com/google-gemini/gemini-cli'
-    type: SoftwareApplication
+mentions: []
 about:
   - name: Gemini Workspace Integration
     url: 'https://workspace.google.com/products/gemini'

@@ -11,7 +11,7 @@ excerpt: >-
   enterprise security with Lakewatch, a new SIEM platform backed by Claude and
   two quiet acquisitions.
 date: 'Mar 25, 2026'
-isoDate: "2026-03-29T15:28:00+00:00"
+isoDate: '2026-03-29T15:28:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -32,19 +32,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Databricks
-    url: 'https://www.databricks.com'
-    type: Organization
-  - name: Anthropic
-    url: 'https://www.anthropic.com'
-    type: Organization
-  - name: Antimatter
-    url: 'https://antimatter.io'
-    type: Organization
-  - name: SiftD.ai
-    url: 'https://siftd.ai'
-    type: Organization
+mentions: []
 about:
   - name: Lakewatch
     url: 'https://www.databricks.com/product/lakewatch'

@@ -12,7 +12,7 @@ excerpt: >-
   to take without waiting for human approval, using an AI safety layer to filter
   risky behavior in real time.
 date: 'Mar 25, 2026'
-isoDate: "2026-03-29T15:32:00+00:00"
+isoDate: '2026-03-29T15:32:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -32,16 +32,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Anthropic
-    url: 'https://www.anthropic.com'
-    type: Organization
-  - name: GitHub
-    url: 'https://github.com'
-    type: Organization
-  - name: OpenAI
-    url: 'https://openai.com'
-    type: Organization
+mentions: []
 about:
   - name: Claude Code
     url: 'https://www.anthropic.com/claude-code'

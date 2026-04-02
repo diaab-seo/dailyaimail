@@ -6,15 +6,15 @@ tags:
   - AI Tools and Apps
   - Mistral AI
 headline: >-
-  Meet Voxtral: Mistral's Open-Weights TTS Model That Wants to Power Every
-  Voice Agent on the Planet
+  Meet Voxtral: Mistral's Open-Weights TTS Model That Wants to Power Every Voice
+  Agent on the Planet
 excerpt: >-
   Mistral just released Voxtral 4B TTS 2603 — a fast, open-weights
   text-to-speech model with 20 preset voices, 9 languages, 70ms latency, and
   production-grade performance that runs on a single GPU. Here's everything it
   can do, who it's built for, and why it matters.
 date: 'Mar 29, 2026'
-isoDate: "2026-03-29T21:10:00+00:00"
+isoDate: '2026-03-29T21:10:00+00:00'
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -24,8 +24,8 @@ imageWidth: 1200
 imageHeight: 675
 imageCaption: >-
   Mistral's Voxtral 4B TTS 2603 is an open-weights, frontier text-to-speech
-  model built for production voice agents — with 70ms latency, 20 preset
-  voices, and support for 9 major languages.
+  model built for production voice agents — with 70ms latency, 20 preset voices,
+  and support for 9 major languages.
 keywords:
   - Voxtral TTS
   - Mistral text to speech
@@ -37,15 +37,7 @@ articleSection:
   - Technology
   - Artificial Intelligence
 mentions:
-  - name: Mistral AI
-    url: 'https://mistral.ai'
-    type: Organization
-  - name: vLLM
-    url: 'https://github.com/vllm-project/vllm'
-    type: SoftwareApplication
-  - name: vLLM-Omni
-    url: 'https://github.com/vllm-project/vllm-omni'
-    type: SoftwareApplication
+  - inference
 about:
   - name: Voxtral 4B TTS 2603
     url: 'https://huggingface.co/mistralai/Voxtral-4B-TTS-2603'
@@ -63,7 +55,7 @@ citations:
   - name: 'Hugging Face: Voxtral-4B-TTS-2603 Weights'
     url: 'https://huggingface.co/mistralai/Voxtral-4B-TTS-2603'
     type: CreativeWork
-  - name: 'Voxtral Research Paper'
+  - name: Voxtral Research Paper
     url: 'https://arxiv.org/abs/2603.25551'
     type: CreativeWork
 ---

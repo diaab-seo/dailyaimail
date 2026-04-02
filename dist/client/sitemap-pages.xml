@@ -31,6 +31,9 @@
       <loc>https://dailyaimail.news/news</loc>
     </url>
     <url>
+      <loc>https://dailyaimail.news/newsletter</loc>
+    </url>
+    <url>
       <loc>https://dailyaimail.news/explainers</loc>
     </url>
     <url>
@@ -62,6 +65,27 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/agentic-commerce</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/cybersecurity</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/ai-tools</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/open-source</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/claude-mythos</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/frontier-ai</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/ai-safety</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/ai-rumors</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/google-ai</loc>
@@ -154,7 +178,19 @@
       <loc>https://dailyaimail.news/topics/ai-video</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/topics/ai-safety</loc>
+      <loc>https://dailyaimail.news/topics/developer-tools</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/startups</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/oracle</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/layoffs</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/datacenter</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/ai-hardware</loc>
@@ -179,6 +215,12 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/articles/chatgpt-ecommerce-pivot-instant-checkout</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/articles/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product</loc>
@@ -217,6 +259,9 @@
       <loc>https://dailyaimail.news/articles/mistral-voxtral-4b-tts-2603-open-weights</loc>
     </url>
     <url>
+      <loc>https://dailyaimail.news/articles/openai-122-billion-funding-round</loc>
+    </url>
+    <url>
       <loc>https://dailyaimail.news/articles/openai-adult-mode-paused-strategy-pivot</loc>
     </url>
     <url>
@@ -224,6 +269,12 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/articles/openai-safety-bug-bounty-program-launch</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/articles/oracle-layoffs-ai-spending</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/articles/rebellions-400m-pre-ipo-ai-chip-rebelrack</loc>

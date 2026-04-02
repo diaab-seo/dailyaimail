@@ -2,18 +2,17 @@
 tag: Google AI
 tags:
   - Google AI
-  - "AI Tools & Apps"
+  - AI Tools & Apps
   - Gemini
   - AI Assistants
   - Personal AI
-headline: >-
-  Gemini Can Now Import Your AI Memories and Chat History From Other Apps
+headline: Gemini Can Now Import Your AI Memories and Chat History From Other Apps
 excerpt: >-
   Google is rolling out memory and chat history import tools for all Gemini
   consumer accounts, letting users carry their preferences and past
   conversations from other AI assistants without starting over.
 date: 'Mar 29, 2026'
-isoDate: "2026-03-29T15:26:00+00:00"
+isoDate: '2026-03-29T15:26:00+00:00'
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,10 +33,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Google
-    url: 'https://google.com'
-    type: Organization
+mentions: []
 about:
   - name: Gemini
     url: 'https://gemini.google.com'
@@ -49,7 +45,7 @@ citations:
   - name: 'Google Blog: Memory and Chat History Import for Gemini'
     url: 'https://blog.google/products/gemini/memory-chat-history-import'
     type: CreativeWork
-  - name: 'Gemini App Settings'
+  - name: Gemini App Settings
     url: 'https://gemini.google.com'
     type: CreativeWork
   - name: 'Google: Personal Intelligence in Gemini'

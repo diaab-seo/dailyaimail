@@ -1,18 +1,20 @@
 ---
-tag: "Microsoft AI"
+tag: Microsoft AI
 tags:
   - Microsoft AI
   - Copilot
   - Anthropic
   - Enterprise AI
   - Microsoft 365
-headline: "Microsoft Copilot Cowork Launches in Early Access With Critique and Model Council"
+headline: >-
+  Microsoft Copilot Cowork Launches in Early Access With Critique and Model
+  Council
 excerpt: >-
   Microsoft's Copilot Cowork is now live in Frontier early access, bringing
   agentic task handling to Microsoft 365 alongside two major Researcher
   upgrades: a dual-model Critique layer and a side-by-side Model Council.
 date: 'Mar 31, 2026'
-isoDate: "2026-03-31T00:00:00+00:00"
+isoDate: '2026-03-31T00:00:00+00:00'
 modifiedDate: '2026-03-31'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,40 +36,36 @@ articleSection:
   - Technology
   - Artificial Intelligence
 mentions:
-  - name: Microsoft
-    url: 'https://microsoft.com'
-    type: Organization
-  - name: Anthropic
-    url: 'https://www.anthropic.com'
-    type: Organization
-  - name: OpenAI
-    url: 'https://openai.com'
-    type: Organization
-  - name: Reuters
-    url: 'https://reuters.com'
-    type: Organization
+  - benchmark
 about:
   - name: Copilot Cowork
-    url: 'https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/'
+    url: >-
+      https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/
     type: SoftwareApplication
   - name: Microsoft 365 Copilot Wave 3
     url: 'https://www.microsoft.com/en-us/microsoft-365/copilot'
     type: Thing
 images:
-  - url: '/images/microsoft-copilot-cowork.jpeg'
-    caption: 'Microsoft Copilot Cowork interface showing agentic task planning inside Microsoft 365.'
+  - url: /images/microsoft-copilot-cowork.jpeg
+    caption: >-
+      Microsoft Copilot Cowork interface showing agentic task planning inside
+      Microsoft 365.
     width: 1200
     height: 675
-  - url: '/images/ms365-copilot-researcher-critique.jpeg'
-    caption: 'The new Critique feature pairs OpenAI GPT and Anthropic Claude in a dual-model review pipeline inside Copilot Researcher.'
+  - url: /images/ms365-copilot-researcher-critique.jpeg
+    caption: >-
+      The new Critique feature pairs OpenAI GPT and Anthropic Claude in a
+      dual-model review pipeline inside Copilot Researcher.
     width: 1200
     height: 675
 citations:
   - name: 'Microsoft 365 Blog: Copilot Cowork Now Available in Frontier'
-    url: 'https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/'
+    url: >-
+      https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/
     type: CreativeWork
   - name: 'Reuters: Microsoft AI Upgrades and Copilot Cowork Early Access'
-    url: 'https://www.reuters.com/business/microsoft-unveils-ai-upgrades-rolls-out-copilot-cowork-early-access-customers-2026-03-30/'
+    url: >-
+      https://www.reuters.com/business/microsoft-unveils-ai-upgrades-rolls-out-copilot-cowork-early-access-customers-2026-03-30/
     type: CreativeWork
 ---
 

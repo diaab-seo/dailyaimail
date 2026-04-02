@@ -12,7 +12,7 @@ excerpt: >-
   morally rigid, and increasingly dependent on machine validation over human
   feedback. The researchers say it's a safety issue that needs regulation.
 date: 'Mar 29, 2026'
-isoDate: "2026-03-29T19:47:00+00:00"
+isoDate: '2026-03-29T19:47:00+00:00'
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,22 +34,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Stanford University
-    url: 'https://stanford.edu'
-    type: Organization
-  - name: Myra Cheng
-    url: 'https://news.stanford.edu'
-    type: Person
-  - name: Dan Jurafsky
-    url: 'https://stanford.edu'
-    type: Person
-  - name: Pew Research Center
-    url: 'https://pewresearch.org'
-    type: Organization
-  - name: Science
-    url: 'https://www.science.org'
-    type: Organization
+mentions: []
 about:
   - name: AI Sycophancy
     url: 'https://www.science.org'
@@ -58,7 +43,9 @@ about:
     url: 'https://ai.meta.com'
     type: Thing
 citations:
-  - name: 'Science: Sycophantic AI decreases prosocial intentions and promotes dependence'
+  - name: >-
+      Science: Sycophantic AI decreases prosocial intentions and promotes
+      dependence
     url: 'https://www.science.org'
     type: CreativeWork
   - name: 'Stanford News: AI Sycophancy Study'

@@ -11,6 +11,66 @@
         <language>en</language>
         <atom:link href="https://dailyaimail.news/rss.xml" rel="self" type="application/rss+xml" />
         <item>
+            <title><![CDATA[Oracle Cuts Thousands of Jobs as It Bets Billions on AI Infrastructure]]></title>
+            <link><![CDATA[https://dailyaimail.news/articles/oracle-layoffs-ai-spending]]></link>
+            <description><![CDATA[Oracle has begun laying off thousands of its 160,000-person workforce as the $420bn business software giant accelerates spending on datacentres to compete with Alphabet and Amazon — and fund a $300bn deal with OpenAI. About 10,000 employees are reported to have already lost their jobs.]]></description>
+            <pubDate>Wed, 01 Apr 2026 13:10:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/oracle-layoffs-ai-spending]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/oracle-layoffs-ai-spending.png" />
+                <media:content url="https://dailyaimail.news/images/oracle-layoffs-ai-spending.png" medium="image">
+                    <media:title type="html"><![CDATA[oracle-layoffs-ai-spending.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
+            <title><![CDATA[Claude Mythos Leaked: Anthropic's Most Powerful Model Yet Poses 'Unprecedented Cybersecurity Risk']]></title>
+            <link><![CDATA[https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model]]></link>
+            <description><![CDATA[A CMS misconfiguration exposed nearly 3,000 internal Anthropic assets, including a draft blog post describing Claude Mythos — a new model tier above Opus that the company itself warns is 'far ahead of any other AI model in cyber capabilities.' Anthropic has confirmed the model exists.]]></description>
+            <pubDate>Wed, 01 Apr 2026 12:00:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/claude-mythos-capybara-leak-anthropic-frontier-model.png" />
+                <media:content url="https://dailyaimail.news/images/claude-mythos-capybara-leak-anthropic-frontier-model.png" medium="image">
+                    <media:title type="html"><![CDATA[claude-mythos-capybara-leak-anthropic-frontier-model.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
+            <title><![CDATA[OpenAI Raises $122 Billion to Accelerate the Next Phase of AI]]></title>
+            <link><![CDATA[https://dailyaimail.news/articles/openai-122-billion-funding-round]]></link>
+            <description><![CDATA[At a post-money valuation of $852 billion, OpenAI's latest round — anchored by SoftBank, Amazon, NVIDIA, and Microsoft — positions the company to scale compute, unify its product surface into an AI superapp, and reach $2 billion in monthly revenue.]]></description>
+            <pubDate>Wed, 01 Apr 2026 10:00:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/openai-122-billion-funding-round]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/openai-122-billion-funding-round.png" />
+                <media:content url="https://dailyaimail.news/images/openai-122-billion-funding-round.png" medium="image">
+                    <media:title type="html"><![CDATA[openai-122-billion-funding-round.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
+            <title><![CDATA[Claude Code Leaks Its Own Source Code for the Second Time in a Year via npm Source Maps]]></title>
+            <link><![CDATA[https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map]]></link>
+            <description><![CDATA[A 60MB source-map file included in Claude Code v2.1.88 exposed 1,906 proprietary TypeScript source files on the public npm registry — the same packaging oversight that struck Anthropic in February 2025.]]></description>
+            <pubDate>Tue, 31 Mar 2026 12:03:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/claude-code-source-code-leak-npm-source-map.png" />
+                <media:content url="https://dailyaimail.news/images/claude-code-source-code-leak-npm-source-map.png" medium="image">
+                    <media:title type="html"><![CDATA[claude-code-source-code-leak-npm-source-map.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
+            <title><![CDATA[How One Startup Used OpenClaw and Claude Code to Build a 24/7 AI Engineering Team]]></title>
+            <link><![CDATA[https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid]]></link>
+            <description><![CDATA[JustPaid's CTO replaced most of his dev workflow with seven AI agents running on OpenClaw and Anthropic's Claude Code — delivering 10 major features in a month and training a new human hire almost entirely through AI.]]></description>
+            <pubDate>Tue, 31 Mar 2026 12:00:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/openclaw-claude-code-ai-engineering-team-justpaid.png" />
+                <media:content url="https://dailyaimail.news/images/openclaw-claude-code-ai-engineering-team-justpaid.png" medium="image">
+                    <media:title type="html"><![CDATA[openclaw-claude-code-ai-engineering-team-justpaid.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
             <title><![CDATA[Microsoft Copilot Cowork Launches in Early Access With Critique and Model Council]]></title>
             <link><![CDATA[https://dailyaimail.news/articles/microsoft-copilot-cowork-launch-early-access]]></link>
             <description><![CDATA[Microsoft's Copilot Cowork is now live in Frontier early access, bringing agentic task handling to Microsoft 365 alongside two major Researcher upgrades: a dual-model Critique layer and a side-by-side Model Council.]]></description>

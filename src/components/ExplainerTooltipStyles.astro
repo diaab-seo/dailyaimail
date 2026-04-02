@@ -1,0 +1,112 @@
+---
+// Explainer tooltip styles and script
+---
+
+<style is:global>
+  .explainer-term {
+    border-bottom: 1px dashed #f5c518;
+    cursor: help;
+    position: relative;
+    white-space: nowrap;
+  }
+  .explainer-bubble {
+    z-index: 9999 !important;
+  }
+  .explainer-bubble p {
+    color: #eee !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    font-family: inherit !important;
+  }
+  .explainer-bubble a.explainer-read-more {
+    color: #f5c518 !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    margin-top: 10px !important;
+    display: block !important;
+  }
+  .explainer-bubble a.explainer-read-more:hover {
+    text-decoration: underline !important;
+  }
+</style>
+
+<script>
+  function initTooltips() {
+    const terms = document.querySelectorAll('.explainer-term');
+    terms.forEach(term => {
+      // Don't re-init if already done
+      if (term.closest('.explainer-wrapper')) return;
+
+      // Wrap it
+      const wrapper = document.createElement('span');
+      wrapper.className = 'explainer-wrapper';
+      wrapper.style.position = 'relative';
+      wrapper.style.display = 'inline-block';
+      
+      if (term.parentNode) {
+        term.parentNode.insertBefore(wrapper, term);
+      }
+      wrapper.appendChild(term);
+      
+      // Create bubble
+      const bubble = document.createElement('div');
+      bubble.className = 'explainer-bubble';
+      bubble.style.cssText = `
+        position: absolute;
+        bottom: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 280px;
+        background: #1a1a1a;
+        border: 1px solid #444;
+        border-radius: 8px;
+        padding: 12px 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        display: none;
+        white-space: normal;
+        pointer-events: auto;
+      `;
+      
+      const slug = term.getAttribute('data-slug');
+      const excerpt = term.getAttribute('data-excerpt');
+      
+      const p = document.createElement('p');
+      p.textContent = excerpt || '';
+      
+      const a = document.createElement('a');
+      a.href = slug || '#';
+      a.className = 'explainer-read-more';
+      a.textContent = 'Read more →';
+      
+      bubble.appendChild(p);
+      bubble.appendChild(a);
+      wrapper.appendChild(bubble);
+      
+      // Interactions
+      let timeoutId: any = null;
+      
+      const show = () => {
+        if (timeoutId) clearTimeout(timeoutId);
+        bubble.style.display = 'block';
+      };
+      
+      const hide = () => {
+        timeoutId = setTimeout(() => {
+          bubble.style.display = 'none';
+        }, 200);
+      };
+      
+      wrapper.addEventListener('mouseenter', show);
+      wrapper.addEventListener('mouseleave', hide);
+      bubble.addEventListener('mouseenter', show);
+      bubble.addEventListener('mouseleave', hide);
+    });
+  }
+
+  // Run on load and after view transitions/HMR
+  document.addEventListener('DOMContentLoaded', initTooltips);
+  document.addEventListener('astro:page-load', initTooltips);
+  document.addEventListener('astro:after-swap', initTooltips);
+</script>
