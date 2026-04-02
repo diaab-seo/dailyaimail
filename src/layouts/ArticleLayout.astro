@@ -40,7 +40,7 @@ const mentionedExplainers = allExplainers.filter((e) =>
 );
 
 const SITE_URL = "https://dailyaimail.news";
-const articleUrl = `${SITE_URL}/articles/${article.slug}`;
+const articleUrl = `${SITE_URL}/news/${article.slug}`;
 const pubDate =
   toSchemaDate(article.isoDate) || new Date(article.isoDate).toISOString();
 const modified = getDateModified(article);
@@ -687,7 +687,7 @@ const schema = {
             <ul class="related-list">
               {related.map((r) => (
                 <li class="related-item">
-                  <a href={`/articles/${r.slug}`}>
+                  <a href={`/news/${r.slug}`}>
                     <span class="related-date">{r.date}</span>
                     <span class="related-headline">{r.headline}</span>
                   </a>

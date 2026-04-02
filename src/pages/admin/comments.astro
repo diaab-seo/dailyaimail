@@ -45,7 +45,7 @@ const approved = comments.filter((c) => c.status === "approved");
                                     <strong>{c.display_name}</strong>
                                     <span class="ac-sep">·</span>
                                     <a
-                                        href={`/articles/${c.article_slug}`}
+                                        href={`/news/${c.article_slug}`}
                                         class="ac-article"
                                     >
                                         {c.article_slug}
@@ -146,7 +146,7 @@ const approved = comments.filter((c) => c.status === "approved");
                                     <strong>{c.display_name}</strong>
                                     <span class="ac-sep">·</span>
                                     <a
-                                        href={`/articles/${c.article_slug}#comment-${c.id}`}
+                                        href={`/news/${c.article_slug}#comment-${c.id}`}
                                         class="ac-article"
                                     >
                                         {c.article_slug}

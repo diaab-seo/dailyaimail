@@ -344,17 +344,17 @@ const schema = {
       itemListElement: latestArticles.map((a, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        url: `${siteUrl}/articles/${a.slug}`,
+        url: `${siteUrl}/news/${a.slug}`,
         name: a.headline,
         item: {
           "@type": "NewsArticle",
-          "@id": `${siteUrl}/articles/${a.slug}#article`,
+          "@id": `${siteUrl}/news/${a.slug}#article`,
           headline: a.headline,
           description: a.excerpt,
           datePublished: new Date(a.isoDate).toISOString(),
           author: { "@id": `${siteUrl}/#/schema/person/editorial-team` },
           publisher: { "@id": `${siteUrl}/#organization` },
-          url: `${siteUrl}/articles/${a.slug}`,
+          url: `${siteUrl}/news/${a.slug}`,
         },
       })),
     },
@@ -377,7 +377,7 @@ const schema = {
   {heroArticle ? (
     <section class="hero">
       <div class="hero-inner">
-        <HeroCard article={{ ...heroArticle, href: `/articles/${heroArticle.slug}` }} />
+        <HeroCard article={{ ...heroArticle, href: `/news/${heroArticle.slug}` }} />
       </div>
     </section>
   ) : (
@@ -398,7 +398,7 @@ const schema = {
         <div class="card-grid">
           {
             latestArticles.map((a) => (
-              <NewsCard {...a} href={`/articles/${a.slug}`} />
+              <NewsCard {...a} href={`/news/${a.slug}`} />
             ))
           }
         </div>
@@ -412,7 +412,7 @@ const schema = {
         <div class="card-grid">
           {
             anthropicArticles.map((a) => (
-              <NewsCard {...a} href={`/articles/${a.slug}`} />
+              <NewsCard {...a} href={`/news/${a.slug}`} />
             ))
           }
         </div>
@@ -431,7 +431,7 @@ const schema = {
         <div class="card-grid">
           {
             googleArticles.map((a) => (
-              <NewsCard {...a} href={`/articles/${a.slug}`} />
+              <NewsCard {...a} href={`/news/${a.slug}`} />
             ))
           }
         </div>
@@ -450,7 +450,7 @@ const schema = {
         <div class="card-grid">
           {
             openaiArticles.map((a) => (
-              <NewsCard {...a} href={`/articles/${a.slug}`} />
+              <NewsCard {...a} href={`/news/${a.slug}`} />
             ))
           }
         </div>
@@ -472,7 +472,7 @@ const schema = {
                 <span class="trending-num">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <a href={`/articles/${t.slug}`}>{t.headline}</a>
+                <a href={`/news/${t.slug}`}>{t.headline}</a>
               </li>
             ))
           }
@@ -516,7 +516,7 @@ const schema = {
         <div class="card-grid">
           {
             toolsArticles.map((a) => (
-              <NewsCard {...a} href={`/articles/${a.slug}`} />
+              <NewsCard {...a} href={`/news/${a.slug}`} />
             ))
           }
         </div>
@@ -535,7 +535,7 @@ const schema = {
         <div class="card-grid">
           {
             policyArticles.map((a) => (
-              <NewsCard {...a} href={`/articles/${a.slug}`} />
+              <NewsCard {...a} href={`/news/${a.slug}`} />
             ))
           }
         </div>
@@ -556,7 +556,7 @@ const schema = {
                 <span class="trending-num">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <a href={`/articles/${t.slug}`}>{t.headline}</a>
+                <a href={`/news/${t.slug}`}>{t.headline}</a>
               </li>
             ))
           }

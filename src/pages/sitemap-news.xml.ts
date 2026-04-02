@@ -24,7 +24,7 @@ export const GET: APIRoute = async () => {
 
       return `
     <url>
-      <loc>https://dailyaimail.news/articles/${article.id}</loc>
+      <loc>https://dailyaimail.news/news/${article.id}</loc>
       <news:news>
         <news:publication>
           <news:name>Daily AI Mail</news:name>

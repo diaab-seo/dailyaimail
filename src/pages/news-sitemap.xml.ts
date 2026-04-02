@@ -43,7 +43,7 @@ export const GET: APIRoute = async () => {
 
         return `
   <url>
-    <loc>${SITE_URL}/articles/${e.id}</loc>
+    <loc>${SITE_URL}/news/${e.id}</loc>
     <news:news>
       <news:publication>
         <news:name>Daily AI Mail</news:name>

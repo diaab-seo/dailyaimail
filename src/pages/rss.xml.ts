@@ -9,7 +9,7 @@ export const GET: APIRoute = async ({ request }) => {
   const feedUrl = `${siteUrl}/rss.xml`;
 
   const items = articles.map(article => {
-    const articleLink = `${siteUrl}/articles/${article.slug}`;
+    const articleLink = `${siteUrl}/news/${article.slug}`;
     const pubDate = new Date(article.isoDate).toUTCString();
     
     // Construct absolute image URL if available
