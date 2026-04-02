@@ -23,7 +23,7 @@ export const GET: APIRoute = async () => {
 
     const allTags    = [...new Set(articles.flatMap(a => [a.data.tag, ...(a.data.tags ?? [])]))];
     const topicPages = allTags.map(tag => `/topics/${tag.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`);
-    const articlePages   = articles.map(a => `/articles/${a.id}`);
+    const articlePages   = articles.map(a => `/news/${a.id}`);
     const explainerPages = explainers.map(t => `/explainers/${t.data.slug}`);
 
     const allUrls = [

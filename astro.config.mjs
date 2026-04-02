@@ -82,6 +82,8 @@ export default defineConfig({
                 '/press-kit',
                 '/rss.xml',
                 '/newsletter',
+                // ── News articles (fully static, no worker needed) ──
+                '/news/*',
                 // ── Explainers (fully static, no worker needed) ──
                 '/explainers',
                 '/explainers/*',

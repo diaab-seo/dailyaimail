@@ -95,7 +95,7 @@ const schema = {
             significantLink: articles
                 .sort((a, b) => b.isoDate.localeCompare(a.isoDate))
                 .slice(0, 3)
-                .map((a) => `${SITE_URL}/articles/${a.slug}`),
+                .map((a) => `${SITE_URL}/news/${a.slug}`),
         },
         definedTerm,
         {
@@ -109,15 +109,15 @@ const schema = {
                 .map((a, i) => ({
                     "@type": "ListItem",
                     position: i + 1,
-                    url: `${SITE_URL}/articles/${a.slug}`,
+                    url: `${SITE_URL}/news/${a.slug}`,
                     name: a.headline,
                     item: {
                         "@type": "NewsArticle",
-                        "@id": `${SITE_URL}/articles/${a.slug}#article`,
+                        "@id": `${SITE_URL}/news/${a.slug}#article`,
                         headline: a.headline,
                         description: a.excerpt,
                         datePublished: `${a.isoDate}T00:00:00+00:00`,
-                        url: `${SITE_URL}/articles/${a.slug}`,
+                        url: `${SITE_URL}/news/${a.slug}`,
                         author: {
                             "@id": `${SITE_URL}/#/schema/person/editorial-team`,
                         },
@@ -252,7 +252,7 @@ if (page && page.currentPage > 1) {
                             author={a.author}
                             readingTime={a.readingTime}
                             image={a.image}
-                            href={`/articles/${a.slug}`}
+                            href={`/news/${a.slug}`}
                         />
                     ))
                 }

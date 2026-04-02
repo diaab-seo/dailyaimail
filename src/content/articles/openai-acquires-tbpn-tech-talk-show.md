@@ -51,7 +51,7 @@ citations:
     url: 'https://openai.com'
     type: CreativeWork
 relatedArticles:
-  - url: '/articles/openai-122-billion-funding-round'
+  - url: '/news/openai-122-billion-funding-round'
     date: '2026-04-01'
 ---
 

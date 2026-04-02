@@ -19,9 +19,9 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
     if (!articleSlug || !body) return new Response(null, { status: 400 });
     if (body.length > 2000) {
-        return new Response(null, { status: 302, headers: { Location: `/articles/${articleSlug}?err=toolong#comments` } });
+        return new Response(null, { status: 302, headers: { Location: `/news/${articleSlug}?err=toolong#comments` } });
     }
 
     await createComment(db, { article_slug: articleSlug, user_id: user.id, body, ip_address: ip });
-    return new Response(null, { status: 302, headers: { Location: `/articles/${articleSlug}?commented=1#comments` } });
+    return new Response(null, { status: 302, headers: { Location: `/news/${articleSlug}?commented=1#comments` } });
 };
