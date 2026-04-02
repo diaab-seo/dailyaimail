@@ -11,7 +11,7 @@ excerpt: >-
   superconducting qubits and neutral atoms — to accelerate the path to
   commercially relevant quantum computers by decade's end.
 date: 'Mar 25, 2026'
-isoDate: "2026-03-29T15:20:00+00:00"
+isoDate: '2026-03-29T15:20:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -31,22 +31,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Google Quantum AI
-    url: 'https://quantumai.google'
-    type: Organization
-  - name: QuEra Computing
-    url: 'https://www.quera.com'
-    type: Organization
-  - name: CU Boulder
-    url: 'https://www.colorado.edu'
-    type: Organization
-  - name: JILA
-    url: 'https://jila.colorado.edu'
-    type: Organization
-  - name: NIST
-    url: 'https://www.nist.gov'
-    type: Organization
+mentions: []
 about:
   - name: Neutral Atom Quantum Computing
     url: 'https://quantumai.google/research/neutral-atoms'

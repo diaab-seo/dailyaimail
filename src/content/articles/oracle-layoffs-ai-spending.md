@@ -1,19 +1,19 @@
 ---
-tag: "AI Infrastructure"
+tag: AI Infrastructure
 tags:
   - Oracle
   - AI Infrastructure
   - Layoffs
   - Technology
   - Datacenter
-headline: "Oracle Cuts Thousands of Jobs as It Bets Billions on AI Infrastructure"
+headline: Oracle Cuts Thousands of Jobs as It Bets Billions on AI Infrastructure
 excerpt: >-
   Oracle has begun laying off thousands of its 160,000-person workforce as the
   $420bn business software giant accelerates spending on datacentres to compete
   with Alphabet and Amazon — and fund a $300bn deal with OpenAI. About 10,000
   employees are reported to have already lost their jobs.
 date: 'Apr 01, 2026'
-isoDate: "2026-04-01T15:10:00+02:00"
+isoDate: '2026-04-01T15:10:00+02:00'
 modifiedDate: '2026-04-01'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,34 +34,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Oracle
-    url: 'https://www.oracle.com'
-    type: Organization
-  - name: OpenAI
-    url: 'https://www.openai.com'
-    type: Organization
-  - name: Alphabet
-    url: 'https://abc.xyz'
-    type: Organization
-  - name: Amazon
-    url: 'https://www.amazon.com'
-    type: Organization
-  - name: Meta
-    url: 'https://www.meta.com'
-    type: Organization
-  - name: Forbes
-    url: 'https://www.forbes.com'
-    type: Organization
-  - name: Business Insider
-    url: 'https://www.businessinsider.com'
-    type: Organization
-  - name: BBC
-    url: 'https://www.bbc.co.uk'
-    type: Organization
-  - name: Larry Ellison
-    url: 'https://www.forbes.com/real-time-billionaires/'
-    type: Person
+mentions: []
 about:
   - name: Oracle Layoffs 2026
     url: 'https://www.oracle.com'
@@ -77,10 +50,12 @@ citations:
     url: 'https://www.forbes.com/real-time-billionaires/'
     type: CreativeWork
   - name: 'Business Insider: Oracle Layoff Email'
-    url: 'https://www.businessinsider.com/read-oracle-layoff-email-employees-job-cuts-2026-3'
+    url: >-
+      https://www.businessinsider.com/read-oracle-layoff-email-employees-job-cuts-2026-3
     type: CreativeWork
   - name: 'The Guardian: New Datacentres Risk Doubling UK Electricity Use'
-    url: 'https://www.theguardian.com/technology/2026/feb/23/new-datacentres-risk-doubling-uk-electricity-use-ofgem-peak-demand'
+    url: >-
+      https://www.theguardian.com/technology/2026/feb/23/new-datacentres-risk-doubling-uk-electricity-use-ofgem-peak-demand
     type: CreativeWork
 ---
 

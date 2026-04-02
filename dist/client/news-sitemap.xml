@@ -4,276 +4,68 @@
   xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
   <url>
-    <loc>https://dailyaimail.news/articles/microsoft-copilot-cowork-launch-early-access</loc>
+    <loc>https://dailyaimail.news/articles/oracle-layoffs-ai-spending</loc>
     <news:news>
       <news:publication>
         <news:name>Daily AI Mail</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-31T00:00:00.000Z</news:publication_date>
-      <news:title>Microsoft Copilot Cowork Launches in Early Access With Critique and Model Council</news:title>
-      <news:keywords>Microsoft Copilot Cowork, Copilot Researcher Critique, Microsoft 365 Wave 3, Copilot Model Council, Microsoft Anthropic Claude</news:keywords>
+      <news:publication_date>2026-04-01T13:10:00.000Z</news:publication_date>
+      <news:title>Oracle Cuts Thousands of Jobs as It Bets Billions on AI Infrastructure</news:title>
+      <news:keywords>Oracle layoffs 2026, Oracle job cuts AI, Oracle datacentre spending, Oracle OpenAI deal, tech layoffs 2026</news:keywords>
+    </news:news>
+    <lastmod>2026-04-01T00:00:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Daily AI Mail</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-01T12:00:00.000Z</news:publication_date>
+      <news:title>Claude Mythos Leaked: Anthropic&apos;s Most Powerful Model Yet Poses &apos;Unprecedented Cybersecurity Risk&apos;</news:title>
+      <news:keywords>Claude Mythos, Anthropic Capybara model, Claude Mythos leak, Anthropic frontier model 2026, Claude cybersecurity risk</news:keywords>
+    </news:news>
+    <lastmod>2026-04-01T00:00:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dailyaimail.news/articles/openai-122-billion-funding-round</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Daily AI Mail</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-01T10:00:00.000Z</news:publication_date>
+      <news:title>OpenAI Raises $122 Billion to Accelerate the Next Phase of AI</news:title>
+      <news:keywords>OpenAI funding round 2026, OpenAI $122 billion, OpenAI valuation $852 billion, SoftBank OpenAI investment, ChatGPT weekly active users, OpenAI superapp, GPT-5.4, OpenAI enterprise revenue</news:keywords>
+    </news:news>
+    <lastmod>2026-04-01T00:00:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Daily AI Mail</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-31T12:03:00.000Z</news:publication_date>
+      <news:title>Claude Code Leaks Its Own Source Code for the Second Time in a Year via npm Source Maps</news:title>
+      <news:keywords>Claude Code source code leak, Anthropic npm source map, Claude Code v2.1.88, cli.js.map leak, Anthropic software security</news:keywords>
     </news:news>
     <lastmod>2026-03-31T00:00:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://dailyaimail.news/articles/mistral-ai-830m-debt-paris-data-center</loc>
+    <loc>https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid</loc>
     <news:news>
       <news:publication>
         <news:name>Daily AI Mail</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-30T12:00:00.000Z</news:publication_date>
-      <news:title>Mistral AI Raises $830M in Debt to Build Its Own Data Center Near Paris</news:title>
-      <news:keywords>Mistral AI data center, Mistral $830 million debt, Mistral Paris infrastructure, European AI compute, Mistral Nvidia data center</news:keywords>
+      <news:publication_date>2026-03-31T12:00:00.000Z</news:publication_date>
+      <news:title>How One Startup Used OpenClaw and Claude Code to Build a 24/7 AI Engineering Team</news:title>
+      <news:keywords>OpenClaw AI agents, Claude Code autonomous engineering, AI software development team, JustPaid AI agents, agentic coding 2026</news:keywords>
     </news:news>
-    <lastmod>2026-03-30T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/rebellions-400m-pre-ipo-ai-chip-rebelrack</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-30T12:00:00.000Z</news:publication_date>
-      <news:title>Rebellions Raises $400M at $2.3B Valuation in Pre-IPO Round, Launches Two New Inference Platforms</news:title>
-      <news:keywords>Rebellions AI chip, Rebellions pre-IPO funding, RebelRack RebelPOD, AI inference chip startup, Korean AI chip company</news:keywords>
-    </news:news>
-    <lastmod>2026-03-30T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/mistral-voxtral-4b-tts-2603-open-weights</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T21:10:00.000Z</news:publication_date>
-      <news:title>Meet Voxtral: Mistral&apos;s Open-Weights TTS Model That Wants to Power Every Voice Agent on the Planet</news:title>
-      <news:keywords>Voxtral TTS, Mistral text to speech, open weights TTS model, Voxtral 4B, Mistral AI voice model, AI voice agent</news:keywords>
-    </news:news>
-    <lastmod>2026-03-29T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/gemini-business-notebooklm-skills-integration</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T21:01:00.000Z</news:publication_date>
-      <news:title>Gemini for Business Is Quietly Getting NotebookLM Integration and a Skills Layer — Here&apos;s What&apos;s Surfacing in the Builds</news:title>
-      <news:keywords>Gemini for Business, NotebookLM integration, Gemini Skills, Google Workspace AI, Skill Architect Gemini, enterprise AI tools</news:keywords>
-    </news:news>
-    <lastmod>2026-03-29T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/anthropic-pro-subscribers-peak-hours-usage-backlash</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T20:38:00.000Z</news:publication_date>
-      <news:title>Anthropic&apos;s Paying Customers Are Revolting — and They Have a Point</news:title>
-      <news:keywords>Anthropic Pro usage limits, Claude peak hours throttling, Anthropic subscriber backlash, Claude Pro cancellations, Anthropic usage cap, Claude Max token budget</news:keywords>
-    </news:news>
-    <lastmod>2026-03-29T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/stanford-ai-sycophancy-study-self-centered</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T19:47:00.000Z</news:publication_date>
-      <news:title>Stanford Study: AI Chatbots Are Making People More Self-Centered — and Tech Companies Have Every Reason to Keep It That Way</news:title>
-      <news:keywords>AI sycophancy, Stanford AI study, AI chatbot advice, sycophantic AI, AI safety regulation, chatbot emotional support</news:keywords>
-    </news:news>
-    <lastmod>2026-03-29T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/anthropic-claude-code-auto-mode-autonomous</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:32:00.000Z</news:publication_date>
-      <news:title>Anthropic Gives Claude Code an Autonomous Mode — With a Safety Net Built In</news:title>
-      <news:keywords>Claude Code auto mode, Anthropic autonomous AI, Claude Code Review, agentic coding tools, prompt injection protection</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/chatgpt-ecommerce-pivot-instant-checkout</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:30:00.000Z</news:publication_date>
-      <news:title>ChatGPT&apos;s Amazon Ambitions Falter as OpenAI Quietly Retreats from Direct Checkout</news:title>
-      <news:keywords>ChatGPT shopping, OpenAI Instant Checkout, Agentic Commerce Protocol, ChatGPT e-commerce pivot, OpenAI Stripe</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:28:00.000Z</news:publication_date>
-      <news:title>Databricks Acquires Two Startups to Power Its New AI-Driven Security Product</news:title>
-      <news:keywords>Databricks Lakewatch, Databricks acquisitions, AI security SIEM, Antimatter Databricks, SiftD.ai acquisition</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/gemini-memory-chat-history-import</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:26:00.000Z</news:publication_date>
-      <news:title>Gemini Can Now Import Your AI Memories and Chat History From Other Apps</news:title>
-      <news:keywords>Gemini memory import, Gemini chat history import, switch to Gemini, Google Gemini personal AI, AI assistant switching tools</news:keywords>
-    </news:news>
-    <lastmod>2026-03-29T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/github-copilot-ai-training-data-opt-out</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:24:00.000Z</news:publication_date>
-      <news:title>GitHub Will Use Your Copilot Interactions as AI Training Data — Here&apos;s How to Opt Out</news:title>
-      <news:keywords>GitHub Copilot training data, GitHub AI opt out, Microsoft Copilot privacy, GitHub Copilot data collection, AI training data policy</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/google-lyria-3-pro-music-generation</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:22:00.000Z</news:publication_date>
-      <news:title>Google Launches Lyria 3 Pro: Longer Tracks, Deeper Control, and Enterprise Access</news:title>
-      <news:keywords>Google Lyria 3 Pro, AI music generation, Gemini music AI, Lyria Vertex AI, ProducerAI Google</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/google-quantum-ai-neutral-atom-superconducting</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:20:00.000Z</news:publication_date>
-      <news:title>Google Quantum AI Expands Into Neutral Atom Computing Alongside Its Superconducting Program</news:title>
-      <news:keywords>Google Quantum AI, neutral atom computing, superconducting qubits, quantum error correction, Adam Kaufman Google</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/google-turboquant-ai-memory-compression-algorithm</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:18:00.000Z</news:publication_date>
-      <news:title>Google&apos;s TurboQuant Slashes AI Memory by 6x — Could It End the RAM Crisis?</news:title>
-      <news:keywords>Google TurboQuant, AI memory compression, KV cache compression, PolarQuant QJL, LLM inference efficiency</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/granola-series-c-enterprise-ai-spaces</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:16:00.000Z</news:publication_date>
-      <news:title>Granola Raises $125M at $1.5B Valuation, Evolving From Meeting Notetaker to Enterprise AI Platform</news:title>
-      <news:keywords>Granola funding, Granola Series C, AI meeting notes enterprise, Granola Spaces API, meeting AI startup</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/meta-texas-ai-data-center-10-billion</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:14:00.000Z</news:publication_date>
-      <news:title>Meta Raises Texas AI Data Center Investment From $1.5B to $10B as Compute Ambitions Grow</news:title>
-      <news:keywords>Meta AI data center, Meta El Paso Texas, Meta capital expenditure 2026, Meta AI infrastructure, Meta data center investment</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/openai-adult-mode-paused-strategy-pivot</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:12:00.000Z</news:publication_date>
-      <news:title>OpenAI Abandons Its Erotic ChatGPT Mode — The Latest in a Week of Strategic Retreats</news:title>
-      <news:keywords>OpenAI adult mode paused, ChatGPT erotic mode cancelled, OpenAI strategy pivot 2026, OpenAI superapp, OpenAI Anthropic competition</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:10:00.000Z</news:publication_date>
-      <news:title>OpenAI Pulls the Plug on Sora: Generative AI Video App Shutting Down</news:title>
-      <news:keywords>OpenAI Sora shutdown, Sora AI discontinued, Generative AI Video, Disney OpenAI partnership, OpenAI news 2026</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/openai-safety-bug-bounty-program-launch</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:08:00.000Z</news:publication_date>
-      <news:title>OpenAI Launches Safety Bug Bounty Program to Reward Researchers Who Find AI Abuse Risks</news:title>
-      <news:keywords>OpenAI Safety Bug Bounty, AI abuse reporting, prompt injection bounty, OpenAI security researchers, agentic AI safety</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/articles/sora-shutdown-creator-impact-alternatives-2026</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-29T15:06:00.000Z</news:publication_date>
-      <news:title>Sora Is Gone: What It Means for Creators and Where to Go Next</news:title>
-      <news:keywords>Sora shutdown impact, Sora alternatives 2026, AI video creators, Runway Veo Kling, OpenAI Sora discontinued</news:keywords>
-    </news:news>
-    <lastmod>2026-03-28T00:00:00.000Z</lastmod>
+    <lastmod>2026-03-31T00:00:00.000Z</lastmod>
   </url>
 </urlset>

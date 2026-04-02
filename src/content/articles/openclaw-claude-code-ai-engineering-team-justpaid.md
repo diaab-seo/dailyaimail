@@ -1,18 +1,20 @@
 ---
-tag: "AI Tools"
+tag: AI Tools
 tags:
   - AI Tools and Apps
   - Claude Code
   - Agentic AI
   - Developer Tools
   - Startups
-headline: "How One Startup Used OpenClaw and Claude Code to Build a 24/7 AI Engineering Team"
+headline: >-
+  How One Startup Used OpenClaw and Claude Code to Build a 24/7 AI Engineering
+  Team
 excerpt: >-
-  JustPaid's CTO replaced most of his dev workflow with seven AI agents
-  running on OpenClaw and Anthropic's Claude Code — delivering 10 major
-  features in a month and training a new human hire almost entirely through AI.
+  JustPaid's CTO replaced most of his dev workflow with seven AI agents running
+  on OpenClaw and Anthropic's Claude Code — delivering 10 major features in a
+  month and training a new human hire almost entirely through AI.
 date: 'Mar 31, 2026'
-isoDate: "2026-03-31T12:00:00+00:00"
+isoDate: '2026-03-31T12:00:00+00:00'
 modifiedDate: '2026-03-31'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,34 +36,20 @@ articleSection:
   - Technology
   - Artificial Intelligence
 mentions:
-  - name: Anthropic
-    url: 'https://www.anthropic.com'
-    type: Organization
-  - name: JustPaid
-    url: 'https://justpaid.io'
-    type: Organization
-  - name: Kuse AI
-    url: 'http://kuse.ai/'
-    type: Organization
-  - name: Wayfound
-    url: 'https://wayfound.ai'
-    type: Organization
-  - name: Nvidia
-    url: 'https://nvidia.com'
-    type: Organization
-  - name: Gartner
-    url: 'https://gartner.com'
-    type: Organization
+  - ai-agent
+  - guardrails
 about:
   - name: OpenClaw
-    url: 'https://www.wsj.com/cio-journal/heres-what-openclaw-agents-are-doing-today-c25d8e6d'
+    url: >-
+      https://www.wsj.com/cio-journal/heres-what-openclaw-agents-are-doing-today-c25d8e6d
     type: SoftwareApplication
   - name: Claude Code
     url: 'https://www.anthropic.com/claude-code'
     type: SoftwareApplication
 citations:
   - name: 'WSJ: What OpenClaw Agents Are Doing Today'
-    url: 'https://www.wsj.com/cio-journal/heres-what-openclaw-agents-are-doing-today-c25d8e6d'
+    url: >-
+      https://www.wsj.com/cio-journal/heres-what-openclaw-agents-are-doing-today-c25d8e6d
     type: CreativeWork
   - name: 'Kuse AI: AI Co-Workers Platform'
     url: 'http://kuse.ai/'

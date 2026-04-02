@@ -1,18 +1,20 @@
 ---
-tag: "Anthropic"
+tag: Anthropic
 tags:
   - Anthropic
   - Claude Code
   - Cybersecurity
   - AI Tools
   - Open Source
-headline: "Claude Code Leaks Its Own Source Code for the Second Time in a Year via npm Source Maps"
+headline: >-
+  Claude Code Leaks Its Own Source Code for the Second Time in a Year via npm
+  Source Maps
 excerpt: >-
   A 60MB source-map file included in Claude Code v2.1.88 exposed 1,906
   proprietary TypeScript source files on the public npm registry — the same
   packaging oversight that struck Anthropic in February 2025.
 date: 'Mar 31, 2026'
-isoDate: "2026-03-31T17:33:00+05:30"
+isoDate: '2026-03-31T17:33:00+05:30'
 modifiedDate: '2026-03-31'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -33,16 +35,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Anthropic
-    url: 'https://www.anthropic.com'
-    type: Organization
-  - name: Fuzzland
-    url: 'https://fuzzland.io'
-    type: Organization
-  - name: DEV Community
-    url: 'https://dev.to'
-    type: Organization
+mentions: []
 about:
   - name: Claude Code
     url: 'https://www.anthropic.com/claude-code'
@@ -52,7 +45,8 @@ about:
     type: Thing'
 citations:
   - name: 'DEV Community: Claude Code Source Leak via npm Source Maps'
-    url: 'https://dev.to/gabrielanhaia/claude-codes-entire-source-code-was-just-leaked-via-npm-source-maps-heres-whats-inside-cjo'
+    url: >-
+      https://dev.to/gabrielanhaia/claude-codes-entire-source-code-was-just-leaked-via-npm-source-maps-heres-whats-inside-cjo
     type: CreativeWork
   - name: 'BlockBeats: Claude Code npm Leak Details'
     url: 'https://www.theblockbeats.info/flash/338932'
@@ -64,7 +58,8 @@ citations:
     url: 'https://github.com/instructkr/claude-code'
     type: CreativeWork
   - name: 'Threads: Anthropic Claude Code Leak Discussion'
-    url: 'https://www.threads.com/@young.mete/post/DWi3R7ZDjWo/anthropic-just-leaked-claude-codes-source-code-apparently-they-accidentally'
+    url: >-
+      https://www.threads.com/@young.mete/post/DWi3R7ZDjWo/anthropic-just-leaked-claude-codes-source-code-apparently-they-accidentally
     type: CreativeWork
 ---
 

@@ -3,16 +3,14 @@ tag: Anthropic
 tags:
   - Generative AI
   - Big Tech AI
-headline: >-
-  Anthropic's Paying Customers Are Revolting — and They Have a Point
+headline: Anthropic's Paying Customers Are Revolting — and They Have a Point
 excerpt: >-
   Pro and Max subscribers are canceling in visible numbers after discovering
   that Claude's peak-hour throttling leaves free users more functional than
-  those paying $20–$200 a month — with no in-app warning, no token counter,
-  and no published usage budgets. A viral Reddit open letter is demanding
-  answers.
+  those paying $20–$200 a month — with no in-app warning, no token counter, and
+  no published usage budgets. A viral Reddit open letter is demanding answers.
 date: 'Mar 29, 2026'
-isoDate: "2026-03-29T20:38:00+00:00"
+isoDate: '2026-03-29T20:38:00+00:00'
 modifiedDate: '2026-03-29'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,13 +32,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Anthropic
-    url: 'https://anthropic.com'
-    type: Organization
-  - name: Reddit r/ClaudeAI
-    url: 'https://www.reddit.com/r/ClaudeAI'
-    type: Organization
+mentions: []
 about:
   - name: Claude Pro Subscription
     url: 'https://claude.ai'
@@ -50,7 +42,8 @@ about:
     type: Thing
 citations:
   - name: 'Reddit: An open letter to Anthropic — r/ClaudeAI'
-    url: 'https://www.reddit.com/r/ClaudeAI/comments/1s5nxwe/an_open_letter_to_anthropic_want_to_free_up/'
+    url: >-
+      https://www.reddit.com/r/ClaudeAI/comments/1s5nxwe/an_open_letter_to_anthropic_want_to_free_up/
     type: CreativeWork
 ---
 

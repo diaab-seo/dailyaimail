@@ -1,0 +1,2 @@
+export const EXPLAINER_TOOLTIP_CAP = 3;
+export const EXPLAINER_MENTIONS_CAP = 6;

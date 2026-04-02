@@ -1,19 +1,21 @@
 ---
-tag: "AI Hardware"
+tag: AI Hardware
 tags:
   - AI Hardware
   - Semiconductors
   - Rebellions
   - AI Chips
   - IPO
-headline: "Rebellions Raises $400M at $2.3B Valuation in Pre-IPO Round, Launches Two New Inference Platforms"
+headline: >-
+  Rebellions Raises $400M at $2.3B Valuation in Pre-IPO Round, Launches Two New
+  Inference Platforms
 excerpt: >-
-  The South Korean fabless AI chip startup has now raised $850M total — $650M
-  of it in the last six months — as it readies for a public listing and
-  accelerates expansion into the US, Middle East, and Asia with two new
-  inference infrastructure products.
+  The South Korean fabless AI chip startup has now raised $850M total — $650M of
+  it in the last six months — as it readies for a public listing and accelerates
+  expansion into the US, Middle East, and Asia with two new inference
+  infrastructure products.
 date: 'Mar 30, 2026'
-isoDate: "2026-03-30T12:00:00+00:00"
+isoDate: '2026-03-30T12:00:00+00:00'
 modifiedDate: '2026-03-30'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -23,8 +25,8 @@ imageWidth: 1200
 imageHeight: 675
 imageCaption: >-
   Rebellions has raised $400M in a pre-IPO round led by Mirae Asset and the
-  Korea National Growth Fund, launching RebelRack and RebelPOD as it pushes
-  into US, Middle East, and Asian markets.
+  Korea National Growth Fund, launching RebelRack and RebelPOD as it pushes into
+  US, Middle East, and Asian markets.
 keywords:
   - Rebellions AI chip
   - Rebellions pre-IPO funding
@@ -35,24 +37,7 @@ articleSection:
   - Technology
   - Artificial Intelligence
 mentions:
-  - name: Rebellions
-    url: 'https://rebellions.ai'
-    type: Organization
-  - name: Mirae Asset Financial Group
-    url: 'https://www.miraeasset.com'
-    type: Organization
-  - name: Korea National Growth Fund
-    url: 'https://finance.yahoo.com/sectors/technology/articles/south-korea-invest-166-million-090058822.html'
-    type: Organization
-  - name: Nvidia
-    url: 'https://nvidia.com'
-    type: Organization
-  - name: Samsung
-    url: 'https://samsung.com'
-    type: Organization
-  - name: AWS
-    url: 'https://aws.amazon.com'
-    type: Organization
+  - inference
 about:
   - name: RebelRack
     url: 'https://rebellions.ai'
@@ -62,25 +47,31 @@ about:
     type: SoftwareApplication
 citations:
   - name: 'Rebellions: Series C Global Growth Announcement'
-    url: 'https://rebellions.ai/newsroom/rebellions-scales-global-growth-with-silicon-valley-backed-series-c/'
+    url: >-
+      https://rebellions.ai/newsroom/rebellions-scales-global-growth-with-silicon-valley-backed-series-c/
     type: CreativeWork
   - name: 'Yahoo Finance: South Korea Backs Rebellions Growth Fund'
-    url: 'https://finance.yahoo.com/sectors/technology/articles/south-korea-invest-166-million-090058822.html'
+    url: >-
+      https://finance.yahoo.com/sectors/technology/articles/south-korea-invest-166-million-090058822.html
     type: CreativeWork
   - name: 'PR Newswire: Rebellions Global Expansion and Executive Appointments'
-    url: 'https://www.prnewswire.com/news-releases/rebellions-accelerates-global-expansion-and-strengthens-customer-centric-strategy-with-significant-executive-appointments-302612937.html'
+    url: >-
+      https://www.prnewswire.com/news-releases/rebellions-accelerates-global-expansion-and-strengthens-customer-centric-strategy-with-significant-executive-appointments-302612937.html
     type: CreativeWork
   - name: 'TechCrunch: Rebellions Series B with Samsung'
-    url: 'https://techcrunch.com/2024/01/29/rebellions-lands-124m-for-ai-chip-rebel-in-collab-with-samsung/'
+    url: >-
+      https://techcrunch.com/2024/01/29/rebellions-lands-124m-for-ai-chip-rebel-in-collab-with-samsung/
     type: CreativeWork
   - name: 'CRN: 10 Hottest Semiconductor Startups of 2025'
-    url: 'https://www.crn.com/news/components-peripherals/2025/the-10-hottest-semiconductor-startups-of-2025'
+    url: >-
+      https://www.crn.com/news/components-peripherals/2025/the-10-hottest-semiconductor-startups-of-2025
     type: CreativeWork
   - name: 'Observer: Google TPU and the Nvidia Challenge'
     url: 'https://observer.com/2025/12/google-ai-chip-tpu-nvidia-challenge/'
     type: CreativeWork
   - name: 'TechCrunch: Inside Amazon Trainium Lab'
-    url: 'https://techcrunch.com/2026/03/22/an-exclusive-tour-of-amazons-trainium-lab-the-chip-thats-won-over-anthropic-openai-even-apple/'
+    url: >-
+      https://techcrunch.com/2026/03/22/an-exclusive-tour-of-amazons-trainium-lab-the-chip-thats-won-over-anthropic-openai-even-apple/
     type: CreativeWork
 ---
 

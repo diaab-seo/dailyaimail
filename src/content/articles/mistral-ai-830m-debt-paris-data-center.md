@@ -1,18 +1,18 @@
 ---
-tag: "Mistral AI"
+tag: Mistral AI
 tags:
   - Mistral AI
   - Enterprise AI
   - AI Infrastructure
   - Data Centers
   - European AI
-headline: "Mistral AI Raises $830M in Debt to Build Its Own Data Center Near Paris"
+headline: Mistral AI Raises $830M in Debt to Build Its Own Data Center Near Paris
 excerpt: >-
   The French AI lab is financing a new Nvidia-powered data center in
-  Bruyères-le-Châtel, targeting Q2 2026 operability — part of a broader push
-  to deploy 200MW of European compute capacity by 2027.
+  Bruyères-le-Châtel, targeting Q2 2026 operability — part of a broader push to
+  deploy 200MW of European compute capacity by 2027.
 date: 'Mar 30, 2026'
-isoDate: "2026-03-30T12:00:00+00:00"
+isoDate: '2026-03-30T12:00:00+00:00'
 modifiedDate: '2026-03-30'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -22,8 +22,8 @@ imageWidth: 1200
 imageHeight: 675
 imageCaption: >-
   Mistral AI is financing a new Nvidia-powered data center in
-  Bruyères-le-Châtel, south of Paris, aiming for Q2 2026 operability as part
-  of its European infrastructure push.
+  Bruyères-le-Châtel, south of Paris, aiming for Q2 2026 operability as part of
+  its European infrastructure push.
 keywords:
   - Mistral AI data center
   - Mistral $830 million debt
@@ -33,35 +33,23 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Mistral AI
-    url: 'https://mistral.ai'
-    type: Organization
-  - name: Nvidia
-    url: 'https://nvidia.com'
-    type: Organization
-  - name: General Catalyst
-    url: 'https://generalcatalyst.com'
-    type: Organization
-  - name: Reuters
-    url: 'https://reuters.com'
-    type: Organization
-  - name: CNBC
-    url: 'https://cnbc.com'
-    type: Organization
+mentions: []
 about:
   - name: Mistral AI Paris Data Center
     url: 'https://mistral.ai'
     type: Thing
 citations:
   - name: 'Reuters: Mistral Raises $830M for AI Data Centre'
-    url: 'https://www.reuters.com/business/finance/frances-mistral-raises-830-million-debt-ai-data-centre-build-up-2026-03-30/'
+    url: >-
+      https://www.reuters.com/business/finance/frances-mistral-raises-830-million-debt-ai-data-centre-build-up-2026-03-30/
     type: CreativeWork
   - name: 'CNBC: Mistral AI Paris Data Center Cluster'
-    url: 'https://www.cnbc.com/2026/03/30/mistral-ai-paris-data-center-cluster-debt-financing.html'
+    url: >-
+      https://www.cnbc.com/2026/03/30/mistral-ai-paris-data-center-cluster-debt-financing.html
     type: CreativeWork
   - name: 'Bloomberg: Mistral CEO Plans Data Center Fundraise'
-    url: 'https://www.bloomberg.com/news/articles/2025-02-10/mistral-ceo-plans-to-raise-more-funds-to-back-ai-data-center'
+    url: >-
+      https://www.bloomberg.com/news/articles/2025-02-10/mistral-ceo-plans-to-raise-more-funds-to-back-ai-data-center
     type: CreativeWork
   - name: 'CNBC: Mistral Commits $1.4B to Sweden AI Infrastructure'
     url: 'https://www.cnbc.com/2026/02/11/mistral-ai-infrastructure-sweden.html'

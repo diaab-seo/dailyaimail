@@ -1,5 +1,5 @@
 ---
-tag: "Anthropic"
+tag: Anthropic
 tags:
   - Anthropic
   - Claude Mythos
@@ -7,14 +7,16 @@ tags:
   - AI Safety
   - AI Rumors
   - Cybersecurity
-headline: "Claude Mythos Leaked: Anthropic's Most Powerful Model Yet Poses 'Unprecedented Cybersecurity Risk'"
+headline: >-
+  Claude Mythos Leaked: Anthropic's Most Powerful Model Yet Poses 'Unprecedented
+  Cybersecurity Risk'
 excerpt: >-
   A CMS misconfiguration exposed nearly 3,000 internal Anthropic assets,
   including a draft blog post describing Claude Mythos — a new model tier above
   Opus that the company itself warns is 'far ahead of any other AI model in
   cyber capabilities.' Anthropic has confirmed the model exists.
 date: 'Apr 01, 2026'
-isoDate: "2026-04-01T14:00:00+02:00"
+isoDate: '2026-04-01T14:00:00+02:00'
 modifiedDate: '2026-04-01'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -37,18 +39,8 @@ articleSection:
   - Technology
   - Artificial Intelligence
 mentions:
-  - name: Anthropic
-    url: 'https://www.anthropic.com'
-    type: Organization
-  - name: Fortune
-    url: 'https://fortune.com'
-    type: Organization
-  - name: LayerX Security
-    url: 'https://layerxsecurity.com'
-    type: Organization
-  - name: University of Cambridge
-    url: 'https://cam.ac.uk'
-    type: Organization
+  - benchmark
+  - context-window
 about:
   - name: Claude Mythos
     url: 'https://www.anthropic.com'
@@ -58,22 +50,28 @@ about:
     type: Thing
 citations:
   - name: 'Fortune: Anthropic Mythos Leak Exclusive'
-    url: 'https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/'
+    url: >-
+      https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/
     type: CreativeWork
   - name: 'CSO Online: Mythos Aimed at Cybersecurity Use Cases'
-    url: 'https://www.csoonline.com/article/4151801/leak-reveals-anthropics-mythos-a-powerful-ai-model-aimed-at-cybersecurity-use-cases.html'
+    url: >-
+      https://www.csoonline.com/article/4151801/leak-reveals-anthropics-mythos-a-powerful-ai-model-aimed-at-cybersecurity-use-cases.html
     type: CreativeWork
   - name: 'Techzine: Details Leak on Anthropic Step-Change Mythos Model'
-    url: 'https://www.techzine.eu/news/applications/140017/details-leak-on-anthropics-step-change-mythos-model/'
+    url: >-
+      https://www.techzine.eu/news/applications/140017/details-leak-on-anthropics-step-change-mythos-model/
     type: CreativeWork
   - name: 'The Decoder: Anthropic Leak Reveals Claude Mythos'
-    url: 'https://the-decoder.com/anthropic-leak-reveals-new-model-claude-mythos-with-dramatically-higher-scores-on-tests-than-any-previous-model/'
+    url: >-
+      https://the-decoder.com/anthropic-leak-reveals-new-model-claude-mythos-with-dramatically-higher-scores-on-tests-than-any-previous-model/
     type: CreativeWork
   - name: 'Euronews: What is Anthropic Mythos'
-    url: 'https://www.euronews.com/next/2026/03/30/what-is-anthropics-mythos-the-leaked-ai-model-that-poses-unprecedented-cybersecurity-risks'
+    url: >-
+      https://www.euronews.com/next/2026/03/30/what-is-anthropics-mythos-the-leaked-ai-model-that-poses-unprecedented-cybersecurity-risks
     type: CreativeWork
   - name: 'Futurism: Anthropic Step Change New Model Claude Mythos'
-    url: 'https://futurism.com/artificial-intelligence/anthropic-step-change-new-model-claude-mythos'
+    url: >-
+      https://futurism.com/artificial-intelligence/anthropic-step-change-new-model-claude-mythos
     type: CreativeWork
 ---
 

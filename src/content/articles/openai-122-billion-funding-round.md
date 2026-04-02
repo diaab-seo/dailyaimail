@@ -1,17 +1,17 @@
 ---
-tag: "OpenAI"
+tag: OpenAI
 tags:
   - OpenAI
   - Enterprise AI
   - ChatGPT
-headline: "OpenAI Raises $122 Billion to Accelerate the Next Phase of AI"
+headline: OpenAI Raises $122 Billion to Accelerate the Next Phase of AI
 excerpt: >-
-  At a post-money valuation of $852 billion, OpenAI's latest round — anchored
-  by SoftBank, Amazon, NVIDIA, and Microsoft — positions the company to scale
+  At a post-money valuation of $852 billion, OpenAI's latest round — anchored by
+  SoftBank, Amazon, NVIDIA, and Microsoft — positions the company to scale
   compute, unify its product surface into an AI superapp, and reach $2 billion
   in monthly revenue.
 date: 'Apr 1, 2026'
-isoDate: "2026-04-01T10:00:00Z"
+isoDate: '2026-04-01T10:00:00Z'
 modifiedDate: '2026-04-01'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -36,30 +36,7 @@ articleSection:
   - Business
   - Artificial Intelligence
 mentions:
-  - name: OpenAI
-    url: 'https://www.openai.com'
-    type: Organization
-  - name: SoftBank
-    url: 'https://www.softbank.jp/en/'
-    type: Organization
-  - name: Amazon
-    url: 'https://www.amazon.com'
-    type: Organization
-  - name: NVIDIA
-    url: 'https://www.nvidia.com'
-    type: Organization
-  - name: Microsoft
-    url: 'https://www.microsoft.com'
-    type: Organization
-  - name: a16z
-    url: 'https://a16z.com'
-    type: Organization
-  - name: ARK Invest
-    url: 'https://ark-invest.com'
-    type: Organization
-  - name: Sequoia Capital
-    url: 'https://www.sequoiacap.com'
-    type: Organization
+  - inference
 about:
   - name: ChatGPT
     url: 'https://chat.openai.com'

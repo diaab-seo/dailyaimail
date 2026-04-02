@@ -11,7 +11,7 @@ excerpt: >-
   transcription — introducing Spaces, dual APIs, and MCP integrations as it bets
   on context-driven enterprise workflows.
 date: 'Mar 25, 2026'
-isoDate: "2026-03-29T15:16:00+00:00"
+isoDate: '2026-03-29T15:16:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -32,30 +32,7 @@ articleSection:
   - Technology
   - Artificial Intelligence
 mentions:
-  - name: Granola
-    url: 'https://granola.so'
-    type: Organization
-  - name: Index Ventures
-    url: 'https://www.indexventures.com'
-    type: Organization
-  - name: Kleiner Perkins
-    url: 'https://www.kleinerperkins.com'
-    type: Organization
-  - name: Read AI
-    url: 'https://www.read.ai'
-    type: Organization
-  - name: Fireflies
-    url: 'https://fireflies.ai'
-    type: Organization
-  - name: Quill
-    url: 'https://quill.chat'
-    type: Organization
-  - name: Vanta
-    url: 'https://vanta.com'
-    type: Organization
-  - name: Mistral AI
-    url: 'https://mistral.ai'
-    type: Organization
+  - ai-agent
 about:
   - name: Granola Spaces
     url: 'https://granola.so/spaces'

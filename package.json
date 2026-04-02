@@ -11,12 +11,18 @@
     "preview": "wrangler pages dev",
     "astro": "astro",
     "db:init": "wrangler d1 execute dailyaimail-db --local --file=./schema.sql",
-    "db:init:prod": "wrangler d1 execute dailyaimail-db --remote --file=./schema.sql"
+    "db:init:prod": "wrangler d1 execute dailyaimail-db --remote --file=./schema.sql",
+    "sync:mentions": "node scripts/sync-mentions.mjs",
+    "sync:mentions:file": "node scripts/sync-mentions.mjs --file=",
+    "watch:mentions": "node scripts/watch-articles.mjs",
+    "dev:full": "concurrently \"astro dev\" \"node scripts/watch-articles.mjs\""
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.2",
     "astro": "^6.0.4",
-    "gray-matter": "^4.0.3"
+    "concurrently": "^9.2.1",
+    "gray-matter": "^4.0.3",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.0.0",

@@ -21,12 +21,7 @@ const articles = defineCollection({
         imageCaption: z.string().optional(),
         keywords: z.array(z.string()).optional(),
         articleSection: z.array(z.string()).optional(),
-        mentions: z.array(z.object({
-            name: z.string(),
-            url: z.string(),
-            type: z.string(), // Schema.org @type e.g. "Organization", "Person", "Thing"
-            sameAs: z.string().optional(), // Wikipedia or Wikidata URL
-        })).optional(),
+        mentions: z.array(z.string()).optional().default([]),
         about: z.array(z.object({
             name: z.string(),
             url: z.string(),

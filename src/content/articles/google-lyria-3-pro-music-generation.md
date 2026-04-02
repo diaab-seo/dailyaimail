@@ -2,7 +2,7 @@
 tag: Google AI
 tags:
   - Google AI
-  - "AI Tools & Apps"
+  - AI Tools & Apps
   - AI Music Generation
   - Gemini
   - Vertex AI
@@ -14,7 +14,7 @@ excerpt: >-
   three-minute track generation, structural composition control, and rollout
   across Gemini, Vertex AI, and ProducerAI.
 date: 'Mar 25, 2026'
-isoDate: "2026-03-29T15:22:00+00:00"
+isoDate: '2026-03-29T15:22:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -34,19 +34,7 @@ keywords:
 articleSection:
   - Technology
   - Artificial Intelligence
-mentions:
-  - name: Google
-    url: 'https://google.com'
-    type: Organization
-  - name: Spotify
-    url: 'https://spotify.com'
-    type: Organization
-  - name: Deezer
-    url: 'https://deezer.com'
-    type: Organization
-  - name: ProducerAI
-    url: 'https://producerai.com'
-    type: Organization
+mentions: []
 about:
   - name: Lyria 3 Pro
     url: 'https://deepmind.google/technologies/lyria/'

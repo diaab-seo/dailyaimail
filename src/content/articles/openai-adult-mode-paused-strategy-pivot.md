@@ -3,7 +3,7 @@ tag: OpenAI
 tags:
   - OpenAI
   - ChatGPT
-  - "Policy & Ethics"
+  - Policy & Ethics
   - AI Strategy
   - Anthropic
 headline: >-
@@ -14,7 +14,7 @@ excerpt: >-
   the shelf as OpenAI executes a sweeping pivot away from side projects toward
   enterprise, coding, and a ChatGPT superapp.
 date: 'Mar 26, 2026'
-isoDate: "2026-03-29T15:12:00+00:00"
+isoDate: '2026-03-29T15:12:00+00:00'
 modifiedDate: '2026-03-28'
 author: Daily AI Mail Editorial Staff
 authorUrl: 'https://dailyaimail.news/about-us/editorial-team'
@@ -36,18 +36,7 @@ articleSection:
   - Technology
   - Artificial Intelligence
 mentions:
-  - name: OpenAI
-    url: 'https://openai.com'
-    type: Organization
-  - name: Anthropic
-    url: 'https://www.anthropic.com'
-    type: Organization
-  - name: Financial Times
-    url: 'https://ft.com'
-    type: Organization
-  - name: The Wall Street Journal
-    url: 'https://wsj.com'
-    type: Organization
+  - guardrails
 about:
   - name: ChatGPT Adult Mode
     url: 'https://openai.com/chatgpt'
