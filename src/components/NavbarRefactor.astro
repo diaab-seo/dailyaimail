@@ -1,0 +1,1144 @@
+---
+const GOOGLE_NEWS_URL =
+  "https://news.google.com/publications/CAAqLAgKIiZDQklTRmdnTWFoSUtFR1JoYVd4NVlXbHRZV2xzTG01bGQzTW9BQVAB?ceid=US:en&oc=3";
+
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/dailaimail/",
+    icon: "linkedin",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/dailyaimail/",
+    icon: "facebook",
+  },
+  {
+    label: "X",
+    href: "https://x.com/dailyaimail",
+    icon: "x",
+  },
+  {
+    label: "Medium",
+    href: "https://medium.com/@dailyaimail",
+    icon: "medium",
+  },
+  {
+    label: "Reddit",
+    href: "https://www.reddit.com/user/dailyaimail/",
+    icon: "reddit",
+  },
+];
+
+const topicGroups = [
+  {
+    label: "Frontier Labs",
+    href: "/topics/openai",
+    items: [
+      { label: "OpenAI", href: "/topics/openai" },
+      { label: "Anthropic", href: "/topics/anthropic" },
+      { label: "Google AI", href: "/topics/google-ai" },
+      { label: "Meta AI", href: "/topics/meta-ai" },
+      { label: "Mistral AI", href: "/topics/mistral-ai" },
+    ],
+  },
+  {
+    label: "Products",
+    href: "/topics/chatgpt",
+    items: [
+      { label: "ChatGPT", href: "/topics/chatgpt" },
+      { label: "Gemini", href: "/topics/gemini" },
+      { label: "Claude Code", href: "/topics/claude-code" },
+      { label: "Copilot", href: "/topics/copilot" },
+      { label: "Sora", href: "/topics/sora" },
+    ],
+  },
+  {
+    label: "Industry",
+    href: "/topics/enterprise-ai",
+    items: [
+      { label: "Enterprise AI", href: "/topics/enterprise-ai" },
+      { label: "Startups", href: "/topics/startups" },
+      { label: "AI Strategy", href: "/topics/ai-strategy" },
+      { label: "Media", href: "/topics/media" },
+      { label: "Layoffs", href: "/topics/layoffs" },
+    ],
+  },
+  {
+    label: "Infrastructure",
+    href: "/topics/ai-infrastructure",
+    items: [
+      { label: "AI Infrastructure", href: "/topics/ai-infrastructure" },
+      { label: "AI Chips", href: "/topics/ai-chips" },
+      { label: "Data Centers", href: "/topics/data-centers" },
+      { label: "Semiconductors", href: "/topics/semiconductors" },
+      { label: "Developer Tools", href: "/topics/developer-tools" },
+    ],
+  },
+  {
+    label: "Policy & Safety",
+    href: "/topics/policy-and-ethics",
+    items: [
+      { label: "Policy & Ethics", href: "/topics/policy-and-ethics" },
+      { label: "AI Safety", href: "/topics/ai-safety" },
+      { label: "AI Security", href: "/topics/ai-security" },
+      { label: "Open Source AI", href: "/topics/open-source-ai" },
+      { label: "Frontier AI", href: "/topics/frontier-ai" },
+    ],
+  },
+];
+
+const moreTopics = [
+  { label: "Generative AI", href: "/topics/generative-ai" },
+  { label: "AI Agents", href: "/topics/ai-agents" },
+  { label: "Machine Learning", href: "/topics/machine-learning" },
+  { label: "Quantum Computing", href: "/topics/quantum-computing" },
+  { label: "Personal AI", href: "/topics/personal-ai" },
+  { label: "All Topics", href: "/topics" },
+];
+---
+
+<nav class="navbar" id="main-nav" aria-label="Primary">
+  <div class="utility-shell">
+    <div class="utility-row">
+      <a href="/" class="navbar-logo" aria-label="Daily AI Mail Home">
+        <img src="/daily-ai-mail-logo.svg" class="logo" alt="Daily AI Mail" />
+      </a>
+
+      <div class="utility-actions">
+        <div class="social-links" aria-label="Social links">
+          {
+            socialLinks.map((link) => (
+              <a
+                href={link.href}
+                class="utility-icon-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                title={link.label}
+              >
+                {
+                  link.icon === "linkedin" && (
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A1.97 1.97 0 1 0 5.3 6.94 1.97 1.97 0 0 0 5.25 3ZM20.44 13.02c0-3.47-1.85-5.08-4.33-5.08-2 0-2.9 1.1-3.4 1.88V8.5H9.33V20h3.38v-6.4c0-1.69.32-3.33 2.41-3.33 2.06 0 2.09 1.93 2.09 3.44V20h3.38v-6.98Z"></path>
+                    </svg>
+                  )
+                }
+                {
+                  link.icon === "facebook" && (
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M13.5 21v-7.27h2.45l.37-2.84H13.5V9.08c0-.83.23-1.39 1.42-1.39h1.52V5.15c-.26-.03-1.17-.11-2.23-.11-2.2 0-3.71 1.34-3.71 3.81v2.04H8v2.84h2.5V21h3Z"></path>
+                    </svg>
+                  )
+                }
+                {
+                  link.icon === "x" && (
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M18.9 2H21l-6.87 7.85L22.2 22h-6.32l-4.95-6.5L5.24 22H3.1l7.34-8.39L2 2h6.48l4.47 5.97L18.9 2Zm-1.11 18h1.75L7.52 3.9H5.64L17.79 20Z"></path>
+                    </svg>
+                  )
+                }
+                {
+                  link.icon === "medium" && (
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4.52 7.75A1.1 1.1 0 0 0 4 6.82V6.7h4.56l3.52 7.72 3.1-7.72h4.35v.12a.93.93 0 0 0-.43.88v8.6c0 .42.12.56.43.88v.12h-4.38v-.12c.34-.28.34-.37.34-.88V9.34l-3.88 9.08h-.53L6.57 9.34v5.82c-.1.67.1 1.35.53 1.87v.12H4v-.12c.43-.52.62-1.2.5-1.87V7.75Z"></path>
+                    </svg>
+                  )
+                }
+                {
+                  link.icon === "reddit" && (
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M14.27 15.13a.75.75 0 0 1-1.06 1.06 1.9 1.9 0 0 0-2.68 0 .75.75 0 1 1-1.06-1.06 3.4 3.4 0 0 1 4.8 0Zm-.84-3.38a1.13 1.13 0 1 0 0-2.25 1.13 1.13 0 0 0 0 2.25Zm-3.86-2.25a1.13 1.13 0 1 0 0 2.25 1.13 1.13 0 0 0 0-2.25Zm11.23 2.14a1.8 1.8 0 0 0-3.06-1.28 6.95 6.95 0 0 0-4.88-1.83l.83-2.62 2.23.52a1.6 1.6 0 1 0 .35-1.48l-2.84-.66a.75.75 0 0 0-.89.5l-1.02 3.24a7.08 7.08 0 0 0-4.97 1.84 1.8 1.8 0 1 0-1.06 3.25 4.9 4.9 0 0 0-.03.52c0 2.9 2.87 5.25 6.41 5.25s6.4-2.35 6.4-5.25c0-.17 0-.35-.02-.52a1.8 1.8 0 0 0 1.55-1.78Z"></path>
+                    </svg>
+                  )
+                }
+              </a>
+            ))
+          }
+
+          <a
+            href={GOOGLE_NEWS_URL}
+            class="utility-icon-link utility-icon-link--google"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow on Google News"
+            title="Follow on Google News"
+          >
+            <img
+              src="/badges/google-news-icon.svg"
+              alt=""
+              width="20"
+              height="20"
+              aria-hidden="true"
+            />
+          </a>
+
+          <a
+            href="/rss.xml"
+            class="utility-icon-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="RSS Feed"
+            title="RSS Feed"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.18 17.82a1.82 1.82 0 1 1 0-3.64 1.82 1.82 0 0 1 0 3.64ZM4 9.5v2.73A7.77 7.77 0 0 1 11.77 20h2.73C14.5 13.65 10.35 9.5 4 9.5Zm0-5v2.73c7.86 0 12.27 4.41 12.27 12.27H19C19 10.18 13.82 5 4 4.5Z"></path>
+            </svg>
+          </a>
+
+          <a
+            href="/newsletter"
+            class="newsletter-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Newsletter
+          </a>
+
+          <div class="avatar-wrap desktop-only" id="avatar-wrap">
+            <button
+              class="utility-icon-link avatar-btn"
+              id="avatar-btn"
+              aria-label="Account"
+              aria-haspopup="true"
+              aria-expanded="false"
+              type="button"
+            >
+              <span class="avatar-initials" id="avatar-initials" aria-hidden="true"
+              ></span>
+              <svg
+                id="avatar-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="12" cy="8" r="4"></circle>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"></path>
+              </svg>
+            </button>
+
+            <div class="avatar-dropdown" id="avatar-dropdown" role="menu" hidden>
+              <div id="avatar-guest">
+                <a href="/auth/register" class="avatar-item" role="menuitem">
+                  Create Account
+                </a>
+                <a href="/auth/login" class="avatar-item" role="menuitem">
+                  Sign In
+                </a>
+              </div>
+              <div id="avatar-user" style="display:none;">
+                <p class="avatar-display-name" id="avatar-display-name"></p>
+                <div class="avatar-rule"></div>
+                <form method="POST" action="/auth/logout" style="margin:0;">
+                  <button
+                    type="submit"
+                    class="avatar-item avatar-item--btn"
+                    role="menuitem"
+                  >
+                    Sign Out
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-toolbar">
+          <button
+            class="toolbar-btn"
+            id="search-open-btn-mobile"
+            aria-label="Search"
+            type="button"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="20" y1="20" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <button
+            class="toolbar-btn"
+            id="hamburger-btn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            type="button"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="topics-shell">
+    <div class="topics-row">
+      <ul class="desktop-topics" aria-label="Topic feeds">
+        <li><a href="/news" class="topic-link topic-link--primary">All Feed</a></li>
+        {
+          topicGroups.map((group) => (
+            <li class="topic-item has-dropdown">
+              <a href={group.href} class="topic-link">
+                <span>{group.label}</span>
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M4 6l4 4 4-4"></path>
+                </svg>
+              </a>
+              <ul class="topic-dropdown">
+                {group.items.map((item) => (
+                  <li><a href={item.href}>{item.label}</a></li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+        <li class="topic-item has-dropdown">
+          <a href="/topics" class="topic-link">
+            <span>More Topics</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M4 6l4 4 4-4"></path>
+            </svg>
+          </a>
+          <ul class="topic-dropdown topic-dropdown--more">
+            {
+              moreTopics.map((item) => (
+                <li><a href={item.href}>{item.label}</a></li>
+              ))
+            }
+          </ul>
+        </li>
+      </ul>
+
+      <button
+        class="search-btn desktop-search"
+        id="search-open-btn"
+        aria-label="Search"
+        type="button"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="20" y1="20" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="/news" class="mobile-direct-link">All Feed</a>
+
+    {
+      topicGroups.map((group) => (
+        <details class="mobile-topic-group">
+          <summary>{group.label}</summary>
+          <div class="mobile-topic-links">
+            {group.items.map((item) => (
+              <a href={item.href}>{item.label}</a>
+            ))}
+          </div>
+        </details>
+      ))
+    }
+
+    <details class="mobile-topic-group">
+      <summary>More Topics</summary>
+      <div class="mobile-topic-links">
+        {moreTopics.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </details>
+
+    <div class="mobile-meta-links">
+      <a href="/about-us">About Us</a>
+      <a href="/contact-us">Contact</a>
+      <a href="/newsletter" target="_blank" rel="noopener noreferrer">
+        Newsletter
+      </a>
+    </div>
+
+    <div class="mobile-auth-links">
+      <a id="mobile-signin-item" href="/auth/login">Sign In</a>
+      <a id="mobile-register-item" href="/auth/register">Create Account</a>
+      <form
+        id="mobile-logout-item"
+        method="POST"
+        action="/auth/logout"
+        style="display:none;"
+      >
+        <button type="submit" class="mobile-logout-btn">Sign Out</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div
+  id="search-modal"
+  class="search-modal"
+  aria-modal="true"
+  role="dialog"
+  aria-label="Search Daily AI Mail"
+>
+  <div class="search-backdrop" id="search-backdrop"></div>
+  <div class="search-container">
+    <div id="search"></div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+
+<script>
+  (async () => {
+    try {
+      const res = await fetch("/api/me");
+      const data = (await res.json()) as { user?: any };
+      const user = data.user;
+
+      const avatarBtn = document.getElementById("avatar-btn");
+      const avatarInitials = document.getElementById("avatar-initials");
+      const avatarGuest = document.getElementById("avatar-guest");
+      const avatarUser = document.getElementById("avatar-user");
+      const avatarName = document.getElementById("avatar-display-name");
+
+      const mobileSignin = document.getElementById("mobile-signin-item");
+      const mobileRegister = document.getElementById("mobile-register-item");
+      const mobileLogout = document.getElementById("mobile-logout-item");
+
+      if (user && user.displayName) {
+        const initials =
+          user.avatarInitials ||
+          user.displayName
+            .split(" ")
+            .map((name: string) => name[0])
+            .join("")
+            .toUpperCase()
+            .slice(0, 2);
+
+        if (avatarInitials) avatarInitials.textContent = initials;
+        if (avatarBtn) avatarBtn.classList.add("is-logged-in");
+        if (avatarBtn) avatarBtn.setAttribute("aria-label", user.displayName);
+        if (avatarGuest) avatarGuest.style.display = "none";
+        if (avatarUser) avatarUser.style.display = "";
+        if (avatarName) avatarName.textContent = user.displayName;
+
+        if (mobileSignin) mobileSignin.style.display = "none";
+        if (mobileRegister) mobileRegister.style.display = "none";
+        if (mobileLogout) mobileLogout.style.display = "";
+      } else {
+        if (avatarGuest) avatarGuest.style.display = "";
+        if (avatarUser) avatarUser.style.display = "none";
+      }
+    } catch {
+      // Keep nav functional even if auth state fails to load.
+    }
+  })();
+
+  const avatarBtn = document.getElementById("avatar-btn");
+  const avatarDropdown = document.getElementById("avatar-dropdown");
+
+  if (avatarBtn && avatarDropdown) {
+    avatarBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = !avatarDropdown.hidden;
+      avatarDropdown.hidden = isOpen;
+      avatarBtn.setAttribute("aria-expanded", String(!isOpen));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        !avatarDropdown.hidden &&
+        !avatarDropdown.contains(event.target as Node) &&
+        event.target !== avatarBtn
+      ) {
+        avatarDropdown.hidden = true;
+        avatarBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !avatarDropdown.hidden) {
+        avatarDropdown.hidden = true;
+        avatarBtn.setAttribute("aria-expanded", "false");
+        avatarBtn.focus();
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchModal = document.getElementById("search-modal") as HTMLElement | null;
+    if (searchModal) searchModal.style.display = "none";
+
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const mainNav = document.getElementById("main-nav");
+
+    if (hamburgerBtn && mainNav) {
+      hamburgerBtn.addEventListener("click", () => {
+        const isOpen = mainNav.hasAttribute("data-open");
+        mainNav.toggleAttribute("data-open");
+        hamburgerBtn.setAttribute("aria-expanded", String(!isOpen));
+        hamburgerBtn.setAttribute(
+          "aria-label",
+          isOpen ? "Open menu" : "Close menu",
+        );
+      });
+    }
+
+    const searchOpenBtns = [
+      document.getElementById("search-open-btn"),
+      document.getElementById("search-open-btn-mobile"),
+    ].filter(Boolean) as HTMLElement[];
+    const searchBackdrop = document.getElementById("search-backdrop");
+    const searchEl = document.getElementById("search");
+
+    if (!searchModal || !searchEl || searchOpenBtns.length === 0) return;
+
+    let pagefindInitialised = false;
+
+    function openSearch() {
+      searchModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+
+      if (pagefindInitialised) {
+        (searchModal.querySelector("input[type=text]") as HTMLElement)?.focus();
+        return;
+      }
+
+      const isDev =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+
+      if (isDev) {
+        searchEl.innerHTML = `<div style="padding:32px 24px;color:#6b7280;font-size:14px;font-family:var(--font-mono);text-align:center;line-height:1.9;">Search requires a production build.<br/>Run <code style="color:#111827;background:rgba(245,197,24,0.16);padding:2px 8px;border-radius:4px;">npm run build && npm run preview</code><br/>to test search locally.</div>`;
+        pagefindInitialised = true;
+        return;
+      }
+
+      const PagefindUI = (window as Window & {
+        PagefindUI?: new (options: {
+          element: string;
+          showSubResults: boolean;
+          showImages: boolean;
+          resetStyles: boolean;
+        }) => unknown;
+      }).PagefindUI;
+
+      if (!PagefindUI) {
+        searchEl.innerHTML = `<div style="padding:24px;color:#6b7280;text-align:center;font-family:var(--font-mono);font-size:14px;">Search index not available.</div>`;
+        return;
+      }
+
+      new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false,
+        resetStyles: false,
+      });
+      pagefindInitialised = true;
+      setTimeout(() => {
+        (searchModal.querySelector("input[type=text]") as HTMLElement)?.focus();
+      }, 50);
+    }
+
+    function closeSearch() {
+      searchModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+
+    searchOpenBtns.forEach((button) =>
+      button.addEventListener("click", openSearch),
+    );
+    searchBackdrop?.addEventListener("click", closeSearch);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeSearch();
+      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        openSearch();
+      }
+    });
+  });
+</script>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .utility-shell,
+  .topics-shell {
+    padding: 0 var(--gutter);
+  }
+
+  .utility-row,
+  .topics-row {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .utility-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 0 16px;
+  }
+
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  .navbar-logo .logo {
+    width: auto;
+    height: clamp(56px, 7vw, 78px);
+  }
+
+  .utility-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .utility-icon-link,
+  .toolbar-btn,
+  .search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-base);
+    color: var(--color-text-primary);
+    transition:
+      border-color var(--transition),
+      background var(--transition),
+      color var(--transition),
+      transform var(--transition);
+  }
+
+  .utility-icon-link:hover,
+  .toolbar-btn:hover,
+  .search-btn:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-gold);
+    background: rgba(245, 197, 24, 0.12);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .utility-icon-link svg,
+  .toolbar-btn svg,
+  .search-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .utility-icon-link svg[viewBox="0 0 24 24"][aria-hidden="true"] {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  .utility-icon-link--google img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .newsletter-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 18px;
+    border: 1px solid #d7b200;
+    background: #f5c518;
+    color: #111827;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .newsletter-link:hover {
+    color: #111827;
+    background: #e7b700;
+    text-decoration: none;
+  }
+
+  .topics-shell {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .topics-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .desktop-topics {
+    display: flex;
+    align-items: stretch;
+    flex: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .desktop-topics::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topic-item,
+  .desktop-topics > li {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .topic-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 56px;
+    padding: 0 18px;
+    border-right: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .desktop-topics > li:first-child .topic-link {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .topic-link:hover {
+    background: rgba(245, 197, 24, 0.08);
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .topic-link--primary {
+    font-weight: 700;
+  }
+
+  .topic-link svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+  }
+
+  .topic-dropdown {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 1px);
+    min-width: 220px;
+    padding: 10px;
+    margin: 0;
+    list-style: none;
+    background: rgba(255, 255, 255, 0.99);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 18px 48px rgba(17, 24, 39, 0.12);
+    display: none;
+  }
+
+  .topic-dropdown li a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 10px;
+    color: var(--color-text-primary);
+    font-size: 14px;
+  }
+
+  .topic-dropdown li a:hover {
+    background: rgba(245, 197, 24, 0.12);
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .has-dropdown:hover .topic-dropdown,
+  .has-dropdown:focus-within .topic-dropdown {
+    display: block;
+  }
+
+  .desktop-search {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 0;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .avatar-wrap {
+    position: relative;
+  }
+
+  .avatar-btn {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .avatar-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  .avatar-btn.is-logged-in {
+    background: #111827;
+    border-color: #111827;
+    color: #ffffff;
+  }
+
+  .avatar-initials {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .avatar-btn.is-logged-in #avatar-icon {
+    display: none;
+  }
+
+  .avatar-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 220px;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: 0 18px 48px rgba(17, 24, 39, 0.14);
+  }
+
+  .avatar-item {
+    display: block;
+    padding: 10px 12px;
+    color: var(--color-text-primary);
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .avatar-item:hover {
+    background: rgba(245, 197, 24, 0.12);
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .avatar-item--btn {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .avatar-display-name {
+    padding: 8px 12px 4px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+  }
+
+  .avatar-rule {
+    border-top: 1px solid var(--color-border);
+    margin: 6px 0;
+  }
+
+  .mobile-toolbar,
+  .mobile-nav {
+    display: none;
+  }
+
+  .mobile-toolbar {
+    gap: 8px;
+  }
+
+  .toolbar-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobile-nav {
+    padding: 16px var(--gutter) 24px;
+    border-top: 1px solid var(--color-border);
+    background: #ffffff;
+  }
+
+  .mobile-direct-link,
+  .mobile-meta-links a,
+  .mobile-auth-links a,
+  .mobile-logout-btn,
+  .mobile-topic-links a {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    color: var(--color-text-primary);
+    font-size: 15px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-direct-link {
+    font-weight: 700;
+  }
+
+  .mobile-topic-group {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-topic-group summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .mobile-topic-group summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-topic-group summary::after {
+    content: "+";
+    font-size: 18px;
+    color: var(--color-text-secondary);
+  }
+
+  .mobile-topic-group[open] summary::after {
+    content: "-";
+  }
+
+  .mobile-topic-links {
+    padding-bottom: 6px;
+  }
+
+  .mobile-topic-links a {
+    padding-left: 14px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  .mobile-meta-links,
+  .mobile-auth-links {
+    margin-top: 10px;
+  }
+
+  .mobile-logout-btn {
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    text-align: left;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  nav[data-open] .mobile-nav {
+    display: block;
+  }
+
+  nav[data-open] .toolbar-btn:last-child {
+    border-color: var(--color-gold);
+    background: rgba(245, 197, 24, 0.12);
+  }
+
+  .search-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 88px;
+  }
+
+  .search-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.54);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .search-container {
+    position: relative;
+    width: min(680px, calc(100vw - 32px));
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    box-shadow: 0 28px 80px rgba(17, 24, 39, 0.18);
+    overflow: hidden;
+  }
+
+  #search {
+    padding: 16px;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+  }
+
+  #search :global(.pagefind-ui__search-input) {
+    width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--color-text-primary);
+    font-size: 16px;
+    margin-bottom: 18px;
+    outline: none;
+  }
+
+  #search :global(.pagefind-ui__search-input:focus) {
+    border-color: var(--color-gold);
+  }
+
+  #search :global(.pagefind-ui__search-clear) {
+    background: none;
+    border: none;
+    color: var(--color-text-hint);
+    cursor: pointer;
+  }
+
+  #search :global(.pagefind-ui__result-link) {
+    display: block;
+    padding: 14px;
+    border-radius: 12px;
+    color: var(--color-text-primary);
+  }
+
+  #search :global(.pagefind-ui__result-link:hover) {
+    background: rgba(245, 197, 24, 0.08);
+    text-decoration: none;
+  }
+
+  #search :global(.pagefind-ui__result-title) {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  #search :global(.pagefind-ui__result-excerpt) {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+  }
+
+  #search :global(.pagefind-ui__result-excerpt mark) {
+    background: rgba(245, 197, 24, 0.2);
+    color: #8a5e00;
+    padding: 0 2px;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 1120px) {
+    .utility-row {
+      align-items: flex-start;
+    }
+
+    .utility-actions {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .social-links {
+      justify-content: flex-end;
+    }
+  }
+
+  @media (max-width: 920px) {
+    .utility-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+    }
+
+    .navbar-logo {
+      justify-content: center;
+    }
+
+    .utility-actions {
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .social-links {
+      justify-content: center;
+    }
+
+    .desktop-only,
+    .topics-shell {
+      display: none;
+    }
+
+    .mobile-toolbar {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .utility-shell {
+      padding-top: 4px;
+    }
+
+    .navbar-logo .logo {
+      height: 60px;
+    }
+
+    .social-links {
+      gap: 8px;
+    }
+
+    .utility-icon-link,
+    .toolbar-btn {
+      width: 38px;
+      height: 38px;
+    }
+
+    .newsletter-link {
+      width: 100%;
+    }
+  }
+</style>

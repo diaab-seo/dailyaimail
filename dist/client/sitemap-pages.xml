@@ -58,6 +58,21 @@
       <loc>https://dailyaimail.news/topics/big-tech-ai</loc>
     </url>
     <url>
+      <loc>https://dailyaimail.news/topics/ai-security</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/enterprise-ai</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/llm-security</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/ai-governance</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/responsible-ai</loc>
+    </url>
+    <url>
       <loc>https://dailyaimail.news/topics/openai</loc>
     </url>
     <url>
@@ -89,12 +104,6 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/google-ai</loc>
-    </url>
-    <url>
-      <loc>https://dailyaimail.news/topics/enterprise-ai</loc>
-    </url>
-    <url>
-      <loc>https://dailyaimail.news/topics/ai-security</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/ai-tools-and-apps</loc>
@@ -236,6 +245,9 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/news/anthropic-pro-subscribers-peak-hours-usage-backlash</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/news/best-practices-secure-ai-systems</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/news/chatgpt-ecommerce-pivot-instant-checkout</loc>

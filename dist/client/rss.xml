@@ -11,6 +11,18 @@
         <language>en</language>
         <atom:link href="https://dailyaimail.news/rss.xml" rel="self" type="application/rss+xml" />
         <item>
+            <title><![CDATA[Best Practices To Secure AI Systems: A Comprehensive Guide for Every Team]]></title>
+            <link><![CDATA[https://dailyaimail.news/news/best-practices-secure-ai-systems]]></link>
+            <description><![CDATA[AI systems introduce attack surfaces that traditional security frameworks were never built to handle. This guide covers every layer of AI security — from model training and API exposure to prompt injection, supply chain risk, and governance — with actionable steps for technical and non-technical teams alike.]]></description>
+            <pubDate>Fri, 03 Apr 2026 13:35:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/best-practices-secure-ai-systems]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/best-practices-secure-ai-systems.png" />
+                <media:content url="https://dailyaimail.news/images/best-practices-secure-ai-systems.png" medium="image">
+                    <media:title type="html"><![CDATA[best-practices-secure-ai-systems.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
             <title><![CDATA[Gemma 4: Byte for Byte, the Most Capable Open Models Google Has Ever Built]]></title>
             <link><![CDATA[https://dailyaimail.news/news/gemma-4-most-capable-open-models-google]]></link>
             <description><![CDATA[Google has released Gemma 4, its most capable open model family yet — four sizes from edge-optimized 2B to a 31B dense model, all under Apache 2.0 and built on the same research that powers Gemini 3.]]></description>
