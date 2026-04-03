@@ -4,6 +4,19 @@
   xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
   <url>
+    <loc>https://dailyaimail.news/news/best-practices-secure-ai-systems</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Daily AI Mail</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03T13:35:00.000Z</news:publication_date>
+      <news:title>Best Practices To Secure AI Systems: A Comprehensive Guide for Every Team</news:title>
+      <news:keywords>best practices to secure AI systems, how to secure AI models, AI security framework, LLM security best practices, securing generative AI applications, AI threat mitigation, prompt injection prevention, AI governance security, enterprise AI security, how to protect AI from attacks, AI model security checklist, securing AI APIs</news:keywords>
+    </news:news>
+    <lastmod>2026-04-03T00:00:00.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://dailyaimail.news/news/gemma-4-most-capable-open-models-google</loc>
     <news:news>
       <news:publication>
@@ -41,44 +54,5 @@
       <news:keywords>Meta Avocado AI model, Meta AI strategy, Meta open source AI, Llama 4 Meta, Meta vs Google AI</news:keywords>
     </news:news>
     <lastmod>2026-04-02T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/news/oracle-layoffs-ai-spending</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01T13:10:00.000Z</news:publication_date>
-      <news:title>Oracle Cuts Thousands of Jobs as It Bets Billions on AI Infrastructure</news:title>
-      <news:keywords>Oracle layoffs 2026, Oracle job cuts AI, Oracle datacentre spending, Oracle OpenAI deal, tech layoffs 2026</news:keywords>
-    </news:news>
-    <lastmod>2026-04-01T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/news/claude-mythos-capybara-leak-anthropic-frontier-model</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01T12:00:00.000Z</news:publication_date>
-      <news:title>Claude Mythos Leaked: Anthropic&apos;s Most Powerful Model Yet Poses &apos;Unprecedented Cybersecurity Risk&apos;</news:title>
-      <news:keywords>Claude Mythos, Anthropic Capybara model, Claude Mythos leak, Anthropic frontier model 2026, Claude cybersecurity risk</news:keywords>
-    </news:news>
-    <lastmod>2026-04-01T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/news/openai-122-billion-funding-round</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01T10:00:00.000Z</news:publication_date>
-      <news:title>OpenAI Raises $122 Billion to Accelerate the Next Phase of AI</news:title>
-      <news:keywords>OpenAI funding round 2026, OpenAI $122 billion, OpenAI valuation $852 billion, SoftBank OpenAI investment, ChatGPT weekly active users, OpenAI superapp, GPT-5.4, OpenAI enterprise revenue</news:keywords>
-    </news:news>
-    <lastmod>2026-04-01T00:00:00.000Z</lastmod>
   </url>
 </urlset>
