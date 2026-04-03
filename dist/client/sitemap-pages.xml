@@ -109,6 +109,15 @@
       <loc>https://dailyaimail.news/topics/personal-ai</loc>
     </url>
     <url>
+      <loc>https://dailyaimail.news/topics/vertex-ai</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/ai-models</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/machine-learning</loc>
+    </url>
+    <url>
       <loc>https://dailyaimail.news/topics/technology</loc>
     </url>
     <url>
@@ -122,9 +131,6 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/ai-music-generation</loc>
-    </url>
-    <url>
-      <loc>https://dailyaimail.news/topics/vertex-ai</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/quantum-computing</loc>
@@ -143,6 +149,18 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/meta-ai</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/llm</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/ai-strategy</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/open-source-ai</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/ai-industry</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/microsoft-ai</loc>
@@ -166,10 +184,16 @@
       <loc>https://dailyaimail.news/topics/ai-tools-and-apps</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/topics/policy-and-ethics</loc>
+      <loc>https://dailyaimail.news/topics/media</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/topics/ai-strategy</loc>
+      <loc>https://dailyaimail.news/topics/acquisitions</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/silicon-valley</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/topics/policy-and-ethics</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/sora</loc>
@@ -208,82 +232,91 @@
       <loc>https://dailyaimail.news/topics/ipo</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/anthropic-claude-code-auto-mode-autonomous</loc>
+      <loc>https://dailyaimail.news/news/anthropic-claude-code-auto-mode-autonomous</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/anthropic-pro-subscribers-peak-hours-usage-backlash</loc>
+      <loc>https://dailyaimail.news/news/anthropic-pro-subscribers-peak-hours-usage-backlash</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/chatgpt-ecommerce-pivot-instant-checkout</loc>
+      <loc>https://dailyaimail.news/news/chatgpt-ecommerce-pivot-instant-checkout</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map</loc>
+      <loc>https://dailyaimail.news/news/claude-code-source-code-leak-npm-source-map</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model</loc>
+      <loc>https://dailyaimail.news/news/claude-mythos-capybara-leak-anthropic-frontier-model</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product</loc>
+      <loc>https://dailyaimail.news/news/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/gemini-business-notebooklm-skills-integration</loc>
+      <loc>https://dailyaimail.news/news/gemini-business-notebooklm-skills-integration</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/gemini-memory-chat-history-import</loc>
+      <loc>https://dailyaimail.news/news/gemini-memory-chat-history-import</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/github-copilot-ai-training-data-opt-out</loc>
+      <loc>https://dailyaimail.news/news/gemma-4-most-capable-open-models-google</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/google-lyria-3-pro-music-generation</loc>
+      <loc>https://dailyaimail.news/news/github-copilot-ai-training-data-opt-out</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/google-quantum-ai-neutral-atom-superconducting</loc>
+      <loc>https://dailyaimail.news/news/google-lyria-3-pro-music-generation</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/google-turboquant-ai-memory-compression-algorithm</loc>
+      <loc>https://dailyaimail.news/news/google-quantum-ai-neutral-atom-superconducting</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/granola-series-c-enterprise-ai-spaces</loc>
+      <loc>https://dailyaimail.news/news/google-turboquant-ai-memory-compression-algorithm</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/meta-texas-ai-data-center-10-billion</loc>
+      <loc>https://dailyaimail.news/news/granola-series-c-enterprise-ai-spaces</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/microsoft-copilot-cowork-launch-early-access</loc>
+      <loc>https://dailyaimail.news/news/meta-texas-ai-data-center-10-billion</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/mistral-ai-830m-debt-paris-data-center</loc>
+      <loc>https://dailyaimail.news/news/metas-unreleased-avocado-ai-model-reveals-strategy</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/mistral-voxtral-4b-tts-2603-open-weights</loc>
+      <loc>https://dailyaimail.news/news/microsoft-copilot-cowork-launch-early-access</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/openai-122-billion-funding-round</loc>
+      <loc>https://dailyaimail.news/news/mistral-ai-830m-debt-paris-data-center</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/openai-adult-mode-paused-strategy-pivot</loc>
+      <loc>https://dailyaimail.news/news/mistral-voxtral-4b-tts-2603-open-weights</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down</loc>
+      <loc>https://dailyaimail.news/news/openai-122-billion-funding-round</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/openai-safety-bug-bounty-program-launch</loc>
+      <loc>https://dailyaimail.news/news/openai-acquires-tbpn-tech-talk-show</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid</loc>
+      <loc>https://dailyaimail.news/news/openai-adult-mode-paused-strategy-pivot</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/oracle-layoffs-ai-spending</loc>
+      <loc>https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/rebellions-400m-pre-ipo-ai-chip-rebelrack</loc>
+      <loc>https://dailyaimail.news/news/openai-safety-bug-bounty-program-launch</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/sora-shutdown-creator-impact-alternatives-2026</loc>
+      <loc>https://dailyaimail.news/news/openclaw-claude-code-ai-engineering-team-justpaid</loc>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/stanford-ai-sycophancy-study-self-centered</loc>
+      <loc>https://dailyaimail.news/news/oracle-layoffs-ai-spending</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/news/rebellions-400m-pre-ipo-ai-chip-rebelrack</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/news/sora-shutdown-creator-impact-alternatives-2026</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/news/stanford-ai-sycophancy-study-self-centered</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/explainers/ai-agent</loc>

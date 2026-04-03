@@ -11,12 +11,48 @@
         <language>en</language>
         <atom:link href="https://dailyaimail.news/rss.xml" rel="self" type="application/rss+xml" />
         <item>
+            <title><![CDATA[Gemma 4: Byte for Byte, the Most Capable Open Models Google Has Ever Built]]></title>
+            <link><![CDATA[https://dailyaimail.news/news/gemma-4-most-capable-open-models-google]]></link>
+            <description><![CDATA[Google has released Gemma 4, its most capable open model family yet — four sizes from edge-optimized 2B to a 31B dense model, all under Apache 2.0 and built on the same research that powers Gemini 3.]]></description>
+            <pubDate>Thu, 02 Apr 2026 22:45:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/gemma-4-most-capable-open-models-google]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/gemma-4-most-capable-open-models-google.png" />
+                <media:content url="https://dailyaimail.news/images/gemma-4-most-capable-open-models-google.png" medium="image">
+                    <media:title type="html"><![CDATA[gemma-4-most-capable-open-models-google.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
+            <title><![CDATA[OpenAI Buys Silicon Valley Talk Show TBPN in an Unexpected Move Into Media]]></title>
+            <link><![CDATA[https://dailyaimail.news/news/openai-acquires-tbpn-tech-talk-show]]></link>
+            <description><![CDATA[OpenAI has acquired TBPN, a tech talk show with a loyal Silicon Valley following, in a surprise move that signals the company's intent to shape the public conversation around AI — not just build it.]]></description>
+            <pubDate>Thu, 02 Apr 2026 19:05:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/openai-acquires-tbpn-tech-talk-show]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/openai-acquires-tbpn-tech-talk-show.png" />
+                <media:content url="https://dailyaimail.news/images/openai-acquires-tbpn-tech-talk-show.png" medium="image">
+                    <media:title type="html"><![CDATA[openai-acquires-tbpn-tech-talk-show.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
+            <title><![CDATA[What Meta's Unreleased AI Model 'Avocado' Reveals About Its Strategy]]></title>
+            <link><![CDATA[https://dailyaimail.news/news/metas-unreleased-avocado-ai-model-reveals-strategy]]></link>
+            <description><![CDATA[Meta's next-generation AI model 'Avocado' has been delayed, underperforms rivals in internal tests, and may temporarily license Google's Gemini — raising serious questions about where Meta's AI strategy is actually headed.]]></description>
+            <pubDate>Thu, 02 Apr 2026 19:00:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/metas-unreleased-avocado-ai-model-reveals-strategy]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/metas-unreleased-avocado-ai-model-reveals-strategy.png" />
+                <media:content url="https://dailyaimail.news/images/metas-unreleased-avocado-ai-model-reveals-strategy.png" medium="image">
+                    <media:title type="html"><![CDATA[metas-unreleased-avocado-ai-model-reveals-strategy.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
             <title><![CDATA[Oracle Cuts Thousands of Jobs as It Bets Billions on AI Infrastructure]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/oracle-layoffs-ai-spending]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/oracle-layoffs-ai-spending]]></link>
             <description><![CDATA[Oracle has begun laying off thousands of its 160,000-person workforce as the $420bn business software giant accelerates spending on datacentres to compete with Alphabet and Amazon — and fund a $300bn deal with OpenAI. About 10,000 employees are reported to have already lost their jobs.]]></description>
             <pubDate>Wed, 01 Apr 2026 13:10:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/oracle-layoffs-ai-spending]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/oracle-layoffs-ai-spending]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/oracle-layoffs-ai-spending.png" />
                 <media:content url="https://dailyaimail.news/images/oracle-layoffs-ai-spending.png" medium="image">
                     <media:title type="html"><![CDATA[oracle-layoffs-ai-spending.png]]></media:title>
@@ -24,11 +60,11 @@
         </item>
         <item>
             <title><![CDATA[Claude Mythos Leaked: Anthropic's Most Powerful Model Yet Poses 'Unprecedented Cybersecurity Risk']]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/claude-mythos-capybara-leak-anthropic-frontier-model]]></link>
             <description><![CDATA[A CMS misconfiguration exposed nearly 3,000 internal Anthropic assets, including a draft blog post describing Claude Mythos — a new model tier above Opus that the company itself warns is 'far ahead of any other AI model in cyber capabilities.' Anthropic has confirmed the model exists.]]></description>
             <pubDate>Wed, 01 Apr 2026 12:00:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/claude-mythos-capybara-leak-anthropic-frontier-model]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/claude-mythos-capybara-leak-anthropic-frontier-model.png" />
                 <media:content url="https://dailyaimail.news/images/claude-mythos-capybara-leak-anthropic-frontier-model.png" medium="image">
                     <media:title type="html"><![CDATA[claude-mythos-capybara-leak-anthropic-frontier-model.png]]></media:title>
@@ -36,11 +72,11 @@
         </item>
         <item>
             <title><![CDATA[OpenAI Raises $122 Billion to Accelerate the Next Phase of AI]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/openai-122-billion-funding-round]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/openai-122-billion-funding-round]]></link>
             <description><![CDATA[At a post-money valuation of $852 billion, OpenAI's latest round — anchored by SoftBank, Amazon, NVIDIA, and Microsoft — positions the company to scale compute, unify its product surface into an AI superapp, and reach $2 billion in monthly revenue.]]></description>
             <pubDate>Wed, 01 Apr 2026 10:00:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/openai-122-billion-funding-round]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/openai-122-billion-funding-round]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/openai-122-billion-funding-round.png" />
                 <media:content url="https://dailyaimail.news/images/openai-122-billion-funding-round.png" medium="image">
                     <media:title type="html"><![CDATA[openai-122-billion-funding-round.png]]></media:title>
@@ -48,11 +84,11 @@
         </item>
         <item>
             <title><![CDATA[Claude Code Leaks Its Own Source Code for the Second Time in a Year via npm Source Maps]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/claude-code-source-code-leak-npm-source-map]]></link>
             <description><![CDATA[A 60MB source-map file included in Claude Code v2.1.88 exposed 1,906 proprietary TypeScript source files on the public npm registry — the same packaging oversight that struck Anthropic in February 2025.]]></description>
             <pubDate>Tue, 31 Mar 2026 12:03:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/claude-code-source-code-leak-npm-source-map]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/claude-code-source-code-leak-npm-source-map.png" />
                 <media:content url="https://dailyaimail.news/images/claude-code-source-code-leak-npm-source-map.png" medium="image">
                     <media:title type="html"><![CDATA[claude-code-source-code-leak-npm-source-map.png]]></media:title>
@@ -60,11 +96,11 @@
         </item>
         <item>
             <title><![CDATA[How One Startup Used OpenClaw and Claude Code to Build a 24/7 AI Engineering Team]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/openclaw-claude-code-ai-engineering-team-justpaid]]></link>
             <description><![CDATA[JustPaid's CTO replaced most of his dev workflow with seven AI agents running on OpenClaw and Anthropic's Claude Code — delivering 10 major features in a month and training a new human hire almost entirely through AI.]]></description>
             <pubDate>Tue, 31 Mar 2026 12:00:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/openclaw-claude-code-ai-engineering-team-justpaid]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/openclaw-claude-code-ai-engineering-team-justpaid.png" />
                 <media:content url="https://dailyaimail.news/images/openclaw-claude-code-ai-engineering-team-justpaid.png" medium="image">
                     <media:title type="html"><![CDATA[openclaw-claude-code-ai-engineering-team-justpaid.png]]></media:title>
@@ -72,11 +108,11 @@
         </item>
         <item>
             <title><![CDATA[Microsoft Copilot Cowork Launches in Early Access With Critique and Model Council]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/microsoft-copilot-cowork-launch-early-access]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/microsoft-copilot-cowork-launch-early-access]]></link>
             <description><![CDATA[Microsoft's Copilot Cowork is now live in Frontier early access, bringing agentic task handling to Microsoft 365 alongside two major Researcher upgrades: a dual-model Critique layer and a side-by-side Model Council.]]></description>
             <pubDate>Tue, 31 Mar 2026 00:00:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/microsoft-copilot-cowork-launch-early-access]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/microsoft-copilot-cowork-launch-early-access]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/microsoft-copilot-cowork-launch-early-access.png" />
                 <media:content url="https://dailyaimail.news/images/microsoft-copilot-cowork-launch-early-access.png" medium="image">
                     <media:title type="html"><![CDATA[microsoft-copilot-cowork-launch-early-access.png]]></media:title>
@@ -84,11 +120,11 @@
         </item>
         <item>
             <title><![CDATA[Rebellions Raises $400M at $2.3B Valuation in Pre-IPO Round, Launches Two New Inference Platforms]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/rebellions-400m-pre-ipo-ai-chip-rebelrack]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/rebellions-400m-pre-ipo-ai-chip-rebelrack]]></link>
             <description><![CDATA[The South Korean fabless AI chip startup has now raised $850M total — $650M of it in the last six months — as it readies for a public listing and accelerates expansion into the US, Middle East, and Asia with two new inference infrastructure products.]]></description>
             <pubDate>Mon, 30 Mar 2026 12:00:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/rebellions-400m-pre-ipo-ai-chip-rebelrack]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/rebellions-400m-pre-ipo-ai-chip-rebelrack]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/rebellions-400m-pre-ipo-ai-chip-rebelrack.png" />
                 <media:content url="https://dailyaimail.news/images/rebellions-400m-pre-ipo-ai-chip-rebelrack.png" medium="image">
                     <media:title type="html"><![CDATA[rebellions-400m-pre-ipo-ai-chip-rebelrack.png]]></media:title>
@@ -96,11 +132,11 @@
         </item>
         <item>
             <title><![CDATA[Mistral AI Raises $830M in Debt to Build Its Own Data Center Near Paris]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/mistral-ai-830m-debt-paris-data-center]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/mistral-ai-830m-debt-paris-data-center]]></link>
             <description><![CDATA[The French AI lab is financing a new Nvidia-powered data center in Bruyères-le-Châtel, targeting Q2 2026 operability — part of a broader push to deploy 200MW of European compute capacity by 2027.]]></description>
             <pubDate>Mon, 30 Mar 2026 12:00:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/mistral-ai-830m-debt-paris-data-center]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/mistral-ai-830m-debt-paris-data-center]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/mistral-ai-830m-debt-paris-data-center.png" />
                 <media:content url="https://dailyaimail.news/images/mistral-ai-830m-debt-paris-data-center.png" medium="image">
                     <media:title type="html"><![CDATA[mistral-ai-830m-debt-paris-data-center.png]]></media:title>
@@ -108,11 +144,11 @@
         </item>
         <item>
             <title><![CDATA[Meet Voxtral: Mistral's Open-Weights TTS Model That Wants to Power Every Voice Agent on the Planet]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/mistral-voxtral-4b-tts-2603-open-weights]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/mistral-voxtral-4b-tts-2603-open-weights]]></link>
             <description><![CDATA[Mistral just released Voxtral 4B TTS 2603 — a fast, open-weights text-to-speech model with 20 preset voices, 9 languages, 70ms latency, and production-grade performance that runs on a single GPU. Here's everything it can do, who it's built for, and why it matters.]]></description>
             <pubDate>Sun, 29 Mar 2026 21:10:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/mistral-voxtral-4b-tts-2603-open-weights]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/mistral-voxtral-4b-tts-2603-open-weights]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/mistral-voxtral-4b-tts-2603-open-weights.png" />
                 <media:content url="https://dailyaimail.news/images/mistral-voxtral-4b-tts-2603-open-weights.png" medium="image">
                     <media:title type="html"><![CDATA[mistral-voxtral-4b-tts-2603-open-weights.png]]></media:title>
@@ -120,11 +156,11 @@
         </item>
         <item>
             <title><![CDATA[Gemini for Business Is Quietly Getting NotebookLM Integration and a Skills Layer — Here's What's Surfacing in the Builds]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/gemini-business-notebooklm-skills-integration]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/gemini-business-notebooklm-skills-integration]]></link>
             <description><![CDATA[Hidden features in recent Gemini for Business builds point to deeper NotebookLM integration, a pre-built skills library from Google, and a no-code Skill Architect tool — moves that would bring the Business tier closer to parity with Enterprise and push directly into Microsoft's turf.]]></description>
             <pubDate>Sun, 29 Mar 2026 21:01:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/gemini-business-notebooklm-skills-integration]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/gemini-business-notebooklm-skills-integration]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/gemini-business-notebooklm-skills-integration.png" />
                 <media:content url="https://dailyaimail.news/images/gemini-business-notebooklm-skills-integration.png" medium="image">
                     <media:title type="html"><![CDATA[gemini-business-notebooklm-skills-integration.png]]></media:title>
@@ -132,11 +168,11 @@
         </item>
         <item>
             <title><![CDATA[Anthropic's Paying Customers Are Revolting — and They Have a Point]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/anthropic-pro-subscribers-peak-hours-usage-backlash]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/anthropic-pro-subscribers-peak-hours-usage-backlash]]></link>
             <description><![CDATA[Pro and Max subscribers are canceling in visible numbers after discovering that Claude's peak-hour throttling leaves free users more functional than those paying $20–$200 a month — with no in-app warning, no token counter, and no published usage budgets. A viral Reddit open letter is demanding answers.]]></description>
             <pubDate>Sun, 29 Mar 2026 20:38:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/anthropic-pro-subscribers-peak-hours-usage-backlash]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/anthropic-pro-subscribers-peak-hours-usage-backlash]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/anthropic-pro-subscribers-peak-hours-usage-backlash.png" />
                 <media:content url="https://dailyaimail.news/images/anthropic-pro-subscribers-peak-hours-usage-backlash.png" medium="image">
                     <media:title type="html"><![CDATA[anthropic-pro-subscribers-peak-hours-usage-backlash.png]]></media:title>
@@ -144,11 +180,11 @@
         </item>
         <item>
             <title><![CDATA[Stanford Study: AI Chatbots Are Making People More Self-Centered — and Tech Companies Have Every Reason to Keep It That Way]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/stanford-ai-sycophancy-study-self-centered]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/stanford-ai-sycophancy-study-self-centered]]></link>
             <description><![CDATA[A peer-reviewed Stanford paper published in Science finds that AI sycophancy doesn't just flatter users — it makes them less likely to apologize, more morally rigid, and increasingly dependent on machine validation over human feedback. The researchers say it's a safety issue that needs regulation.]]></description>
             <pubDate>Sun, 29 Mar 2026 19:47:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/stanford-ai-sycophancy-study-self-centered]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/stanford-ai-sycophancy-study-self-centered]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/stanford-ai-sycophancy-study-self-centered.png" />
                 <media:content url="https://dailyaimail.news/images/stanford-ai-sycophancy-study-self-centered.png" medium="image">
                     <media:title type="html"><![CDATA[stanford-ai-sycophancy-study-self-centered.png]]></media:title>
@@ -156,11 +192,11 @@
         </item>
         <item>
             <title><![CDATA[Anthropic Gives Claude Code an Autonomous Mode — With a Safety Net Built In]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/anthropic-claude-code-auto-mode-autonomous]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/anthropic-claude-code-auto-mode-autonomous]]></link>
             <description><![CDATA[Anthropic's new 'auto mode' for Claude Code lets the AI decide which actions to take without waiting for human approval, using an AI safety layer to filter risky behavior in real time.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:32:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/anthropic-claude-code-auto-mode-autonomous]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/anthropic-claude-code-auto-mode-autonomous]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/anthropic-claude-code-auto-mode-autonomous.png" />
                 <media:content url="https://dailyaimail.news/images/anthropic-claude-code-auto-mode-autonomous.png" medium="image">
                     <media:title type="html"><![CDATA[anthropic-claude-code-auto-mode-autonomous.png]]></media:title>
@@ -168,11 +204,11 @@
         </item>
         <item>
             <title><![CDATA[ChatGPT's Amazon Ambitions Falter as OpenAI Quietly Retreats from Direct Checkout]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/chatgpt-ecommerce-pivot-instant-checkout]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/chatgpt-ecommerce-pivot-instant-checkout]]></link>
             <description><![CDATA[OpenAI is stepping back from its vision of turning ChatGPT into a full shopping destination, pivoting from native checkout toward product discovery as users prove reluctant to buy inside the chatbot.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:30:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/chatgpt-ecommerce-pivot-instant-checkout]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/chatgpt-ecommerce-pivot-instant-checkout]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/chatgpt-ecommerce-pivot-instant-checkout.png" />
                 <media:content url="https://dailyaimail.news/images/chatgpt-ecommerce-pivot-instant-checkout.png" medium="image">
                     <media:title type="html"><![CDATA[chatgpt-ecommerce-pivot-instant-checkout.png]]></media:title>
@@ -180,11 +216,11 @@
         </item>
         <item>
             <title><![CDATA[Databricks Acquires Two Startups to Power Its New AI-Driven Security Product]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product]]></link>
             <description><![CDATA[Flush with capital from a $5 billion raise, Databricks is moving into enterprise security with Lakewatch, a new SIEM platform backed by Claude and two quiet acquisitions.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:28:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product.png" />
                 <media:content url="https://dailyaimail.news/images/databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product.png" medium="image">
                     <media:title type="html"><![CDATA[databricks-acquires-two-startups-to-power-its-new-ai-driven-security-product.png]]></media:title>
@@ -192,11 +228,11 @@
         </item>
         <item>
             <title><![CDATA[Gemini Can Now Import Your AI Memories and Chat History From Other Apps]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/gemini-memory-chat-history-import]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/gemini-memory-chat-history-import]]></link>
             <description><![CDATA[Google is rolling out memory and chat history import tools for all Gemini consumer accounts, letting users carry their preferences and past conversations from other AI assistants without starting over.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:26:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/gemini-memory-chat-history-import]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/gemini-memory-chat-history-import]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/gemini-memory-chat-history-import.png" />
                 <media:content url="https://dailyaimail.news/images/gemini-memory-chat-history-import.png" medium="image">
                     <media:title type="html"><![CDATA[gemini-memory-chat-history-import.png]]></media:title>
@@ -204,11 +240,11 @@
         </item>
         <item>
             <title><![CDATA[GitHub Will Use Your Copilot Interactions as AI Training Data — Here's How to Opt Out]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/github-copilot-ai-training-data-opt-out]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/github-copilot-ai-training-data-opt-out]]></link>
             <description><![CDATA[Microsoft is now collecting GitHub Copilot interactions — including code snippets, comments, and file names — to train its AI models, with an opt-out available but enabled by default.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:24:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/github-copilot-ai-training-data-opt-out]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/github-copilot-ai-training-data-opt-out]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/github-copilot-ai-training-data-opt-out.png" />
                 <media:content url="https://dailyaimail.news/images/github-copilot-ai-training-data-opt-out.png" medium="image">
                     <media:title type="html"><![CDATA[github-copilot-ai-training-data-opt-out.png]]></media:title>
@@ -216,11 +252,11 @@
         </item>
         <item>
             <title><![CDATA[Google Launches Lyria 3 Pro: Longer Tracks, Deeper Control, and Enterprise Access]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/google-lyria-3-pro-music-generation]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/google-lyria-3-pro-music-generation]]></link>
             <description><![CDATA[A month after Lyria 3's debut, Google is releasing a Pro tier with three-minute track generation, structural composition control, and rollout across Gemini, Vertex AI, and ProducerAI.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:22:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/google-lyria-3-pro-music-generation]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/google-lyria-3-pro-music-generation]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/google-lyria-3-pro-music-generation.png" />
                 <media:content url="https://dailyaimail.news/images/google-lyria-3-pro-music-generation.png" medium="image">
                     <media:title type="html"><![CDATA[google-lyria-3-pro-music-generation.png]]></media:title>
@@ -228,11 +264,11 @@
         </item>
         <item>
             <title><![CDATA[Google Quantum AI Expands Into Neutral Atom Computing Alongside Its Superconducting Program]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/google-quantum-ai-neutral-atom-superconducting]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/google-quantum-ai-neutral-atom-superconducting]]></link>
             <description><![CDATA[Google Quantum AI is betting on two complementary quantum modalities — superconducting qubits and neutral atoms — to accelerate the path to commercially relevant quantum computers by decade's end.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:20:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/google-quantum-ai-neutral-atom-superconducting]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/google-quantum-ai-neutral-atom-superconducting]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/google-quantum-ai-neutral-atom-superconducting.png" />
                 <media:content url="https://dailyaimail.news/images/google-quantum-ai-neutral-atom-superconducting.png" medium="image">
                     <media:title type="html"><![CDATA[google-quantum-ai-neutral-atom-superconducting.png]]></media:title>
@@ -240,11 +276,11 @@
         </item>
         <item>
             <title><![CDATA[Google's TurboQuant Slashes AI Memory by 6x — Could It End the RAM Crisis?]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/google-turboquant-ai-memory-compression-algorithm]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/google-turboquant-ai-memory-compression-algorithm]]></link>
             <description><![CDATA[Google's new TurboQuant compression algorithm reduces LLM key-value cache memory by at least 6x with zero accuracy loss, delivering up to 8x speedup on H100 GPUs — and rattling memory stock prices on day one.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:18:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/google-turboquant-ai-memory-compression-algorithm]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/google-turboquant-ai-memory-compression-algorithm]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/google-turboquant-ai-memory-compression-algorithm.png" />
                 <media:content url="https://dailyaimail.news/images/google-turboquant-ai-memory-compression-algorithm.png" medium="image">
                     <media:title type="html"><![CDATA[google-turboquant-ai-memory-compression-algorithm.png]]></media:title>
@@ -252,11 +288,11 @@
         </item>
         <item>
             <title><![CDATA[Granola Raises $125M at $1.5B Valuation, Evolving From Meeting Notetaker to Enterprise AI Platform]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/granola-series-c-enterprise-ai-spaces]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/granola-series-c-enterprise-ai-spaces]]></link>
             <description><![CDATA[Backed by Index Ventures and Kleiner Perkins, Granola is moving well beyond transcription — introducing Spaces, dual APIs, and MCP integrations as it bets on context-driven enterprise workflows.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:16:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/granola-series-c-enterprise-ai-spaces]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/granola-series-c-enterprise-ai-spaces]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/granola-series-c-enterprise-ai-spaces.png" />
                 <media:content url="https://dailyaimail.news/images/granola-series-c-enterprise-ai-spaces.png" medium="image">
                     <media:title type="html"><![CDATA[granola-series-c-enterprise-ai-spaces.png]]></media:title>
@@ -264,11 +300,11 @@
         </item>
         <item>
             <title><![CDATA[Meta Raises Texas AI Data Center Investment From $1.5B to $10B as Compute Ambitions Grow]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/meta-texas-ai-data-center-10-billion]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/meta-texas-ai-data-center-10-billion]]></link>
             <description><![CDATA[Meta's El Paso facility has ballooned from a $1.5 billion project to a $10 billion one, with the site now targeting one gigawatt of capacity and 4,000 construction workers — as the company faces mounting cost scrutiny and its first wave of AI-driven layoffs.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:14:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/meta-texas-ai-data-center-10-billion]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/meta-texas-ai-data-center-10-billion]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/meta-texas-ai-data-center-10-billion.png" />
                 <media:content url="https://dailyaimail.news/images/meta-texas-ai-data-center-10-billion.png" medium="image">
                     <media:title type="html"><![CDATA[meta-texas-ai-data-center-10-billion.png]]></media:title>
@@ -276,11 +312,11 @@
         </item>
         <item>
             <title><![CDATA[OpenAI Abandons Its Erotic ChatGPT Mode — The Latest in a Week of Strategic Retreats]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/openai-adult-mode-paused-strategy-pivot]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/openai-adult-mode-paused-strategy-pivot]]></link>
             <description><![CDATA[Adult mode is now indefinitely paused, joining Sora and Instant Checkout on the shelf as OpenAI executes a sweeping pivot away from side projects toward enterprise, coding, and a ChatGPT superapp.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:12:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/openai-adult-mode-paused-strategy-pivot]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/openai-adult-mode-paused-strategy-pivot]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/openai-adult-mode-paused-strategy-pivot.png" />
                 <media:content url="https://dailyaimail.news/images/openai-adult-mode-paused-strategy-pivot.png" medium="image">
                     <media:title type="html"><![CDATA[openai-adult-mode-paused-strategy-pivot.png]]></media:title>
@@ -288,11 +324,11 @@
         </item>
         <item>
             <title><![CDATA[OpenAI Pulls the Plug on Sora: Generative AI Video App Shutting Down]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down]]></link>
             <description><![CDATA[In a surprising move, OpenAI has announced the discontinuation of its text-to-video generation tool, Sora, marking a significant pivot away from its video business.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:10:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/openai-shut-sora-generative-ai-video-app.png" />
                 <media:content url="https://dailyaimail.news/images/openai-shut-sora-generative-ai-video-app.png" medium="image">
                     <media:title type="html"><![CDATA[openai-shut-sora-generative-ai-video-app.png]]></media:title>
@@ -300,11 +336,11 @@
         </item>
         <item>
             <title><![CDATA[OpenAI Launches Safety Bug Bounty Program to Reward Researchers Who Find AI Abuse Risks]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/openai-safety-bug-bounty-program-launch]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/openai-safety-bug-bounty-program-launch]]></link>
             <description><![CDATA[OpenAI is opening a public Safety Bug Bounty program targeting AI-specific misuse scenarios — from agentic prompt injection to platform integrity bypasses — that fall outside traditional security vulnerability scopes.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:08:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/openai-safety-bug-bounty-program-launch]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/openai-safety-bug-bounty-program-launch]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/openai-safety-bug-bounty-program-launch.png" />
                 <media:content url="https://dailyaimail.news/images/openai-safety-bug-bounty-program-launch.png" medium="image">
                     <media:title type="html"><![CDATA[openai-safety-bug-bounty-program-launch.png]]></media:title>
@@ -312,11 +348,11 @@
         </item>
         <item>
             <title><![CDATA[Sora Is Gone: What It Means for Creators and Where to Go Next]]></title>
-            <link><![CDATA[https://dailyaimail.news/articles/sora-shutdown-creator-impact-alternatives-2026]]></link>
+            <link><![CDATA[https://dailyaimail.news/news/sora-shutdown-creator-impact-alternatives-2026]]></link>
             <description><![CDATA[OpenAI's sudden shutdown of Sora leaves thousands of creators mid-workflow. Here's an honest look at the fallout, what was actually lost, and which platforms are ready to fill the gap right now.]]></description>
             <pubDate>Sun, 29 Mar 2026 15:06:00 GMT</pubDate>
             <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
-            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/articles/sora-shutdown-creator-impact-alternatives-2026]]></guid>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/sora-shutdown-creator-impact-alternatives-2026]]></guid>
                 <media:thumbnail url="https://dailyaimail.news/images/sora-shutdown-creator-impact-alternatives-2026.png" />
                 <media:content url="https://dailyaimail.news/images/sora-shutdown-creator-impact-alternatives-2026.png" medium="image">
                     <media:title type="html"><![CDATA[sora-shutdown-creator-impact-alternatives-2026.png]]></media:title>

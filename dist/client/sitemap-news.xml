@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-      <loc>https://dailyaimail.news/articles/claude-code-source-code-leak-npm-source-map</loc>
-      <news:news>
-        <news:publication>
-          <news:name>Daily AI Mail</news:name>
-          <news:language>en</news:language>
-        </news:publication>
-        <news:publication_date>2026-03-31T12:03:00.000Z</news:publication_date>
-        <news:title>Claude Code Leaks Its Own Source Code for the Second Time in a Year via npm Source Maps</news:title>
-      </news:news>
-      <lastmod>2026-03-31T14:03:00+02:00</lastmod>
-    </url>
-    <url>
-      <loc>https://dailyaimail.news/articles/claude-mythos-capybara-leak-anthropic-frontier-model</loc>
+      <loc>https://dailyaimail.news/news/claude-mythos-capybara-leak-anthropic-frontier-model</loc>
       <news:news>
         <news:publication>
           <news:name>Daily AI Mail</news:name>
@@ -25,7 +13,31 @@
       <lastmod>2026-04-01T14:00:00+02:00</lastmod>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/openai-122-billion-funding-round</loc>
+      <loc>https://dailyaimail.news/news/gemma-4-most-capable-open-models-google</loc>
+      <news:news>
+        <news:publication>
+          <news:name>Daily AI Mail</news:name>
+          <news:language>en</news:language>
+        </news:publication>
+        <news:publication_date>2026-04-02T22:45:00.000Z</news:publication_date>
+        <news:title>Gemma 4: Byte for Byte, the Most Capable Open Models Google Has Ever Built</news:title>
+      </news:news>
+      <lastmod>2026-04-03T00:45:00+02:00</lastmod>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/news/metas-unreleased-avocado-ai-model-reveals-strategy</loc>
+      <news:news>
+        <news:publication>
+          <news:name>Daily AI Mail</news:name>
+          <news:language>en</news:language>
+        </news:publication>
+        <news:publication_date>2026-04-02T19:00:00.000Z</news:publication_date>
+        <news:title>What Meta&apos;s Unreleased AI Model &apos;Avocado&apos; Reveals About Its Strategy</news:title>
+      </news:news>
+      <lastmod>2026-04-02T21:00:00+02:00</lastmod>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/news/openai-122-billion-funding-round</loc>
       <news:news>
         <news:publication>
           <news:name>Daily AI Mail</news:name>
@@ -37,19 +49,19 @@
       <lastmod>2026-04-01T12:00:00+02:00</lastmod>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/openclaw-claude-code-ai-engineering-team-justpaid</loc>
+      <loc>https://dailyaimail.news/news/openai-acquires-tbpn-tech-talk-show</loc>
       <news:news>
         <news:publication>
           <news:name>Daily AI Mail</news:name>
           <news:language>en</news:language>
         </news:publication>
-        <news:publication_date>2026-03-31T12:00:00.000Z</news:publication_date>
-        <news:title>How One Startup Used OpenClaw and Claude Code to Build a 24/7 AI Engineering Team</news:title>
+        <news:publication_date>2026-04-02T19:05:00.000Z</news:publication_date>
+        <news:title>OpenAI Buys Silicon Valley Talk Show TBPN in an Unexpected Move Into Media</news:title>
       </news:news>
-      <lastmod>2026-03-31T14:00:00+02:00</lastmod>
+      <lastmod>2026-04-02T21:05:00+02:00</lastmod>
     </url>
     <url>
-      <loc>https://dailyaimail.news/articles/oracle-layoffs-ai-spending</loc>
+      <loc>https://dailyaimail.news/news/oracle-layoffs-ai-spending</loc>
       <news:news>
         <news:publication>
           <news:name>Daily AI Mail</news:name>

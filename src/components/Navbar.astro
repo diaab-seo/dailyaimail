@@ -409,29 +409,34 @@
         return;
       }
 
-      // Production — lazy-load pagefind
-      const pagefindPath = "/pagefind/pagefind-ui.js";
-      // @ts-ignore
-      import(/* @vite-ignore */ pagefindPath)
-        .then(({ PagefindUI }) => {
-          new PagefindUI({
-            element: "#search",
-            showSubResults: true,
-            showImages: false,
-            resetStyles: false,
-          });
-          pagefindInitialised = true;
-          setTimeout(() => {
-            if (searchModal)
-              (
-                searchModal.querySelector("input[type=text]") as HTMLElement
-              )?.focus();
-          }, 50);
-        })
-        .catch((e) => {
-          console.warn("[Search] Pagefind failed to load:", e);
-          searchEl.innerHTML = `<div style="padding:24px;color:#8a95a8;text-align:center;font-family:var(--font-mono);font-size:14px;">Search index not available.</div>`;
-        });
+      const PagefindUI = (window as Window & {
+        PagefindUI?: new (options: {
+          element: string;
+          showSubResults: boolean;
+          showImages: boolean;
+          resetStyles: boolean;
+        }) => unknown;
+      }).PagefindUI;
+
+      if (!PagefindUI) {
+        console.warn("[Search] Pagefind UI script was not found at /pagefind/pagefind-ui.js");
+        searchEl.innerHTML = `<div style="padding:24px;color:#8a95a8;text-align:center;font-family:var(--font-mono);font-size:14px;">Search index not available.</div>`;
+        return;
+      }
+
+      new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false,
+        resetStyles: false,
+      });
+      pagefindInitialised = true;
+      setTimeout(() => {
+        if (searchModal)
+          (
+            searchModal.querySelector("input[type=text]") as HTMLElement
+          )?.focus();
+      }, 50);
     }
 
     function closeSearch() {

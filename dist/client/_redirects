@@ -1,6 +1,9 @@
 /sitemap.xml /sitemap-index.xml 301
 /sitemap-news.xml /news-sitemap.xml 301
 
+# ── Article URL migration: /articles/* → /news/* ──────────────────────────
+/articles/:slug                     /news/:slug                         301
+
 # ── Topic consolidation 301s ──────────────────────────────
 
 # Company/product overlaps
