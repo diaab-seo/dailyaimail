@@ -702,6 +702,7 @@ const moreTopics = [
     align-items: stretch;
     justify-content: space-between;
     gap: 0;
+    overflow: visible;
   }
 
   .desktop-topics {
@@ -711,8 +712,7 @@ const moreTopics = [
     list-style: none;
     margin: 0;
     padding: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
+    overflow: visible;
   }
 
   .desktop-topics::-webkit-scrollbar {
@@ -772,6 +772,7 @@ const moreTopics = [
     border: 1px solid var(--color-border);
     box-shadow: 0 18px 48px rgba(17, 24, 39, 0.12);
     display: none;
+    z-index: 30;
   }
 
   .topic-dropdown li a {
