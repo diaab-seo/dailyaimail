@@ -26,11 +26,11 @@ const schema = {
     "@graph": [
         {
             "@type": "CollectionPage",
-            "@id": `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + "/" : ""}`,
-            url: `${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + "/" : ""}`,
+            "@id": `${SITE_URL}/news${page.currentPage > 1 ? page.currentPage + "/" : ""}`,
+            url: `${SITE_URL}/news${page.currentPage > 1 ? page.currentPage + "/" : ""}`,
             name: `All News${page.currentPage > 1 ? ` — Page ${page.currentPage}` : ""} - Daily AI Mail`,
             description:
-                "Browse the latest artificial intelligence news and analysis.",
+                "Stay informed with the latest developments in artificial intelligence. Explore news, updates, and in-depth analysis on AI technologies, trends, and breakthroughs.",
             isPartOf: { "@id": `${SITE_URL}/#website` },
         },
     ],
@@ -41,7 +41,7 @@ const schema = {
     title={`Latest AI News, Updates And Coverage${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ""} - Daily AI Mail`}
     metaTitle={`Latest AI News, Updates And Coverage${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ""} - Daily AI Mail`}
     description="Browse the latest artificial intelligence news and analysis."
-    canonical={`${SITE_URL}/news/${page.currentPage > 1 ? page.currentPage + "/" : ""}`}
+    canonical={`${SITE_URL}/news${page.currentPage > 1 ? page.currentPage + "/" : ""}`}
 >
     <!-- Add Link Headers -->
     {page.url.prev && <link rel="prev" href={page.url.prev} slot="head" />}
