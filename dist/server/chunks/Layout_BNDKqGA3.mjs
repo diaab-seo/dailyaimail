@@ -1,7 +1,7 @@
 globalThis.process ??= {};
 globalThis.process.env ??= {};
-import { c as createComponent } from "./astro-component_BldU_NTn.mjs";
-import { n as createRenderInstruction, r as renderTemplate, h as addAttribute, m as maybeRenderHead, l as renderComponent, o as renderSlot, p as renderHead } from "./worker-entry_D-QvvVDX.mjs";
+import { c as createComponent } from "./astro-component_CspnrLXO.mjs";
+import { n as createRenderInstruction, r as renderTemplate, h as addAttribute, m as maybeRenderHead, l as renderComponent, o as renderSlot, p as renderHead } from "./worker-entry_cIrlCqGz.mjs";
 async function renderScript(result, id) {
   const inlined = result.inlinedScripts.get(id);
   let content = "";
