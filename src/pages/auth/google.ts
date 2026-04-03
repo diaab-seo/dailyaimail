@@ -13,10 +13,20 @@ import { hashPassword } from "../../lib/password";
 
 const CLIENT_ID = "211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com";
 
+function getSafeRedirectPath(value: FormDataEntryValue | null): string {
+    if (typeof value !== 'string' || !value.startsWith('/')) return '/';
+    if (value.startsWith('//')) return '/';
+    return value;
+}
+
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     try {
         const formData = await request.formData();
         const credential = formData.get('credential');
+        const requestUrl = new URL(request.url);
+        const returnTo = getSafeRedirectPath(
+            formData.get('state') ?? requestUrl.searchParams.get('from'),
+        );
         
         if (!credential || typeof credential !== 'string') {
             return new Response('Missing Google token credential', { status: 400 });
@@ -94,7 +104,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
         await createSession(kv, cookies, sessionUser, { ip, ua });
         await updateLastLogin(db, sessionUser.id);
         
-        return redirect("/");
+        return redirect(returnTo);
     } catch (e: any) {
         return new Response('Internal Server Error: ' + e.message, { status: 500 });
     }

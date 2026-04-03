@@ -117,9 +117,11 @@ export async function approveComment(db: D1Database, commentId: number, adminId:
     ).bind(adminId, commentId).run();
 }
 
-export async function rejectComment(db: D1Database, commentId: number, adminId: number): Promise<void> {
+export async function trashComment(db: D1Database, commentId: number, adminId: number): Promise<void> {
     await db.prepare(
-        `UPDATE comments SET status = 'rejected', approved_by = ?  WHERE id = ?`
+        `UPDATE comments
+         SET status = 'rejected', approved_at = NULL, approved_by = ?
+         WHERE id = ?`
     ).bind(adminId, commentId).run();
 }
 

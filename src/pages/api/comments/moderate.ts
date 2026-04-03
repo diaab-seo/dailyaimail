@@ -3,7 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import { getSession, requireAdmin } from '../../../lib/auth';
-import { approveComment, rejectComment, deleteComment } from '../../../lib/db';
+import { approveComment, trashComment, deleteComment } from '../../../lib/db';
 
 export const POST: APIRoute = async ({ request, cookies }) => {
     const db = (env as any).DB as D1Database;
@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     if (!action || isNaN(commentId)) return new Response(null, { status: 400 });
 
     if (action === 'approve') await approveComment(db, commentId, user!.id);
-    if (action === 'reject') await rejectComment(db, commentId, user!.id);
+    if (action === 'trash') await trashComment(db, commentId, user!.id);
     if (action === 'delete') await deleteComment(db, commentId);
 
     return new Response(null, { status: 302, headers: { Location: '/admin/comments' } });

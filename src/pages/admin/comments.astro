@@ -16,11 +16,12 @@ if (denied) return denied;
 const comments = await getAllCommentsForAdmin(db);
 
 const pending = comments.filter((c) => c.status === "pending");
-const approved = comments.filter((c) => c.status === "approved");
+const published = comments.filter((c) => c.status === "approved");
+const trashed = comments.filter((c) => c.status === "rejected");
 ---
 
 <Layout
-    title="Comment Moderation â€” Daily AI Mail"
+    title="Comment Moderation - Daily AI Mail"
     metaTitle="Comment Moderation"
 >
     <div class="admin-wrap">
@@ -28,9 +29,8 @@ const approved = comments.filter((c) => c.status === "approved");
             <h1 class="admin-title">Comment Moderation</h1>
             <div class="admin-stats">
                 <span class="stat stat--pending">{pending.length} Pending</span>
-                <span class="stat stat--approved"
-                    >{approved.length} Approved</span
-                >
+                <span class="stat stat--approved">{published.length} Published</span>
+                <span class="stat stat--trashed">{trashed.length} Trashed</span>
             </div>
         </header>
 
@@ -43,83 +43,24 @@ const approved = comments.filter((c) => c.status === "approved");
                             <div class="admin-comment admin-comment--pending">
                                 <div class="ac-meta">
                                     <strong>{c.display_name}</strong>
-                                    <span class="ac-sep">Â·</span>
-                                    <a
-                                        href={`/news/${c.article_slug}`}
-                                        class="ac-article"
-                                    >
+                                    <span class="ac-sep">·</span>
+                                    <a href={`/news/${c.article_slug}`} class="ac-article">
                                         {c.article_slug}
                                     </a>
-                                    <span class="ac-sep">Â·</span>
+                                    <span class="ac-sep">·</span>
                                     <time>{formatDate(c.created_at)}</time>
                                 </div>
                                 <p class="ac-body">{c.body}</p>
                                 <div class="ac-actions">
-                                    <form
-                                        method="POST"
-                                        action="/api/comments/moderate"
-                                        style="display:inline;"
-                                    >
-                                        <input
-                                            type="hidden"
-                                            name="commentId"
-                                            value={c.id}
-                                        />
-                                        <input
-                                            type="hidden"
-                                            name="action"
-                                            value="approve"
-                                        />
-                                        <button
-                                            type="submit"
-                                            class="ac-btn ac-btn--approve"
-                                        >
-                                            âœ“ Approve
-                                        </button>
+                                    <form method="POST" action="/api/comments/moderate" style="display:inline;">
+                                        <input type="hidden" name="commentId" value={c.id} />
+                                        <input type="hidden" name="action" value="approve" />
+                                        <button type="submit" class="ac-btn ac-btn--approve">Publish</button>
                                     </form>
-                                    <form
-                                        method="POST"
-                                        action="/api/comments/moderate"
-                                        style="display:inline;"
-                                    >
-                                        <input
-                                            type="hidden"
-                                            name="commentId"
-                                            value={c.id}
-                                        />
-                                        <input
-                                            type="hidden"
-                                            name="action"
-                                            value="reject"
-                                        />
-                                        <button
-                                            type="submit"
-                                            class="ac-btn ac-btn--reject"
-                                        >
-                                            âœ— Reject
-                                        </button>
-                                    </form>
-                                    <form
-                                        method="POST"
-                                        action="/api/comments/moderate"
-                                        style="display:inline;"
-                                    >
-                                        <input
-                                            type="hidden"
-                                            name="commentId"
-                                            value={c.id}
-                                        />
-                                        <input
-                                            type="hidden"
-                                            name="action"
-                                            value="delete"
-                                        />
-                                        <button
-                                            type="submit"
-                                            class="ac-btn ac-btn--delete"
-                                        >
-                                            Delete
-                                        </button>
+                                    <form method="POST" action="/api/comments/moderate" style="display:inline;">
+                                        <input type="hidden" name="commentId" value={c.id} />
+                                        <input type="hidden" name="action" value="trash" />
+                                        <button type="submit" class="ac-btn ac-btn--reject">Trash</button>
                                     </form>
                                 </div>
                             </div>
@@ -128,55 +69,69 @@ const approved = comments.filter((c) => c.status === "approved");
                 </section>
             ) : (
                 <div class="admin-empty">
-                    <p>No comments pending review. All caught up âœ“</p>
+                    <p>No comments pending review. All caught up.</p>
                 </div>
             )
         }
 
         {
-            approved.length > 0 && (
+            published.length > 0 && (
                 <section class="admin-section">
-                    <h2 class="admin-section-title">
-                        Approved ({approved.length})
-                    </h2>
+                    <h2 class="admin-section-title">Published ({published.length})</h2>
                     <div class="comment-queue">
-                        {approved.map((c) => (
+                        {published.map((c) => (
                             <div class="admin-comment admin-comment--approved">
                                 <div class="ac-meta">
                                     <strong>{c.display_name}</strong>
-                                    <span class="ac-sep">Â·</span>
-                                    <a
-                                        href={`/news/${c.article_slug}#comment-${c.id}`}
-                                        class="ac-article"
-                                    >
+                                    <span class="ac-sep">·</span>
+                                    <a href={`/news/${c.article_slug}#comment-${c.id}`} class="ac-article">
                                         {c.article_slug}
                                     </a>
-                                    <span class="ac-sep">Â·</span>
+                                    <span class="ac-sep">·</span>
                                     <time>{formatDate(c.created_at)}</time>
                                 </div>
                                 <p class="ac-body">{c.body}</p>
                                 <div class="ac-actions">
-                                    <form
-                                        method="POST"
-                                        action="/api/comments/moderate"
-                                        style="display:inline;"
-                                    >
-                                        <input
-                                            type="hidden"
-                                            name="commentId"
-                                            value={c.id}
-                                        />
-                                        <input
-                                            type="hidden"
-                                            name="action"
-                                            value="delete"
-                                        />
-                                        <button
-                                            type="submit"
-                                            class="ac-btn ac-btn--delete"
-                                        >
-                                            Delete
-                                        </button>
+                                    <form method="POST" action="/api/comments/moderate" style="display:inline;">
+                                        <input type="hidden" name="commentId" value={c.id} />
+                                        <input type="hidden" name="action" value="trash" />
+                                        <button type="submit" class="ac-btn ac-btn--reject">Trash</button>
+                                    </form>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )
+        }
+
+        {
+            trashed.length > 0 && (
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Trashed ({trashed.length})</h2>
+                    <div class="comment-queue">
+                        {trashed.map((c) => (
+                            <div class="admin-comment admin-comment--trashed">
+                                <div class="ac-meta">
+                                    <strong>{c.display_name}</strong>
+                                    <span class="ac-sep">·</span>
+                                    <a href={`/news/${c.article_slug}`} class="ac-article">
+                                        {c.article_slug}
+                                    </a>
+                                    <span class="ac-sep">·</span>
+                                    <time>{formatDate(c.created_at)}</time>
+                                </div>
+                                <p class="ac-body">{c.body}</p>
+                                <div class="ac-actions">
+                                    <form method="POST" action="/api/comments/moderate" style="display:inline;">
+                                        <input type="hidden" name="commentId" value={c.id} />
+                                        <input type="hidden" name="action" value="approve" />
+                                        <button type="submit" class="ac-btn ac-btn--approve">Publish</button>
+                                    </form>
+                                    <form method="POST" action="/api/comments/moderate" style="display:inline;">
+                                        <input type="hidden" name="commentId" value={c.id} />
+                                        <input type="hidden" name="action" value="delete" />
+                                        <button type="submit" class="ac-btn ac-btn--delete">Delete Permanently</button>
                                     </form>
                                 </div>
                             </div>
@@ -211,6 +166,7 @@ const approved = comments.filter((c) => c.status === "approved");
     .admin-stats {
         display: flex;
         gap: 12px;
+        flex-wrap: wrap;
     }
     .stat {
         font-size: 13px;
@@ -227,6 +183,11 @@ const approved = comments.filter((c) => c.status === "approved");
         background: #16a34a20;
         color: #16a34a;
         border: 1px solid #16a34a40;
+    }
+    .stat--trashed {
+        background: #ef444420;
+        color: #ef4444;
+        border: 1px solid #ef444440;
     }
     .admin-section {
         margin-bottom: 48px;
@@ -251,6 +212,9 @@ const approved = comments.filter((c) => c.status === "approved");
     }
     .admin-comment--approved {
         border-left: 3px solid #16a34a;
+    }
+    .admin-comment--trashed {
+        border-left: 3px solid #ef4444;
     }
     .ac-meta {
         display: flex;
@@ -283,6 +247,7 @@ const approved = comments.filter((c) => c.status === "approved");
     .ac-actions {
         display: flex;
         gap: 8px;
+        flex-wrap: wrap;
     }
     .ac-btn {
         padding: 6px 16px;
