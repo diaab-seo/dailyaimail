@@ -16,6 +16,7 @@ if (user) return Astro.redirect("/");
 
 const registered = Astro.url.searchParams.get("registered") === "1";
 const returnTo = Astro.url.searchParams.get("from") ?? "/";
+const googleLoginUri = `/auth/google?from=${encodeURIComponent(returnTo)}`;
 
 let error = "";
 let email = "";
@@ -78,7 +79,8 @@ if (Astro.request.method === "POST") {
             <script src="https://accounts.google.com/gsi/client" async defer></script>
             <div id="g_id_onload"
                  data-client_id="211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com"
-                 data-login_uri="/auth/google"
+                 data-login_uri={googleLoginUri}
+                 data-state={returnTo}
                  data-auto_prompt="false">
             </div>
             
@@ -98,6 +100,7 @@ if (Astro.request.method === "POST") {
             </div>
 
             <form method="POST" class="auth-form">
+                <input type="hidden" name="from" value={returnTo} />
                 <div class="field">
                     <label for="email">Email Address</label>
                     <input
@@ -125,7 +128,7 @@ if (Astro.request.method === "POST") {
             </form>
 
             <p class="auth-switch">
-                Don't have an account? <a href="/auth/register">Create one</a>
+                Don't have an account? <a href={`/auth/register?from=${encodeURIComponent(returnTo)}`}>Create one</a>
             </p>
         </div>
     </div>

@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from "./Layout.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
 import {
@@ -51,6 +51,8 @@ const plainBody = stripMarkdown(article.body);
 const hasImage = Boolean(article.image);
 const imageUrl = hasImage ? `${SITE_URL}${article.image}` : null;
 const logoUrl = `${SITE_URL}/daily-ai-mail-logo.svg`;
+const editorialBio =
+  "Daily AI Mail is written and edited by the Daily AI Mail Editorial Staff, an independent team of AI journalists, researchers, and analysts with over 15 years of experience covering artificial intelligence, machine learning, and emerging technologies.";
 
 // Collect all images for Article Schema (Featured + Inline)
 const inlineImages = extractImages(article.body).map((img) =>
@@ -502,7 +504,7 @@ const schema = {
 
         <!-- Follow on Google News -->
         <a
-          class="action-btn google-news-btn"
+          class="google-news-badge"
           id="google-news-btn"
           href="https://news.google.com/publications/CAAqLAgKIiZDQklTRmdnTWFoSUtFR1JoYVd4NVlXbHRZV2xzTG01bGQzTW9BQVAB?ceid=US:en&oc=3"
           target="_blank"
@@ -510,19 +512,14 @@ const schema = {
           title="Follow Daily AI Mail on Google News"
           aria-label="Follow us on Google News"
         >
-          <!-- Google News "G" icon -->
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="currentColor"
+          <img
+            src="/badges/google-news-icon.svg"
+            alt=""
+            width="20"
+            height="16"
             aria-hidden="true"
-          >
-            <path
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"
-            ></path>
-          </svg>
-          <span>Follow on Google News</span>
+          />
+          <span>Google News</span>
         </a>
         <span class="md-toast" id="md-toast">Copied as Markdown!</span>
 
@@ -637,32 +634,37 @@ const schema = {
 
     <aside class="article-sidebar">
       <address class="sidebar-author-box">
-        <a href="/about-us/editorial-team" class="author-avatar">
-          {
-            article.author
-              .split(" ")
-              .map((n) => n[0])
-              .join("")
-          }
+        <a href="/about-us/editorial-team" class="author-avatar author-avatar--logo">
+          <img
+            src="/daily-ai-mail-logo.svg"
+            alt="Daily AI Mail Editorial Staff"
+            width="72"
+            height="72"
+            loading="lazy"
+          />
         </a>
-        <div>
+        <div class="author-copy">
           <strong class="author-name"
             ><a href="/about-us/editorial-team">{article.author}</a></strong
           >
           <p class="author-role">Editor, Daily AI Mail</p>
+          <p class="author-bio">{editorialBio}</p>
+          <a href="/about-us/editorial-team" class="author-more">
+            Read more about us
+          </a>
         </div>
       </address>
 
-      <!-- Google Preferred Source -->
+      <!-- Google Preferred Source + Google News -->
       <div class="google-badge-widget">
         <p class="google-badge-hint">
-          Follow us on Google for daily AI updates
+          Follow Daily AI Mail on Google for daily AI updates
         </p>
         <a
           href="https://google.com/preferences/source?q=https://dailyaimail.news/"
           target="_blank"
           rel="noopener noreferrer"
-          class="google-badge-link"
+          class="google-badge-link google-badge-link--preferred"
           aria-label="Add Daily AI Mail as a preferred source on Google"
         >
           <img
@@ -673,6 +675,24 @@ const schema = {
             height="40"
             class="google-badge"
           />
+        </a>
+        <a
+          href="https://news.google.com/publications/CAAqLAgKIiZDQklTRmdnTWFoSUtFR1JoYVd4NVlXbHRZV2xzTG01bGQzTW9BQVAB?ceid=US:en&oc=3"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="google-badge-link"
+          aria-label="Follow Daily AI Mail on Google News"
+        >
+          <span class="google-news-card-badge">
+            <img
+              src="/badges/google-news-icon.svg"
+              alt=""
+              width="24"
+              height="20"
+              aria-hidden="true"
+            />
+            <span>Follow on Google News</span>
+          </span>
         </a>
       </div>
 
@@ -895,14 +915,30 @@ const schema = {
     color: var(--color-base);
     border-color: var(--color-gold);
   }
-  .google-news-btn {
-    border-color: #4285f4;
-    color: #4285f4;
+  .google-news-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid #4285f430;
+    background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    color: #1f3b64;
+    box-shadow: 0 6px 18px rgba(66, 133, 244, 0.12);
+    text-decoration: none;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
   }
-  .google-news-btn:hover {
-    background: #4285f4;
-    color: #fff;
-    border-color: #4285f4;
+  .google-news-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(66, 133, 244, 0.18);
+    color: #1f3b64;
+  }
+  .google-news-badge img {
+    width: 20px;
+    height: auto;
+    display: block;
   }
 
   .share-wrapper {
@@ -1125,7 +1161,7 @@ const schema = {
   }
   .sidebar-author-box {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
     padding: 24px;
     background: var(--color-surface);
@@ -1133,18 +1169,25 @@ const schema = {
     border: 1px solid var(--color-border);
   }
   .author-avatar {
-    width: 48px;
-    height: 48px;
-    background: var(--color-gold);
-    color: var(--color-base);
-    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+    background: #fff;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 18px;
     text-decoration: none;
     flex-shrink: 0;
+    border: 1px solid var(--color-border);
+    padding: 10px;
+  }
+  .author-avatar--logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .author-copy {
+    min-width: 0;
   }
   .author-name {
     display: block;
@@ -1161,7 +1204,20 @@ const schema = {
   .author-role {
     font-size: 13px;
     color: var(--color-text-hint);
-    margin: 0;
+    margin: 0 0 12px;
+  }
+  .author-bio {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin: 0 0 12px;
+  }
+  .author-more {
+    color: var(--color-gold);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* Google Badge */
@@ -1181,12 +1237,34 @@ const schema = {
   .google-badge-link {
     display: inline-block;
     transition: transform 0.2s ease;
+    text-decoration: none;
+  }
+  .google-badge-link--preferred {
+    margin-bottom: 12px;
   }
   .google-badge-link:hover {
     transform: scale(1.02);
   }
   .google-badge {
     display: block;
+    height: auto;
+  }
+  .google-news-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #fff;
+    color: #1f3b64;
+    border: 1px solid #4285f430;
+    box-shadow: 0 6px 18px rgba(66, 133, 244, 0.1);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .google-news-card-badge img {
+    display: block;
+    width: 24px;
     height: auto;
   }
 

@@ -17,6 +17,8 @@ const kv = (env as any).SESSION as KVNamespace;
 
 const user = await getSession(kv, Astro.cookies);
 if (user) return Astro.redirect("/");
+const returnTo = Astro.url.searchParams.get("from") ?? "/";
+const googleLoginUri = `/auth/google?from=${encodeURIComponent(returnTo)}`;
 
 let errors: Record<string, string> = {};
 let values = { email: "", username: "", displayName: "" };
@@ -87,7 +89,7 @@ if (Astro.request.method === "POST") {
             password_hash: hash,
             password_salt: salt,
         });
-        return Astro.redirect("/auth/login?registered=1");
+        return Astro.redirect(`/auth/login?registered=1&from=${encodeURIComponent(returnTo)}`);
     }
 }
 ---
@@ -109,7 +111,8 @@ if (Astro.request.method === "POST") {
             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
             <div id="g_id_onload"
                  data-client_id="211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com"
-                 data-login_uri="/auth/google"
+                 data-login_uri={googleLoginUri}
+                 data-state={returnTo}
                  data-auto_prompt="false">
             </div>
             
@@ -233,7 +236,7 @@ if (Astro.request.method === "POST") {
                 </p>
             </form>
             <p class="auth-switch">
-                Already have an account? <a href="/auth/login">Sign in</a>
+                Already have an account? <a href={`/auth/login?from=${encodeURIComponent(returnTo)}`}>Sign in</a>
             </p>
         </div>
     </div>

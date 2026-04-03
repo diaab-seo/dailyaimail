@@ -135,7 +135,10 @@ const tooLong = Astro.url.searchParams.get("err") === "toolong";
                             Sign in
                         </a>
                         or
-                        <a href="/auth/register" class="comment-sign-in">
+                        <a
+                            href={`/auth/register?from=${encodeURIComponent(Astro.url.pathname)}`}
+                            class="comment-sign-in"
+                        >
                             create an account
                         </a>
                         to leave a comment.
