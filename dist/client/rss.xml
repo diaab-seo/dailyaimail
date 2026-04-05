@@ -11,6 +11,30 @@
         <language>en</language>
         <atom:link href="https://dailyaimail.news/rss.xml" rel="self" type="application/rss+xml" />
         <item>
+            <title><![CDATA[Anthropic Moves OpenClaw Usage Outside Claude Code Subscriptions]]></title>
+            <link><![CDATA[https://dailyaimail.news/news/anthropic-openclaw-claude-code-extra-usage]]></link>
+            <description><![CDATA[Anthropic is separating OpenClaw and other third-party harness usage from Claude Code subscriptions, forcing affected developers onto pay-as-you-go billing and adding fresh tension to the fast-growing AI coding tools market.]]></description>
+            <pubDate>Sun, 05 Apr 2026 13:36:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/anthropic-openclaw-claude-code-extra-usage]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/anthropic-openclaw-claude-code-extra-usage.png" />
+                <media:content url="https://dailyaimail.news/images/anthropic-openclaw-claude-code-extra-usage.png" medium="image">
+                    <media:title type="html"><![CDATA[anthropic-openclaw-claude-code-extra-usage.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
+            <title><![CDATA[Databricks Teams Up With STATION F to Push AI Adoption Among European Startups]]></title>
+            <link><![CDATA[https://dailyaimail.news/news/databricks-station-f-europe-ai-startups]]></link>
+            <description><![CDATA[Databricks is opening an office at STATION F and rolling out training, workshops, and product access aimed at helping European founders move AI projects from experimentation into production.]]></description>
+            <pubDate>Sun, 05 Apr 2026 13:30:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/databricks-station-f-europe-ai-startups]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/databricks-station-f-europe-ai-startups.png" />
+                <media:content url="https://dailyaimail.news/images/databricks-station-f-europe-ai-startups.png" medium="image">
+                    <media:title type="html"><![CDATA[databricks-station-f-europe-ai-startups.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
             <title><![CDATA[Microsoft Commits $10 Billion to AI and Cybersecurity in Japan, Pledging to Train a Million Engineers by 2030]]></title>
             <link><![CDATA[https://dailyaimail.news/news/microsoft-10-billion-japan-ai-cybersecurity]]></link>
             <description><![CDATA[Microsoft has announced a $10 billion investment in Japan covering cloud and AI infrastructure, national cybersecurity, and workforce development — the largest in a series of major AI commitments across Asia made within a single week.]]></description>
