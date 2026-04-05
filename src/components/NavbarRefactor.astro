@@ -246,17 +246,6 @@ const moreTopics = [
         <div class="mobile-toolbar">
           <button
             class="toolbar-btn"
-            id="search-open-btn-mobile"
-            aria-label="Search"
-            type="button"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="11" cy="11" r="7"></circle>
-              <line x1="20" y1="20" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-          <button
-            class="toolbar-btn"
             id="hamburger-btn"
             aria-label="Open menu"
             aria-expanded="false"
@@ -328,32 +317,51 @@ const moreTopics = [
   </div>
 
   <div class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-    <a href="/news" class="mobile-direct-link">All Feed</a>
-    <a href="/statistics" class="mobile-direct-link">Statistics</a>
-
-    {
-      topicGroups.map((group) => (
-        <details class="mobile-topic-group">
-          <summary>{group.label}</summary>
-          <div class="mobile-topic-links">
-            {group.items.map((item) => (
-              <a href={item.href}>{item.label}</a>
-            ))}
-          </div>
-        </details>
-      ))
-    }
-
-    <details class="mobile-topic-group">
-      <summary>More Topics</summary>
-      <div class="mobile-topic-links">
-        {moreTopics.map((item) => (
-          <a href={item.href}>{item.label}</a>
-        ))}
+    <form class="mobile-search-form" id="mobile-search-form">
+      <label class="mobile-search-label" for="mobile-search-input">Search</label>
+      <div class="mobile-search-row">
+        <input
+          id="mobile-search-input"
+          class="mobile-search-input"
+          type="search"
+          name="q"
+          placeholder="Search Daily AI Mail"
+          autocomplete="off"
+        />
+        <button class="mobile-search-submit" type="submit">Go</button>
       </div>
-    </details>
+    </form>
 
-    <div class="mobile-meta-links">
+    <div class="mobile-menu-section">
+      <p class="mobile-menu-heading">Topics</p>
+      <a href="/news" class="mobile-direct-link">All Feed</a>
+      <a href="/statistics" class="mobile-direct-link">Statistics</a>
+
+      {
+        topicGroups.map((group) => (
+          <details class="mobile-topic-group">
+            <summary>{group.label}</summary>
+            <div class="mobile-topic-links">
+              {group.items.map((item) => (
+                <a href={item.href}>{item.label}</a>
+              ))}
+            </div>
+          </details>
+        ))
+      }
+
+      <details class="mobile-topic-group">
+        <summary>More Topics</summary>
+        <div class="mobile-topic-links">
+          {moreTopics.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+        </div>
+      </details>
+    </div>
+
+    <div class="mobile-meta-links mobile-menu-section">
+      <p class="mobile-menu-heading">More</p>
       <a href="/about-us">About Us</a>
       <a href="/contact-us">Contact</a>
       <a href="/newsletter" target="_blank" rel="noopener noreferrer">
@@ -361,7 +369,8 @@ const moreTopics = [
       </a>
     </div>
 
-    <div class="mobile-auth-links">
+    <div class="mobile-auth-links mobile-menu-section">
+      <p class="mobile-menu-heading">Account</p>
       <a id="mobile-signin-item" href="/auth/login">Sign In</a>
       <a id="mobile-register-item" href="/auth/register">Create Account</a>
       <form
@@ -373,6 +382,97 @@ const moreTopics = [
         <button type="submit" class="mobile-logout-btn">Sign Out</button>
       </form>
     </div>
+
+    <div class="mobile-follow mobile-menu-section">
+      <p class="mobile-menu-heading">Follow Us</p>
+      <div class="mobile-follow-links">
+        {
+          socialLinks.map((link) => (
+            <a
+              href={link.href}
+              class="mobile-follow-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              title={link.label}
+            >
+              {
+                link.icon === "linkedin" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3A1.97 1.97 0 1 0 5.3 6.94 1.97 1.97 0 0 0 5.25 3ZM20.44 13.02c0-3.47-1.85-5.08-4.33-5.08-2 0-2.9 1.1-3.4 1.88V8.5H9.33V20h3.38v-6.4c0-1.69.32-3.33 2.41-3.33 2.06 0 2.09 1.93 2.09 3.44V20h3.38v-6.98Z"></path>
+                  </svg>
+                )
+              }
+              {
+                link.icon === "facebook" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M13.5 21v-7.27h2.45l.37-2.84H13.5V9.08c0-.83.23-1.39 1.42-1.39h1.52V5.15c-.26-.03-1.17-.11-2.23-.11-2.2 0-3.71 1.34-3.71 3.81v2.04H8v2.84h2.5V21h3Z"></path>
+                  </svg>
+                )
+              }
+              {
+                link.icon === "x" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18.9 2H21l-6.87 7.85L22.2 22h-6.32l-4.95-6.5L5.24 22H3.1l7.34-8.39L2 2h6.48l4.47 5.97L18.9 2Zm-1.11 18h1.75L7.52 3.9H5.64L17.79 20Z"></path>
+                  </svg>
+                )
+              }
+              {
+                link.icon === "medium" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4.52 7.75A1.1 1.1 0 0 0 4 6.82V6.7h4.56l3.52 7.72 3.1-7.72h4.35v.12a.93.93 0 0 0-.43.88v8.6c0 .42.12.56.43.88v.12h-4.38v-.12c.34-.28.34-.37.34-.88V9.34l-3.88 9.08h-.53L6.57 9.34v5.82c-.1.67.1 1.35.53 1.87v.12H4v-.12c.43-.52.62-1.2.5-1.87V7.75Z"></path>
+                  </svg>
+                )
+              }
+              {
+                link.icon === "reddit" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14.27 15.13a.75.75 0 0 1-1.06 1.06 1.9 1.9 0 0 0-2.68 0 .75.75 0 1 1-1.06-1.06 3.4 3.4 0 0 1 4.8 0Zm-.84-3.38a1.13 1.13 0 1 0 0-2.25 1.13 1.13 0 0 0 0 2.25Zm-3.86-2.25a1.13 1.13 0 1 0 0 2.25 1.13 1.13 0 0 0 0-2.25Zm11.23 2.14a1.8 1.8 0 0 0-3.06-1.28 6.95 6.95 0 0 0-4.88-1.83l.83-2.62 2.23.52a1.6 1.6 0 1 0 .35-1.48l-2.84-.66a.75.75 0 0 0-.89.5l-1.02 3.24a7.08 7.08 0 0 0-4.97 1.84 1.8 1.8 0 1 0-1.06 3.25 4.9 4.9 0 0 0-.03.52c0 2.9 2.87 5.25 6.41 5.25s6.4-2.35 6.4-5.25c0-.17 0-.35-.02-.52a1.8 1.8 0 0 0 1.55-1.78Z"></path>
+                  </svg>
+                )
+              }
+            </a>
+          ))
+        }
+        <a
+          href={GOOGLE_NEWS_URL}
+          class="mobile-follow-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow on Google News"
+          title="Follow on Google News"
+        >
+          <img
+            src="/badges/google-news-icon.svg"
+            alt=""
+            width="20"
+            height="20"
+            aria-hidden="true"
+          />
+        </a>
+        <a
+          href="/rss.xml"
+          class="mobile-follow-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="RSS Feed"
+          title="RSS Feed"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.18 17.82a1.82 1.82 0 1 1 0-3.64 1.82 1.82 0 0 1 0 3.64ZM4 9.5v2.73A7.77 7.77 0 0 1 11.77 20h2.73C14.5 13.65 10.35 9.5 4 9.5Zm0-5v2.73c7.86 0 12.27 4.41 12.27 12.27H19C19 10.18 13.82 5 4 4.5Z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <a
+      href="/newsletter"
+      class="mobile-newsletter-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Newsletter Sign-Up
+    </a>
   </div>
 </nav>
 
@@ -475,23 +575,27 @@ const moreTopics = [
 
     const hamburgerBtn = document.getElementById("hamburger-btn");
     const mainNav = document.getElementById("main-nav");
+    const mobileSearchForm = document.getElementById("mobile-search-form") as HTMLFormElement | null;
+    const mobileSearchInput = document.getElementById("mobile-search-input") as HTMLInputElement | null;
+
+    function setMenuOpen(open: boolean) {
+      if (!mainNav || !hamburgerBtn) return;
+      mainNav.toggleAttribute("data-open", open);
+      hamburgerBtn.setAttribute("aria-expanded", String(open));
+      hamburgerBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      document.body.style.overflow = open ? "hidden" : "";
+    }
 
     if (hamburgerBtn && mainNav) {
       hamburgerBtn.addEventListener("click", () => {
         const isOpen = mainNav.hasAttribute("data-open");
-        mainNav.toggleAttribute("data-open");
-        hamburgerBtn.setAttribute("aria-expanded", String(!isOpen));
-        hamburgerBtn.setAttribute(
-          "aria-label",
-          isOpen ? "Open menu" : "Close menu",
-        );
+        setMenuOpen(!isOpen);
       });
     }
 
-    const searchOpenBtns = [
-      document.getElementById("search-open-btn"),
-      document.getElementById("search-open-btn-mobile"),
-    ].filter(Boolean) as HTMLElement[];
+    const searchOpenBtns = [document.getElementById("search-open-btn")].filter(
+      Boolean,
+    ) as HTMLElement[];
     const searchBackdrop = document.getElementById("search-backdrop");
     const searchEl = document.getElementById("search");
 
@@ -499,12 +603,31 @@ const moreTopics = [
 
     let pagefindInitialised = false;
 
-    function openSearch() {
+    function syncSearchQuery(query: string) {
+      if (!query) return;
+      const searchInput = searchModal.querySelector(
+        "input[type=text], input[type=search]",
+      ) as HTMLInputElement | null;
+      if (!searchInput) return;
+      searchInput.value = query;
+      searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      searchInput.focus();
+    }
+
+    function openSearch(query = "") {
       searchModal.style.display = "flex";
       document.body.style.overflow = "hidden";
 
       if (pagefindInitialised) {
-        (searchModal.querySelector("input[type=text]") as HTMLElement)?.focus();
+        if (query) {
+          syncSearchQuery(query);
+        } else {
+          (
+            searchModal.querySelector(
+              "input[type=text], input[type=search]",
+            ) as HTMLElement
+          )?.focus();
+        }
         return;
       }
 
@@ -540,7 +663,15 @@ const moreTopics = [
       });
       pagefindInitialised = true;
       setTimeout(() => {
-        (searchModal.querySelector("input[type=text]") as HTMLElement)?.focus();
+        if (query) {
+          syncSearchQuery(query);
+        } else {
+          (
+            searchModal.querySelector(
+              "input[type=text], input[type=search]",
+            ) as HTMLElement
+          )?.focus();
+        }
       }, 50);
     }
 
@@ -552,10 +683,21 @@ const moreTopics = [
     searchOpenBtns.forEach((button) =>
       button.addEventListener("click", openSearch),
     );
+
+    mobileSearchForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const query = mobileSearchInput?.value.trim() ?? "";
+      setMenuOpen(false);
+      openSearch(query);
+    });
+
     searchBackdrop?.addEventListener("click", closeSearch);
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeSearch();
+      if (event.key === "Escape" && mainNav?.hasAttribute("data-open")) {
+        setMenuOpen(false);
+      }
       if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         openSearch();
@@ -902,9 +1044,59 @@ const moreTopics = [
   }
 
   .mobile-nav {
-    padding: 16px var(--gutter) 24px;
-    border-top: 1px solid var(--color-border);
+    background: #050505;
+    color: #ffffff;
+  }
+
+  .mobile-menu-section {
+    margin-top: 24px;
+  }
+
+  .mobile-menu-heading,
+  .mobile-search-label {
+    display: block;
+    margin: 0 0 14px;
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .mobile-search-form {
+    margin: 0;
+  }
+
+  .mobile-search-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0;
+    border: 1px solid #3a3a3a;
     background: #ffffff;
+  }
+
+  .mobile-search-input {
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: #111827;
+    padding: 13px 14px;
+    font-size: 15px;
+  }
+
+  .mobile-search-input:focus {
+    border-color: transparent;
+  }
+
+  .mobile-search-submit {
+    border: none;
+    border-radius: 0;
+    background: #f5c518;
+    color: #111827;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
   }
 
   .mobile-direct-link,
@@ -915,9 +1107,9 @@ const moreTopics = [
     display: block;
     width: 100%;
     padding: 12px 0;
-    color: var(--color-text-primary);
+    color: #ffffff;
     font-size: 15px;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .mobile-direct-link {
@@ -925,7 +1117,7 @@ const moreTopics = [
   }
 
   .mobile-topic-group {
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .mobile-topic-group summary {
@@ -937,7 +1129,7 @@ const moreTopics = [
     list-style: none;
     font-size: 15px;
     font-weight: 600;
-    color: var(--color-text-primary);
+    color: #ffffff;
   }
 
   .mobile-topic-group summary::-webkit-details-marker {
@@ -946,8 +1138,8 @@ const moreTopics = [
 
   .mobile-topic-group summary::after {
     content: "+";
-    font-size: 18px;
-    color: var(--color-text-secondary);
+    font-size: 20px;
+    color: #ffffff;
   }
 
   .mobile-topic-group[open] summary::after {
@@ -961,12 +1153,12 @@ const moreTopics = [
   .mobile-topic-links a {
     padding-left: 14px;
     font-size: 14px;
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.72);
   }
 
   .mobile-meta-links,
   .mobile-auth-links {
-    margin-top: 10px;
+    margin-top: 0;
   }
 
   .mobile-logout-btn {
@@ -977,6 +1169,71 @@ const moreTopics = [
     text-align: left;
     font-family: inherit;
     cursor: pointer;
+  }
+
+  .mobile-follow {
+    padding-bottom: 120px;
+  }
+
+  .mobile-follow-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .mobile-follow-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+    background: transparent;
+    transition:
+      border-color var(--transition),
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .mobile-follow-link:hover {
+    border-color: #f5c518;
+    background: rgba(245, 197, 24, 0.12);
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .mobile-follow-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .mobile-follow-link img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobile-newsletter-cta {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 32px calc(var(--gutter) * -1) calc(var(--gutter) * -1);
+    min-height: 56px;
+    background: #f5c518;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    z-index: 1;
+  }
+
+  .mobile-newsletter-cta:hover {
+    color: #111827;
+    background: #e7b700;
+    text-decoration: none;
   }
 
   nav[data-open] .mobile-nav {
@@ -1091,23 +1348,37 @@ const moreTopics = [
   }
 
   @media (max-width: 920px) {
+    .navbar {
+      z-index: 400;
+    }
+
     .utility-row {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 14px;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
     }
 
     .navbar-logo {
-      justify-content: center;
+      flex: 0 0 auto;
+      justify-content: flex-start;
     }
 
     .utility-actions {
-      align-items: stretch;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
     }
 
     .social-links {
-      justify-content: center;
+      justify-content: flex-end;
+      gap: 0;
+    }
+
+    .social-links > .utility-icon-link,
+    .social-links > .utility-icon-link--google,
+    .social-links > .desktop-only {
+      display: none;
     }
 
     .desktop-only,
@@ -1117,21 +1388,34 @@ const moreTopics = [
 
     .mobile-toolbar {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
+    }
+
+    .newsletter-link {
+      min-width: 0;
+      width: auto;
+      padding: 0 14px;
+      font-size: 12px;
+    }
+
+    .mobile-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: calc(100dvh - 88px);
+      min-height: calc(100vh - 88px);
+      padding: 20px var(--gutter) calc(32px + env(safe-area-inset-bottom));
+      overflow-y: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+      z-index: 350;
     }
   }
 
   @media (max-width: 640px) {
-    .utility-shell {
-      padding-top: 4px;
-    }
-
     .navbar-logo .logo {
-      height: 60px;
-    }
-
-    .social-links {
-      gap: 8px;
+      height: 42px;
     }
 
     .utility-icon-link,
@@ -1141,7 +1425,18 @@ const moreTopics = [
     }
 
     .newsletter-link {
-      width: 100%;
+      padding: 0 12px;
+      font-size: 11px;
+    }
+
+    .mobile-nav {
+      height: calc(100dvh - 74px);
+      min-height: calc(100vh - 74px);
+    }
+
+    .mobile-menu-heading,
+    .mobile-search-label {
+      font-size: 1.05rem;
     }
   }
 </style>

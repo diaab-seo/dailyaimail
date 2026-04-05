@@ -1,7 +1,6 @@
 ---
 import Navbar from "../components/NavbarRefactor.astro";
 import Footer from "../components/Footer.astro";
-import NewsletterModal from "../components/NewsletterModal.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -145,8 +144,6 @@ const ogSection = directProps.ogSection;
     <Navbar />
     <slot />
     <Footer />
-    <NewsletterModal />
-
     <!-- Google One Tap (site-wide, shown only when user is not logged in) -->
     <div id="g_id_onload_sitewide"
          data-client_id="211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com"
