@@ -1,0 +1,46 @@
+Title : You Will Create One 
+Source : 
+bro created an AI job search system for Claude Code that scored 700+ job applications and actually got him a job. 
+
+AND IT'S NOW OPEN-SOURCE.
+
+It scans multiple company career pages, rewrites your CV per job, and even fills application forms. The repo has:
+> 14 skill modes (evaluate, scan, PDF, ...)
+> Go terminal dashboard
+> ATS-optimized PDF generation via Playwright
+> 45+ companies pre-configured (Anthropic, OpenAI, ElevenLabs, Stripe...)
+
+account on x [@](https://x.com/Hesamation)
+Tweet to embed : 
+https://x.com/Hesamation/status/2040820834428658008
+Github Repo Link : 
+https://github.com/santifer/career-ops
+The Original Builder Is : 
+https://x.com/santifer
+santifer | AI Builder
+
+From Project Readme On Github : 
+What Is This
+Career-Ops turns Claude Code into a full job search command center. Instead of manually tracking applications in a spreadsheet, you get an AI-powered pipeline that:
+
+Evaluates offers with a structured A-F scoring system (10 weighted dimensions)
+Generates tailored PDFs -- ATS-optimized CVs customized per job description
+Scans portals automatically (Greenhouse, Ashby, Lever, company pages)
+Processes in batch -- evaluate 10+ offers in parallel with sub-agents
+Tracks everything in a single source of truth with integrity checks
+Important: This is NOT a spray-and-pray tool. The whole point is to apply only where there's a real match -- for your sake and for the recruiter reading your application. The scoring system helps you focus on high-fit opportunities instead of wasting everyone's time. Always review before submitting.
+
+Built by someone who used it to evaluate 740+ job offers, generate 100+ tailored CVs, and land a Head of Applied AI role.
+Features
+Feature	Description
+Auto-Pipeline	Paste a URL, get a full evaluation + PDF + tracker entry
+6-Block Evaluation	Role summary, CV match, level strategy, comp research, personalization, interview prep (STAR+R)
+Interview Story Bank	Accumulates STAR+Reflection stories across evaluations -- 5-10 master stories that answer any behavioral question
+Negotiation Scripts	Salary negotiation frameworks, geographic discount pushback, competing offer leverage
+ATS PDF Generation	Keyword-injected CVs with Space Grotesk + DM Sans design
+Portal Scanner	45+ companies pre-configured (Anthropic, OpenAI, ElevenLabs, Retool, n8n...) + custom queries across Ashby, Greenhouse, Lever, Wellfound
+Batch Processing	Parallel evaluation with claude -p workers
+Dashboard TUI	Terminal UI to browse, filter, and sort your pipeline
+Pipeline Integrity	Automated merge, dedup, status normalization, health checks
+
+Demo Gif : https://github.com/santifer/career-ops/blob/main/docs/demo.gif
