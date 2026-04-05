@@ -4,6 +4,19 @@
   xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
   <url>
+    <loc>https://dailyaimail.news/news/microsoft-10-billion-japan-ai-cybersecurity</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Daily AI Mail</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-04T00:22:00.000Z</news:publication_date>
+      <news:title>Microsoft Commits $10 Billion to AI and Cybersecurity in Japan, Pledging to Train a Million Engineers by 2030</news:title>
+      <news:keywords>Microsoft Japan AI investment, Microsoft $10 billion Japan, Microsoft Japan cybersecurity, Brad Smith Japan Tokyo, Microsoft Azure Japan infrastructure, SoftBank Microsoft AI, Sakura Internet Microsoft, Microsoft Asia AI expansion, Japan AI engineers 2030, Microsoft AI infrastructure Asia</news:keywords>
+    </news:news>
+    <lastmod>2026-04-04T00:00:00.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://dailyaimail.news/news/best-practices-secure-ai-systems</loc>
     <news:news>
       <news:publication>
@@ -15,44 +28,5 @@
       <news:keywords>best practices to secure AI systems, how to secure AI models, AI security framework, LLM security best practices, securing generative AI applications, AI threat mitigation, prompt injection prevention, AI governance security, enterprise AI security, how to protect AI from attacks, AI model security checklist, securing AI APIs</news:keywords>
     </news:news>
     <lastmod>2026-04-03T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/news/gemma-4-most-capable-open-models-google</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-02T22:45:00.000Z</news:publication_date>
-      <news:title>Gemma 4: Byte for Byte, the Most Capable Open Models Google Has Ever Built</news:title>
-      <news:keywords>Gemma 4 release, Google open source AI models, Gemma 4 Apache 2.0, Google AI open models 2026, Gemma 4 benchmark performance, Vertex AI Gemma</news:keywords>
-    </news:news>
-    <lastmod>2026-04-03T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/news/openai-acquires-tbpn-tech-talk-show</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-02T19:05:00.000Z</news:publication_date>
-      <news:title>OpenAI Buys Silicon Valley Talk Show TBPN in an Unexpected Move Into Media</news:title>
-      <news:keywords>OpenAI TBPN acquisition, OpenAI media strategy, TBPN tech talk show, OpenAI news, John Coogan Jordi Hays OpenAI</news:keywords>
-    </news:news>
-    <lastmod>2026-04-02T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/news/metas-unreleased-avocado-ai-model-reveals-strategy</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-02T19:00:00.000Z</news:publication_date>
-      <news:title>What Meta&apos;s Unreleased AI Model &apos;Avocado&apos; Reveals About Its Strategy</news:title>
-      <news:keywords>Meta Avocado AI model, Meta AI strategy, Meta open source AI, Llama 4 Meta, Meta vs Google AI</news:keywords>
-    </news:news>
-    <lastmod>2026-04-02T00:00:00.000Z</lastmod>
   </url>
 </urlset>

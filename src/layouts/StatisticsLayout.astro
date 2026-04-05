@@ -1,0 +1,442 @@
+﻿---
+import Layout from './Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { formatModifiedTime } from '../lib/dateUtils';
+import { editorialTeamRef, orgRef, websiteRef } from '../utils/schema';
+import '../styles/statistics.css';
+
+interface Props {
+  headline: string;
+  excerpt: string;
+  date: string;
+  isoDate: string;
+  updatedAt?: string;
+  author: string;
+  authorUrl?: string;
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
+  imageCaption?: string;
+  imageAlt: string;
+  keywords: string[];
+  topic: string;
+  entity: string;
+  dataUpdated: string;
+  sources: { name: string; url: string }[];
+  keyStats: { label: string; value: string; note?: string }[];
+  slug: string;
+  markdownExport: string;
+  relatedReports: { slug: string; headline: string; entity: string; excerpt: string }[];
+}
+
+const {
+  headline,
+  excerpt,
+  date,
+  isoDate,
+  updatedAt,
+  author,
+  authorUrl,
+  image,
+  imageWidth,
+  imageHeight,
+  imageCaption,
+  imageAlt,
+  keywords,
+  topic,
+  entity,
+  dataUpdated,
+  sources,
+  keyStats,
+  slug,
+  markdownExport,
+  relatedReports,
+} = Astro.props;
+
+const SITE_URL = 'https://dailyaimail.news';
+const canonical = `${SITE_URL}/statistics/${slug}`;
+const imageUrl = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
+const publishedTime = formatModifiedTime(isoDate);
+const publishedDate = new Date(isoDate).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'Africa/Cairo',
+});
+const logoUrl = `${SITE_URL}/daily-ai-mail-logo.svg`;
+const socialProfiles = [
+  'https://www.linkedin.com/company/dailaimail/',
+  'https://www.facebook.com/dailyaimail/',
+  'https://x.com/dailyaimail',
+  'https://medium.com/@dailyaimail',
+  'https://www.reddit.com/user/dailyaimail/',
+  'https://news.google.com/publications/CAowvObKDA',
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': canonical,
+      url: canonical,
+      name: headline,
+      headline,
+      description: excerpt,
+      isPartOf: websiteRef(),
+      about: orgRef(),
+      publisher: orgRef(),
+      author: editorialTeamRef(),
+      inLanguage: 'en-US',
+      datePublished: new Date(isoDate).toISOString(),
+      ...(updatedAt ? { dateModified: updatedAt } : {}),
+      primaryImageOfPage: { '@id': `${canonical}#primaryimage` },
+      breadcrumb: { '@id': `${canonical}#breadcrumb` },
+      mainEntity: { '@id': `${canonical}#dataset` },
+    },
+    {
+      '@type': 'Article',
+      '@id': `${canonical}#article`,
+      url: canonical,
+      headline,
+      description: excerpt,
+      datePublished: new Date(isoDate).toISOString(),
+      ...(updatedAt ? { dateModified: updatedAt } : {}),
+      image: [{ '@id': `${canonical}#primaryimage` }],
+      keywords,
+      author: editorialTeamRef(),
+      publisher: orgRef(),
+      isPartOf: websiteRef(),
+      mainEntityOfPage: { '@id': canonical },
+      about: {
+        '@type': 'Thing',
+        name: entity,
+      },
+      mentions: [
+        orgRef(),
+        websiteRef(),
+        editorialTeamRef(),
+        { '@id': `${canonical}#dataset` },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: SITE_URL,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Statistics',
+          item: `${SITE_URL}/statistics`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: topic,
+          item: canonical,
+        },
+      ],
+    },
+    {
+      '@type': 'Dataset',
+      '@id': `${canonical}#dataset`,
+      name: headline,
+      description: excerpt,
+      url: canonical,
+      temporalCoverage: dataUpdated,
+      isPartOf: websiteRef(),
+      includedInDataCatalog: websiteRef(),
+      publisher: orgRef(),
+      creator: editorialTeamRef(),
+      mainEntityOfPage: { '@id': canonical },
+      citation: sources.map((source) => ({
+        '@type': 'CreativeWork',
+        name: source.name,
+        url: source.url,
+      })),
+    },
+    {
+      '@type': 'ImageObject',
+      '@id': `${canonical}#primaryimage`,
+      url: imageUrl,
+      contentUrl: imageUrl,
+      width: imageWidth,
+      height: imageHeight,
+      caption: imageCaption ?? headline,
+      inLanguage: 'en-US',
+    },
+    {
+      ...websiteRef(),
+      url: `${SITE_URL}/`,
+      name: 'Daily AI Mail',
+      publisher: orgRef(),
+      inLanguage: 'en-US',
+      hasPart: [{ '@id': canonical }],
+    },
+    {
+      ...orgRef(),
+      name: 'Daily AI Mail',
+      url: `${SITE_URL}/`,
+      publishingPrinciples: `${SITE_URL}/publishing-principles`,
+      sameAs: socialProfiles,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${SITE_URL}/#/schema/logo/image/`,
+        url: logoUrl,
+        contentUrl: logoUrl,
+        width: 512,
+        height: 512,
+        caption: 'Daily AI Mail',
+      },
+      image: { '@id': `${SITE_URL}/#/schema/logo/image/` },
+    },
+    {
+      ...editorialTeamRef(),
+      url: 'https://dailyaimail.news/about-us/editorial-team',
+      memberOf: orgRef(),
+    },
+  ],
+};
+---
+
+<Layout
+  title={headline}
+  description={excerpt}
+  metaTitle={`${headline} | Daily AI Mail Statistics`}
+  canonical={canonical}
+  ogType="article"
+  ogTitle={headline}
+  ogDescription={excerpt}
+  ogImage={imageUrl}
+  ogImageWidth={imageWidth}
+  ogImageHeight={imageHeight}
+  ogImageAlt={imageAlt}
+  ogPublished={new Date(isoDate).toISOString()}
+  ogModified={updatedAt}
+  ogAuthor={author}
+  ogSection={topic}
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+    slot="head"
+  />
+  <meta name="robots" content="max-image-preview:large" slot="head" />
+
+  <Breadcrumb
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Statistics', href: '/statistics' },
+      { label: topic },
+    ]}
+  />
+
+  <main class="stat-layout" data-pagefind-meta="tag:statistics">
+    <header class="stat-hero">
+      <div class="stat-hero__image">
+        <figure>
+          <img
+            src={image}
+            width={imageWidth}
+            height={imageHeight}
+            alt={imageAlt}
+            loading="eager"
+          />
+          {imageCaption && <figcaption>{imageCaption}</figcaption>}
+        </figure>
+      </div>
+
+      <div class="stat-hero__content">
+        <div class="stat-hero__meta">
+          <span class="stat-badge">Data updated: {dataUpdated}</span>
+          <span class="stat-topic">{topic}</span>
+        </div>
+        <h1 data-pagefind-meta="title">{headline}</h1>
+        <p class="stat-excerpt">{excerpt}</p>
+        <div class="stat-keycards">
+          {
+            keyStats.map((stat) => (
+              <div class="stat-card">
+                <span class="stat-card__value">{stat.value}</span>
+                <span class="stat-card__label">{stat.label}</span>
+                {stat.note && <span class="stat-card__note">{stat.note}</span>}
+              </div>
+            ))
+          }
+        </div>
+        <p class="stat-byline">
+          By {authorUrl ? <a href={authorUrl}>{author}</a> : author}
+          <span class="stat-byline__sep">·</span>
+          <time datetime={isoDate}>Published {publishedTime} · {publishedDate}</time>
+        </p>
+      </div>
+    </header>
+
+    <div class="stat-body" data-pagefind-body>
+      <article class="stat-content">
+        <slot />
+
+        <details class="stat-sources">
+          <summary>Sources &amp; Methodology</summary>
+          <ol>
+            {
+              sources.map((source) => (
+                <li>
+                  <a href={source.url} target="_blank" rel="noopener noreferrer">
+                    {source.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </details>
+      </article>
+
+      <aside class="stat-sidebar" aria-label="Statistics page tools">
+        <div class="stat-sidebar__stack">
+          <section class="stat-sidebar__card stat-sidebar__card--meta">
+            <p class="stat-sidebar__eyebrow">Report Metadata</p>
+            <dl class="stat-sidebar__meta-list">
+              <div>
+                <dt>Entity</dt>
+                <dd>{entity}</dd>
+              </div>
+              <div>
+                <dt>Topic</dt>
+                <dd>{topic}</dd>
+              </div>
+              <div>
+                <dt>Published</dt>
+                <dd>{publishedDate}</dd>
+              </div>
+              <div>
+                <dt>Data updated</dt>
+                <dd>{dataUpdated}</dd>
+              </div>
+              <div>
+                <dt>Sources</dt>
+                <dd>{sources.length}</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="stat-sidebar__card stat-sidebar__card--tools">
+            <p class="stat-sidebar__eyebrow">Share &amp; Copy</p>
+            <div class="stat-sidebar__actions">
+              <button
+                class="stat-action-btn stat-action-btn--primary"
+                id="stat-copy-md-btn"
+                type="button"
+                title="Copy this statistics page as Markdown"
+              >
+                <span>Copy as Markdown</span>
+              </button>
+              <button
+                class="stat-action-btn"
+                id="stat-copy-link-btn"
+                type="button"
+                title="Copy share link"
+              >
+                <span>Copy Link</span>
+              </button>
+            </div>
+            <div class="stat-share-icons" aria-label="Share this statistics page">
+              <a class="stat-share-icon" id="stat-share-x" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on X">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+              </a>
+              <a class="stat-share-icon" id="stat-share-li" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a class="stat-share-icon" id="stat-share-wa" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path></svg>
+              </a>
+              <a class="stat-share-icon" id="stat-share-fb" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+            </div>
+            <span class="stat-copy-toast" id="stat-copy-toast" role="status" aria-live="polite"></span>
+            <template id="stat-markdown-template">{markdownExport}</template>
+          </section>
+
+          {
+            relatedReports.length > 0 && (
+              <section class="stat-sidebar__card stat-sidebar__card--related">
+                <p class="stat-sidebar__eyebrow">Related Statistics</p>
+                <ul class="stat-related-list">
+                  {relatedReports.map((report) => (
+                    <li>
+                      <a href={`/statistics/${report.slug}`}>
+                        <span class="stat-related-list__entity">{report.entity}</span>
+                        <strong>{report.headline}</strong>
+                        <span>{report.excerpt}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
+        </div>
+      </aside>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const statsUrl = location.href;
+  const statsTitle =
+    document.querySelector("meta[property='og:title']")?.getAttribute('content') ??
+    document.title;
+  const enc = encodeURIComponent;
+
+  const shareX = document.getElementById('stat-share-x');
+  const shareLi = document.getElementById('stat-share-li');
+  const shareWa = document.getElementById('stat-share-wa');
+  const shareFb = document.getElementById('stat-share-fb');
+  const copyLinkBtn = document.getElementById('stat-copy-link-btn');
+  const copyMdBtn = document.getElementById('stat-copy-md-btn');
+  const copyToast = document.getElementById('stat-copy-toast');
+  const mdTpl = document.getElementById('stat-markdown-template');
+
+  if (shareX instanceof HTMLAnchorElement) {
+    shareX.href = `https://x.com/intent/tweet?text=${enc(statsTitle)}&url=${enc(statsUrl)}`;
+  }
+  if (shareLi instanceof HTMLAnchorElement) {
+    shareLi.href = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(statsUrl)}`;
+  }
+  if (shareWa instanceof HTMLAnchorElement) {
+    shareWa.href = `https://wa.me/?text=${enc(statsTitle + ' ' + statsUrl)}`;
+  }
+  if (shareFb instanceof HTMLAnchorElement) {
+    shareFb.href = `https://www.facebook.com/sharer/sharer.php?u=${enc(statsUrl)}`;
+  }
+
+  const showToast = (message) => {
+    if (!(copyToast instanceof HTMLElement)) return;
+    copyToast.textContent = message;
+    copyToast.classList.add('is-visible');
+    window.setTimeout(() => copyToast.classList.remove('is-visible'), 2200);
+  };
+
+  copyLinkBtn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(statsUrl);
+      showToast('Link copied');
+    } catch {}
+  });
+
+  copyMdBtn?.addEventListener('click', async () => {
+    try {
+      const markdown = mdTpl instanceof HTMLTemplateElement ? mdTpl.innerHTML : '';
+      await navigator.clipboard.writeText(markdown);
+      showToast('Markdown copied');
+    } catch {}
+  });
+</script>
+
