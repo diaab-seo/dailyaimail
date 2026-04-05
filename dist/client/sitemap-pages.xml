@@ -76,6 +76,9 @@
       <loc>https://dailyaimail.news/topics/responsible-ai</loc>
     </url>
     <url>
+      <loc>https://dailyaimail.news/topics/ai-productivity</loc>
+    </url>
+    <url>
       <loc>https://dailyaimail.news/topics/openai</loc>
     </url>
     <url>
@@ -158,9 +161,6 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/granola</loc>
-    </url>
-    <url>
-      <loc>https://dailyaimail.news/topics/ai-productivity</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/topics/meta-ai</loc>
@@ -257,6 +257,9 @@
     </url>
     <url>
       <loc>https://dailyaimail.news/news/best-practices-secure-ai-systems</loc>
+    </url>
+    <url>
+      <loc>https://dailyaimail.news/news/career-ops-claude-code-job-search-open-source</loc>
     </url>
     <url>
       <loc>https://dailyaimail.news/news/chatgpt-ecommerce-pivot-instant-checkout</loc>
