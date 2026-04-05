@@ -11,6 +11,18 @@
         <language>en</language>
         <atom:link href="https://dailyaimail.news/rss.xml" rel="self" type="application/rss+xml" />
         <item>
+            <title><![CDATA[Microsoft Says Copilot's 'Entertainment Only' Warning Is Legacy Language]]></title>
+            <link><![CDATA[https://dailyaimail.news/news/microsoft-copilot-legacy-warning-terms]]></link>
+            <description><![CDATA[Microsoft is facing fresh scrutiny over Copilot's terms of use after users resurfaced language calling the product "for entertainment purposes only," even as the company pushes businesses to adopt it more deeply.]]></description>
+            <pubDate>Sun, 05 Apr 2026 22:21:00 GMT</pubDate>
+            <dc:creator><![CDATA[Daily AI Mail Editorial Staff]]></dc:creator>
+            <guid isPermaLink="false"><![CDATA[https://dailyaimail.news/news/microsoft-copilot-legacy-warning-terms]]></guid>
+                <media:thumbnail url="https://dailyaimail.news/images/microsoft-copilot-legacy-warning-terms.png" />
+                <media:content url="https://dailyaimail.news/images/microsoft-copilot-legacy-warning-terms.png" medium="image">
+                    <media:title type="html"><![CDATA[microsoft-copilot-legacy-warning-terms.png]]></media:title>
+                </media:content>
+        </item>
+        <item>
             <title><![CDATA[Anthropic Moves OpenClaw Usage Outside Claude Code Subscriptions]]></title>
             <link><![CDATA[https://dailyaimail.news/news/anthropic-openclaw-claude-code-extra-usage]]></link>
             <description><![CDATA[Anthropic is separating OpenClaw and other third-party harness usage from Claude Code subscriptions, forcing affected developers onto pay-as-you-go billing and adding fresh tension to the fast-growing AI coding tools market.]]></description>
