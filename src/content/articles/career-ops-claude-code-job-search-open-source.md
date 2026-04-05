@@ -56,6 +56,8 @@ The latest viral Claude Code project is not another coding agent demo. It is a j
 
 The project, called [Career-Ops](https://github.com/santifer/career-ops), was highlighted in a post from [@Hesamation on X](https://x.com/Hesamation/status/2040820834428658008) and quickly caught attention because the pitch is unusually concrete. According to the repo and the social post, the system evaluated more than 700 job opportunities, generated over 100 tailored CVs, and helped its builder land a Head of Applied AI role.
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">bro created an AI job search system for Claude Code that scored 700+ job applications and actually got him a job. <br><br>AND IT&#39;S NOW OPEN-SOURCE.<br><br>It scans multiple company career pages, rewrites your CV per job, and even fills application forms. The repo has:<br>&gt; 14 skill modes… <a href="https://t.co/VOM4M5jzU6">pic.twitter.com/VOM4M5jzU6</a></p>&mdash; ℏεsam (@Hesamation) <a href="https://twitter.com/Hesamation/status/2040820834428658008?ref_src=twsrc%5Etfw">April 5, 2026</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 ## More Than a Resume Bot
 
 What makes Career-Ops stand out is that it is not framed as a mass-application spam machine. In the project's own documentation, the emphasis is on scoring fit before applying, then tailoring materials to the role rather than spraying resumes across the internet.
