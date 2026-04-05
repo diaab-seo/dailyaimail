@@ -79,9 +79,3 @@ That sequence has made some developers read the change as competitive lock-in ra
 The backdrop is broader than Anthropic alone. OpenAI, for example, recently shut down its Sora app and video generation models, a move we covered [here](/news/openai-pulls-the-plug-on-sora-generative-ai-video-app-shutting-down), as major AI vendors keep reallocating compute and product focus toward higher-priority categories like software engineering and enterprise workflows.
 
 For developers, the practical takeaway is simple: Claude Code subscriptions now cover less than some power users assumed. If third-party harnesses become a standard way to run coding agents at scale, vendors will increasingly have to decide whether those workflows belong inside flat subscriptions or on metered infrastructure pricing. Anthropic has now made its answer clear.
-
----
-
-**Image prompt for Gemini Enterprise:**
-
-> An editorial technology illustration of a coding platform billing shift, showing a central AI developer console connected to external agent harnesses by branching Neon Cyan data lines, with one path rerouted into a metered pay-as-you-go billing gateway; composition should feel tense and strategic rather than chaotic, with modular terminal panels, token flow indicators, abstract compute nodes, and infrastructure barriers suggesting policy change around third-party AI coding tools; Deep Navy background, Electric Gold highlights for billing and pricing signals, Neon Cyan for data paths, Ice White interface accents, and Steel structural frames; clean vector editorial style, minimal but sharp, no people, no readable text, no logos.
