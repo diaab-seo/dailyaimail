@@ -1,6 +1,7 @@
-// @ts-check
+﻿// @ts-check
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
+import mdx from '@astrojs/mdx';
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -12,7 +13,7 @@ function buildExplainerMap() {
     const explainersDir = path.join(process.cwd(), 'src/content/explainers');
     const map = new Map();
     if (!fs.existsSync(explainersDir)) return map;
-    
+
     const files = fs.readdirSync(explainersDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
     for (const file of files) {
         const content = fs.readFileSync(path.join(explainersDir, file), 'utf8');
@@ -33,15 +34,15 @@ function explainerPluginFactory() {
             if (!explainerMap) {
                 explainerMap = buildExplainerMap();
             }
-            
+
             const frontmatter = vfile.data?.astro?.frontmatter || {};
             const articleTitle = frontmatter.headline || frontmatter.title || '';
             const plugin = rehypeExplainerTooltips({
                 terms: explainerMap,
                 tooltipCap: EXPLAINER_TOOLTIP_CAP,
-                articleTitle
+                articleTitle,
             });
-            
+
             plugin(tree, vfile);
             return tree;
         } catch (err) {
@@ -52,6 +53,11 @@ function explainerPluginFactory() {
 }
 
 export default defineConfig({
+    integrations: [
+        mdx({
+            extendMarkdownConfig: true,
+        }),
+    ],
     build: {
         format: 'file',
     },
@@ -64,9 +70,6 @@ export default defineConfig({
             enabled: true,
             configPath: './wrangler.jsonc',
         },
-        // Only route SSR pages through the CF worker runtime.
-        // Static pages (topics, homepage, category, legal pages) are served
-        // directly and don't need the worker runner resolving astro:content.
         routes: {
             strategy: 'exclude',
             exclude: [
@@ -82,11 +85,11 @@ export default defineConfig({
                 '/press-kit',
                 '/rss.xml',
                 '/newsletter',
-                // ── News articles (fully static, no worker needed) ──
+                '/statistics',
                 '/news/*',
-                // ── Explainers (fully static, no worker needed) ──
                 '/explainers',
                 '/explainers/*',
+                '/statistics/*',
             ],
         },
     }),

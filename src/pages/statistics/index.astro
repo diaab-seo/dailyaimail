@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/statistics.css';
+
+const entries = (await getCollection('statistics')).sort(
+  (a, b) => new Date(b.data.isoDate).getTime() - new Date(a.data.isoDate).getTime(),
+);
+
+const SITE_URL = 'https://dailyaimail.news';
+const canonical = `${SITE_URL}/statistics`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${canonical}#webpage`,
+  url: canonical,
+  name: 'AI Statistics & Usage Reports',
+  description:
+    'Verified AI statistics, adoption reports, usage breakdowns, and benchmark-style data pages for major AI tools and platforms.',
+  isPartOf: {
+    '@id': `${SITE_URL}/#website`,
+  },
+};
+---
+
+<Layout
+  title="AI Statistics & Usage Reports"
+  metaTitle="AI Statistics & Usage Reports | Daily AI Mail"
+  description="Verified AI statistics, adoption reports, usage breakdowns, and benchmark-style data pages for major AI tools and platforms."
+  canonical={canonical}
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+    slot="head"
+  />
+
+  <main class="statistics-page">
+    <header class="statistics-page__header">
+      <span class="statistics-page__eyebrow">New section</span>
+      <h1 class="statistics-page__title">AI Statistics &amp; Usage Reports</h1>
+      <p class="statistics-page__description">
+        This section covers verified usage data, adoption metrics, traffic benchmarks,
+        and market snapshots for major AI tools and platforms.
+      </p>
+    </header>
+
+    {
+      entries.length > 0 ? (
+        <div class="statistics-grid">
+          {entries.map((entry) => (
+            <a href={`/statistics/${entry.id}`} class="statistics-card">
+              <div class="statistics-card__media">
+                <img
+                  src={entry.data.image}
+                  alt={entry.data.imageAlt}
+                  width={entry.data.imageWidth}
+                  height={entry.data.imageHeight}
+                  loading="lazy"
+                />
+              </div>
+              <div class="statistics-card__body">
+                <span class="statistics-card__entity">{entry.data.entity}</span>
+                <h2 class="statistics-card__headline">{entry.data.headline}</h2>
+                <p class="statistics-card__excerpt">{entry.data.excerpt}</p>
+                {
+                  entry.data.keyStats[0] && (
+                    <div class="statistics-card__stat">
+                      <span class="statistics-card__value">{entry.data.keyStats[0].value}</span>
+                      <span class="statistics-card__label">{entry.data.keyStats[0].label}</span>
+                    </div>
+                  )
+                }
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="statistics-empty">
+          No statistics reports have been published yet. Add an `.mdx` file under
+          `src/content/statistics/` to launch the section.
+        </div>
+      )
+    }
+  </main>
+</Layout>

@@ -1,11 +1,11 @@
-import { defineCollection, z } from 'astro:content';
+﻿import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const articles = defineCollection({
     loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
     schema: z.object({
         tag: z.string(),
-        tags: z.array(z.string()).optional(), // additional display topics beyond primary tag
+        tags: z.array(z.string()).optional(),
         headline: z.string(),
         excerpt: z.string(),
         date: z.string(),
@@ -31,7 +31,7 @@ const articles = defineCollection({
         citations: z.array(z.object({
             name: z.string(),
             url: z.string(),
-            type: z.string().optional().default("CreativeWork"),
+            type: z.string().optional().default('CreativeWork'),
         })).optional(),
     }),
 });
@@ -39,10 +39,10 @@ const articles = defineCollection({
 const explainers = defineCollection({
     loader: glob({ pattern: '**/*.md', base: './src/content/explainers' }),
     schema: z.object({
-        term:           z.string(),
-        abbreviation:   z.string().optional(),
-        slug:           z.string(),
-        category:       z.enum([
+        term: z.string(),
+        abbreviation: z.string().optional(),
+        slug: z.string(),
+        category: z.enum([
             'foundation-models',
             'training',
             'inference',
@@ -52,14 +52,47 @@ const explainers = defineCollection({
             'data',
             'applications',
         ]),
-        definition:     z.string(),           // 1–2 sentence plain-text (tooltip + OG)
-        featuredImage:  z.string().optional(), // e.g. "/images/explainers/what-is-llm.png"
-        dateAdded:      z.string(),           // ISO date string e.g. "2026-03-26"
-        lastUpdated:    z.string().optional(),
-        relatedTerms:   z.array(z.string()).optional(), // slugs
-        seoTitle:       z.string().optional(),
+        definition: z.string(),
+        featuredImage: z.string().optional(),
+        dateAdded: z.string(),
+        lastUpdated: z.string().optional(),
+        relatedTerms: z.array(z.string()).optional(),
+        seoTitle: z.string().optional(),
         seoDescription: z.string().optional(),
     }),
 });
 
-export const collections = { articles, explainers };
+const statistics = defineCollection({
+    loader: glob({ pattern: '**/*.mdx', base: './src/content/statistics' }),
+    schema: z.object({
+        headline: z.string(),
+        excerpt: z.string(),
+        date: z.string(),
+        isoDate: z.string(),
+        updatedAt: z.string().optional(),
+        author: z.string(),
+        authorUrl: z.string().optional(),
+        image: z.string(),
+        imageWidth: z.number(),
+        imageHeight: z.number(),
+        imageCaption: z.string().optional(),
+        imageAlt: z.string(),
+        keywords: z.array(z.string()),
+        topic: z.string(),
+        entity: z.string(),
+        dataUpdated: z.string(),
+        sources: z.array(z.object({
+            name: z.string(),
+            url: z.string(),
+        })),
+        keyStats: z.array(z.object({
+            label: z.string(),
+            value: z.string(),
+            note: z.string().optional(),
+        })),
+        mentions: z.array(z.string()).optional(),
+        citations: z.array(z.string()).optional(),
+    }),
+});
+
+export const collections = { articles, explainers, statistics };

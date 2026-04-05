@@ -1,0 +1,414 @@
+---
+interface Dataset {
+  label?: string;
+  data: Array<string | number | null>;
+  backgroundColor?: string | string[];
+  borderColor?: string | string[];
+  [key: string]: unknown;
+}
+
+interface Props {
+  id?: string;
+  type: 'bar' | 'line' | 'doughnut' | 'pie';
+  title: string;
+  labels: string[];
+  datasets: Dataset[];
+  height?: number;
+  disclosure?: string;
+}
+
+const palette = [
+  'var(--color-electric-gold)',
+  'var(--color-neon-cyan)',
+  'var(--color-accent)',
+  'var(--color-cyan)',
+];
+
+const {
+  id = `chart-${crypto.randomUUID()}`,
+  type,
+  title,
+  labels,
+  datasets,
+  height = 350,
+  disclosure = 'Data shown is compiled from the cited sources in this report.',
+} = Astro.props;
+
+const normalizedDatasets = datasets.map((dataset, index) => ({
+  ...dataset,
+  label: dataset.label ?? `Series ${index + 1}`,
+  backgroundColor: dataset.backgroundColor ?? palette[index % palette.length],
+  borderColor: dataset.borderColor ?? dataset.backgroundColor ?? palette[index % palette.length],
+}));
+
+const numericDatasets = normalizedDatasets.map((dataset) =>
+  dataset.data.map((value) => (typeof value === 'number' ? value : Number(value ?? 0)))
+);
+
+const allValues = numericDatasets.flat().filter((value) => Number.isFinite(value));
+const minValue = type === 'line' ? Math.min(...allValues) : 0;
+const maxValue = Math.max(...allValues, 1);
+const yRange = maxValue - minValue || 1;
+const chartHeight = Math.max(height, 260);
+const chartWidth = 760;
+const padding = { top: 24, right: 20, bottom: 52, left: 48 };
+const plotWidth = chartWidth - padding.left - padding.right;
+const plotHeight = chartHeight - padding.top - padding.bottom;
+const yTicks = 4;
+const yTickValues = Array.from({ length: yTicks + 1 }, (_, index) => {
+  const value = minValue + ((yTicks - index) / yTicks) * yRange;
+  return value;
+});
+
+const formatValue = (value: number) => {
+  if (value >= 1000) return value.toLocaleString('en-US');
+  if (Number.isInteger(value)) return String(value);
+  return value.toFixed(1);
+};
+
+const buildLinePoints = (values: number[]) =>
+  values
+    .map((value, index) => {
+      const x = padding.left + (labels.length === 1 ? plotWidth / 2 : (index / (labels.length - 1)) * plotWidth);
+      const y = padding.top + (1 - (value - minValue) / yRange) * plotHeight;
+      return `${x},${y}`;
+    })
+    .join(' ');
+
+const groupedBars = labels.map((label, labelIndex) => {
+  const groupLeft = padding.left + (labelIndex / labels.length) * plotWidth;
+  const groupWidth = plotWidth / labels.length;
+  const barWidth = Math.min((groupWidth * 0.72) / Math.max(normalizedDatasets.length, 1), 44);
+  const groupInnerWidth = barWidth * normalizedDatasets.length;
+  const innerLeft = groupLeft + (groupWidth - groupInnerWidth) / 2;
+
+  return {
+    label,
+    bars: normalizedDatasets.map((dataset, datasetIndex) => {
+      const value = numericDatasets[datasetIndex][labelIndex] ?? 0;
+      const barHeight = ((value - Math.min(0, minValue)) / Math.max(maxValue - Math.min(0, minValue), 1)) * plotHeight;
+      return {
+        x: innerLeft + datasetIndex * barWidth,
+        y: padding.top + plotHeight - barHeight,
+        width: barWidth - 4,
+        height: barHeight,
+        value,
+        color: Array.isArray(dataset.backgroundColor)
+          ? dataset.backgroundColor[labelIndex] ?? palette[datasetIndex % palette.length]
+          : dataset.backgroundColor,
+      };
+    }),
+  };
+});
+
+const pieValues = numericDatasets[0] ?? [];
+const pieTotal = pieValues.reduce((sum, value) => sum + value, 0) || 1;
+const pieCenter = 160;
+const pieRadius = 116;
+const doughnutInnerRadius = 58;
+const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
+  const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+  return {
+    x: centerX + radius * Math.cos(angleInRadians),
+    y: centerY + radius * Math.sin(angleInRadians),
+  };
+};
+
+const describeArc = (
+  centerX: number,
+  centerY: number,
+  outerRadius: number,
+  startAngle: number,
+  endAngle: number,
+  innerRadius = 0
+) => {
+  const outerStart = polarToCartesian(centerX, centerY, outerRadius, endAngle);
+  const outerEnd = polarToCartesian(centerX, centerY, outerRadius, startAngle);
+  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+
+  if (innerRadius <= 0) {
+    return [
+      `M ${centerX} ${centerY}`,
+      `L ${outerStart.x} ${outerStart.y}`,
+      `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 0 ${outerEnd.x} ${outerEnd.y}`,
+      'Z',
+    ].join(' ');
+  }
+
+  const innerStart = polarToCartesian(centerX, centerY, innerRadius, endAngle);
+  const innerEnd = polarToCartesian(centerX, centerY, innerRadius, startAngle);
+
+  return [
+    `M ${outerStart.x} ${outerStart.y}`,
+    `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 0 ${outerEnd.x} ${outerEnd.y}`,
+    `L ${innerEnd.x} ${innerEnd.y}`,
+    `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 1 ${innerStart.x} ${innerStart.y}`,
+    'Z',
+  ].join(' ');
+};
+
+const pieSegments = labels.map((label, index) => {
+  const value = pieValues[index] ?? 0;
+  const start = pieValues.slice(0, index).reduce((sum, current) => sum + current, 0);
+  const end = start + value;
+  const startAngle = (start / pieTotal) * 360;
+  const endAngle = (end / pieTotal) * 360;
+  const midAngle = startAngle + (endAngle - startAngle) / 2;
+  const color = Array.isArray(normalizedDatasets[0]?.backgroundColor)
+    ? normalizedDatasets[0]?.backgroundColor[index] ?? palette[index % palette.length]
+    : palette[index % palette.length];
+
+  return {
+    label,
+    value,
+    color,
+    percentage: (value / pieTotal) * 100,
+    path: describeArc(
+      pieCenter,
+      pieCenter,
+      pieRadius,
+      startAngle,
+      endAngle,
+      type === 'doughnut' ? doughnutInnerRadius : 0
+    ),
+    tooltipX: pieCenter + Math.cos(((midAngle - 90) * Math.PI) / 180) * (type === 'doughnut' ? 90 : 72),
+    tooltipY: pieCenter + Math.sin(((midAngle - 90) * Math.PI) / 180) * (type === 'doughnut' ? 90 : 72),
+  };
+});
+---
+
+<figure class="stat-chart" data-chart-root id={id}>
+  <div class="stat-chart__header">
+    <figcaption class="stat-chart__title">{title}</figcaption>
+    <div class="stat-chart__toggle" role="tablist" aria-label={`${title} view options`}>
+      <button type="button" class="stat-chart__tab is-active" data-chart-tab="chart" aria-selected="true">Chart</button>
+      <button type="button" class="stat-chart__tab" data-chart-tab="table" aria-selected="false">Table</button>
+    </div>
+  </div>
+
+  <div class="stat-chart__panel is-active" data-chart-panel="chart">
+    {
+      (type === 'line' || type === 'bar') && (
+        <div class="stat-chart__canvas" role="img" aria-label={title}>
+          <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} aria-hidden="true" preserveAspectRatio="none">
+            {yTickValues.map((tick) => {
+              const y = padding.top + ((maxValue - tick) / yRange) * plotHeight;
+              return (
+                <g>
+                  <line x1={padding.left} y1={y} x2={chartWidth - padding.right} y2={y} class="stat-chart__gridline" />
+                  <text x={padding.left - 10} y={y + 4} text-anchor="end" class="stat-chart__axis-label">
+                    {formatValue(tick)}
+                  </text>
+                </g>
+              );
+            })}
+
+            <line
+              x1={padding.left}
+              y1={padding.top + plotHeight}
+              x2={chartWidth - padding.right}
+              y2={padding.top + plotHeight}
+              class="stat-chart__axis"
+            />
+
+            {type === 'line' && normalizedDatasets.map((dataset, datasetIndex) => (
+              <g>
+                <polyline
+                  class="stat-chart__line"
+                  fill="none"
+                  points={buildLinePoints(numericDatasets[datasetIndex])}
+                  stroke={Array.isArray(dataset.borderColor) ? dataset.borderColor[0] : dataset.borderColor}
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                {numericDatasets[datasetIndex].map((value, valueIndex) => {
+                  const x = padding.left + (labels.length === 1 ? plotWidth / 2 : (valueIndex / (labels.length - 1)) * plotWidth);
+                  const y = padding.top + (1 - (value - minValue) / yRange) * plotHeight;
+                  return (
+                    <g class="stat-chart__point-group" tabindex="0">
+                      <title>{`${dataset.label}: ${labels[valueIndex]} - ${formatValue(value)}`}</title>
+                      <circle class="stat-chart__point-hit" cx={x} cy={y} r="14" fill="transparent" />
+                      <circle
+                        class="stat-chart__point"
+                        cx={x}
+                        cy={y}
+                        r="5"
+                        fill={Array.isArray(dataset.borderColor) ? dataset.borderColor[0] : dataset.borderColor}
+                      />
+                      <text x={x} y={y - 12} text-anchor="middle" class="stat-chart__value-label">
+                        {formatValue(value)}
+                      </text>
+                    </g>
+                  );
+                })}
+              </g>
+            ))}
+
+            {type === 'bar' && groupedBars.map((group, groupIndex) => {
+              const labelX = padding.left + ((groupIndex + 0.5) / labels.length) * plotWidth;
+              return (
+                <g>
+                  {group.bars.map((bar) => (
+                    <g class="stat-chart__bar-group" tabindex="0">
+                      <title>{`${group.label}: ${formatValue(bar.value)}`}</title>
+                      <rect
+                        class="stat-chart__bar"
+                        x={bar.x}
+                        y={bar.y}
+                        width={bar.width}
+                        height={Math.max(bar.height, 2)}
+                        rx="6"
+                        fill={bar.color}
+                      />
+                      <text x={bar.x + bar.width / 2} y={bar.y - 8} text-anchor="middle" class="stat-chart__value-label">
+                        {formatValue(bar.value)}
+                      </text>
+                    </g>
+                  ))}
+                  <text x={labelX} y={chartHeight - 18} text-anchor="middle" class="stat-chart__axis-label">
+                    {group.label}
+                  </text>
+                </g>
+              );
+            })}
+
+            {type === 'line' && labels.map((label, index) => {
+              const x = padding.left + (labels.length === 1 ? plotWidth / 2 : (index / (labels.length - 1)) * plotWidth);
+              return (
+                <text x={x} y={chartHeight - 18} text-anchor="middle" class="stat-chart__axis-label">
+                  {label}
+                </text>
+              );
+            })}
+          </svg>
+        </div>
+      )
+    }
+
+    {
+      (type === 'doughnut' || type === 'pie') && (
+        <div class="stat-chart__pie-wrap">
+          <div class="stat-chart__pie-frame">
+            <svg
+              class="stat-chart__pie-svg"
+              viewBox="0 0 320 320"
+              role="img"
+              aria-label={title}
+            >
+              {pieSegments.map((segment, index) => (
+                <g class="stat-chart__slice-group" tabindex="0">
+                  <title>{`${segment.label}: ${formatValue(segment.value)} (${segment.percentage.toFixed(1)}%)`}</title>
+                  <path
+                    class="stat-chart__slice"
+                    d={segment.path}
+                    fill={segment.color}
+                    data-segment={index}
+                  />
+                </g>
+              ))}
+              {type === 'doughnut' && (
+                <g>
+                  <circle class="stat-chart__pie-hole" cx={pieCenter} cy={pieCenter} r={doughnutInnerRadius} />
+                  <text x={pieCenter} y={pieCenter - 4} text-anchor="middle" class="stat-chart__pie-total">
+                    {formatValue(pieTotal)}
+                  </text>
+                  <text x={pieCenter} y={pieCenter + 18} text-anchor="middle" class="stat-chart__pie-total-label">
+                    Total
+                  </text>
+                </g>
+              )}
+            </svg>
+          </div>
+
+          <ul class="stat-chart__legend">
+            {pieSegments.map((segment, index) => (
+              <li class="stat-chart__legend-item" data-segment={index} tabindex="0">
+                <span class="stat-chart__legend-dot" style={`background:${segment.color};`}></span>
+                <span class="stat-chart__legend-label">{segment.label}</span>
+                <span class="stat-chart__legend-value">{formatValue(segment.value)} ({segment.percentage.toFixed(1)}%)</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+
+  <div class="stat-chart__panel" data-chart-panel="table" hidden>
+    <table class="stat-table">
+      <caption>{title}</caption>
+      <thead>
+        <tr>
+          <th scope="col">Label</th>
+          {
+            normalizedDatasets.map((dataset) => (
+              <th scope="col">{dataset.label}</th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          labels.map((label, rowIndex) => (
+            <tr>
+              <th scope="row">{label}</th>
+              {
+                normalizedDatasets.map((dataset) => (
+                  <td>{String(dataset.data[rowIndex] ?? '')}</td>
+                ))
+              }
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="stat-disclosure"><em>{disclosure}</em></p>
+</figure>
+
+<script is:inline define:vars={{ id }}>
+  const root = document.getElementById(id);
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll('[data-chart-tab]'));
+    const panels = Array.from(root.querySelectorAll('[data-chart-panel]'));
+
+    const setActive = (target) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.chartTab === target;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      panels.forEach((panel) => {
+        const active = panel.dataset.chartPanel === target;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => setActive(tab.dataset.chartTab));
+    });
+
+    const clearSegmentState = () => {
+      root.querySelectorAll('[data-segment].is-active').forEach((node) => node.classList.remove('is-active'));
+    };
+
+    const activateSegment = (segment) => {
+      clearSegmentState();
+      if (segment == null) return;
+      root.querySelectorAll(`[data-segment="${segment}"]`).forEach((node) => node.classList.add('is-active'));
+    };
+
+    root.querySelectorAll('[data-segment]').forEach((node) => {
+      const handleEnter = () => activateSegment(node.dataset.segment);
+      const handleLeave = () => activateSegment(null);
+      node.addEventListener('mouseenter', handleEnter);
+      node.addEventListener('mouseleave', handleLeave);
+      node.addEventListener('focus', handleEnter);
+      node.addEventListener('blur', handleLeave);
+    });
+  }
+</script>

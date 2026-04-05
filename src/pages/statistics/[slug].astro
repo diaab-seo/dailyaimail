@@ -1,0 +1,74 @@
+---
+export const prerender = true;
+
+import { getCollection, render } from 'astro:content';
+import StatisticsLayout from '../../layouts/StatisticsLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('statistics');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const allEntries = await getCollection('statistics');
+const relatedReports = allEntries
+  .filter((candidate) => candidate.id !== entry.id)
+  .map((candidate) => ({
+    slug: candidate.id,
+    headline: candidate.data.headline,
+    entity: candidate.data.entity,
+    excerpt: candidate.data.excerpt,
+  }))
+  .slice(0, 2);
+
+const markdownExport = [
+  `# ${entry.data.headline}`,
+  '',
+  `> ${entry.data.excerpt}`,
+  '',
+  `**Entity:** ${entry.data.entity}  `,
+  `**Published:** ${entry.data.date}  `,
+  `**Data updated:** ${entry.data.dataUpdated}  `,
+  `**Source URL:** https://dailyaimail.news/statistics/${entry.id}`,
+  '',
+  '---',
+  '',
+  entry.body,
+  '',
+  '---',
+  '',
+  '## Sources',
+  '',
+  ...entry.data.sources.map((source) => `- [${source.name}](${source.url})`),
+].join('\n');
+---
+
+<StatisticsLayout
+  slug={entry.id}
+  headline={entry.data.headline}
+  excerpt={entry.data.excerpt}
+  date={entry.data.date}
+  isoDate={entry.data.isoDate}
+  updatedAt={entry.data.updatedAt}
+  author={entry.data.author}
+  authorUrl={entry.data.authorUrl}
+  image={entry.data.image}
+  imageWidth={entry.data.imageWidth}
+  imageHeight={entry.data.imageHeight}
+  imageCaption={entry.data.imageCaption}
+  imageAlt={entry.data.imageAlt}
+  keywords={entry.data.keywords}
+  topic={entry.data.topic}
+  entity={entry.data.entity}
+  dataUpdated={entry.data.dataUpdated}
+  sources={entry.data.sources}
+  keyStats={entry.data.keyStats}
+  markdownExport={markdownExport}
+  relatedReports={relatedReports}
+>
+  <Content />
+</StatisticsLayout>

@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --color-base: #FFFFFF;
   --color-surface: #F9FAFB;
   --color-border: #E5E7EB;
@@ -6,6 +6,8 @@
   --color-gold-hover: #D4A800;
   --color-cyan: #0284C7;
   --color-cyan-dim: #0369A1;
+  --color-electric-gold: #F5C518;
+  --color-neon-cyan: #06B6D4;
   --color-text-primary: #111827;
   --color-text-secondary: #4B5563;
   --color-text-hint: #9CA3AF;
