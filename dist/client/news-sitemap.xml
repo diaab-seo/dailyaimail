@@ -4,6 +4,32 @@
   xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
   <url>
+    <loc>https://dailyaimail.news/news/anthropic-openclaw-claude-code-extra-usage</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Daily AI Mail</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-05T13:36:00.000Z</news:publication_date>
+      <news:title>Anthropic Moves OpenClaw Usage Outside Claude Code Subscriptions</news:title>
+      <news:keywords>Anthropic OpenClaw pricing, Claude Code third-party harnesses, OpenClaw pay as you go, how Anthropic changed Claude Code billing, what happened to OpenClaw usage on Claude subscriptions, Anthropic developer tools pricing</news:keywords>
+    </news:news>
+    <lastmod>2026-04-05T00:00:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dailyaimail.news/news/databricks-station-f-europe-ai-startups</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Daily AI Mail</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-05T13:30:00.000Z</news:publication_date>
+      <news:title>Databricks Teams Up With STATION F to Push AI Adoption Among European Startups</news:title>
+      <news:keywords>Databricks STATION F partnership, Databricks Europe AI startups, STATION F AI adoption, Lakebase and Genie for startups, how Databricks supports AI founders, what STATION F partnership means for European startups</news:keywords>
+    </news:news>
+    <lastmod>2026-04-05T00:00:00.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://dailyaimail.news/news/microsoft-10-billion-japan-ai-cybersecurity</loc>
     <news:news>
       <news:publication>
@@ -15,18 +41,5 @@
       <news:keywords>Microsoft Japan AI investment, Microsoft $10 billion Japan, Microsoft Japan cybersecurity, Brad Smith Japan Tokyo, Microsoft Azure Japan infrastructure, SoftBank Microsoft AI, Sakura Internet Microsoft, Microsoft Asia AI expansion, Japan AI engineers 2030, Microsoft AI infrastructure Asia</news:keywords>
     </news:news>
     <lastmod>2026-04-04T00:00:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dailyaimail.news/news/best-practices-secure-ai-systems</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Daily AI Mail</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-03T13:35:00.000Z</news:publication_date>
-      <news:title>Best Practices To Secure AI Systems: A Comprehensive Guide for Every Team</news:title>
-      <news:keywords>best practices to secure AI systems, how to secure AI models, AI security framework, LLM security best practices, securing generative AI applications, AI threat mitigation, prompt injection prevention, AI governance security, enterprise AI security, how to protect AI from attacks, AI model security checklist, securing AI APIs</news:keywords>
-    </news:news>
-    <lastmod>2026-04-03T00:00:00.000Z</lastmod>
   </url>
 </urlset>

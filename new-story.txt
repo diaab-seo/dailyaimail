@@ -1,0 +1,39 @@
+Article Title To Rewrite : Databricks joins STATION F to Accelerate AI Adoption for European Founders
+
+
+Article Body : 
+New partnership drives adoption of Lakebase and Genie, enabling European founders to build enterprise-ready AI on their data
+
+PARIS, FRANCE - APRIL 2, 2026 — Databricks, the Data and AI company, today announced a new partnership with STATION F, the world’s largest startup campus, to help European tech leaders harness the full power of data and AI. Through this partnership, founders, engineers and data and AI teams will gain additional insights, skills and tools to scale AI apps and agents on their enterprise data with speed, governance and security.
+
+The urgency for European founders to build strong AI capabilities has never been greater. According to PitchBook data, AI dominated European VC investment in 2025, accounting for nearly 40% of all European VC deal value by Q3 2025 — a trend further accelerating in 2026. This is why Databricks is partnering with STATION F, to help European leaders build AI applications to scale their business faster with Lakebase, Databricks’ serverless Postgres database built for AI agents, and Genie, Databricks’ AI agent that lets any employee chat with their data and get trusted answers instantly.
+
+Democratizing data and AI at STATION F
+As part of this new partnership, Databricks will open a dedicated office at STATION F, actively contributing to the innovative community through a range of initiatives. Founders and teams will benefit from:
+
+Training and coaching: Direct access to Databricks experts on how to build with a range of Databricks solutions, including Lakebase, Genie, Agent Bricks and Unity Catalog
+Ecosystem programs: Specialized office hours and networking events
+Technical sessions: Invitations to live demos, vibe coding workshops and interactive hackathons showcasing Databricks’ latest products
+Customer and partner events: Insights into how Databricks customers and partners are moving AI into production
+“Today’s founders have a unique opportunity to scale at unprecedented speeds with AI. Many of our customers have already proven what’s possible when building AI applications at scale whether it's for more personalized customer experiences, streamlining data-driven decision-making and so much more, “ said Nico Gaviola, VP Emerging Enterprise and Digital Natives, Databricks. “This new partnership with STATION F places us at the heart of the French tech community, accelerating our goal to empower the next generation of EMEA AI companies.”
+
+“We are so excited to launch this new partnership with Databricks, one of the most important platforms in the global AI landscape today. Not only will our founders be able to access their tech and team directly on campus, but they'll be able to follow in the footsteps of Databricks’ incredible entrepreneurial journey,” said Roxanne Varza, Director of STATION F.
+
+Powering the next generation of emerging enterprises
+This partnership builds on the rapid growth of Databricks’ emerging enterprise and startups business in EMEA. Databricks is launching a dedicated startups team in the region, supporting pre-seed to Series B startups such as Linkup and Tsuga to build AI apps and agents on a governed data foundation.
+
+Databricks has supported many European companies to drive business impact with data and AI, from early-stage startups to unicorns, including Flo Health, GetYourGuide, In the Memory, Mirakl and Parloa. Many digital native businesses like Skyscanner have moved from AI experimentation to full-scale production on Databricks.
+
+Through Databricks Ventures, the company continues to invest in the EMEA AI ecosystem, recently participating in Lovable’s $330M Series B funding round to power AI-native application development. Additionally, EMEA startups like Applied Computing are active participants in the Databricks AI Accelerator Program, a product development initiative designed to strategically support high-potential startups building on the Databricks platform. Databricks also has a dedicated Databricks for Startups offering, supporting startups to build data-driven applications on a lakehouse foundation.
+
+Links :
+https://www.databricks.com/
+https://stationf.co/
+https://pitchbook.com/news/reports/q3-2025-european-venture-report#:~:text=AI%20fuels%20Europe's%20largest%20VC,by%20the%20rise%20of%20AI.
+https://www.databricks.com/product/lakebase
+https://www.databricks.com/product/business-intelligence/genie
+https://www.databricks.com/databricks-ventures
+https://www.databricks.com/product/startups
+Tags : Enterprise AI, AI Adoption
+
+Date Of Partnership Is 2, April.
