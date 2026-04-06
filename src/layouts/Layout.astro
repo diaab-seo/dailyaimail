@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   metaTitle?: string;
   canonical?: string;
+  noindex?: boolean;
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
@@ -27,6 +28,7 @@ const frontmatter = (Astro.props as any).frontmatter ?? {};
 const title = directProps.title ?? frontmatter.title;
 const description = directProps.description ?? frontmatter.description;
 const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
+const noindex = directProps.noindex ?? Astro.url.pathname.startsWith("/auth/");
 
 const SITE_URL = "https://dailyaimail.news";
 let canonicalPath = Astro.url.pathname;
@@ -78,6 +80,7 @@ const ogSection = directProps.ogSection;
       content={description ??
         "Your daily source for AI news, research and tools."}
     />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -156,48 +159,89 @@ const ogSection = directProps.ogSection;
     <script is:inline>
       // Only show Google One Tap when the user does not have a session
       (function() {
-        // If user has a session cookie, skip One Tap
-        var hasSession = document.cookie.split(';').some(function(c) {
-          return c.trim().startsWith('sid=');
-        });
-        // Also skip on login/register pages (Google button is already there)
         var path = window.location.pathname;
         var isAuthPage = path.startsWith('/auth/');
-        if (hasSession || isAuthPage) return;
+        if (isAuthPage) return;
 
-        // Load GSI client and initialize One Tap
-        var script = document.createElement('script');
-        script.src = 'https://accounts.google.com/gsi/client';
-        script.async = true;
-        script.defer = true;
-        script.onload = function() {
-          var el = document.getElementById('g_id_onload_sitewide');
-          if (el) el.style.display = '';
+        var recentGoogleSignInAt = Number(sessionStorage.getItem('dai_google_just_signed_in_at') || '0');
+        if (recentGoogleSignInAt && Date.now() - recentGoogleSignInAt < 15000) return;
+
+        function currentReturnTo() {
+          return window.location.pathname + window.location.search;
+        }
+
+        function submitGoogleCredential(credential) {
+          sessionStorage.setItem('dai_google_just_signed_in_at', String(Date.now()));
           if (window.google && window.google.accounts && window.google.accounts.id) {
-            window.google.accounts.id.initialize({
-              client_id: '211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com',
-              login_uri: '/auth/google',
-              auto_select: true,
-              cancel_on_tap_outside: false,
-              context: 'signin',
-              callback: function(response) {
-                // Post the credential as a form to /auth/google
-                var form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '/auth/google';
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'credential';
-                input.value = response.credential;
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
-              }
-            });
-            window.google.accounts.id.prompt();
+            window.google.accounts.id.cancel();
+            if (typeof window.google.accounts.id.disableAutoSelect === 'function') {
+              window.google.accounts.id.disableAutoSelect();
+            }
           }
-        };
-        document.head.appendChild(script);
+
+          var form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/auth/google';
+
+          var credentialInput = document.createElement('input');
+          credentialInput.type = 'hidden';
+          credentialInput.name = 'credential';
+          credentialInput.value = credential;
+          form.appendChild(credentialInput);
+
+          var stateInput = document.createElement('input');
+          stateInput.type = 'hidden';
+          stateInput.name = 'state';
+          stateInput.value = currentReturnTo();
+          form.appendChild(stateInput);
+
+          document.body.appendChild(form);
+          form.submit();
+        }
+
+        function loadOneTap() {
+          var script = document.createElement('script');
+          script.src = 'https://accounts.google.com/gsi/client';
+          script.async = true;
+          script.defer = true;
+          script.onload = function() {
+            var el = document.getElementById('g_id_onload_sitewide');
+            if (el) el.style.display = '';
+            if (window.google && window.google.accounts && window.google.accounts.id) {
+              window.google.accounts.id.initialize({
+                client_id: '211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com',
+                login_uri: '/auth/google',
+                auto_select: true,
+                cancel_on_tap_outside: false,
+                context: 'signin',
+                state_cookie_domain: window.location.hostname,
+                callback: function(response) {
+                  submitGoogleCredential(response.credential);
+                }
+              });
+              window.google.accounts.id.prompt();
+            }
+          };
+          document.head.appendChild(script);
+        }
+
+        fetch('/api/me', {
+          credentials: 'same-origin',
+          cache: 'no-store',
+          headers: { 'Accept': 'application/json' }
+        })
+          .then(function(response) {
+            if (!response.ok) return null;
+            return response.json();
+          })
+          .then(function(data) {
+            if (data && data.user) return;
+            loadOneTap();
+          })
+          .catch(function() {
+            // Fail open so the sign-in prompt still works if session lookup fails.
+            loadOneTap();
+          });
       })();
     </script>
 

@@ -11,11 +11,10 @@ import type { SessionUser } from "../../lib/auth";
 const db = (env as any).DB as D1Database;
 const kv = (env as any).SESSION as KVNamespace;
 
-const user = await getSession(kv, Astro.cookies);
-if (user) return Astro.redirect("/");
-
 const registered = Astro.url.searchParams.get("registered") === "1";
 const returnTo = Astro.url.searchParams.get("from") ?? "/";
+const user = await getSession(kv, Astro.cookies);
+if (user) return Astro.redirect(returnTo);
 const googleLoginUri = `/auth/google?from=${encodeURIComponent(returnTo)}`;
 
 let error = "";
@@ -60,7 +59,7 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<Layout title="Sign In — Daily AI Mail" metaTitle="Sign In — Daily AI Mail">
+<Layout title="Sign In - Daily AI Mail" metaTitle="Sign In - Daily AI Mail" noindex={true}>
     <div class="auth-wrap">
         <div class="auth-card">
             <a href="/" class="auth-brand">Daily <em>AI</em> Mail</a>

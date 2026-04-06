@@ -1,7 +1,7 @@
 globalThis.process ??= {};
 globalThis.process.env ??= {};
-import { c as createComponent } from "./astro-component_DcIrlnxg.mjs";
-import { n as createRenderInstruction, r as renderTemplate, h as addAttribute, m as maybeRenderHead, l as renderComponent, o as renderSlot, p as renderHead } from "./worker-entry_r5E4GpWC.mjs";
+import { c as createComponent } from "./astro-component_9jCvtBV5.mjs";
+import { n as createRenderInstruction, r as renderTemplate, h as addAttribute, m as maybeRenderHead, l as renderComponent, o as renderSlot, p as renderHead } from "./worker-entry_DmggEcAh.mjs";
 async function renderScript(result, id) {
   const inlined = result.inlinedScripts.get(id);
   let content = "";
@@ -139,6 +139,7 @@ const $$Layout = createComponent(($$result, $$props, $$slots) => {
   const title = directProps.title ?? frontmatter.title;
   const description = directProps.description ?? frontmatter.description;
   const metaTitle = directProps.metaTitle ?? frontmatter.metaTitle;
+  const noindex = directProps.noindex ?? Astro2.url.pathname.startsWith("/auth/");
   const SITE_URL = "https://dailyaimail.news";
   let canonicalPath = Astro2.url.pathname;
   if (canonicalPath.endsWith("/index.html")) {
@@ -168,51 +169,92 @@ const $$Layout = createComponent(($$result, $$props, $$slots) => {
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PZML6X97');<\/script><!-- End Google Tag Manager --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2726475267654049" crossorigin="anonymous"><\/script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description"`, '><link rel="canonical"', '><!-- Open Graph --><meta property="og:type"', '><meta property="og:url"', '><meta property="og:title"', '><meta property="og:description"', '><meta property="og:image"', '><meta property="og:image:width"', '><meta property="og:image:height"', '><meta property="og:image:alt"', '><meta property="og:site_name" content="Daily AI Mail"><meta property="og:locale" content="en_US">', "", "", "", '<!-- Twitter / X Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@dailyaimail"><meta name="twitter:title"', '><meta name="twitter:description"', '><meta name="twitter:image"', '><meta name="twitter:image:alt"', '><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"><title>\n      ', '\n    </title><link rel="icon" type="image/png" href="/favicon.png"><meta name="generator"', "><!-- Per-page injections (JSON-LD, etc.) -->", "", '</head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZML6X97" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> ', " ", " ", ` <!-- Google One Tap (site-wide, shown only when user is not logged in) --> <div id="g_id_onload_sitewide" data-client_id="211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com" data-login_uri="/auth/google" data-auto_prompt="true" data-cancel_on_tap_outside="false" data-context="signin" style="display:none"></div> <script>
+    })(window,document,'script','dataLayer','GTM-PZML6X97');<\/script><!-- End Google Tag Manager --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2726475267654049" crossorigin="anonymous"><\/script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description"`, ">", '<link rel="canonical"', '><!-- Open Graph --><meta property="og:type"', '><meta property="og:url"', '><meta property="og:title"', '><meta property="og:description"', '><meta property="og:image"', '><meta property="og:image:width"', '><meta property="og:image:height"', '><meta property="og:image:alt"', '><meta property="og:site_name" content="Daily AI Mail"><meta property="og:locale" content="en_US">', "", "", "", '<!-- Twitter / X Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@dailyaimail"><meta name="twitter:title"', '><meta name="twitter:description"', '><meta name="twitter:image"', '><meta name="twitter:image:alt"', '><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"><title>\n      ', '\n    </title><link rel="icon" type="image/png" href="/favicon.png"><meta name="generator"', "><!-- Per-page injections (JSON-LD, etc.) -->", "", '</head> <body> <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZML6X97" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) --> ', " ", " ", ` <!-- Google One Tap (site-wide, shown only when user is not logged in) --> <div id="g_id_onload_sitewide" data-client_id="211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com" data-login_uri="/auth/google" data-auto_prompt="true" data-cancel_on_tap_outside="false" data-context="signin" style="display:none"></div> <script>
       // Only show Google One Tap when the user does not have a session
       (function() {
-        // If user has a session cookie, skip One Tap
-        var hasSession = document.cookie.split(';').some(function(c) {
-          return c.trim().startsWith('sid=');
-        });
-        // Also skip on login/register pages (Google button is already there)
         var path = window.location.pathname;
         var isAuthPage = path.startsWith('/auth/');
-        if (hasSession || isAuthPage) return;
+        if (isAuthPage) return;
 
-        // Load GSI client and initialize One Tap
-        var script = document.createElement('script');
-        script.src = 'https://accounts.google.com/gsi/client';
-        script.async = true;
-        script.defer = true;
-        script.onload = function() {
-          var el = document.getElementById('g_id_onload_sitewide');
-          if (el) el.style.display = '';
+        var recentGoogleSignInAt = Number(sessionStorage.getItem('dai_google_just_signed_in_at') || '0');
+        if (recentGoogleSignInAt && Date.now() - recentGoogleSignInAt < 15000) return;
+
+        function currentReturnTo() {
+          return window.location.pathname + window.location.search;
+        }
+
+        function submitGoogleCredential(credential) {
+          sessionStorage.setItem('dai_google_just_signed_in_at', String(Date.now()));
           if (window.google && window.google.accounts && window.google.accounts.id) {
-            window.google.accounts.id.initialize({
-              client_id: '211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com',
-              login_uri: '/auth/google',
-              auto_select: true,
-              cancel_on_tap_outside: false,
-              context: 'signin',
-              callback: function(response) {
-                // Post the credential as a form to /auth/google
-                var form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '/auth/google';
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'credential';
-                input.value = response.credential;
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
-              }
-            });
-            window.google.accounts.id.prompt();
+            window.google.accounts.id.cancel();
+            if (typeof window.google.accounts.id.disableAutoSelect === 'function') {
+              window.google.accounts.id.disableAutoSelect();
+            }
           }
-        };
-        document.head.appendChild(script);
+
+          var form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/auth/google';
+
+          var credentialInput = document.createElement('input');
+          credentialInput.type = 'hidden';
+          credentialInput.name = 'credential';
+          credentialInput.value = credential;
+          form.appendChild(credentialInput);
+
+          var stateInput = document.createElement('input');
+          stateInput.type = 'hidden';
+          stateInput.name = 'state';
+          stateInput.value = currentReturnTo();
+          form.appendChild(stateInput);
+
+          document.body.appendChild(form);
+          form.submit();
+        }
+
+        function loadOneTap() {
+          var script = document.createElement('script');
+          script.src = 'https://accounts.google.com/gsi/client';
+          script.async = true;
+          script.defer = true;
+          script.onload = function() {
+            var el = document.getElementById('g_id_onload_sitewide');
+            if (el) el.style.display = '';
+            if (window.google && window.google.accounts && window.google.accounts.id) {
+              window.google.accounts.id.initialize({
+                client_id: '211980990853-n9806238qr51qtn69h914ed1nbv5a8m0.apps.googleusercontent.com',
+                login_uri: '/auth/google',
+                auto_select: true,
+                cancel_on_tap_outside: false,
+                context: 'signin',
+                state_cookie_domain: window.location.hostname,
+                callback: function(response) {
+                  submitGoogleCredential(response.credential);
+                }
+              });
+              window.google.accounts.id.prompt();
+            }
+          };
+          document.head.appendChild(script);
+        }
+
+        fetch('/api/me', {
+          credentials: 'same-origin',
+          cache: 'no-store',
+          headers: { 'Accept': 'application/json' }
+        })
+          .then(function(response) {
+            if (!response.ok) return null;
+            return response.json();
+          })
+          .then(function(data) {
+            if (data && data.user) return;
+            loadOneTap();
+          })
+          .catch(function() {
+            // Fail open so the sign-in prompt still works if session lookup fails.
+            loadOneTap();
+          });
       })();
     <\/script> <!-- Go To Top --> <button id="go-top-btn" class="go-top-btn" aria-label="Back to top" title="Back to top"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button> <script>
   window.addEventListener("DOMContentLoaded", function () {
@@ -232,7 +274,7 @@ const $$Layout = createComponent(($$result, $$props, $$slots) => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   })();
-<\/script></body></html>`])), addAttribute(description ?? "Your daily source for AI news, research and tools.", "content"), addAttribute(canonical, "href"), addAttribute(ogType, "content"), addAttribute(canonical, "content"), addAttribute(ogTitle, "content"), addAttribute(ogDesc, "content"), addAttribute(ogImage, "content"), addAttribute(String(ogImageWidth), "content"), addAttribute(String(ogImageHeight), "content"), addAttribute(ogImageAlt, "content"), ogPublished && renderTemplate`<meta property="article:published_time"${addAttribute(ogPublished, "content")}>`, ogModified && renderTemplate`<meta property="article:modified_time"${addAttribute(ogModified, "content")}>`, ogType === "article" && renderTemplate`<meta property="article:author"${addAttribute(ogAuthor, "content")}>`, ogType === "article" && ogSection && renderTemplate`<meta property="article:section"${addAttribute(ogSection, "content")}>`, addAttribute(ogTitle, "content"), addAttribute(ogDesc, "content"), addAttribute(ogImage, "content"), addAttribute(ogImageAlt, "content"), metaTitle ?? (title ? `${title} — Daily AI Mail` : "Daily AI Mail"), addAttribute(Astro2.generator, "content"), renderSlot($$result, $$slots["head"]), renderHead(), renderComponent($$result, "Navbar", $$NavbarRefactor, {}), renderSlot($$result, $$slots["default"]), renderComponent($$result, "Footer", $$Footer, {}));
+<\/script></body></html>`])), addAttribute(description ?? "Your daily source for AI news, research and tools.", "content"), noindex && renderTemplate`<meta name="robots" content="noindex, nofollow">`, addAttribute(canonical, "href"), addAttribute(ogType, "content"), addAttribute(canonical, "content"), addAttribute(ogTitle, "content"), addAttribute(ogDesc, "content"), addAttribute(ogImage, "content"), addAttribute(String(ogImageWidth), "content"), addAttribute(String(ogImageHeight), "content"), addAttribute(ogImageAlt, "content"), ogPublished && renderTemplate`<meta property="article:published_time"${addAttribute(ogPublished, "content")}>`, ogModified && renderTemplate`<meta property="article:modified_time"${addAttribute(ogModified, "content")}>`, ogType === "article" && renderTemplate`<meta property="article:author"${addAttribute(ogAuthor, "content")}>`, ogType === "article" && ogSection && renderTemplate`<meta property="article:section"${addAttribute(ogSection, "content")}>`, addAttribute(ogTitle, "content"), addAttribute(ogDesc, "content"), addAttribute(ogImage, "content"), addAttribute(ogImageAlt, "content"), metaTitle ?? (title ? `${title} — Daily AI Mail` : "Daily AI Mail"), addAttribute(Astro2.generator, "content"), renderSlot($$result, $$slots["head"]), renderHead(), renderComponent($$result, "Navbar", $$NavbarRefactor, {}), renderSlot($$result, $$slots["default"]), renderComponent($$result, "Footer", $$Footer, {}));
 }, "D:/AI News/dailyaimail/src/layouts/Layout.astro", void 0);
 export {
   $$Layout as $
