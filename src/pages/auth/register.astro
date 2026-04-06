@@ -15,9 +15,9 @@ import { hashPassword } from "../../lib/password";
 const db = (env as any).DB as D1Database;
 const kv = (env as any).SESSION as KVNamespace;
 
-const user = await getSession(kv, Astro.cookies);
-if (user) return Astro.redirect("/");
 const returnTo = Astro.url.searchParams.get("from") ?? "/";
+const user = await getSession(kv, Astro.cookies);
+if (user) return Astro.redirect(returnTo);
 const googleLoginUri = `/auth/google?from=${encodeURIComponent(returnTo)}`;
 
 let errors: Record<string, string> = {};
@@ -97,6 +97,7 @@ if (Astro.request.method === "POST") {
 <Layout
     title="Create Account — Daily AI Mail"
     metaTitle="Create Account — Daily AI Mail"
+    noindex={true}
 >
     <div class="auth-wrap">
         <div class="auth-card">
