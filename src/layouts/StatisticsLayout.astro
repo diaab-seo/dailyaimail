@@ -55,6 +55,7 @@ const {
 
 const SITE_URL = 'https://dailyaimail.news';
 const canonical = `${SITE_URL}/statistics/${slug}`;
+const statisticsCatalogId = `${SITE_URL}/statistics#data-catalog`;
 const imageUrl = image.startsWith('http') ? image : `${SITE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
 const publishedTime = formatModifiedTime(isoDate);
 const publishedDate = new Date(isoDate).toLocaleDateString('en-US', {
@@ -72,6 +73,8 @@ const socialProfiles = [
   'https://www.reddit.com/user/dailyaimail/',
   'https://news.google.com/publications/CAowvObKDA',
 ];
+const organizationRef = { '@type': 'Organization', '@id': `${SITE_URL}/#organization` };
+const editorialTeamOrgRef = { '@type': 'Organization', '@id': `${SITE_URL}/#/schema/editorial-team` };
 
 const schema = {
   '@context': 'https://schema.org',
@@ -149,11 +152,19 @@ const schema = {
       name: headline,
       description: excerpt,
       url: canonical,
+      sameAs: canonical,
+      datePublished: new Date(isoDate).toISOString(),
+      ...(updatedAt ? { dateModified: updatedAt } : {}),
       temporalCoverage: dataUpdated,
-      isPartOf: websiteRef(),
-      includedInDataCatalog: websiteRef(),
-      publisher: orgRef(),
-      creator: editorialTeamRef(),
+      isPartOf: { '@id': statisticsCatalogId },
+      includedInDataCatalog: { '@id': statisticsCatalogId },
+      publisher: organizationRef,
+      creator: editorialTeamOrgRef,
+      author: editorialTeamOrgRef,
+      maintainer: organizationRef,
+      license: `${SITE_URL}/terms-and-conditions`,
+      isAccessibleForFree: true,
+      inLanguage: 'en-US',
       mainEntityOfPage: { '@id': canonical },
       citation: sources.map((source) => ({
         '@type': 'CreativeWork',
@@ -178,6 +189,21 @@ const schema = {
       publisher: orgRef(),
       inLanguage: 'en-US',
       hasPart: [{ '@id': canonical }],
+    },
+    {
+      '@type': 'DataCatalog',
+      '@id': statisticsCatalogId,
+      url: `${SITE_URL}/statistics`,
+      name: 'Daily AI Mail Statistics',
+      description: 'A collection of published AI statistics datasets and usage reports from Daily AI Mail.',
+      inLanguage: 'en-US',
+      publisher: organizationRef,
+      creator: organizationRef,
+      maintainer: organizationRef,
+      license: `${SITE_URL}/terms-and-conditions`,
+      isAccessibleForFree: true,
+      mainEntityOfPage: { '@id': `${SITE_URL}/statistics#webpage` },
+      about: organizationRef,
     },
     {
       ...orgRef(),
