@@ -93,9 +93,3 @@ The announcement also fits a wider regional strategy. Databricks said it is laun
 The throughline is clear: Databricks wants to be present before those companies mature into large enterprise accounts. That is also why its startup push now stretches beyond product credits or cloud partnerships. Through [Databricks Ventures](https://www.databricks.com/databricks-ventures) and its broader [Databricks for Startups](https://www.databricks.com/product/startups) program, the company is building a pipeline that blends investment, technical enablement, and platform lock-in.
 
 For European founders, the STATION F partnership could be useful if it turns into real hands-on support rather than another ecosystem branding exercise. For Databricks, the bet is straightforward: the companies learning to build AI products in Paris today could become some of its most valuable customers tomorrow.
-
----
-
-**Image prompt for Gemini Enterprise:**
-
-> A clean editorial technology illustration of a European startup campus transformed into an AI innovation hub, featuring a modern Paris-inspired startup complex with luminous data pathways flowing into modular dashboards, database nodes, and agent orchestration layers; visual emphasis on enterprise AI adoption, startup acceleration, and governed data infrastructure; wide cinematic composition with architectural depth, layered interface panels, subtle cloud and database motifs, and a polished publication-ready vector aesthetic; color palette anchored in Deep Navy with Electric Gold highlights, Neon Cyan data streams, Ice White interface accents, and Steel structural elements; minimal, sophisticated, high-contrast, no people, no readable text, no logos.
