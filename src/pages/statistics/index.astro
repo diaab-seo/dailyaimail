@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { editorialTeamRef, orgRef, websiteRef } from '../../utils/schema';
 import '../../styles/statistics.css';
 
 const entries = (await getCollection('statistics')).sort(
@@ -9,25 +10,142 @@ const entries = (await getCollection('statistics')).sort(
 
 const SITE_URL = 'https://dailyaimail.news';
 const canonical = `${SITE_URL}/statistics`;
+const logoUrl = `${SITE_URL}/daily-ai-mail-logo.svg`;
+const socialProfiles = [
+  'https://www.linkedin.com/company/dailaimail/',
+  'https://www.facebook.com/dailyaimail/',
+  'https://x.com/dailyaimail',
+  'https://medium.com/@dailyaimail',
+  'https://www.reddit.com/user/dailyaimail/',
+  'https://news.google.com/publications/CAowvObKDA',
+];
+const statisticsCatalogId = `${canonical}#data-catalog`;
+const collectionDescription =
+  'Verified AI statistics, adoption reports, usage breakdowns, and benchmark-style data pages for major AI tools and platforms.';
+const organizationRef = { '@type': 'Organization', '@id': `${SITE_URL}/#organization` };
+const editorialTeamOrgRef = { '@type': 'Organization', '@id': `${SITE_URL}/#/schema/editorial-team` };
 
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${canonical}#webpage`,
-  url: canonical,
-  name: 'AI Statistics & Usage Reports',
-  description:
-    'Verified AI statistics, adoption reports, usage breakdowns, and benchmark-style data pages for major AI tools and platforms.',
-  isPartOf: {
-    '@id': `${SITE_URL}/#website`,
-  },
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: 'AI Statistics & Usage Reports',
+      description: collectionDescription,
+      isPartOf: websiteRef(),
+      about: orgRef(),
+      publisher: orgRef(),
+      author: editorialTeamRef(),
+      inLanguage: 'en-US',
+      mainEntity: { '@id': statisticsCatalogId },
+      breadcrumb: { '@id': `${canonical}#breadcrumb` },
+      isAccessibleForFree: true,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: SITE_URL,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Statistics',
+          item: canonical,
+        },
+      ],
+    },
+    {
+      '@type': 'DataCatalog',
+      '@id': statisticsCatalogId,
+      url: canonical,
+      name: 'Daily AI Mail Statistics',
+      description: collectionDescription,
+      inLanguage: 'en-US',
+      publisher: organizationRef,
+      creator: organizationRef,
+      maintainer: organizationRef,
+      license: `${SITE_URL}/terms-and-conditions`,
+      isAccessibleForFree: true,
+      mainEntityOfPage: { '@id': `${canonical}#webpage` },
+      about: organizationRef,
+      sameAs: [canonical],
+      dataset: entries.map((entry) => ({
+        '@id': `${SITE_URL}/statistics/${entry.id}#dataset`,
+      })),
+    },
+    ...entries.map((entry) => ({
+      '@type': 'Dataset',
+      '@id': `${SITE_URL}/statistics/${entry.id}#dataset`,
+      url: `${SITE_URL}/statistics/${entry.id}`,
+      name: entry.data.headline,
+      description: entry.data.excerpt,
+      datePublished: new Date(entry.data.isoDate).toISOString(),
+      dateModified: entry.data.updatedAt ?? new Date(entry.data.isoDate).toISOString(),
+      temporalCoverage: entry.data.dataUpdated,
+      inLanguage: 'en-US',
+      isAccessibleForFree: true,
+      license: `${SITE_URL}/terms-and-conditions`,
+      publisher: organizationRef,
+      creator: editorialTeamOrgRef,
+      author: editorialTeamOrgRef,
+      maintainer: organizationRef,
+      includedInDataCatalog: { '@id': statisticsCatalogId },
+      isPartOf: { '@id': statisticsCatalogId },
+      mainEntityOfPage: { '@id': `${SITE_URL}/statistics/${entry.id}` },
+      image: entry.data.image.startsWith('http')
+        ? entry.data.image
+        : `${SITE_URL}${entry.data.image}`,
+      keywords: entry.data.keywords,
+      about: {
+        '@type': 'Thing',
+        name: entry.data.entity,
+      },
+    })),
+    {
+      ...websiteRef(),
+      url: `${SITE_URL}/`,
+      name: 'Daily AI Mail',
+      publisher: orgRef(),
+      inLanguage: 'en-US',
+      hasPart: [{ '@id': `${canonical}#webpage` }],
+    },
+    {
+      ...orgRef(),
+      name: 'Daily AI Mail',
+      url: `${SITE_URL}/`,
+      publishingPrinciples: `${SITE_URL}/publishing-principles`,
+      sameAs: socialProfiles,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${SITE_URL}/#/schema/logo/image/`,
+        url: logoUrl,
+        contentUrl: logoUrl,
+        width: 512,
+        height: 512,
+        caption: 'Daily AI Mail',
+      },
+      image: { '@id': `${SITE_URL}/#/schema/logo/image/` },
+    },
+    {
+      ...editorialTeamRef(),
+      url: `${SITE_URL}/about-us/editorial-team`,
+      memberOf: orgRef(),
+    },
+  ],
 };
 ---
 
 <Layout
   title="AI Statistics & Usage Reports"
   metaTitle="AI Statistics & Usage Reports | Daily AI Mail"
-  description="Verified AI statistics, adoption reports, usage breakdowns, and benchmark-style data pages for major AI tools and platforms."
+  description={collectionDescription}
   canonical={canonical}
 >
   <script
